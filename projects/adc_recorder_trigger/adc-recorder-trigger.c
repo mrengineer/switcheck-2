@@ -53,13 +53,13 @@ int main()
   *rst |= 1;
 
   /* configure trigger edge (0 for negative, 1 for positive) */
-  *(uint16_t *)(cfg + 2) = 0;
+  *(uint16_t *)(cfg + 2) = 0;     //BIT FOR TRIGGER
 
   /* set trigger mask */
   *(uint16_t *)(cfg + 8) = 1;
 
   /* set trigger level */
-  *(uint16_t *)(cfg + 10) = 1;
+  *(uint16_t *)(cfg + 10) = 3;  //НОВЫЙ УРОВЕНЬ
 
   /* set number of samples before trigger */
   *(uint32_t *)(cfg + 12) = 1024 - 1;
@@ -75,11 +75,23 @@ int main()
   *rst |= 2;
   *rst &= ~2;
 
+  printf("WAIT FOR TRIGGER\n");
+
   /* wait when oscilloscope stops */
+  //while(*(uint32_t *)(sts + 0) & 1)
+  //{
+  //  usleep(1000);
+  //}
+
+  *(uint16_t *)(cfg + 2) = 1;
+  //usleep(10);
+  //*(uint16_t *)(cfg + 2) = 0;
+
   while(*(uint32_t *)(sts + 0) & 1)
   {
     usleep(1000);
   }
+
 
   start = *(uint32_t *)(sts + 0) >> 1;
   start = (start - 1024) & 0x007FFFC0;
