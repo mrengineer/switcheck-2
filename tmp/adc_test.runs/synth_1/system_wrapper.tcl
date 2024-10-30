@@ -70,6 +70,8 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 2
+set_msg_config -id {HDL-1065} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z010clg400-1
 
@@ -90,7 +92,10 @@ set_property verilog_define TOOL_VIVADO [current_fileset]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_mem /home/bulkin/red-pitaya-notes/cfg/dds.mem
-read_verilog -library xil_defaultlib /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/hdl/system_wrapper.v
+read_verilog -library xil_defaultlib {
+  /home/bulkin/red-pitaya-notes/cores/adc.v
+  /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/hdl/system_wrapper.v
+}
 add_files /home/bulkin/red-pitaya-notes/tmp/adc_test.srcs/sources_1/bd/system/system.bd
 set_property used_in_implementation false [get_files -all /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_board.xdc]
 set_property used_in_implementation false [get_files -all /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0.xdc]
@@ -119,6 +124,8 @@ set_property used_in_implementation false [get_files /home/bulkin/red-pitaya-not
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental /home/bulkin/red-pitaya-notes/tmp/adc_test.srcs/utils_1/imports/synth_1/system_wrapper.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

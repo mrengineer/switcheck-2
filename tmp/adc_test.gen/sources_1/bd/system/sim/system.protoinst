@@ -3,7 +3,7 @@
 	"modules": {
 		"system": {
 			"proto_instances": {
-				"/adc_0/m_axis": {
+				"/ADC_1/m_axis": {
 					"interface": "xilinx.com:interface:axis:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},
@@ -40,22 +40,6 @@
 						"TVALID": { "actual": "s_axis_data_tvalid"}
 					}
 				},
-				"/dds_0/S_AXIS_PHASE": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "aclk"},
-						"TDATA": { "actual": "s_axis_phase_tdata[31:0]"},
-						"TVALID": { "actual": "s_axis_phase_tvalid"}
-					}
-				},
-				"/dds_1/S_AXIS_PHASE": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "aclk"},
-						"TDATA": { "actual": "s_axis_phase_tdata[31:0]"},
-						"TVALID": { "actual": "s_axis_phase_tvalid"}
-					}
-				},
 				"/hub_0/s_axi": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
@@ -83,22 +67,6 @@
 						"WREADY": { "actual": "s_axi_wready"},
 						"WSTRB": { "actual": "s_axi_wstrb[3:0]"},
 						"WVALID": { "actual": "s_axi_wvalid"}
-					}
-				},
-				"/phase_0/m_axis": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "aclk"},
-						"TDATA": { "actual": "m_axis_tdata[31:0]"},
-						"TVALID": { "actual": "m_axis_tvalid"}
-					}
-				},
-				"/phase_1/m_axis": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "aclk"},
-						"TDATA": { "actual": "m_axis_tdata[31:0]"},
-						"TVALID": { "actual": "m_axis_tvalid"}
 					}
 				},
 				"/ps_0/M_AXI_GP0": {
