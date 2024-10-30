@@ -28,7 +28,7 @@ int main ()
   int fd, sock_server, sock_client;
   int position, limit, offset;
   volatile uint32_t *rx_addr, *rx_cntr;
-  volatile uint16_t *rx_rate;
+  volatile uint16_t *rx_rate, *trg_value;
   volatile uint8_t *rx_rst;
   volatile void *cfg, *sts, *ram;
   cpu_set_t mask;
@@ -72,13 +72,23 @@ int main ()
 
   ram = mmap(NULL, 2048*sysconf(_SC_PAGESIZE), PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
 
-  rx_rst = (uint8_t *)(cfg + 0);
-  rx_rate = (uint16_t *)(cfg + 2);
-  rx_addr = (uint32_t *)(cfg + 4);
+  //+1 eq 8 bit => 64 bit address shift is 64/8 = 8
+  rx_rst = (uint8_t *)(cfg + 0); //[0 bit shifted]
+  rx_rate = (uint16_t *)(cfg + 2);  //[16 bit shift]
+  rx_addr = (uint32_t *)(cfg + 4);  //32 bit shifted
+  trg_value = (uint16_t *)(cfg + 8);  //16 bit for mod(ADC1+ADC2) trigger value
 
   rx_cntr = (uint32_t *)(sts + 0);
 
+  uint16_t trg = 40;
+
+
+  *trg_value = trg;
+
   *rx_addr = size;
+
+
+  printf("WAIT TRIGGER >%i", trg);
 
   while(!interrupted)
   {

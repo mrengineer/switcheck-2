@@ -35,15 +35,6 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_slic
 # IP: bd/system/ip/system_slice_3_0/system_slice_3_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_slice_3_0 || ORIG_REF_NAME==system_slice_3_0} -quiet] -quiet
 
-# IP: bd/system/ip/system_subset_0_0/system_subset_0_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_subset_0_0 || ORIG_REF_NAME==system_subset_0_0} -quiet] -quiet
-
-# IP: bd/system/ip/system_rate_0_0/system_rate_0_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_rate_0_0 || ORIG_REF_NAME==system_rate_0_0} -quiet] -quiet
-
-# IP: bd/system/ip/system_cic_0_0/system_cic_0_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_cic_0_0 || ORIG_REF_NAME==system_cic_0_0} -quiet] -quiet
-
 # IP: bd/system/ip/system_const_1_0/system_const_1_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_const_1_0 || ORIG_REF_NAME==system_const_1_0} -quiet] -quiet
 
@@ -58,6 +49,9 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_slic
 
 # IP: bd/system/ip/system_ADC_1_0/system_ADC_1_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_ADC_1_0 || ORIG_REF_NAME==system_ADC_1_0} -quiet] -quiet
+
+# IP: bd/system/ip/system_axis_decimator_0_0/system_axis_decimator_0_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_axis_decimator_0_0 || ORIG_REF_NAME==system_axis_decimator_0_0} -quiet] -quiet
 
 # XDC: /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_board.xdc
 set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==system_pll_0_0 || ORIG_REF_NAME==system_pll_0_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
@@ -75,7 +69,5 @@ set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filte
 
 # XDC: /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/system_rst_0_0.xdc
 #dup# set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==system_rst_0_0 || ORIG_REF_NAME==system_rst_0_0} -quiet] {/U0 } ]/U0 ] -quiet] -quiet
-
-# XDC: /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_subset_0_0/system_subset_0_0_ooc.xdc
 
 # XDC: /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/system_ooc.xdc

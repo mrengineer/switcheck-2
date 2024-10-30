@@ -94,6 +94,7 @@ OPTRACE "Adding files" START { }
 read_mem /home/bulkin/red-pitaya-notes/cfg/dds.mem
 read_verilog -library xil_defaultlib {
   /home/bulkin/red-pitaya-notes/cores/adc.v
+  /home/bulkin/red-pitaya-notes/cores/axis_decimator.v
   /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/hdl/system_wrapper.v
 }
 add_files /home/bulkin/red-pitaya-notes/tmp/adc_test.srcs/sources_1/bd/system/system.bd
@@ -103,7 +104,6 @@ set_property used_in_implementation false [get_files -all /home/bulkin/red-pitay
 set_property used_in_implementation false [get_files -all /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ps_0_0/system_ps_0_0.xdc]
 set_property used_in_implementation false [get_files -all /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/system_rst_0_0_board.xdc]
 set_property used_in_implementation false [get_files -all /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/system_rst_0_0.xdc]
-set_property used_in_implementation false [get_files -all /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_subset_0_0/system_subset_0_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/system_ooc.xdc]
 
 OPTRACE "Adding files" END { }
