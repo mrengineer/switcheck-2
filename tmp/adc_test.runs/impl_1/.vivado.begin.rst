@@ -3,3 +3,18 @@
     <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="141884" HostCore="8" HostMemory="32753812">
     </Process>
 </ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="153838" HostCore="8" HostMemory="32753812">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="162836" HostCore="8" HostMemory="32753812">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="170650" HostCore="8" HostMemory="32753812">
+    </Process>
+</ProcessHandle>

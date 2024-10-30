@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Oct 30 17:57:40 2024" VIVADOVERSION="2023.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Oct 30 19:10:42 2024" VIVADOVERSION="2023.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -238,6 +238,11 @@
             <CONNECTION INSTANCE="External_Ports" PORT="adc_dat_b_i"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="aresetn" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="slice_0_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="slice_0" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" LEFT="31" NAME="m_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_m_axis_tdata">
           <CONNECTIONS>
             <CONNECTION INSTANCE="subset_0" PORT="s_axis_tdata"/>
@@ -248,6 +253,7 @@
             <CONNECTION INSTANCE="subset_0" PORT="s_axis_tvalid"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" LEFT="15" NAME="trigger_level" RIGHT="0" SIGIS="undef"/>
       </PORTS>
       <BUSINTERFACES>
         <BUSINTERFACE BUSNAME="ADC_1_m_axis" NAME="m_axis" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
@@ -3324,6 +3330,7 @@
             <CONNECTION INSTANCE="subset_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="rate_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="cic_0" PORT="aresetn"/>
+            <CONNECTION INSTANCE="ADC_1" PORT="aresetn"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

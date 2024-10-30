@@ -56,19 +56,25 @@
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module system_ADC_1_0 (
   aclk,
+  aresetn,
   adc_csn,
   adc_dat_a,
   adc_dat_b,
+  trigger_level,
   m_axis_tvalid,
   m_axis_tdata
 );
 
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aclk, ASSOCIATED_BUSIF m_axis, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN system_pll_0_0_clk_out1, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aclk, ASSOCIATED_BUSIF m_axis, ASSOCIATED_RESET aresetn, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN system_pll_0_0_clk_out1, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 aclk CLK" *)
 input wire aclk;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aresetn, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 aresetn RST" *)
+input wire aresetn;
 output wire adc_csn;
 input wire [15 : 0] adc_dat_a;
 input wire [15 : 0] adc_dat_b;
+input wire [15 : 0] trigger_level;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 m_axis TVALID" *)
 output wire m_axis_tvalid;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME m_axis, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 0, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 125000000, PHASE 0.0, CLK_DOMAIN system_pll_0_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
@@ -79,9 +85,11 @@ output wire [31 : 0] m_axis_tdata;
     .ADC_DATA_WIDTH(14)
   ) inst (
     .aclk(aclk),
+    .aresetn(aresetn),
     .adc_csn(adc_csn),
     .adc_dat_a(adc_dat_a),
     .adc_dat_b(adc_dat_b),
+    .trigger_level(trigger_level),
     .m_axis_tvalid(m_axis_tvalid),
     .m_axis_tdata(m_axis_tdata)
   );

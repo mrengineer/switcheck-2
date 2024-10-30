@@ -2304,6 +2304,10 @@
                 "value": "m_axis",
                 "value_src": "constant"
               },
+              "ASSOCIATED_RESET": {
+                "value": "aresetn",
+                "value_src": "constant"
+              },
               "FREQ_HZ": {
                 "value": "125000000",
                 "value_src": "ip_prop"
@@ -2318,6 +2322,16 @@
               }
             }
           },
+          "aresetn": {
+            "type": "rst",
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_LOW",
+                "value_src": "constant"
+              }
+            }
+          },
           "adc_csn": {
             "direction": "O"
           },
@@ -2327,6 +2341,11 @@
             "right": "0"
           },
           "adc_dat_b": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "trigger_level": {
             "direction": "I",
             "left": "15",
             "right": "0"
@@ -2469,7 +2488,8 @@
           "slice_0/dout",
           "subset_0/aresetn",
           "rate_0/aresetn",
-          "cic_0/aresetn"
+          "cic_0/aresetn",
+          "ADC_1/aresetn"
         ]
       },
       "slice_1_dout": {

@@ -11,7 +11,7 @@
     ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source system_wrapper.tcl -notrace
-create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1321.176 ; gain = 0.027 ; free physical = 2551 ; free virtual = 32155
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1322.148 ; gain = 0.027 ; free physical = 2206 ; free virtual = 31682
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/bulkin/red-pitaya-notes/tmp/cores'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/bulkin/Xilinx/Vivado/2023.2/data/ip'.
@@ -27,16 +27,16 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 141672
+INFO: [Synth 8-7075] Helper process launched with PID 170400
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2038.195 ; gain = 406.715 ; free physical = 1536 ; free virtual = 31205
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2040.168 ; gain = 408.684 ; free physical = 1240 ; free virtual = 30718
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'system_wrapper' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/hdl/system_wrapper.v:13]
 INFO: [Synth 8-6157] synthesizing module 'system' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:13]
 INFO: [Synth 8-6157] synthesizing module 'system_ADC_1_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ADC_1_0/synth/system_ADC_1_0.v:53]
-INFO: [Synth 8-6157] synthesizing module 'ADC' [/home/bulkin/red-pitaya-notes/cores/adc.v:4]
+INFO: [Synth 8-6157] synthesizing module 'ADC' [/home/bulkin/red-pitaya-notes/cores/adc.v:3]
 	Parameter ADC_DATA_WIDTH bound to: 14 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'ADC' (0#1) [/home/bulkin/red-pitaya-notes/cores/adc.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'ADC' (0#1) [/home/bulkin/red-pitaya-notes/cores/adc.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'system_ADC_1_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ADC_1_0/synth/system_ADC_1_0.v:53]
 INFO: [Synth 8-638] synthesizing module 'system_cic_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_cic_0_0/synth/system_cic_0_0.vhd:74]
 	Parameter C_COMPONENT_NAME bound to: system_cic_0_0 - type: string 
@@ -78,8 +78,8 @@ INFO: [Synth 8-638] synthesizing module 'system_cic_0_0' [/home/bulkin/red-pitay
 	Parameter C_HAS_ARESETN bound to: 1 - type: integer 
 INFO: [Synth 8-3491] module 'cic_compiler_v4_0_17' declared at '/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/7a2b/hdl/cic_compiler_v4_0_vh_rfs.vhd:16033' bound to instance 'U0' of component 'cic_compiler_v4_0_17' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_cic_0_0/synth/system_cic_0_0.vhd:169]
 INFO: [Synth 8-256] done synthesizing module 'system_cic_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_cic_0_0/synth/system_cic_0_0.vhd:74]
-WARNING: [Synth 8-7071] port 's_axis_data_tready' of module 'system_cic_0_0' is unconnected for instance 'cic_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:187]
-WARNING: [Synth 8-7023] instance 'cic_0' of module 'system_cic_0_0' has 10 connections declared, but only 9 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:187]
+WARNING: [Synth 8-7071] port 's_axis_data_tready' of module 'system_cic_0_0' is unconnected for instance 'cic_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:189]
+WARNING: [Synth 8-7023] instance 'cic_0' of module 'system_cic_0_0' has 10 connections declared, but only 9 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:189]
 INFO: [Synth 8-6157] synthesizing module 'system_const_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_const_0_0/synth/system_const_0_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_8_xlconstant' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
 INFO: [Synth 8-6155] done synthesizing module 'xlconstant_v1_1_8_xlconstant' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
@@ -122,61 +122,61 @@ INFO: [Synth 8-6155] done synthesizing module 'output_buffer__parameterized4' (0
 INFO: [Synth 8-6155] done synthesizing module 'inout_buffer__parameterized2' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/modules/inout_buffer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'axi_hub' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/axi_hub.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'system_hub_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_hub_0_0/synth/system_hub_0_0.v:53]
-WARNING: [Synth 8-7071] port 'b00_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b00_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b00_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b00_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b00_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b00_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 's00_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm00_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm00_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b01_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b01_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b01_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b01_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b01_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b01_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 's01_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm01_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm01_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b02_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b02_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b02_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b02_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b02_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b02_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 's02_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm02_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm02_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b03_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b03_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b03_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b03_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b03_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b03_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 's03_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm03_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm03_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b04_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b04_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b04_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b04_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b04_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b04_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 's04_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm04_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm04_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b05_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b05_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b05_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b05_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b05_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'b05_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 's05_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm05_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7071] port 'm05_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
-WARNING: [Synth 8-7023] instance 'hub_0' of module 'system_hub_0_0' has 104 connections declared, but only 50 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:201]
+WARNING: [Synth 8-7071] port 'b00_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b00_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b00_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b00_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b00_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b00_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 's00_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm00_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm00_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b01_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b01_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b01_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b01_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b01_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b01_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 's01_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm01_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm01_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b02_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b02_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b02_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b02_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b02_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b02_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 's02_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm02_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm02_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b03_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b03_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b03_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b03_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b03_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b03_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 's03_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm03_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm03_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b04_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b04_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b04_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b04_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b04_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b04_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 's04_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm04_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm04_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b05_bram_clk' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b05_bram_rst' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b05_bram_en' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b05_bram_we' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b05_bram_addr' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'b05_bram_wdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 's05_axis_tready' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm05_axis_tdata' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7071] port 'm05_axis_tvalid' of module 'system_hub_0_0' is unconnected for instance 'hub_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
+WARNING: [Synth 8-7023] instance 'hub_0' of module 'system_hub_0_0' has 104 connections declared, but only 50 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:203]
 INFO: [Synth 8-6157] synthesizing module 'system_pll_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0.v:67]
 INFO: [Synth 8-6157] synthesizing module 'system_pll_0_0_clk_wiz' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_clk_wiz.v:67]
 INFO: [Synth 8-6157] synthesizing module 'IBUFDS' [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:73646]
@@ -203,9 +203,9 @@ INFO: [Synth 8-6157] synthesizing module 'BUFG' [/home/bulkin/Xilinx/Vivado/2023
 INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1951]
 INFO: [Synth 8-6155] done synthesizing module 'system_pll_0_0_clk_wiz' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_clk_wiz.v:67]
 INFO: [Synth 8-6155] done synthesizing module 'system_pll_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0.v:67]
-WARNING: [Synth 8-7071] port 'clk_out2' of module 'system_pll_0_0' is unconnected for instance 'pll_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:252]
-WARNING: [Synth 8-7071] port 'clk_out3' of module 'system_pll_0_0' is unconnected for instance 'pll_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:252]
-WARNING: [Synth 8-7023] instance 'pll_0' of module 'system_pll_0_0' has 6 connections declared, but only 4 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:252]
+WARNING: [Synth 8-7071] port 'clk_out2' of module 'system_pll_0_0' is unconnected for instance 'pll_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:254]
+WARNING: [Synth 8-7071] port 'clk_out3' of module 'system_pll_0_0' is unconnected for instance 'pll_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:254]
+WARNING: [Synth 8-7023] instance 'pll_0' of module 'system_pll_0_0' has 6 connections declared, but only 4 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:254]
 INFO: [Synth 8-6157] synthesizing module 'system_ps_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'processing_system7_v5_5_processing_system7' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ps_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:152]
 INFO: [Synth 8-6157] synthesizing module 'BIBUF' [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1598]
@@ -228,38 +228,38 @@ WARNING: [Synth 8-7071] port 'DMA2_RSTN' of module 'processing_system7_v5_5_proc
 WARNING: [Synth 8-7071] port 'DMA3_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:500]
 WARNING: [Synth 8-7023] instance 'inst' of module 'processing_system7_v5_5_processing_system7' has 685 connections declared, but only 672 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:500]
 INFO: [Synth 8-6155] done synthesizing module 'system_ps_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:53]
-WARNING: [Synth 8-7071] port 'GPIO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'GPIO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_SCLK_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_SCLK_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_MOSI_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_MOSI_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_MISO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_MISO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_SS_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_SS1_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_SS2_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'SPI0_SS_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'USB0_PORT_INDCTL' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'USB0_VBUS_PWRSELECT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_WID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLEN' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_ARREADY' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_RLAST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
+WARNING: [Synth 8-7071] port 'GPIO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'GPIO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_SCLK_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_SCLK_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_MOSI_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_MOSI_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_MISO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_MISO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_SS_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_SS1_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_SS2_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'SPI0_SS_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'USB0_PORT_INDCTL' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'USB0_VBUS_PWRSELECT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_WID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLEN' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_ARREADY' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_RLAST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
 INFO: [Common 17-14] Message 'Synth 8-7071' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-WARNING: [Synth 8-7023] instance 'ps_0' of module 'system_ps_0_0' has 123 connections declared, but only 85 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:257]
+WARNING: [Synth 8-7023] instance 'ps_0' of module 'system_ps_0_0' has 123 connections declared, but only 85 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:259]
 INFO: [Synth 8-6157] synthesizing module 'system_rate_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rate_0_0/synth/system_rate_0_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'axis_variable' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/axis_variable.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'axis_variable' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/axis_variable.v:4]
@@ -311,7 +311,7 @@ INFO: [Synth 8-256] done synthesizing module 'upcnt_n' (0#1) [/home/bulkin/red-p
 INFO: [Synth 8-256] done synthesizing module 'sequence_psr' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/408c/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:304]
 INFO: [Synth 8-256] done synthesizing module 'proc_sys_reset' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/408c/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1330]
 INFO: [Synth 8-256] done synthesizing module 'system_rst_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/synth/system_rst_0_0.vhd:74]
-WARNING: [Synth 8-7023] instance 'rst_0' of module 'system_rst_0_0' has 10 connections declared, but only 6 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:350]
+WARNING: [Synth 8-7023] instance 'rst_0' of module 'system_rst_0_0' has 10 connections declared, but only 6 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:352]
 INFO: [Synth 8-6157] synthesizing module 'system_slice_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_0_0/synth/system_slice_0_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'port_slicer' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'port_slicer' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
@@ -328,18 +328,18 @@ INFO: [Synth 8-6157] synthesizing module 'system_slice_3_0' [/home/bulkin/red-pi
 INFO: [Synth 8-6157] synthesizing module 'port_slicer__parameterized2' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'port_slicer__parameterized2' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'system_slice_3_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_3_0/synth/system_slice_3_0.v:53]
-WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:369]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:371]
 INFO: [Synth 8-6157] synthesizing module 'system_slice_4_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_4_0/synth/system_slice_4_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'port_slicer__parameterized3' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'port_slicer__parameterized3' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'system_slice_4_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_4_0/synth/system_slice_4_0.v:53]
-WARNING: [Synth 8-7023] instance 'slice_4' of module 'system_slice_4_0' has 2 connections declared, but only 1 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:369]
-WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:371]
+WARNING: [Synth 8-7023] instance 'slice_4' of module 'system_slice_4_0' has 2 connections declared, but only 1 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:371]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:373]
 INFO: [Synth 8-6157] synthesizing module 'system_slice_5_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_5_0/synth/system_slice_5_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'port_slicer__parameterized4' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'port_slicer__parameterized4' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'system_slice_5_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_5_0/synth/system_slice_5_0.v:53]
-WARNING: [Synth 8-7023] instance 'slice_5' of module 'system_slice_5_0' has 2 connections declared, but only 1 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:371]
+WARNING: [Synth 8-7023] instance 'slice_5' of module 'system_slice_5_0' has 2 connections declared, but only 1 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:373]
 INFO: [Synth 8-6157] synthesizing module 'system_subset_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_subset_0_0/synth/system_subset_0_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'top_system_subset_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_subset_0_0/hdl/top_system_subset_0_0.v:60]
 INFO: [Synth 8-6157] synthesizing module 'axis_subset_converter_v1_1_29_core' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/0f24/hdl/axis_subset_converter_v1_1_vl_rfs.v:61]
@@ -392,7 +392,7 @@ INFO: [Synth 8-6157] synthesizing module 'output_buffer__parameterized5' [/home/
 INFO: [Synth 8-6155] done synthesizing module 'output_buffer__parameterized5' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/modules/output_buffer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'axis_ram_writer' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/axis_ram_writer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'system_writer_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_writer_0_0/synth/system_writer_0_0.v:53]
-WARNING: [Synth 8-7023] instance 'writer_0' of module 'system_writer_0_0' has 24 connections declared, but only 23 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:380]
+WARNING: [Synth 8-7023] instance 'writer_0' of module 'system_writer_0_0' has 24 connections declared, but only 23 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:382]
 INFO: [Synth 8-6155] done synthesizing module 'system' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:13]
 INFO: [Synth 8-6155] done synthesizing module 'system_wrapper' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/hdl/system_wrapper.v:13]
 WARNING: [Synth 8-6014] Unused sequential element gen_rd_b.gen_rd_b_synth_template.gen_nc_wide_pipe.rd_sync.addrblsb_reg was removed.  [/home/bulkin/Xilinx/Vivado/2023.2/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:3044]
@@ -510,18 +510,18 @@ WARNING: [Synth 8-7129] Port tdata[8] in module tlast_system_subset_0_0 is eithe
 WARNING: [Synth 8-7129] Port tdata[7] in module tlast_system_subset_0_0 is either unconnected or has no load
 INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2203.133 ; gain = 571.652 ; free physical = 1315 ; free virtual = 30940
+Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2202.137 ; gain = 570.652 ; free physical = 1020 ; free virtual = 30505
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2203.133 ; gain = 571.652 ; free physical = 1315 ; free virtual = 30940
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2202.137 ; gain = 570.652 ; free physical = 1020 ; free virtual = 30505
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2203.133 ; gain = 571.652 ; free physical = 1315 ; free virtual = 30940
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2202.137 ; gain = 570.652 ; free physical = 1020 ; free virtual = 30505
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.09 . Memory (MB): peak = 2203.133 ; gain = 0.000 ; free physical = 1315 ; free virtual = 30924
+Netlist sorting complete. Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.09 . Memory (MB): peak = 2202.137 ; gain = 0.000 ; free physical = 1020 ; free virtual = 30503
 INFO: [Netlist 29-17] Analyzing 1189 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -593,7 +593,7 @@ Resolution: To avoid this warning, move constraints listed in [.Xil/system_wrapp
 INFO: [Project 1-1714] 1 XPM XDC files have been applied to the design.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2325.977 ; gain = 0.000 ; free physical = 1313 ; free virtual = 30922
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2330.980 ; gain = 0.000 ; free physical = 1055 ; free virtual = 30536
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 793 instances were transformed.
   FDR => FDRE: 12 instances
@@ -601,18 +601,18 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   MUXCY_L => MUXCY: 386 instances
   SRL16 => SRL16E: 1 instance 
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.04 . Memory (MB): peak = 2326.012 ; gain = 0.000 ; free physical = 1313 ; free virtual = 30922
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 2331.016 ; gain = 0.000 ; free physical = 1063 ; free virtual = 30542
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2326.012 ; gain = 694.531 ; free physical = 1333 ; free virtual = 30941
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 2331.016 ; gain = 699.531 ; free physical = 981 ; free virtual = 30445
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2326.012 ; gain = 694.531 ; free physical = 1333 ; free virtual = 30941
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 2331.016 ; gain = 699.531 ; free physical = 981 ; free virtual = 30445
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -640,7 +640,7 @@ Applied set_property KEEP_HIERARCHY = SOFT for system_i/slice_5. (constraint fil
 Applied set_property KEEP_HIERARCHY = SOFT for system_i/ADC_1. (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for system_i/writer_0/inst/fifo_0. (constraint file  auto generated constraint).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2326.012 ; gain = 694.531 ; free physical = 1330 ; free virtual = 30940
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 2331.016 ; gain = 699.531 ; free physical = 980 ; free virtual = 30444
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'gen_fwft.curr_fwft_state_reg' in module 'xpm_fifo_base'
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
@@ -655,7 +655,7 @@ INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'gen_fwft.curr_fwft_state_reg' using encoding 'one-hot' in module 'xpm_fifo_base'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2326.012 ; gain = 694.531 ; free physical = 1352 ; free virtual = 30963
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2331.016 ; gain = 699.531 ; free physical = 993 ; free virtual = 30462
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-223] decloning instance 'system_i/cic_0/U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[0].gen_comb_mem_src.gen_en_dly' (delay_bit__parameterized1) to 'system_i/cic_0/U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[0].gen_mem_we'
 INFO: [Synth 8-223] decloning instance 'system_i/cic_0/U0/i_synth/decimator.decimation_filter/comb/gen_stages[1].gen_folded.int_comb_stage/gen_split_accum[0].gen_comb_mem_src.gen_en_dly' (delay_bit__parameterized1) to 'system_i/cic_0/U0/i_synth/decimator.decimation_filter/comb/gen_stages[1].gen_folded.int_comb_stage/gen_split_accum[0].gen_mem_we'
@@ -700,7 +700,7 @@ WARNING: [Synth 8-3332] Sequential element (BSR_OUT_DFF[0].FDRE_BSR) is unused a
 WARNING: [Synth 8-3332] Sequential element (ACTIVE_LOW_BSR_OUT_DFF[0].FDRE_BSR_N) is unused and will be removed from module proc_sys_reset.
 WARNING: [Synth 8-3332] Sequential element (PR_OUT_DFF[0].FDRE_PER) is unused and will be removed from module proc_sys_reset.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2326.012 ; gain = 694.531 ; free physical = 1355 ; free virtual = 30991
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 2331.016 ; gain = 699.531 ; free physical = 936 ; free virtual = 30425
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
 ---------------------------------------------------------------------------------
@@ -708,20 +708,20 @@ Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-3321] set_false_path : Empty to list for constraint at line 49 of /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/system_rst_0_0.xdc. [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/system_rst_0_0.xdc:49]
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:29 ; elapsed = 00:00:30 . Memory (MB): peak = 2326.012 ; gain = 694.531 ; free physical = 1326 ; free virtual = 30945
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 2331.016 ; gain = 699.531 ; free physical = 777 ; free virtual = 30242
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:31 . Memory (MB): peak = 2363.992 ; gain = 732.512 ; free physical = 1281 ; free virtual = 30901
+Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2364.004 ; gain = 732.520 ; free physical = 752 ; free virtual = 30238
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 2372.000 ; gain = 740.520 ; free physical = 1280 ; free virtual = 30900
+Finished Technology Mapping : Time (s): cpu = 00:00:34 ; elapsed = 00:00:35 . Memory (MB): peak = 2372.012 ; gain = 740.527 ; free physical = 725 ; free virtual = 30224
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -740,37 +740,37 @@ Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-3295] tying undriven pin inst/fifo_0:sleep to constant 0
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 2372.000 ; gain = 740.520 ; free physical = 1285 ; free virtual = 30903
+Finished IO Insertion : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 2372.012 ; gain = 740.527 ; free physical = 609 ; free virtual = 30260
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 2372.000 ; gain = 740.520 ; free physical = 1285 ; free virtual = 30903
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 2372.012 ; gain = 740.527 ; free physical = 609 ; free virtual = 30260
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 2372.000 ; gain = 740.520 ; free physical = 1297 ; free virtual = 30915
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:38 ; elapsed = 00:00:39 . Memory (MB): peak = 2372.012 ; gain = 740.527 ; free physical = 609 ; free virtual = 30260
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 2372.000 ; gain = 740.520 ; free physical = 1296 ; free virtual = 30915
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:38 ; elapsed = 00:00:39 . Memory (MB): peak = 2372.012 ; gain = 740.527 ; free physical = 609 ; free virtual = 30260
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 2372.000 ; gain = 740.520 ; free physical = 1296 ; free virtual = 30915
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:38 ; elapsed = 00:00:39 . Memory (MB): peak = 2372.012 ; gain = 740.527 ; free physical = 609 ; free virtual = 30260
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 2372.000 ; gain = 740.520 ; free physical = 1296 ; free virtual = 30915
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:38 ; elapsed = 00:00:39 . Memory (MB): peak = 2372.012 ; gain = 740.527 ; free physical = 609 ; free virtual = 30260
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -788,13 +788,13 @@ Report Cell Usage:
 +------+----------+------+
 |1     |BIBUF     |   130|
 |2     |BUFG      |     5|
-|3     |CARRY4    |    38|
-|4     |LUT1      |    81|
-|5     |LUT2      |   422|
-|6     |LUT3      |   162|
-|7     |LUT4      |   104|
-|8     |LUT5      |   189|
-|9     |LUT6      |   684|
+|3     |CARRY4    |    42|
+|4     |LUT1      |    95|
+|5     |LUT2      |   425|
+|6     |LUT3      |   187|
+|7     |LUT4      |   119|
+|8     |LUT5      |   106|
+|9     |LUT6      |   694|
 |10    |MUXCY_L   |   386|
 |11    |MUXF7     |     7|
 |12    |MUXF8     |     2|
@@ -804,39 +804,40 @@ Report Cell Usage:
 |16    |SRL16     |     1|
 |17    |SRL16E    |    66|
 |18    |XORCY     |   386|
-|19    |FDRE      |  1804|
-|20    |FDSE      |    24|
-|21    |IBUF      |    30|
-|22    |IBUFDS    |     1|
-|23    |OBUF      |     1|
-|24    |OBUFT     |    32|
+|19    |FDCE      |    66|
+|20    |FDRE      |  1768|
+|21    |FDSE      |    24|
+|22    |IBUF      |    42|
+|23    |IBUFDS    |     1|
+|24    |OBUF      |     1|
+|25    |OBUFT     |    32|
 +------+----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 2372.000 ; gain = 740.520 ; free physical = 1296 ; free virtual = 30915
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:38 ; elapsed = 00:00:39 . Memory (MB): peak = 2372.012 ; gain = 740.527 ; free physical = 614 ; free virtual = 30255
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 1104 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2372.000 ; gain = 617.641 ; free physical = 1299 ; free virtual = 30917
-Synthesis Optimization Complete : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 2372.008 ; gain = 740.520 ; free physical = 1299 ; free virtual = 30917
+Synthesis finished with 0 errors, 0 critical warnings and 1120 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 2372.012 ; gain = 611.648 ; free physical = 609 ; free virtual = 30250
+Synthesis Optimization Complete : Time (s): cpu = 00:00:38 ; elapsed = 00:00:39 . Memory (MB): peak = 2372.020 ; gain = 740.527 ; free physical = 609 ; free virtual = 30250
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.06 . Memory (MB): peak = 2372.008 ; gain = 0.000 ; free physical = 1570 ; free virtual = 31189
-INFO: [Netlist 29-17] Analyzing 823 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2372.020 ; gain = 0.000 ; free physical = 903 ; free virtual = 30544
+INFO: [Netlist 29-17] Analyzing 827 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2377.938 ; gain = 0.000 ; free physical = 1581 ; free virtual = 31202
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2375.980 ; gain = 0.000 ; free physical = 914 ; free virtual = 30525
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 102 instances were transformed.
   (MUXCY,XORCY) => CARRY4: 101 instances
   SRL16 => SRL16E: 1 instance 
 
-Synth Design complete | Checksum: f16747f0
+Synth Design complete | Checksum: 8ae41c24
 INFO: [Common 17-83] Releasing license: Synthesis
 225 Infos, 275 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:41 ; elapsed = 00:00:40 . Memory (MB): peak = 2377.973 ; gain = 1056.797 ; free physical = 1581 ; free virtual = 31202
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1990.339; main = 1690.446; forked = 378.084
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3324.918; main = 2377.941; forked = 984.945
-Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2377.973 ; gain = 0.000 ; free physical = 1581 ; free virtual = 31202
+synth_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:43 . Memory (MB): peak = 2376.016 ; gain = 1053.867 ; free physical = 918 ; free virtual = 30530
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1909.196; main = 1687.594; forked = 378.105
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3283.914; main = 2375.984; forked = 984.945
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2376.016 ; gain = 0.000 ; free physical = 918 ; free virtual = 30531
 INFO: [Common 17-1381] The checkpoint '/home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/system_wrapper.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file system_wrapper_utilization_synth.rpt -pb system_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed Oct 30 17:58:34 2024...
+INFO: [Common 17-206] Exiting Vivado at Wed Oct 30 19:11:39 2024...

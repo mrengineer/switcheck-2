@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Wed Oct 30 17:57:40 2024
+//Date        : Wed Oct 30 19:10:41 2024
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -182,8 +182,10 @@ module system
         .adc_csn(ADC_1_adc_csn),
         .adc_dat_a(adc_dat_a_i_1),
         .adc_dat_b(adc_dat_b_i_1),
+        .aresetn(slice_0_dout),
         .m_axis_tdata(ADC_1_m_axis_TDATA),
-        .m_axis_tvalid(ADC_1_m_axis_TVALID));
+        .m_axis_tvalid(ADC_1_m_axis_TVALID),
+        .trigger_level({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}));
   system_cic_0_0 cic_0
        (.aclk(pll_0_clk_out1),
         .aresetn(slice_0_dout),

@@ -7,6 +7,7 @@
 					"interface": "xilinx.com:interface:axis:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},
+						"ARESETN": { "actual": "aresetn"},
 						"TDATA": { "actual": "m_axis_tdata[31:0]"},
 						"TVALID": { "actual": "m_axis_tvalid"}
 					}

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Wed Oct 30 17:59:33 2024
+| Date         : Wed Oct 30 19:12:43 2024
 | Host         : bigbc running 64-bit Ubuntu 24.04 LTS
 | Command      : report_methodology -file system_wrapper_methodology_drc_routed.rpt -pb system_wrapper_methodology_drc_routed.pb -rpx system_wrapper_methodology_drc_routed.rpx
 | Design       : system_wrapper
@@ -23,11 +23,11 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 18
+             Violations found: 30
 +-----------+----------+-------------------------------------------------+------------+
 | Rule      | Severity | Description                                     | Violations |
 +-----------+----------+-------------------------------------------------+------------+
-| TIMING-18 | Warning  | Missing input or output delay                   | 14         |
+| TIMING-18 | Warning  | Missing input or output delay                   | 26         |
 | XDCC-5    | Warning  | User Non-Timing constraint/property overwritten | 4          |
 +-----------+----------+-------------------------------------------------+------------+
 
@@ -60,47 +60,107 @@ Related violations: <none>
 
 TIMING-18#6 Warning
 Missing input or output delay  
-An input delay is missing on adc_dat_a_i[15] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+An input delay is missing on adc_dat_a_i[2] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
 Related violations: <none>
 
 TIMING-18#7 Warning
 Missing input or output delay  
-An input delay is missing on adc_dat_a_i[2] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+An input delay is missing on adc_dat_a_i[3] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
 Related violations: <none>
 
 TIMING-18#8 Warning
 Missing input or output delay  
-An input delay is missing on adc_dat_a_i[3] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+An input delay is missing on adc_dat_a_i[4] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
 Related violations: <none>
 
 TIMING-18#9 Warning
 Missing input or output delay  
-An input delay is missing on adc_dat_a_i[4] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+An input delay is missing on adc_dat_a_i[5] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
 Related violations: <none>
 
 TIMING-18#10 Warning
 Missing input or output delay  
-An input delay is missing on adc_dat_a_i[5] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+An input delay is missing on adc_dat_a_i[6] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
 Related violations: <none>
 
 TIMING-18#11 Warning
 Missing input or output delay  
-An input delay is missing on adc_dat_a_i[6] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+An input delay is missing on adc_dat_a_i[7] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
 Related violations: <none>
 
 TIMING-18#12 Warning
 Missing input or output delay  
-An input delay is missing on adc_dat_a_i[7] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+An input delay is missing on adc_dat_a_i[8] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
 Related violations: <none>
 
 TIMING-18#13 Warning
 Missing input or output delay  
-An input delay is missing on adc_dat_a_i[8] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+An input delay is missing on adc_dat_a_i[9] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
 Related violations: <none>
 
 TIMING-18#14 Warning
 Missing input or output delay  
-An input delay is missing on adc_dat_a_i[9] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+An input delay is missing on adc_dat_b_i[10] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#15 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[11] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#16 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[12] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#17 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[13] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#18 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[14] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#19 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[2] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#20 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[3] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#21 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[4] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#22 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[5] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#23 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[6] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#24 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[7] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#25 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[8] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+TIMING-18#26 Warning
+Missing input or output delay  
+An input delay is missing on adc_dat_b_i[9] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
 Related violations: <none>
 
 XDCC-5#1 Warning
