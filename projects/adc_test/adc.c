@@ -80,7 +80,7 @@ int main ()
 
   rx_cntr = (uint32_t *)(sts + 0);
 
-  uint16_t trg = 40;
+  uint16_t trg = 90;
 
 
   *trg_value = trg;

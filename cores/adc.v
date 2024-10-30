@@ -27,18 +27,20 @@ module ADC #
   reg  [ADC_DATA_WIDTH-1:0] int_dat_b_reg;
   reg  [ADC_DATA_WIDTH-1:0] abs_a; // Абсолютное значение int_dat_a_reg
   reg  [ADC_DATA_WIDTH-1:0] abs_b; // Абсолютное значение int_dat_b_reg
+  reg  [ADC_DATA_WIDTH:0]   sum_abs; // Additional bit for sum
 
-  reg  [ADC_DATA_WIDTH:0] sum_abs; // Additional bit for sum
+  reg                      trigger_activated; // Флаг активации триггера
 
   // Process for capturing and inverting the ADC data with padding
   always @(posedge aclk or negedge aresetn) begin
     if (!aresetn) begin
-      int_dat_a_reg <= 0;
-      int_dat_b_reg <= 0;
-      abs_a <= 0;
-      abs_b <= 0;
-      sum_abs <= 0;
-      m_axis_tvalid <= 1'b0; // Инициализация tvalid в 0 на сбросе
+      int_dat_a_reg    <= 0;
+      int_dat_b_reg    <= 0;
+      abs_a            <= 0;
+      abs_b            <= 0;
+      sum_abs          <= 0;
+      m_axis_tvalid    <= 1'b0;
+      trigger_activated <= 1'b0; // Инициализация флага триггера в 0 на сбросе
     end else begin
       // Захватываем данные и обрезаем до нужной ширины
       int_dat_a_reg <= adc_dat_a[15:PADDING_WIDTH];
@@ -51,20 +53,18 @@ module ADC #
       // Суммируем абсолютные значения
       sum_abs <= abs_a + abs_b;
 
-      // Устанавливаем m_axis_tvalid, если sum_abs больше trigger_level
+      // Проверяем условие для срабатывания триггера и сохраняем состояние
       if (sum_abs > trigger_level)
-        m_axis_tvalid <= 1'b1;
-      else
-        m_axis_tvalid <= 1'b0;
-    end
+        trigger_activated <= 1'b1;
 
-    m_axis_tvalid <= 1'b1;
+      // Устанавливаем m_axis_tvalid, если триггер уже активирован
+      m_axis_tvalid <= trigger_activated;
+    end
   end
 
   assign adc_csn = 1'b1;
 
   // Передаем сумму абсолютных значений на выход
-  
   assign m_axis_tdata = sum_abs;
 
 endmodule
