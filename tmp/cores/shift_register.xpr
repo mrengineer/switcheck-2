@@ -7,7 +7,7 @@
 <Project Product="Vivado" Version="7" Minor="65" Path="/home/bulkin/red-pitaya-notes/tmp/cores/shift_register.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="0f50f07589204b9fb6f4cebb9e8d5b2c"/>
+    <Option Name="Id" Val="3212ade88edc47cfbbec78ac06e7d445"/>
     <Option Name="Part" Val="xc7z010clg400-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>

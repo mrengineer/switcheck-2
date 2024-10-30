@@ -7,7 +7,7 @@
 <Project Product="Vivado" Version="7" Minor="65" Path="/home/bulkin/red-pitaya-notes/tmp/cores/axis_averager.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="e3cfeffe13d24b11993e19144d3d72a4"/>
+    <Option Name="Id" Val="affcc5cadc294cd69911bbc49b4e11e2"/>
     <Option Name="Part" Val="xc7z010clg400-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>

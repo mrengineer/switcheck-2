@@ -13,8 +13,3 @@ initram*
 vivado*
 webtalk*
 uImage
-.vscode
-.Xil
-.fsbl
-*.cache
-*.runs

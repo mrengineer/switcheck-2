@@ -7,7 +7,7 @@
 <Project Product="Vivado" Version="7" Minor="65" Path="/home/bulkin/red-pitaya-notes/tmp/cores/edge_detector.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="7f0bb37be2864bf8b2738ed48e779728"/>
+    <Option Name="Id" Val="a5979e8b770a4cf88c7efd6f08a55852"/>
     <Option Name="Part" Val="xc7z010clg400-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
