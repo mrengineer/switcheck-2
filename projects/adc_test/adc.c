@@ -80,7 +80,7 @@ int main ()
 
   rx_cntr = (uint32_t *)(sts + 0);
 
-  uint16_t trg = 90;
+  uint16_t trg = 50;
 
 
   *trg_value = trg;
@@ -88,23 +88,25 @@ int main ()
   *rx_addr = size;
 
 
-  printf("WAIT TRIGGER >%i", trg);
+  printf("WAIT TRIGGER > %i...\n", trg);
 
   while(!interrupted)
   {
     /* enter reset mode */
-    *rx_rst &= ~1;
+    *rx_rst &= ~1;    //сброс первого бита в 0
     usleep(100);
     *rx_rst &= ~2;
     /* set default sample rate */
     *rx_rate = 40;
 
+
     signal(SIGINT, signal_handler);
 
     /* enter normal operating mode */
-    *rx_rst |= 2;
+    *rx_rst |= 2; //установка второго бита в 1 (axis writer)
     usleep(100);
-    *rx_rst |= 1;
+    *rx_rst |= 1;  //установка первого бита в 1 (дециматор и другие)
+
 
     limit = 32*1024;
 

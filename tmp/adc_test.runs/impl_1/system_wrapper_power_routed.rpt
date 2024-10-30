@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date             : Wed Oct 30 23:47:19 2024
+| Date             : Thu Oct 31 00:28:54 2024
 | Host             : bigbc running 64-bit Ubuntu 24.04 LTS
 | Command          : report_power -file system_wrapper_power_routed.rpt -pb system_wrapper_power_summary_routed.pb -rpx system_wrapper_power_routed.rpx
 | Design           : system_wrapper
@@ -33,7 +33,7 @@ Table of Contents
 | Total On-Chip Power (W)  | 1.508        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.390        |
+| Dynamic (W)              | 1.391        |
 | Device Static (W)        | 0.118        |
 | Effective TJA (C/W)      | 11.5         |
 | Max Ambient (C)          | 67.6         |
@@ -52,14 +52,14 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.004 |        6 |       --- |             --- |
-| Slice Logic             |     0.001 |     1357 |       --- |             --- |
-|   LUT as Logic          |    <0.001 |      377 |     17600 |            2.14 |
-|   Register              |    <0.001 |      698 |     35200 |            1.98 |
-|   CARRY4                |    <0.001 |       40 |      4400 |            0.91 |
+| Clocks                  |     0.005 |        6 |       --- |             --- |
+| Slice Logic             |     0.001 |     1387 |       --- |             --- |
+|   LUT as Logic          |    <0.001 |      383 |     17600 |            2.18 |
+|   Register              |    <0.001 |      712 |     35200 |            2.02 |
+|   CARRY4                |    <0.001 |       42 |      4400 |            0.95 |
 |   Others                |     0.000 |      187 |       --- |             --- |
 |   LUT as Shift Register |     0.000 |        1 |      6000 |            0.02 |
-| Signals                 |     0.002 |     1013 |       --- |             --- |
+| Signals                 |     0.002 |     1029 |       --- |             --- |
 | Block RAM               |    <0.001 |        1 |        60 |            1.67 |
 | PLL                     |     0.105 |        1 |         2 |           50.00 |
 | I/O                     |    <0.001 |       61 |       100 |           61.00 |
@@ -153,7 +153,7 @@ Table of Contents
 +----------------+-----------+
 | Name           | Power (W) |
 +----------------+-----------+
-| system_wrapper |     1.390 |
+| system_wrapper |     1.391 |
 |   system_i     |     1.390 |
 |     hub_0      |     0.004 |
 |       inst     |     0.004 |
