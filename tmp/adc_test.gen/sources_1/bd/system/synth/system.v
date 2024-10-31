@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Thu Oct 31 00:27:12 2024
+//Date        : Thu Oct 31 18:31:39 2024
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=15,numReposBlks=15,numNonXlnxBlks=8,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=2,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
+(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=17,numReposBlks=17,numNonXlnxBlks=10,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=2,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
 module system
    (DDR_addr,
     DDR_ba,
@@ -151,6 +151,8 @@ module system
   wire [15:0]slice_2_dout;
   wire [31:0]slice_3_dout;
   wire [15:0]slice_4_dout;
+  wire [0:0]slice_6_dout;
+  wire [0:0]slice_7_dout;
   wire [31:0]writer_0_m_axi_AWADDR;
   wire [1:0]writer_0_m_axi_AWBURST;
   wire [3:0]writer_0_m_axi_AWCACHE;
@@ -182,6 +184,8 @@ module system
         .aresetn(slice_0_dout),
         .m_axis_tdata(ADC_1_m_axis_TDATA),
         .m_axis_tvalid(ADC_1_m_axis_TVALID),
+        .reset_max_sum(slice_7_dout),
+        .reset_trigger(slice_6_dout),
         .trigger_level(slice_4_dout));
   system_axis_decimator_0_0 axis_decimator_0
        (.aclk(pll_0_clk_out1),
@@ -362,6 +366,12 @@ module system
         .dout(slice_4_dout));
   system_slice_5_0 slice_5
        (.din(hub_0_cfg_data));
+  system_slice_1_1 slice_6
+       (.din(hub_0_cfg_data),
+        .dout(slice_6_dout));
+  system_slice_6_0 slice_7
+       (.din(hub_0_cfg_data),
+        .dout(slice_7_dout));
   system_writer_0_0 writer_0
        (.aclk(pll_0_clk_out1),
         .aresetn(slice_1_dout),

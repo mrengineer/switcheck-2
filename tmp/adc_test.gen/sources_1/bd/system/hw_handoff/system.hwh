@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Oct 31 00:27:13 2024" VIVADOVERSION="2023.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Oct 31 18:31:40 2024" VIVADOVERSION="2023.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -253,6 +253,16 @@
             <CONNECTION INSTANCE="axis_decimator_0" PORT="s_axis_tvalid"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="reset_max_sum" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="slice_7_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="slice_7" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="reset_trigger" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="slice_6_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="slice_6" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="I" LEFT="15" NAME="trigger_level" RIGHT="0" SIGIS="undef" SIGNAME="slice_4_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="slice_4" PORT="dout"/>
@@ -476,6 +486,8 @@
             <CONNECTION INSTANCE="slice_3" PORT="din"/>
             <CONNECTION INSTANCE="slice_4" PORT="din"/>
             <CONNECTION INSTANCE="slice_5" PORT="din"/>
+            <CONNECTION INSTANCE="slice_7" PORT="din"/>
+            <CONNECTION INSTANCE="slice_6" PORT="din"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="31" NAME="m00_axis_tdata" RIGHT="0" SIGIS="undef"/>
@@ -3294,6 +3306,52 @@
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="31" NAME="dout" RIGHT="0" SIGIS="undef"/>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/slice_6" HWVERSION="1.0" INSTANCE="slice_6" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="port_slicer" VLNV="pavel-demin:user:port_slicer:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="DIN_FROM" VALUE="2"/>
+        <PARAMETER NAME="DIN_TO" VALUE="2"/>
+        <PARAMETER NAME="DIN_WIDTH" VALUE="160"/>
+        <PARAMETER NAME="Component_Name" VALUE="system_slice_1_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="159" NAME="din" RIGHT="0" SIGIS="undef" SIGNAME="hub_0_cfg_data">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="hub_0" PORT="cfg_data"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="slice_6_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ADC_1" PORT="reset_trigger"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/slice_7" HWVERSION="1.0" INSTANCE="slice_7" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="port_slicer" VLNV="pavel-demin:user:port_slicer:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="DIN_FROM" VALUE="3"/>
+        <PARAMETER NAME="DIN_TO" VALUE="3"/>
+        <PARAMETER NAME="DIN_WIDTH" VALUE="160"/>
+        <PARAMETER NAME="Component_Name" VALUE="system_slice_6_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="159" NAME="din" RIGHT="0" SIGIS="undef" SIGNAME="hub_0_cfg_data">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="hub_0" PORT="cfg_data"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="slice_7_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ADC_1" PORT="reset_max_sum"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>

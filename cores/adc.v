@@ -17,6 +17,10 @@ module ADC #
   // Trigger level setting
   input  wire [15:0] trigger_level,
 
+  // Reset control signals
+  input  wire        reset_trigger,     // Сброс триггера при 1
+  input  wire        reset_max_sum,     // Сброс максимума суммы при 1
+
   // Master side
   output reg         m_axis_tvalid,
   output wire [15:0] m_axis_tdata
@@ -31,6 +35,7 @@ module ADC #
 
   reg trigger_activated; // Флаг активации триггера
   reg [15:0]  max_sum_abs;   // Output for maximum sum value  
+  reg [63:0]  sample_counter; // 37-битный регистр для подсчета семплов отрабботает год
 
   // Process for capturing, inverting ADC data, and calculating maximum sum
   always @(posedge aclk or negedge aresetn) begin
@@ -43,7 +48,11 @@ module ADC #
       m_axis_tvalid    <= 1'b0;
       trigger_activated <= 1'b0;
       max_sum_abs      <= 0; // Инициализация максимума в 0 на сбросе
+      sample_counter   <= 0; // Инициализация счётчика
     end else begin
+      // Увеличиваем счетчик семплов
+      sample_counter <= sample_counter + 1;
+
       // Захватываем данные и обрезаем до нужной ширины
       int_dat_a_reg <= adc_dat_a[15:PADDING_WIDTH];
       int_dat_b_reg <= adc_dat_b[15:PADDING_WIDTH];
@@ -55,21 +64,24 @@ module ADC #
       // Суммируем абсолютные значения
       sum_abs <= abs_a + abs_b;
 
-      // Определяем максимальное значение суммы
-      if (sum_abs > max_sum_abs) 
-        max_sum_abs <= sum_abs;
+      if (sample_counter > 2) begin  // Пропиустим первые отсчеты после reset потому что по почле reset идет какая-то ерунда
 
-      // Проверяем условие для срабатывания триггера и сохраняем состояние
-      if (sum_abs > trigger_level)
-        trigger_activated <= 1'b1;
+          // Определяем максимальное значение суммы
+          if (sum_abs > max_sum_abs && !reset_max_sum) 
+            max_sum_abs <= sum_abs;
+          else if (reset_max_sum)
+            max_sum_abs <= 0;
 
-      // Устанавливаем m_axis_tvalid, если триггер уже активирован
-      m_axis_tvalid <= trigger_activated;
+          // Проверяем условие для срабатывания триггера и сохраняем состояние
+          if (sum_abs > trigger_level && !reset_trigger)
+            trigger_activated <= 1'b1;
+          else if (reset_trigger)
+            trigger_activated <= 1'b0;
 
-      // Обработка сигналов сброса для максимума и триггера
-      //if (trigger_level == 0) 
-      //  max_sum_abs <= 0;
-      //  trigger_activated <= 1'b0;
+          // Устанавливаем m_axis_tvalid, если триггер уже активирован
+          m_axis_tvalid <= trigger_activated;
+
+      end
     end
   end
 

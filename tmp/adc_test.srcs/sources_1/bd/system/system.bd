@@ -25,7 +25,9 @@
       "slice_4": "",
       "slice_5": "",
       "ADC_1": "",
-      "axis_decimator_0": ""
+      "axis_decimator_0": "",
+      "slice_6": "",
+      "slice_7": ""
     },
     "interface_ports": {
       "Vp_Vn": {
@@ -2269,6 +2271,14 @@
             "direction": "I",
             "left": "15",
             "right": "0"
+          },
+          "reset_trigger": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "reset_max_sum": {
+            "type": "rst",
+            "direction": "I"
           }
         }
       },
@@ -2470,6 +2480,42 @@
             "right": "0"
           }
         }
+      },
+      "slice_6": {
+        "vlnv": "pavel-demin:user:port_slicer:1.0",
+        "ip_revision": "1",
+        "xci_name": "system_slice_1_1",
+        "xci_path": "ip/system_slice_1_1/system_slice_1_1.xci",
+        "inst_hier_path": "slice_6",
+        "parameters": {
+          "DIN_FROM": {
+            "value": "2"
+          },
+          "DIN_TO": {
+            "value": "2"
+          },
+          "DIN_WIDTH": {
+            "value": "160"
+          }
+        }
+      },
+      "slice_7": {
+        "vlnv": "pavel-demin:user:port_slicer:1.0",
+        "ip_revision": "1",
+        "xci_name": "system_slice_6_0",
+        "xci_path": "ip/system_slice_6_0/system_slice_6_0.xci",
+        "inst_hier_path": "slice_7",
+        "parameters": {
+          "DIN_FROM": {
+            "value": "3"
+          },
+          "DIN_TO": {
+            "value": "3"
+          },
+          "DIN_WIDTH": {
+            "value": "160"
+          }
+        }
       }
     },
     "interface_nets": {
@@ -2561,7 +2607,9 @@
           "slice_2/din",
           "slice_3/din",
           "slice_4/din",
-          "slice_5/din"
+          "slice_5/din",
+          "slice_7/din",
+          "slice_6/din"
         ]
       },
       "pll_0_clk_out1": {
@@ -2617,6 +2665,18 @@
         "ports": [
           "slice_4/dout",
           "ADC_1/trigger_level"
+        ]
+      },
+      "slice_6_dout": {
+        "ports": [
+          "slice_6/dout",
+          "ADC_1/reset_trigger"
+        ]
+      },
+      "slice_7_dout": {
+        "ports": [
+          "slice_7/dout",
+          "ADC_1/reset_max_sum"
         ]
       },
       "writer_0_sts_data": {

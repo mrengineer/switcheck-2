@@ -53,6 +53,12 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_ADC_
 # IP: bd/system/ip/system_axis_decimator_0_0/system_axis_decimator_0_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_axis_decimator_0_0 || ORIG_REF_NAME==system_axis_decimator_0_0} -quiet] -quiet
 
+# IP: bd/system/ip/system_slice_1_1/system_slice_1_1.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_slice_1_1 || ORIG_REF_NAME==system_slice_1_1} -quiet] -quiet
+
+# IP: bd/system/ip/system_slice_6_0/system_slice_6_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_slice_6_0 || ORIG_REF_NAME==system_slice_6_0} -quiet] -quiet
+
 # XDC: /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_board.xdc
 set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==system_pll_0_0 || ORIG_REF_NAME==system_pll_0_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
 

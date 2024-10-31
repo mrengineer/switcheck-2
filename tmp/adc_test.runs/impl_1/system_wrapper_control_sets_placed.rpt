@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Thu Oct 31 00:28:41 2024
+| Date         : Thu Oct 31 18:33:05 2024
 | Host         : bigbc running 64-bit Ubuntu 24.04 LTS
 | Command      : report_control_sets -verbose -file system_wrapper_control_sets_placed.rpt
 | Design       : system_wrapper
@@ -58,12 +58,12 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              22 |           11 |
-| No           | No                    | Yes                    |              42 |           14 |
-| No           | Yes                   | No                     |              28 |           13 |
+| No           | No                    | No                     |              22 |            9 |
+| No           | No                    | Yes                    |             106 |           30 |
+| No           | Yes                   | No                     |              28 |           12 |
 | Yes          | No                    | No                     |             318 |           90 |
-| Yes          | No                    | Yes                    |              14 |            3 |
-| Yes          | Yes                   | No                     |             262 |           67 |
+| Yes          | No                    | Yes                    |              14 |            5 |
+| Yes          | Yes                   | No                     |             262 |           70 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -74,51 +74,51 @@ Table of Contents
 |          Clock Signal         |                             Enable Signal                             |                             Set/Reset Signal                             | Slice Load Count | Bel Load Count | Bels / Slice |
 +-------------------------------+-----------------------------------------------------------------------+--------------------------------------------------------------------------+------------------+----------------+--------------+
 |  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/writer_0/inst/fifo_0/xpm_fifo_base_inst/xpm_fifo_rst_inst/rst_i |                1 |              3 |         3.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/writer_0/inst/buf_1/E[0]                                     | system_i/writer_0/inst/fifo_0_i_1_n_0                                    |                1 |              4 |         4.00 |
 |  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_3/buf_1/E[0]                                  | system_i/hub_0/inst/buf_3/buf_1/SR[0]                                    |                1 |              4 |         4.00 |
-|  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/rst_0/U0/EXT_LPF/lpf_int                                        |                3 |              5 |         1.67 |
-|  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/writer_0/inst/fifo_0/xpm_fifo_base_inst/xpm_fifo_rst_inst/Q[0]  |                3 |              6 |         2.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/writer_0/inst/buf_1/E[0]                                     | system_i/writer_0/inst/fifo_0_i_1_n_0                                    |                1 |              4 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/rst_0/U0/EXT_LPF/lpf_int                                        |                1 |              5 |         5.00 |
 |  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/writer_0/inst/fifo_0/xpm_fifo_base_inst/xpm_fifo_rst_inst/SR[0] |                2 |              6 |         3.00 |
+|  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/writer_0/inst/fifo_0/xpm_fifo_base_inst/xpm_fifo_rst_inst/Q[0]  |                4 |              6 |         1.50 |
 |  system_i/pll_0/inst/clk_out1 | system_i/rst_0/U0/SEQ/seq_cnt_en                                      | system_i/rst_0/U0/SEQ/SEQ_COUNTER/q_int[5]_i_1_n_0                       |                2 |              6 |         3.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE027_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                3 |              8 |         2.67 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE038_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE036_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE034_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE029_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE056_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE054_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                3 |              8 |         2.67 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE052_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE045_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                3 |              8 |         2.67 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE043_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE041_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                3 |              8 |         2.67 |
-|  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                4 |              8 |         2.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE050_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE047_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE032_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
 |  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE025_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE023_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
 |  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE019_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE0                                   | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE032_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE027_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE029_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE034_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE036_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE038_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                4 |              8 |         2.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE041_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                3 |              8 |         2.67 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE043_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE045_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE047_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE050_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE052_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE054_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                1 |              8 |         8.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE056_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
 |  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/int_data_reg_reg[33]_0                | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE023_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
 |  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE016_out                             | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_2/int_bready_wire                             |                                                                          |                4 |             12 |         3.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/axis_decimator_0/inst/int_tdata_reg0                         | system_i/axis_decimator_0/inst/p_0_in                                    |                3 |             14 |         4.67 |
-|  system_i/pll_0/inst/clk_out1 | system_i/ADC_1/inst/max_sum_abs0_carry__0_n_1                         | system_i/ADC_1/inst/m_axis_tvalid_i_1_n_0                                |                3 |             14 |         4.67 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_1/CE0                                   | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                2 |              8 |         4.00 |
+|  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/hub_0/inst/buf_3/buf_0/ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N      |                4 |              8 |         2.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_2/int_bready_wire                             |                                                                          |                2 |             12 |         6.00 |
+|  system_i/pll_0/inst/clk_out1 | system_i/axis_decimator_0/inst/int_tdata_reg0                         | system_i/axis_decimator_0/inst/p_0_in                                    |                5 |             14 |         2.80 |
+|  system_i/pll_0/inst/clk_out1 | system_i/ADC_1/inst/max_sum_abs                                       | system_i/ADC_1/inst/m_axis_tvalid_i_2_n_0                                |                5 |             14 |         2.80 |
 |  system_i/pll_0/inst/clk_out1 | system_i/axis_decimator_0/inst/int_cntr_reg0                          | system_i/axis_decimator_0/inst/int_cntr_reg[15]_i_1_n_0                  |                5 |             16 |         3.20 |
 |  system_i/pll_0/inst/clk_out1 | system_i/writer_0/inst/buf_0/E[0]                                     | system_i/writer_0/inst/buf_0/SR[0]                                       |                5 |             16 |         3.20 |
 |  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_0/buf_0/int_ready_reg_reg_0                   |                                                                          |                5 |             19 |         3.80 |
 |  system_i/pll_0/inst/clk_out1 | system_i/writer_0/inst/fifo_0/xpm_fifo_base_inst/rdp_inst/ram_rd_en_i | system_i/writer_0/inst/fifo_0/xpm_fifo_base_inst/xpm_fifo_rst_inst/Q[0]  |                7 |             19 |         2.71 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_1/buf_1/E[0]                                  |                                                                          |                5 |             19 |         3.80 |
-|  system_i/pll_0/inst/clk_out1 |                                                                       |                                                                          |               12 |             23 |         1.92 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_3/buf_1/int_data_reg[47]_i_1__0_n_0           |                                                                          |                9 |             23 |         2.56 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_3/buf_0/int_ready_reg_reg_0                   |                                                                          |                7 |             23 |         3.29 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_1/buf_1/E[0]                                  |                                                                          |                6 |             19 |         3.17 |
+|  system_i/pll_0/inst/clk_out1 |                                                                       |                                                                          |               10 |             23 |         2.30 |
 |  system_i/pll_0/inst/clk_out1 | system_i/writer_0/inst/fifo_0/xpm_fifo_base_inst/rst_d1_inst/E[0]     | system_i/writer_0/inst/fifo_0/xpm_fifo_base_inst/xpm_fifo_rst_inst/Q[0]  |                6 |             23 |         3.83 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_3/buf_1/int_data_reg[47]_i_1__0_n_0           |                                                                          |                8 |             23 |         2.88 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_3/buf_0/int_ready_reg_reg_0                   |                                                                          |                6 |             23 |         3.83 |
 |  system_i/pll_0/inst/clk_out1 | system_i/writer_0/inst/buf_0/int_awready_wire                         |                                                                          |                7 |             32 |         4.57 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_1/buf_1/int_ready_wire                        |                                                                          |               11 |             37 |         3.36 |
 |  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_1/buf_0/int_ready_reg_reg_0                   |                                                                          |                9 |             37 |         4.11 |
-|  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/ADC_1/inst/m_axis_tvalid_i_1_n_0                                |               14 |             42 |         3.00 |
-|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_4/int_rready_wire                             |                                                                          |               15 |             51 |         3.40 |
-|  system_i/pll_0/inst/clk_out1 | system_i/writer_0/inst/buf_1/int_wready_wire                          |                                                                          |               18 |             65 |         3.61 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_1/buf_1/int_ready_wire                        |                                                                          |               12 |             37 |         3.08 |
+|  system_i/pll_0/inst/clk_out1 | system_i/hub_0/inst/buf_4/int_rready_wire                             |                                                                          |               16 |             51 |         3.19 |
+|  system_i/pll_0/inst/clk_out1 | system_i/writer_0/inst/buf_1/int_wready_wire                          |                                                                          |               19 |             65 |         3.42 |
+|  system_i/pll_0/inst/clk_out1 |                                                                       | system_i/ADC_1/inst/m_axis_tvalid_i_2_n_0                                |               30 |            106 |         3.53 |
 +-------------------------------+-----------------------------------------------------------------------+--------------------------------------------------------------------------+------------------+----------------+--------------+
 
 

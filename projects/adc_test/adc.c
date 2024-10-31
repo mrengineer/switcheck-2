@@ -80,7 +80,7 @@ int main ()
 
   rx_cntr = (uint32_t *)(sts + 0);
 
-  uint16_t trg = 50;
+  uint16_t trg = 200;
 
 
   *trg_value = trg;
@@ -147,15 +147,12 @@ int main ()
     }
 
     signal(SIGINT, SIG_DFL);
-    close(sock_client);
   }
 
   /* enter reset mode */
   *rx_rst &= ~1;
   usleep(100);
   *rx_rst &= ~2;
-
-  close(sock_server);
 
   return EXIT_SUCCESS;
 }

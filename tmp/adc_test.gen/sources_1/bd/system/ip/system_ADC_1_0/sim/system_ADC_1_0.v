@@ -61,6 +61,8 @@ module system_ADC_1_0 (
   adc_dat_a,
   adc_dat_b,
   trigger_level,
+  reset_trigger,
+  reset_max_sum,
   m_axis_tvalid,
   m_axis_tdata
 );
@@ -75,6 +77,12 @@ output wire adc_csn;
 input wire [15 : 0] adc_dat_a;
 input wire [15 : 0] adc_dat_b;
 input wire [15 : 0] trigger_level;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_trigger, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_trigger RST" *)
+input wire reset_trigger;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_max_sum, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_max_sum RST" *)
+input wire reset_max_sum;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 m_axis TVALID" *)
 output wire m_axis_tvalid;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME m_axis, TDATA_NUM_BYTES 2, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 0, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 125000000, PHASE 0.0, CLK_DOMAIN system_pll_0_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
@@ -90,6 +98,8 @@ output wire [15 : 0] m_axis_tdata;
     .adc_dat_a(adc_dat_a),
     .adc_dat_b(adc_dat_b),
     .trigger_level(trigger_level),
+    .reset_trigger(reset_trigger),
+    .reset_max_sum(reset_max_sum),
     .m_axis_tvalid(m_axis_tvalid),
     .m_axis_tdata(m_axis_tdata)
   );
