@@ -31,11 +31,12 @@ module ADC #
   reg  [ADC_DATA_WIDTH-1:0] int_dat_b_reg; 
   reg  [ADC_DATA_WIDTH-1:0] abs_a; // Абсолютное значение int_dat_a_reg
   reg  [ADC_DATA_WIDTH-1:0] abs_b; // Абсолютное значение int_dat_b_reg
-  reg  [ADC_DATA_WIDTH:0]   sum_abs; // Additional bit for sum
+  reg signed [ADC_DATA_WIDTH:0]   sum_abs; // Additional bit for sum
 
   reg trigger_activated; // Флаг активации триггера
   reg [15:0]  max_sum_abs;   // Output for maximum sum value  
   reg [63:0]  sample_counter; // 37-битный регистр для подсчета семплов отрабботает год
+  reg [15:0]  counter;
 
   // Process for capturing, inverting ADC data, and calculating maximum sum
   always @(posedge aclk or negedge aresetn) begin
@@ -49,6 +50,7 @@ module ADC #
       trigger_activated <= 1'b0;
       max_sum_abs      <= 0; // Инициализация максимума в 0 на сбросе
       sample_counter   <= 0; // Инициализация счётчика
+      counter          <= 0;
     end else begin
       // Увеличиваем счетчик семплов
       sample_counter <= sample_counter + 1;
@@ -61,10 +63,13 @@ module ADC #
       abs_a <= {1'b0, ~int_dat_a_reg[ADC_DATA_WIDTH-2:0]};      
       abs_b <= {1'b0, ~int_dat_b_reg[ADC_DATA_WIDTH-2:0]};
 
-      // Суммируем абсолютные значения
-      sum_abs <= abs_a + abs_b;
 
-      if (sample_counter > 2) begin  // Пропиустим первые отсчеты после reset потому что по почле reset идет какая-то ерунда
+      // Суммируем абсолютные значения
+      sum_abs <= abs_a + abs_b; //{{(PADDING_WIDTH+1){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, ~int_dat_a_reg[ADC_DATA_WIDTH-2:0]};
+
+      if (sample_counter > 2) begin  // Пропустим первые отсчеты после reset потому что по почле reset идет какая-то ерунда
+          if (trigger_activated) 
+            counter = counter+1;
 
           // Определяем максимальное значение суммы
           if (sum_abs > max_sum_abs && !reset_max_sum) 
@@ -88,6 +93,6 @@ module ADC #
   assign adc_csn = 1'b1;
 
   // Передаем сумму абсолютных значений на выход
-  assign m_axis_tdata = max_sum_abs; //sum_abs;
+  assign m_axis_tdata =  sum_abs;
 
 endmodule

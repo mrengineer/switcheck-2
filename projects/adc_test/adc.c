@@ -14,7 +14,7 @@
 #define clrscr() printf("\e[1;1H\e[2J")
 
 #define CMA_ALLOC _IOWR('Z', 0, uint32_t)
-#define N 138 //N 4194304
+#define N 400 //N 4194304
 
 int interrupted = 0;
 
@@ -80,25 +80,30 @@ int main ()
 
   rx_cntr = (uint32_t *)(sts + 0);
 
-  uint16_t trg = 200;
-
+  uint16_t trg = 70;
 
   *trg_value = trg;
-
   *rx_addr = size;
 
 
-  printf("WAIT TRIGGER > %i...\n", trg);
-
   while(!interrupted)
   {
+
+    usleep(30000);
+    usleep(30000);
+    usleep(30000);
+    usleep(30000);
+    usleep(30000);
+    usleep(30000);
+    usleep(30000);
+
     /* enter reset mode */
     *rx_rst &= ~1;    //сброс первого бита в 0
     usleep(100);
     *rx_rst &= ~2;
     /* set default sample rate */
-    *rx_rate = 40;
-
+    
+    *rx_rate = 19;
 
     signal(SIGINT, signal_handler);
 
@@ -109,6 +114,11 @@ int main ()
 
 
     limit = 32*1024;
+
+
+    printf("WAIT TRIGGER > %i...\n", trg);
+
+    
 
     while(!interrupted)
     {
@@ -125,7 +135,9 @@ int main ()
 
         /* обработаем данные в структуру */
         clrscr();
-        for(uint16_t i = 0; i < N; i += 4)  // 4 16-битных числа на каждую структуру (64-бита)
+
+
+        for(uint16_t i = 0; i < N; i += 1)  // 2 16-битных числа на каждую структуру (64-бита)
         {
 
           // Попробуем объединить старшие и младшие 16 бит с учетом возможного порядка байтов
@@ -136,13 +148,15 @@ int main ()
           printf("Counter (i=%4i): %16u\t dS: %5i\t Sum(Mod(ADC)): %5i\n", i, counter, adc_valueA, adc_valueB);*/
 
           int16_t adc    = (int16_t)buffer[i];
-          printf("Counter (i=%4i): %6u\n", i, adc);
+          printf("%4i|%d\n", i, adc);
         }
+
+        break; //exit while to wait new trigger
 
       }
       else
       {
-        usleep(1000);
+        usleep(100);
       }
     }
 
