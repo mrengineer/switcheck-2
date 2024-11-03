@@ -1,0 +1,30 @@
+verilog xil_defaultlib --include "/home/bulkin/Xilinx/Vivado/2023.2/data/xilinx_vip/include" --include "../../../../adc_test.gen/sources_1/bd/system/ipshared/c2c6" --include "../../../../adc_test.gen/sources_1/bd/system/ipshared/ec67/hdl" --include "../../../../adc_test.gen/sources_1/bd/system/ipshared/6b2b/hdl" \
+"../../../bd/system/ip/system_pll_0_0/system_pll_0_0_clk_wiz.v" \
+"../../../bd/system/ip/system_pll_0_0/system_pll_0_0.v" \
+"../../../bd/system/ip/system_ps_0_0/sim/system_ps_0_0.v" \
+"../../../bd/system/ip/system_const_0_0/sim/system_const_0_0.v" \
+"../../../bd/system/ipshared/modules/inout_buffer.v" \
+"../../../bd/system/ipshared/modules/input_buffer.v" \
+"../../../bd/system/ipshared/modules/output_buffer.v" \
+"../../../bd/system/ipshared/cores/axi_hub.v" \
+"../../../bd/system/ip/system_hub_0_0/sim/system_hub_0_0.v" \
+"../../../bd/system/ipshared/cores/port_slicer.v" \
+"../../../bd/system/ip/system_slice_0_0/sim/system_slice_0_0.v" \
+"../../../bd/system/ip/system_slice_1_0/sim/system_slice_1_0.v" \
+"../../../bd/system/ip/system_slice_2_0/sim/system_slice_2_0.v" \
+"../../../bd/system/ip/system_slice_3_0/sim/system_slice_3_0.v" \
+"../../../bd/system/ip/system_const_1_0/sim/system_const_1_0.v" \
+"../../../bd/system/ipshared/cores/axis_ram_writer.v" \
+"../../../bd/system/ip/system_writer_0_0/sim/system_writer_0_0.v" \
+"../../../bd/system/ip/system_slice_4_0/sim/system_slice_4_0.v" \
+"../../../bd/system/ip/system_slice_5_0/sim/system_slice_5_0.v" \
+"../../../bd/system/ip/system_ADC_1_0/sim/system_ADC_1_0.v" \
+"../../../bd/system/ip/system_axis_decimator_0_0/sim/system_axis_decimator_0_0.v" \
+"../../../bd/system/ip/system_slice_1_1/sim/system_slice_1_1.v" \
+"../../../bd/system/ip/system_slice_6_0/sim/system_slice_6_0.v" \
+"../../../bd/system/sim/system.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

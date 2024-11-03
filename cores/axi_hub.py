@@ -1,8 +1,8 @@
-hub_size = 6
+hub_size = 0
 source = """
 `timescale 1 ns / 1 ps
 
-module axi_hub #
+module axi_hub_new #
 (
   parameter integer CFG_DATA_WIDTH = 1024,
   parameter integer STS_DATA_WIDTH = 1024

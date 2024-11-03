@@ -71,7 +71,6 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 2
-set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config -id {HDL-1065} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z010clg400-1
@@ -96,6 +95,10 @@ read_mem /home/bulkin/red-pitaya-notes/cfg/dds.mem
 read_verilog -library xil_defaultlib {
   /home/bulkin/red-pitaya-notes/cores/adc.v
   /home/bulkin/red-pitaya-notes/cores/axis_decimator.v
+  /home/bulkin/red-pitaya-notes/modules/inout_buffer.v
+  /home/bulkin/red-pitaya-notes/modules/input_buffer.v
+  /home/bulkin/red-pitaya-notes/modules/output_buffer.v
+  /home/bulkin/red-pitaya-notes/cores/axi_hub_modified.v
   /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/hdl/system_wrapper.v
 }
 add_files /home/bulkin/red-pitaya-notes/tmp/adc_test.srcs/sources_1/bd/system/system.bd
