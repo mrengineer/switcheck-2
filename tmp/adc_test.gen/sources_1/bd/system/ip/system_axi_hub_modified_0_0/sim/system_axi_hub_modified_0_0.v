@@ -136,11 +136,11 @@ output wire s_axi_rvalid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 s_axi RREADY" *)
 input wire s_axi_rready;
 output wire [159 : 0] cfg_data;
-input wire [31 : 0] sts_data;
+input wire [127 : 0] sts_data;
 
   axi_hub_modified #(
     .CFG_DATA_WIDTH(160),
-    .STS_DATA_WIDTH(32)
+    .STS_DATA_WIDTH(128)
   ) inst (
     .aclk(aclk),
     .aresetn(aresetn),

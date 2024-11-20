@@ -1,0 +1,195 @@
+<!DOCTYPE html>  
+<meta charset="utf-8" /> 
+	
+<head>
+	<title>Switcheck</title>  
+
+
+	<meta charset="utf-8">
+    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="reconnecting-websocket.js"></script> <!-- https://github.com/joewalnes/reconnecting-websocket -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+	<script language="javascript" type="text/javascript">
+
+	//var wsUri = "ws://" + location.host + ":80";
+	var wsUri = "ws://192.168.1.8:80";
+	var websocket;
+	var connection;
+
+	function init() {
+		connection 	= document.getElementById("connection");
+		output 		= document.getElementById("output");
+	
+		websocket = new ReconnectingWebSocket(wsUri);
+		websocket.reconnectInterval = 2000;
+
+		websocket.onopen 	= function(evt) { onOpen(evt) }; 
+		websocket.onclose 	= function(evt) { onClose(evt) }; 
+		websocket.onmessage = function(evt) { onMessage(evt) }; 
+		websocket.onerror 	= function(evt) { onError(evt) };	
+	}
+
+	function onOpen(evt) { 
+		connection.innerHTML = "<span class=\"badge rounded-pill bg-success\">На связи</span>"; 
+		websocket.send("?");		
+	}
+	function onClose(evt) { connection.innerHTML = "<span class=\"badge rounded-pill bg-danger\">Нет соединения</span>"; }
+	function onError(evt) {
+		connection.innerHTML = "<span class=\"badge rounded-pill bg-danger\">Нет соединения</span>"
+	}
+	function onMessage(message){
+		if (message.data == "") return;
+
+		try {
+			
+			args = String(message.data).split(" ");		
+				var el 		= null;
+				var el_id 	= args[0].toString().trim().toUpperCase();					
+
+				if (el_id == "CLEAN") {					
+					graph_clean();
+				} else if (el_id == "D") {
+					ix 				= parseFloat(args[1].toString().trim());
+					sum_magnitdes1	= parseFloat(args[2].toString().trim());
+/*					variance1 		= parseFloat(args[1].toString().trim());
+					
+					diff			= parseFloat(args[3].toString().trim());
+					dEMA			= parseFloat(args[4].toString().trim());
+					
+*/
+					graph_add_point(sum_magnitdes1, ix);
+
+				} else if (el_id == "RESET") {
+					console.log("RESET");
+				} else if (el_id == "DRAW") {					
+					graph_refresh();
+				} else if (el_id =="STATE") {
+					el = document.getElementById(el_id);
+					evalue = args[1].toString().trim();			
+						switch (parseInt(evalue)){
+							case 0:
+								el.innerHTML = "<span class=\"badge rounded-pill bg-secondary\">Простой</span>"
+								break;
+							case 1:
+								el.innerHTML = "<span class=\"badge rounded-pill bg-primary\">Настройка усиления</span>"
+								break;
+							case 2:
+								el.innerHTML = "<span class=\"badge rounded-pill bg-primary\">Калибровка</span>"
+								break;
+							case 3:
+								el.innerHTML = "<span class=\"badge rounded-pill bg-success text-white\">Ожидание импульса</span>"
+								break;
+							case 4:
+								el.innerHTML = "<span class=\"badge rounded-pill bg-success text-white\">ИМПУЛЬС</span>"
+								break;
+							case 5:
+								el.innerHTML = "<span class=\"badge rounded-pill bg-success text-white\">Передача данных</span>"
+								break;
+							case 6:
+								el.innerHTML = "<span class=\"badge rounded-pill bg-danger text-white\">Сбой</span>"
+								break;				
+							default:
+								el.innerHTML = "<span class=\"badge rounded-pill bg-light text-dark\">Не определено</span>"
+								break;						
+						}			
+				} else if (el_id == "CONSOLE") {
+					el = document.getElementById(el_id);
+					el.innerHTML = message.data.toString().replace("CONSOLE", "").trim() + "<BR>" + el.innerHTML;
+				} else {					
+					el = document.getElementById(el_id);
+					evalue = args[1].toString().trim();
+
+					if (el != null) el.innerHTML = evalue;					
+				}			
+		} catch (error) {
+			console.error(error);
+			console.log(message);
+		}
+
+	}
+	function doSend(message) {	websocket.send(message); }
+
+	window.onload = function () {
+		
+	}
+
+	document.addEventListener("DOMContentLoaded", () => {init();});
+
+	</script>
+</head>
+<body>
+
+		Соединение: <span id="connection"><span class="badge rounded-pill bg-danger">Нет соединения</span></span> 
+		Состояние: <span id="STATE"><span class="badge rounded-pill bg-light text-dark">Не определено</span></span>
+		<HR>
+			Устанволен триггер: <span id="TRIGGER">-</span><BR>
+			Сработало на: <span id="TRIGGEREDBY">-</span>
+
+		
+		<canvas id="myChart" style="height:50vh; width:80vw"></canvas>
+	 
+		<div id="CONSOLE"></div>
+
+		<script>
+			var ctx = document.getElementById('myChart');
+
+			var d = {
+				datasets: [{
+						label: 'Magnitudes',
+						data: [	],
+						backgroundColor: 'rgb(255, 50, 50)',
+						pointRadius: 1
+				}],
+			};
+		  
+			mychart = new Chart(ctx, {
+				type: 	'scatter',
+				data: 	d,
+				options: {
+					animation: false,
+					parsing: false,		//for performance
+					//plugins: {
+					//	decimation: decimation,
+					//},					
+					scales: {
+						x: {
+							type: 'linear',
+							position: 'bottom',
+							ticks: {
+								source: 'auto',
+								// Disabled rotation for performance
+								maxRotation: 0,
+								autoSkip: true,
+							}						
+						},
+						y: {
+							type: 'logarithmic',
+						}
+					},
+					tooltips: {enabled: false},
+        			hover: {mode: null}					
+				}
+				
+			});
+
+			function graph_add_point (sum_magnitudes1, ix) {
+				d.datasets[0].data.push({x: ix, y: sum_magnitudes1});
+			}
+
+			function graph_clean () {				
+				mychart.update('none');
+				d.datasets[0].data = [];
+			}
+
+			function graph_refresh () {
+				mychart.update('none');
+			}
+
+		</script>		
+
+</body>
+
+</html>

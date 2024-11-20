@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x66735E2F400FB2BE",
+      "boundary_crc": "0x66735E2F26D658D2",
       "device": "xc7z010clg400-1",
       "gen_directory": "../../../../adc_test.gen/sources_1/bd/system",
       "name": "system",
@@ -27,7 +27,8 @@
       "axis_decimator_0": "",
       "slice_6": "",
       "slice_7": "",
-      "axi_hub_modified_0": ""
+      "axi_hub_modified_0": "",
+      "xlconcat_0": ""
     },
     "interface_ports": {
       "Vp_Vn": {
@@ -256,30 +257,10 @@
         "right": "0"
       },
       "dac_clk_o": {
-        "direction": "O",
-        "parameters": {
-          "CLK_DOMAIN": {
-            "value": "system_dac_0_0_dac_clk",
-            "value_src": "default_prop"
-          },
-          "FREQ_HZ": {
-            "value": "100000000",
-            "value_src": "default_prop"
-          },
-          "PHASE": {
-            "value": "0.0",
-            "value_src": "default_prop"
-          }
-        }
+        "direction": "O"
       },
       "dac_rst_o": {
-        "direction": "O",
-        "parameters": {
-          "POLARITY": {
-            "value": "ACTIVE_LOW",
-            "value_src": "default_prop"
-          }
-        }
+        "direction": "O"
       },
       "dac_sel_o": {
         "direction": "O"
@@ -2125,6 +2106,11 @@
         "xci_name": "system_ADC_1_0",
         "xci_path": "ip/system_ADC_1_0/system_ADC_1_0.xci",
         "inst_hier_path": "ADC_1",
+        "parameters": {
+          "ADC_DATA_WIDTH": {
+            "value": "14"
+          }
+        },
         "reference_info": {
           "ref_type": "hdl",
           "ref_name": "ADC",
@@ -2257,6 +2243,21 @@
           "reset_max_sum": {
             "type": "rst",
             "direction": "I"
+          },
+          "max_sum_out": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          },
+          "trigged_by_out": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          },
+          "trigged_when": {
+            "direction": "O",
+            "left": "31",
+            "right": "0"
           }
         }
       },
@@ -2506,7 +2507,7 @@
             "value": "160"
           },
           "STS_DATA_WIDTH": {
-            "value": "32"
+            "value": "128"
           }
         },
         "reference_info": {
@@ -2790,8 +2791,38 @@
           },
           "sts_data": {
             "direction": "I",
-            "left": "31",
-            "right": "0"
+            "left": "127",
+            "right": "0",
+            "parameters": {
+              "PortWidth": {
+                "value": "128",
+                "value_src": "ip_prop"
+              }
+            }
+          }
+        }
+      },
+      "xlconcat_0": {
+        "vlnv": "xilinx.com:ip:xlconcat:2.1",
+        "ip_revision": "5",
+        "xci_name": "system_xlconcat_0_0",
+        "xci_path": "ip/system_xlconcat_0_0_1/system_xlconcat_0_0.xci",
+        "inst_hier_path": "xlconcat_0",
+        "parameters": {
+          "IN0_WIDTH": {
+            "value": "32"
+          },
+          "IN1_WIDTH": {
+            "value": "32"
+          },
+          "IN2_WIDTH": {
+            "value": "32"
+          },
+          "IN3_WIDTH": {
+            "value": "32"
+          },
+          "NUM_PORTS": {
+            "value": "4"
           }
         }
       }
@@ -2839,6 +2870,24 @@
         "ports": [
           "ADC_1/adc_csn",
           "adc_csn_o"
+        ]
+      },
+      "ADC_1_max_sum_out": {
+        "ports": [
+          "ADC_1/max_sum_out",
+          "xlconcat_0/In1"
+        ]
+      },
+      "ADC_1_trigged_by_out": {
+        "ports": [
+          "ADC_1/trigged_by_out",
+          "xlconcat_0/In2"
+        ]
+      },
+      "ADC_1_trigged_when": {
+        "ports": [
+          "ADC_1/trigged_when",
+          "xlconcat_0/In3"
         ]
       },
       "adc_clk_n_i_1": {
@@ -2898,8 +2947,8 @@
           "rst_0/slowest_sync_clk",
           "writer_0/aclk",
           "axis_decimator_0/aclk",
-          "ADC_1/aclk",
-          "axi_hub_modified_0/aclk"
+          "axi_hub_modified_0/aclk",
+          "ADC_1/aclk"
         ]
       },
       "pll_0_locked": {
@@ -2960,6 +3009,12 @@
       "writer_0_sts_data": {
         "ports": [
           "writer_0/sts_data",
+          "xlconcat_0/In0"
+        ]
+      },
+      "xlconcat_0_dout": {
+        "ports": [
+          "xlconcat_0/dout",
           "axi_hub_modified_0/sts_data"
         ]
       }

@@ -8,7 +8,7 @@
     "gen_directory": "../../../../../../adc_test.gen/sources_1/bd/system/ip/system_ADC_1_0",
     "parameters": {
       "component_parameters": {
-        "ADC_DATA_WIDTH": [ { "value": "14", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "ADC_DATA_WIDTH": [ { "value": "14", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Component_Name": [ { "value": "system_ADC_1_0", "resolve_type": "user", "usage": "all" } ]
       },
       "model_parameters": {
@@ -49,7 +49,10 @@
         "reset_trigger": [ { "direction": "in" } ],
         "reset_max_sum": [ { "direction": "in" } ],
         "m_axis_tvalid": [ { "direction": "out" } ],
-        "m_axis_tdata": [ { "direction": "out", "size_left": "15", "size_right": "0" } ]
+        "m_axis_tdata": [ { "direction": "out", "size_left": "15", "size_right": "0" } ],
+        "max_sum_out": [ { "direction": "out", "size_left": "15", "size_right": "0" } ],
+        "trigged_by_out": [ { "direction": "out", "size_left": "15", "size_right": "0" } ],
+        "trigged_when": [ { "direction": "out", "size_left": "31", "size_right": "0" } ]
       },
       "interfaces": {
         "m_axis": {

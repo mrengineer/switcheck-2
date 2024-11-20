@@ -11,8 +11,12 @@ sshpass -p 'changeme' ssh -t sdr-rw        #calls from .ssh/config with RemoteCo
 sshpass -p 'changeme' scp ./system_wrapper.bit root@sdr:/root/apps/
 sshpass -p 'changeme' scp ./run.sh root@sdr:/root/apps/
 sshpass -p 'changeme' scp ./adc root@sdr:/root/apps/
+#sshpass -p 'changeme' scp ./websocketd root@sdr:/root/apps/
+
+sshpass -p 'changeme' ssh -t sdr 'sync'
+
+sshpass -p 'changeme' ssh -t sdr '/root/apps/run.sh'
+#sshpass -p 'changeme' ssh -t sdr '/root/apps/websocketd'
 
 sshpass -p 'changeme' ssh -t sdr 'sync'
 sshpass -p 'changeme' ssh -t sdr-ro        #calls from .ssh/config with RemoteCommand mount -o ro,remount /media/mmcblk0p1
-
-sshpass -p 'changeme' ssh -t sdr '/root/apps/run.sh'

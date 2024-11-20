@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date             : Sun Nov  3 18:03:10 2024
+| Date             : Wed Nov 20 22:11:53 2024
 | Host             : bigbc running 64-bit Ubuntu 24.04 LTS
 | Command          : report_power -file system_wrapper_power_routed.rpt -pb system_wrapper_power_summary_routed.pb -rpx system_wrapper_power_routed.rpx
 | Design           : system_wrapper
@@ -53,16 +53,16 @@ Table of Contents
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
 | Clocks                  |     0.005 |        6 |       --- |             --- |
-| Slice Logic             |     0.001 |     1485 |       --- |             --- |
-|   LUT as Logic          |     0.001 |      406 |     17600 |            2.31 |
-|   CARRY4                |    <0.001 |       62 |      4400 |            1.41 |
-|   Register              |    <0.001 |      752 |     35200 |            2.14 |
+| Slice Logic             |     0.001 |     1602 |       --- |             --- |
+|   LUT as Logic          |     0.001 |      470 |     17600 |            2.67 |
+|   CARRY4                |    <0.001 |       60 |      4400 |            1.36 |
+|   Register              |    <0.001 |      797 |     35200 |            2.26 |
 |   Others                |     0.000 |      187 |       --- |             --- |
 |   LUT as Shift Register |     0.000 |        1 |      6000 |            0.02 |
-| Signals                 |     0.002 |     1082 |       --- |             --- |
+| Signals                 |     0.002 |     1138 |       --- |             --- |
 | Block RAM               |    <0.001 |        1 |        60 |            1.67 |
 | PLL                     |     0.105 |        1 |         2 |           50.00 |
-| I/O                     |    <0.001 |       61 |       100 |           61.00 |
+| I/O                     |    <0.001 |       49 |       100 |           49.00 |
 | PS7                     |     1.277 |        1 |       --- |             --- |
 | Static Power            |     0.118 |          |           |                 |
 | Total                   |     1.509 |          |           |                 |
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.024 |       0.017 |      0.007 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.023 |       0.017 |      0.007 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.062 |       0.054 |      0.008 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -155,8 +155,8 @@ Table of Contents
 +------------------------+-----------+
 | system_wrapper         |     1.391 |
 |   system_i             |     1.391 |
-|     ADC_1              |     0.001 |
-|       inst             |     0.001 |
+|     ADC_1              |     0.002 |
+|       inst             |     0.002 |
 |     axi_hub_modified_0 |     0.004 |
 |       inst             |     0.004 |
 |     pll_0              |     0.106 |
