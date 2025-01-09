@@ -10,4 +10,5 @@ cat $apps_dir/system_wrapper.bit > /dev/xdevcfg
 cd $apps_dir
 
 pkill tcpserver     #kill http server
-./websocketd --port=80 --staticdir=. ./adc
+#./websocketd --port=80 --staticdir=. ./adc
+./adc

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1732129809" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/system_wrapper.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1736400270" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/system_wrapper.dcp">
   <File Type="VDS-TIMINGSUMMARY" Name="system_wrapper_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="system_wrapper.dcp"/>
   <File Type="RDS-UTIL-PB" Name="system_wrapper_utilization_synth.pb"/>
@@ -53,6 +53,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PPRDIR/../cores/axis_red_pitaya_dac.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/bd/system/system.bd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -67,9 +74,11 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../cfg/dds.mem">
+    <File Path="$PPRDIR/../cores/axis_ram_writer.v">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
