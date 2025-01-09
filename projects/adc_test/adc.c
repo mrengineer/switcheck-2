@@ -168,7 +168,7 @@ int main () {
 
       /* read ram writer position */
       prev_position = position;
-      position = *rx_cntr;
+      position      = *rx_cntr;
 
       if (prev_position != position) {
         triggered_by_val    = *triggered_by;
@@ -177,72 +177,17 @@ int main () {
         printf("\033[0;33mCONSOLE\033[0m %i -> %i\n", prev_position, position);
 
         //Вычитаем
-        uint32_t *buffer = (uint32_t *)(ram + prev_position);
+        uint64_t *buffer = (uint64_t *)(ram + prev_position);
 
-        printf("VALUE u %x\n", (uint32_t)buffer[0]);
-        printf("VALUE s %x\n", (int32_t)buffer[0]);
+        for(uint32_t i = 0; i < 32; i += 1) {
+          //printf("D %i %d\n", i, adc);
+          uint64_t counter    = buffer[i] >> 16;         // Извлекаем первые 48 бит как счетчик          
+          uint16_t adc_value  = buffer[i] & 0xFFFF;    // Извлекаем оставшиеся 16 бит как значение АЦП
+          double_t msec       = (double_t)counter/125000.0;
 
-        printf("VALUE1 u %x\n", (uint32_t)buffer[1]);
-        printf("VALUE1 s %x\n", (int32_t)buffer[1]);
-
-
-        //for(int i = 64-1; i>=0; i--){
-        //    printf("%d", *buffer >> i & 1) ;
-        //}
-
-
-
-        /*
-        uint64_t* data64 = (uint64_t*)buffer;  // Интерпретация буфера как массива 64-битных слов
-        size_t num_entries = (position - prev_position) * 64 / 8;
-
-        for (size_t i = 0; i < num_entries; i++) {
-            uint64_t value = data64[i];  // Чтение полного 64-битного слова
-
-            uint32_t high_32 = (uint32_t)(value >> 32); // Старшие 32 бита
-            uint16_t mid_16 = (uint16_t)(value >> 16); // Средние 16 бит
-            uint16_t low_16 = (uint16_t)value;         // Младшие 16 бит
-
-            printf("D %lu: 64-bit = %lu, 32-bit = %u, 16-bit1 = %u, 16-bit2 = %u\n",
-                  i, value, high_32, mid_16, low_16);
+          // Печать результатов
+          printf("%i C: %llu (%f ms), ADC Value: %u\n", i, counter, msec, adc_value);
         }
-        */
-
-
-        /*
-        uint64_t* data64 = (uint64_t*)buffer;  // Интерпретация буфера как 64-битные слова
-        size_t num_entries = (position - prev_position) * 64 / 8;
-
-        for (size_t i = 0; i < num_entries; i++) {
-            uint64_t value = data64[i];  // Чтение 64-битного слова
-
-            uint32_t high_32 = (uint32_t)(value & 0xFFFFFFFF);  // Младшие 32 бита
-            uint16_t low_16 = (uint16_t)((value >> 32) & 0xFFFF);  // Средние 16 бит
-            uint16_t mid_16 = (uint16_t)((value >> 48) & 0xFFFF);  // Старшие 16 бит
-
-            printf("D %lu: 64-bit = %lu, 32-bit = %u, 16-bit1 = %u, 16-bit2 = %u\n",
-                  i, value, high_32, mid_16, low_16);
-        }
-        */
-
-
-
-
-        /*
-        for(uint32_t i = 0; i < ((position - prev_position)*64/4); i += 4) {
-            int16_t c1    = (int32_t)buffer[i];
-            int16_t c3    = (int16_t)buffer[i+2];
-            int16_t adc    = (int16_t)buffer[i+3];
-            printf("D %i - %li %i %i\n", i, c1, c3, adc);
-
-            uint32_t e1    = (uint32_t)buffer[i];
-            uint16_t e3    = (uint16_t)buffer[i+2];
-            int16_t edc    = (int16_t)buffer[i+3];
-            printf("D %i uns- %li %i %i\n", i, e1, e3, adc);
-
-            //if (i == position - prev_position - 1 ) printf("D %i %d\n", i, adc);
-        }*/
-
       }
 
       /*if (prev_position == position && position > 300000-1) {

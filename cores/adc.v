@@ -47,7 +47,7 @@ module ADC #
 
 
   reg [32:0] limiter;  // Сколько отсчетов отправлено в шину (без децмации)
-  reg [63:0] sample_counter; // 37-битный регистр для подсчета семплов отработает год, 64 бит - 4,6 млн лет. Этого точно хватит. Но мне надо кратно 32 бит, потому 64
+  reg [48:0] sample_counter; // 37-битный регистр для подсчета семплов отработает год, 64 бит - 4,6 млн лет. Этого точно хватит. Учитывая размерность шины я могу позволить 47 (71 год)
 
   // Process for capturing, inverting ADC data, and calculating maximum sum
   always @(posedge aclk or negedge aresetn) begin
@@ -127,6 +127,6 @@ module ADC #
   assign adc_csn = 1'b1;
 
   // Передаем сумму абсолютных значений на выход
-  assign m_axis_tdata = 64'h33333333AABBCCDD; //64'd11223344556677889900; //{sample_counter[47:0], 16'b00001};
+  assign m_axis_tdata = {sample_counter, sum_abs};
 
 endmodule

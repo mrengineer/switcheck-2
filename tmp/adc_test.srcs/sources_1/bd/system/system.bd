@@ -3222,8 +3222,8 @@
           "axi_hub_modified_0/aclk",
           "axis_red_pitaya_dac_0/aclk",
           "axis_constant_0/aclk",
-          "ADC_1/aclk",
-          "axis_dwidth_converter_0/aclk"
+          "axis_dwidth_converter_0/aclk",
+          "ADC_1/aclk"
         ]
       },
       "pll_0_clk_out2": {
@@ -3255,8 +3255,8 @@
         "ports": [
           "slice_0/dout",
           "axis_decimator_0/aresetn",
-          "ADC_1/aresetn",
-          "axis_dwidth_converter_0/aresetn"
+          "axis_dwidth_converter_0/aresetn",
+          "ADC_1/aresetn"
         ]
       },
       "slice_1_dout": {

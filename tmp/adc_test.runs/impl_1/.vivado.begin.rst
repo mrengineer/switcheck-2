@@ -88,3 +88,18 @@
     <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="213400" HostCore="8" HostMemory="32754700">
     </Process>
 </ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="241354" HostCore="8" HostMemory="32754700">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="249999" HostCore="8" HostMemory="32754700">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="256550" HostCore="8" HostMemory="32754700">
+    </Process>
+</ProcessHandle>
