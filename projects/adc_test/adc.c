@@ -28,7 +28,6 @@ void signal_handler(int sig) {
 int main () {
 
   struct timespec start, stop;       //Для хранения засечек времени с целью измерить время выполнения операции
-  //double accum;
 
   int fd;
 
@@ -37,8 +36,9 @@ int main () {
   int prev_position = 0;
   int limit, offset;
 
-  volatile uint32_t *rx_addr, *rx_cntr, *triggered_when;
-  volatile int32_t *adc_abs_max, *triggered_by;
+  volatile uint32_t *rx_addr, *rx_cntr;
+  volatile int32_t *adc_abs_max;
+  volatile uint64_t *last_detrg, *first_trg;
 
   volatile uint16_t *rx_rate, *trg_value;
   volatile uint8_t *rx_rst;
@@ -113,11 +113,12 @@ int main () {
   trg_value     = (uint16_t *)(cfg + 8);  //16 bit for mod(ADC1+ADC2) trigger value
 
   rx_cntr       = (uint32_t *)(sts + 0);    //через rx_cntr writer0 блок сообщает программе сколько данных он записал в память
-  adc_abs_max   = (int32_t *)(sts + 4);
-  triggered_by  = (int32_t *)(sts + 8);
-  triggered_when  = (int32_t *)(sts + 12);
+  //adc_abs_max   = (int32_t *)(sts + 4);
+  first_trg     = (uint64_t *)(sts + 4);
+  last_detrg    = (uint64_t *)(sts + 8);
+  
 
-  uint16_t trg = 150;
+  uint16_t trg = 160;
 
   *trg_value = trg;
   *rx_addr = size;
@@ -153,33 +154,63 @@ int main () {
 
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
     int32_t cur_adc_abs_max;
-    int32_t triggered_by_val;
-    uint32_t triggered_when_val;
+    uint64_t first_trg_val;
+    uint64_t last_detrg_val;
+    
 
-    cur_adc_abs_max = *adc_abs_max;
-    printf("TRIGGER %d\n", cur_adc_abs_max); 
+    //cur_adc_abs_max = *adc_abs_max;
+    ///printf("TRIGGER %d\n", cur_adc_abs_max); 
   
     while(!interrupted) {
 
-      if (cur_adc_abs_max < *adc_abs_max) {
-        cur_adc_abs_max = *adc_abs_max;
-        printf("TRIGGER set to %d\n", cur_adc_abs_max); 
+      //if (cur_adc_abs_max < *adc_abs_max) {
+      //  cur_adc_abs_max = *adc_abs_max;
+      //  printf("TRIGGER set to %d\n", cur_adc_abs_max); 
+      //}
+      if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
+            perror( "clock gettime" );
+            return EXIT_FAILURE;
       }
+
+      if (stop.tv_sec - start.tv_sec >= 2 && stop.tv_nsec - start.tv_nsec > 10000) {
+        printf("%li sec and %li ns\n\n", stop.tv_sec - start.tv_sec, stop.tv_nsec - start.tv_nsec);
+
+        //SAVE RESET TIME
+        if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
+            perror( "clock gettime" );
+            return EXIT_FAILURE;
+        }
+
+        
+        first_trg_val  = *first_trg;
+        last_detrg_val = *last_detrg;
+        //printf("\033[0;31mTRIGGEREDBY\033[0m first_trg_val %llu  detrg %llu SMP (d=%llu)\n", first_trg_val, last_detrg, last_detrg-first_trg_val);
+
+        //first_trg     = (uint32_t *)(sts + 0);
+        //last_detrg    = (uint64_t *)(sts + 8);
+  
+
+
+        printf("Raw memory dump:\n");
+        for (int i = 0; i < 256/8; i++) {
+          //printf("%i - %lx\n", i, ((uint8_t *)sts)[i]);
+          printf("%i - %lx\n", i, *(uint8_t *)(sts + i));
+        }
+        
+        
+
+      }
+
 
       /* read ram writer position */
       prev_position = position;
       position      = *rx_cntr;
 
-      if (prev_position != position) {
-        triggered_by_val    = *triggered_by;
-        triggered_when_val  = *triggered_when;
-        printf("\033[0;31mTRIGGEREDBY\033[0m %d at %u SMP\n", triggered_by_val, triggered_when_val);        
-        printf("\033[0;33mCONSOLE\033[0m %i -> %i\n", prev_position, position);
+/*      if (prev_position != position) {        
 
         //Вычитаем
         uint64_t *buffer = (uint64_t *)(ram + prev_position);
-
-        for(uint32_t i = 0; i < 32; i += 1) {
+        for(uint32_t i = 0; i < (position - prev_position) * 16; i += 1) {
           //printf("D %i %d\n", i, adc);
           uint64_t counter    = buffer[i] >> 16;         // Извлекаем первые 48 бит как счетчик          
           uint16_t adc_value  = buffer[i] & 0xFFFF;    // Извлекаем оставшиеся 16 бит как значение АЦП
@@ -188,7 +219,7 @@ int main () {
           // Печать результатов
           printf("%i C: %llu (%f ms), ADC Value: %u\n", i, counter, msec, adc_value);
         }
-      }
+      }*/
 
       /*if (prev_position == position && position > 300000-1) {
         if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {

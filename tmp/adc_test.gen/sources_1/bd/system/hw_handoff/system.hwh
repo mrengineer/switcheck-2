@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Jan  9 22:41:21 2025" VIVADOVERSION="2023.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Jan 16 01:10:16 2025" VIVADOVERSION="2023.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -263,6 +263,16 @@
             <CONNECTION INSTANCE="slice_0" PORT="dout"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="O" LEFT="63" NAME="first_trigged" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_first_trigged">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconcat_0" PORT="In0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="63" NAME="last_detrigged" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_last_detrigged">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconcat_0" PORT="In1"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" LEFT="63" NAME="m_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_m_axis_tdata">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axis_decimator_0" PORT="s_axis_tdata"/>
@@ -275,7 +285,7 @@
         </PORT>
         <PORT DIR="O" LEFT="15" NAME="max_sum_out" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_max_sum_out">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="xlconcat_0" PORT="In1"/>
+            <CONNECTION INSTANCE="xlconcat_0" PORT="In2"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="reset_max_sum" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="slice_7_dout">
@@ -286,16 +296,6 @@
         <PORT DIR="I" NAME="reset_trigger" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="slice_6_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="slice_6" PORT="dout"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="15" NAME="trigged_by_out" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_trigged_by_out">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="xlconcat_0" PORT="In2"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="31" NAME="trigged_when" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_trigged_when">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="xlconcat_0" PORT="In3"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="15" NAME="trigger_level" RIGHT="0" SIGIS="undef" SIGNAME="slice_4_dout">
@@ -330,7 +330,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="CFG_DATA_WIDTH" VALUE="160"/>
-        <PARAMETER NAME="STS_DATA_WIDTH" VALUE="128"/>
+        <PARAMETER NAME="STS_DATA_WIDTH" VALUE="256"/>
         <PARAMETER NAME="Component_Name" VALUE="system_axi_hub_modified_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -467,7 +467,7 @@
             <CONNECTION INSTANCE="ps_0" PORT="M_AXI_GP0_WVALID"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="127" NAME="sts_data" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_0_dout">
+        <PORT DIR="I" LEFT="255" NAME="sts_data" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_0_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconcat_0" PORT="dout"/>
           </CONNECTIONS>
@@ -3361,11 +3361,7 @@
             <CONNECTION INSTANCE="axis_dwidth_converter_0" PORT="m_axis_tvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="15" NAME="sts_data" RIGHT="0" SIGIS="undef" SIGNAME="writer_0_sts_data">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="xlconcat_0" PORT="In0"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="O" LEFT="15" NAME="sts_data" RIGHT="0" SIGIS="undef"/>
       </PORTS>
       <BUSINTERFACES>
         <BUSINTERFACE BUSNAME="axis_dwidth_converter_0_M_AXIS" NAME="s_axis" TYPE="SLAVE" VLNV="xilinx.com:interface:axis:1.0">
@@ -3448,7 +3444,7 @@
     <MODULE COREREVISION="5" FULLNAME="/xlconcat_0" HWVERSION="2.1" INSTANCE="xlconcat_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconcat" VLNV="xilinx.com:ip:xlconcat:2.1">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="IN0_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="IN0_WIDTH" VALUE="64"/>
         <PARAMETER NAME="IN100_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN101_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN102_WIDTH" VALUE="1"/>
@@ -3487,7 +3483,7 @@
         <PARAMETER NAME="IN17_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN18_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN19_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN1_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="IN1_WIDTH" VALUE="64"/>
         <PARAMETER NAME="IN20_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN21_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN22_WIDTH" VALUE="1"/>
@@ -3498,7 +3494,7 @@
         <PARAMETER NAME="IN27_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN28_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN29_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN2_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="IN2_WIDTH" VALUE="64"/>
         <PARAMETER NAME="IN30_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN31_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN32_WIDTH" VALUE="1"/>
@@ -3509,7 +3505,7 @@
         <PARAMETER NAME="IN37_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN38_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN39_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN3_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="IN3_WIDTH" VALUE="64"/>
         <PARAMETER NAME="IN40_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN41_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN42_WIDTH" VALUE="1"/>
@@ -3520,7 +3516,7 @@
         <PARAMETER NAME="IN47_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN48_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN49_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN4_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="IN4_WIDTH" VALUE="64"/>
         <PARAMETER NAME="IN50_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN51_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN52_WIDTH" VALUE="1"/>
@@ -3577,32 +3573,28 @@
         <PARAMETER NAME="IN99_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN9_WIDTH" VALUE="1"/>
         <PARAMETER NAME="NUM_PORTS" VALUE="4"/>
-        <PARAMETER NAME="dout_width" VALUE="128"/>
+        <PARAMETER NAME="dout_width" VALUE="256"/>
         <PARAMETER NAME="Component_Name" VALUE="system_xlconcat_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
-        <PORT DIR="I" LEFT="31" NAME="In0" RIGHT="0" SIGIS="undef" SIGNAME="writer_0_sts_data">
+        <PORT DIR="I" LEFT="63" NAME="In0" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_first_trigged">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="writer_0" PORT="sts_data"/>
+            <CONNECTION INSTANCE="ADC_1" PORT="first_trigged"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="31" NAME="In1" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_max_sum_out">
+        <PORT DIR="I" LEFT="63" NAME="In1" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_last_detrigged">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ADC_1" PORT="last_detrigged"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="63" NAME="In2" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_max_sum_out">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ADC_1" PORT="max_sum_out"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="31" NAME="In2" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_trigged_by_out">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="ADC_1" PORT="trigged_by_out"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" LEFT="31" NAME="In3" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_trigged_when">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="ADC_1" PORT="trigged_when"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="127" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_0_dout">
+        <PORT DIR="I" LEFT="63" NAME="In3" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" LEFT="255" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_0_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_hub_modified_0" PORT="sts_data"/>
           </CONNECTIONS>

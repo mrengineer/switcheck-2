@@ -2273,14 +2273,14 @@
             "left": "15",
             "right": "0"
           },
-          "trigged_by_out": {
+          "last_detrigged": {
             "direction": "O",
-            "left": "15",
+            "left": "63",
             "right": "0"
           },
-          "trigged_when": {
+          "first_trigged": {
             "direction": "O",
-            "left": "31",
+            "left": "63",
             "right": "0"
           }
         }
@@ -2531,7 +2531,7 @@
             "value": "160"
           },
           "STS_DATA_WIDTH": {
-            "value": "128"
+            "value": "256"
           }
         },
         "reference_info": {
@@ -2815,11 +2815,11 @@
           },
           "sts_data": {
             "direction": "I",
-            "left": "127",
+            "left": "255",
             "right": "0",
             "parameters": {
               "PortWidth": {
-                "value": "128",
+                "value": "256",
                 "value_src": "ip_prop"
               }
             }
@@ -2834,16 +2834,19 @@
         "inst_hier_path": "xlconcat_0",
         "parameters": {
           "IN0_WIDTH": {
-            "value": "32"
+            "value": "64"
           },
           "IN1_WIDTH": {
-            "value": "32"
+            "value": "64"
           },
           "IN2_WIDTH": {
-            "value": "32"
+            "value": "64"
           },
           "IN3_WIDTH": {
-            "value": "32"
+            "value": "64"
+          },
+          "IN4_WIDTH": {
+            "value": "64"
           },
           "NUM_PORTS": {
             "value": "4"
@@ -3114,22 +3117,22 @@
           "adc_csn_o"
         ]
       },
-      "ADC_1_max_sum_out": {
+      "ADC_1_first_trigged": {
         "ports": [
-          "ADC_1/max_sum_out",
+          "ADC_1/first_trigged",
+          "xlconcat_0/In0"
+        ]
+      },
+      "ADC_1_last_detrigged": {
+        "ports": [
+          "ADC_1/last_detrigged",
           "xlconcat_0/In1"
         ]
       },
-      "ADC_1_trigged_by_out": {
+      "ADC_1_max_sum_out": {
         "ports": [
-          "ADC_1/trigged_by_out",
+          "ADC_1/max_sum_out",
           "xlconcat_0/In2"
-        ]
-      },
-      "ADC_1_trigged_when": {
-        "ports": [
-          "ADC_1/trigged_when",
-          "xlconcat_0/In3"
         ]
       },
       "adc_clk_n_i_1": {
@@ -3293,12 +3296,6 @@
         "ports": [
           "slice_7/dout",
           "ADC_1/reset_max_sum"
-        ]
-      },
-      "writer_0_sts_data": {
-        "ports": [
-          "writer_0/sts_data",
-          "xlconcat_0/In0"
         ]
       },
       "xlconcat_0_dout": {

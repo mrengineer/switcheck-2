@@ -51,8 +51,8 @@
         "m_axis_tvalid": [ { "direction": "out" } ],
         "m_axis_tdata": [ { "direction": "out", "size_left": "63", "size_right": "0" } ],
         "max_sum_out": [ { "direction": "out", "size_left": "15", "size_right": "0" } ],
-        "trigged_by_out": [ { "direction": "out", "size_left": "15", "size_right": "0" } ],
-        "trigged_when": [ { "direction": "out", "size_left": "31", "size_right": "0" } ]
+        "last_detrigged": [ { "direction": "out", "size_left": "63", "size_right": "0" } ],
+        "first_trigged": [ { "direction": "out", "size_left": "63", "size_right": "0" } ]
       },
       "interfaces": {
         "m_axis": {

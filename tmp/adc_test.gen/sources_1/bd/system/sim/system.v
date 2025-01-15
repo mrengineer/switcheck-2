@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Thu Jan  9 22:41:21 2025
+//Date        : Thu Jan 16 01:10:16 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -88,11 +88,11 @@ module system
   output [7:0]led_o;
 
   wire ADC_1_adc_csn;
+  wire [63:0]ADC_1_first_trigged;
+  wire [63:0]ADC_1_last_detrigged;
   wire [63:0]ADC_1_m_axis_TDATA;
   wire ADC_1_m_axis_TVALID;
   wire [15:0]ADC_1_max_sum_out;
-  wire [15:0]ADC_1_trigged_by_out;
-  wire [31:0]ADC_1_trigged_when;
   wire adc_clk_n_i_1;
   wire adc_clk_p_i_1;
   wire [15:0]adc_dat_a_i_1;
@@ -184,8 +184,7 @@ module system
   wire writer_0_m_axi_WREADY;
   wire [7:0]writer_0_m_axi_WSTRB;
   wire writer_0_m_axi_WVALID;
-  wire [15:0]writer_0_sts_data;
-  wire [127:0]xlconcat_0_dout;
+  wire [255:0]xlconcat_0_dout;
   wire [31:0]xlconstant_0_dout;
 
   assign adc_clk_n_i_1 = adc_clk_n_i;
@@ -204,13 +203,13 @@ module system
         .adc_dat_a(adc_dat_a_i_1),
         .adc_dat_b(adc_dat_b_i_1),
         .aresetn(slice_0_dout),
+        .first_trigged(ADC_1_first_trigged),
+        .last_detrigged(ADC_1_last_detrigged),
         .m_axis_tdata(ADC_1_m_axis_TDATA),
         .m_axis_tvalid(ADC_1_m_axis_TVALID),
         .max_sum_out(ADC_1_max_sum_out),
         .reset_max_sum(slice_7_dout),
         .reset_trigger(slice_6_dout),
-        .trigged_by_out(ADC_1_trigged_by_out),
-        .trigged_when(ADC_1_trigged_when),
         .trigger_level(slice_4_dout));
   system_axi_hub_modified_0_0 axi_hub_modified_0
        (.aclk(pll_0_clk_out1),
@@ -424,13 +423,12 @@ module system
         .min_addr(slice_3_dout),
         .s_axis_tdata(axis_dwidth_converter_0_M_AXIS_TDATA),
         .s_axis_tready(axis_dwidth_converter_0_M_AXIS_TREADY),
-        .s_axis_tvalid(axis_dwidth_converter_0_M_AXIS_TVALID),
-        .sts_data(writer_0_sts_data));
+        .s_axis_tvalid(axis_dwidth_converter_0_M_AXIS_TVALID));
   system_xlconcat_0_0 xlconcat_0
-       (.In0({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,writer_0_sts_data}),
-        .In1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,ADC_1_max_sum_out}),
-        .In2({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,ADC_1_trigged_by_out}),
-        .In3(ADC_1_trigged_when),
+       (.In0(ADC_1_first_trigged),
+        .In1(ADC_1_last_detrigged),
+        .In2({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,ADC_1_max_sum_out}),
+        .In3({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .dout(xlconcat_0_dout));
   system_xlconstant_0_0 xlconstant_0
        (.dout(xlconstant_0_dout));
