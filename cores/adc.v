@@ -32,7 +32,9 @@ module ADC #
   output reg [63:0]  last_detrigged,   // последний раз пересекли триггер вниз
   output reg [63:0]  first_trigged,     // первый раз сработал триггер
   output reg [31:0] limiter,  // Сколько отсчетов отправлено в шину (без децмации)
-  output reg trigger_activated // Флаг активации триггера
+  output reg trigger_activated, // Флаг активации триггера
+  
+  output reg [15:0] triggers_count // сколько раз сработал тригер
   
   
 );
@@ -44,13 +46,7 @@ module ADC #
   //reg [ADC_DATA_WIDTH-1:0] abs_b;             // Абсолютное значение int_dat_b_reg
   reg signed [ADC_DATA_WIDTH:0]   sum_abs;    // С дополнительным битом для суммы
 
-
-
-
-
   reg signed [15:0]  max_sum_abs;   // Output for maximum sum value  
-  reg signed [15:0]  trigged_by;   // Значение при котором сработал триггер
-
   
   reg [48:0] sample_counter; // 37-битный регистр для подсчета семплов отработает год, 64 бит - 4,6 млн лет. Этого точно хватит. Учитывая размерность шины я могу позволить 47 (71 год)
 
@@ -64,6 +60,7 @@ module ADC #
       sum_abs          <= 0;
       m_axis_tvalid    <= 1'b0;
       trigger_activated <= 1'b0;
+      triggers_count     <= 0;
       max_sum_abs      <= 0;    // Инициализация максимума в 0 на сбросе
       sample_counter   <= 0;    // Инициализация счётчика
 
@@ -88,7 +85,7 @@ module ADC #
       sum_abs <= { {(PADDING_WIDTH+1){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, ~int_dat_a_reg[ADC_DATA_WIDTH-2:0]};
       
 
-      if (sample_counter > 5) begin  // Пропустим первые отсчеты после reset, там фигня какая-то сыпется по данным
+      if (sample_counter > 3) begin  // Пропустим первые отсчеты после reset, там фигня какая-то сыпется по данным
 
         // Определяем максимальное значение суммы
         if (sum_abs > max_sum_abs && !reset_max_sum) 
@@ -101,10 +98,14 @@ module ADC #
         // Проверяем условие для срабатывания триггера и сохраняем состояние
         // Актуальное значение выше уровня триггера
         // Мы не в резете триггера, триггер еще не сработал
-        if (sum_abs > trigger_level && !reset_trigger && trigger_activated == 1'b0 && limiter==1'b0) begin
+        if (sum_abs > trigger_level && !reset_trigger && trigger_activated == 1'b0) begin       // && limiter==1'b0
           //trigged_by_out <= sum_abs;
-          first_trigged <= sample_counter;
+          
+          if (first_trigged == 0)
+            first_trigged <= sample_counter;
+            
           trigger_activated <= 1'b1;
+          triggers_count <= triggers_count + 1;
         end
         
         
@@ -116,12 +117,13 @@ module ADC #
         if (reset_trigger) begin      // При выставленном сверху сбросе триггера (но не всего блока) сбрасываем его и связанное с ним
           last_detrigged <= 0;
           first_trigged <= 0;
+          triggers_count <= 0;
           trigger_activated <= 1'b0;
           limiter <= 1'b0;
         end
         
 
-        if (limiter > 32'd2000000000)                    // отрубаем
+        if (limiter > 32'd200000000)                    // отрубаем
           trigger_activated <= 1'b0;            // отключаем передачу данных
       
         if (trigger_activated == 1'b1)             // если запись разрешена, то считаем limiter

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Jan 19 00:35:10 2025" VIVADOVERSION="2023.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Jan 19 01:20:30 2025" VIVADOVERSION="2023.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -316,6 +316,11 @@
         <PORT DIR="I" LEFT="15" NAME="trigger_level" RIGHT="0" SIGIS="undef" SIGNAME="slice_4_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="slice_4" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="15" NAME="triggers_count" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_triggers_count">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconcat_2" PORT="In2"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -3827,7 +3832,7 @@
         <PARAMETER NAME="IN17_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN18_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN19_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN1_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="IN1_WIDTH" VALUE="16"/>
         <PARAMETER NAME="IN20_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN21_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN22_WIDTH" VALUE="1"/>
@@ -3838,7 +3843,7 @@
         <PARAMETER NAME="IN27_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN28_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN29_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN2_WIDTH" VALUE="64"/>
+        <PARAMETER NAME="IN2_WIDTH" VALUE="16"/>
         <PARAMETER NAME="IN30_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN31_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN32_WIDTH" VALUE="1"/>
@@ -3916,7 +3921,7 @@
         <PARAMETER NAME="IN98_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN99_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN9_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="NUM_PORTS" VALUE="2"/>
+        <PARAMETER NAME="NUM_PORTS" VALUE="3"/>
         <PARAMETER NAME="dout_width" VALUE="64"/>
         <PARAMETER NAME="Component_Name" VALUE="system_xlconcat_1_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
@@ -3927,9 +3932,14 @@
             <CONNECTION INSTANCE="ADC_1" PORT="limiter"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="31" NAME="In1" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_trigger_activated">
+        <PORT DIR="I" LEFT="15" NAME="In1" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_trigger_activated">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ADC_1" PORT="trigger_activated"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="15" NAME="In2" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_triggers_count">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ADC_1" PORT="triggers_count"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="63" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_2_dout">

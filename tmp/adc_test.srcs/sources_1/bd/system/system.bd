@@ -2297,6 +2297,11 @@
           },
           "trigger_activated": {
             "direction": "O"
+          },
+          "triggers_count": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
           }
         }
       },
@@ -3124,10 +3129,10 @@
             "value": "32"
           },
           "IN1_WIDTH": {
-            "value": "32"
+            "value": "16"
           },
           "IN2_WIDTH": {
-            "value": "64"
+            "value": "16"
           },
           "IN3_WIDTH": {
             "value": "64"
@@ -3142,7 +3147,7 @@
             "value": "16"
           },
           "NUM_PORTS": {
-            "value": "2"
+            "value": "3"
           }
         }
       }
@@ -3238,6 +3243,12 @@
         "ports": [
           "ADC_1/trigger_activated",
           "xlconcat_2/In1"
+        ]
+      },
+      "ADC_1_triggers_count": {
+        "ports": [
+          "ADC_1/triggers_count",
+          "xlconcat_2/In2"
         ]
       },
       "adc_clk_n_i_1": {

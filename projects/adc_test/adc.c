@@ -36,7 +36,7 @@ int main () {
   uint64_t prev_position = 0;
   int limit, offset;
 
-  volatile uint16_t *trigger_activated;
+  volatile uint16_t *trigger_activated, *triggers_count;
   volatile uint32_t *rx_addr, *rx_cntr;
   volatile uint16_t *adc_abs_max, *cur_adc;
   volatile uint32_t *limiter;
@@ -121,18 +121,19 @@ int main () {
   first_trgged    = (uint64_t *)(sts + 16);   //Когда сработал тригер, в семплах
   limiter         = (uint32_t *)(sts + 24);   //Значение внутреннего ограничителя записи (отадочно-техническое чтобы не перерисал мног раз буфер памяти по кругу)
   trigger_activated = (uint16_t *)(sts + 28); //1 бит состояния переменной в IP
+  triggers_count = (uint16_t *)(sts + 30);
   
   
   
 
-  uint16_t trg = 7240;
+  uint16_t trg = 5240;
 
   *trg_value = trg;
   *rx_addr = size;
 
   uint32_t limiter_val;
   uint64_t first_trgged_val, last_detrigged_val;
-  uint16_t trigger_activated_val, cur_adc_val, adc_abs_max_val;
+  uint16_t trigger_activated_val, triggers_count_val, cur_adc_val, adc_abs_max_val;
 
   while(!interrupted) {
 
@@ -149,7 +150,7 @@ int main () {
     *rx_rst &= ~2;
     /* set default sample rate */
     
-    *rx_rate = 2;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
+    *rx_rate = 1;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
 
     signal(SIGINT, signal_handler);
 
@@ -158,20 +159,21 @@ int main () {
     usleep(100);
     *rx_rst |= 1;  //установка первого бита в 1 (дециматор и другие)
 
-    limit = 32*1024;
+    //limit = 32*1024;
 
 
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
 
   
     while(!interrupted) {
-       usleep(10000);
+       usleep(100);
 
       adc_abs_max_val         = *adc_abs_max;
       first_trgged_val        = *first_trgged;
       last_detrigged_val      = *last_detrigged;
       limiter_val             = *limiter;
       trigger_activated_val   = *trigger_activated;
+      triggers_count_val      = *triggers_count;
       cur_adc_val             = *cur_adc;
 
 
@@ -204,13 +206,13 @@ int main () {
         last_detrigged_val  = *last_detrigged;
         
         printf("Position %llu\n", position);
+        printf("Triggers counter: %i\n", triggers_count_val);
         printf("first_trgged_val %ju (0x%jx)\n", first_trgged_val, first_trgged_val);
         printf("last_detrigged_val %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val, last_detrigged_val-first_trgged_val);
         double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000000.0;
 
         printf("pulse_len: %f sec\n", pulse_len);
-        printf("MAX ADC value is %i popugais\n", adc_abs_max_val);
-        printf("ADC = %i popugais\n", cur_adc_val);
+        printf("ADC (MAX/NOW)= %i/%i popugais\n", adc_abs_max_val, cur_adc_val);
         printf("Limiter is: %i SMPS\n", limiter_val);
         printf("Trigger activated: %i\n", trigger_activated_val);
 
