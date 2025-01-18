@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Sat Jan 18 23:10:36 2025
+//Date        : Sun Jan 19 00:35:09 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -88,6 +88,7 @@ module system
   output [7:0]led_o;
 
   wire ADC_1_adc_csn;
+  wire [15:0]ADC_1_cur_adc;
   wire [63:0]ADC_1_first_trigged;
   wire [63:0]ADC_1_last_detrigged;
   wire [31:0]ADC_1_limiter;
@@ -208,6 +209,7 @@ module system
         .adc_dat_a(adc_dat_a_i_1),
         .adc_dat_b(adc_dat_b_i_1),
         .aresetn(slice_0_dout),
+        .cur_adc(ADC_1_cur_adc),
         .first_trigged(ADC_1_first_trigged),
         .last_detrigged(ADC_1_last_detrigged),
         .limiter(ADC_1_limiter),
@@ -440,7 +442,8 @@ module system
         .dout(xlconcat_0_dout));
   system_xlconcat_0_1 xlconcat_1
        (.In0({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,writer_0_sts_data}),
-        .In1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,ADC_1_max_sum_out}),
+        .In1(ADC_1_max_sum_out),
+        .In2(ADC_1_cur_adc),
         .dout(xlconcat_1_dout));
   system_xlconcat_1_0 xlconcat_2
        (.In0(ADC_1_limiter),

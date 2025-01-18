@@ -61,6 +61,7 @@ module system_ADC_1_0 (
   adc_csn,
   adc_dat_a,
   adc_dat_b,
+  cur_adc,
   trigger_level,
   reset_trigger,
   reset_max_sum,
@@ -82,6 +83,7 @@ input wire aresetn;
 output wire adc_csn;
 input wire [15 : 0] adc_dat_a;
 input wire [15 : 0] adc_dat_b;
+output wire [15 : 0] cur_adc;
 input wire [15 : 0] trigger_level;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_trigger, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_trigger RST" *)
@@ -108,6 +110,7 @@ output wire trigger_activated;
     .adc_csn(adc_csn),
     .adc_dat_a(adc_dat_a),
     .adc_dat_b(adc_dat_b),
+    .cur_adc(cur_adc),
     .trigger_level(trigger_level),
     .reset_trigger(reset_trigger),
     .reset_max_sum(reset_max_sum),

@@ -14,6 +14,8 @@ module ADC #
   input  wire [15:0] adc_dat_a,
   input  wire [15:0] adc_dat_b,
 
+  output  wire [15:0] cur_adc,
+
   // Trigger level setting
   input  wire [15:0] trigger_level,
 
@@ -31,6 +33,8 @@ module ADC #
   output reg [63:0]  first_trigged,     // первый раз сработал триггер
   output reg [31:0] limiter,  // Сколько отсчетов отправлено в шину (без децмации)
   output reg trigger_activated // Флаг активации триггера
+  
+  
 );
   localparam PADDING_WIDTH = 16 - ADC_DATA_WIDTH;
 
@@ -106,6 +110,7 @@ module ADC #
         
         if (sum_abs < trigger_level && !reset_trigger && trigger_activated == 1'b1) begin
           last_detrigged <= sample_counter;
+          trigger_activated <= 1'b0;
         end        
         
         if (reset_trigger) begin      // При выставленном сверху сбросе триггера (но не всего блока) сбрасываем его и связанное с ним
@@ -138,6 +143,7 @@ module ADC #
 
   // Передаем сумму абсолютных значений на выход
   assign m_axis_tdata = {sample_counter, sum_abs};
+  assign cur_adc = sum_abs;
 
 endmodule
 

@@ -38,7 +38,8 @@ int main () {
 
   volatile uint16_t *trigger_activated;
   volatile uint32_t *rx_addr, *rx_cntr;
-  volatile uint32_t *adc_abs_max, *limiter;
+  volatile uint16_t *adc_abs_max, *cur_adc;
+  volatile uint32_t *limiter;
   volatile uint64_t *last_detrigged, *first_trgged;
 
   volatile uint16_t *rx_rate, *trg_value;
@@ -114,7 +115,8 @@ int main () {
   trg_value       = (uint16_t *)(cfg + 8);  //16 bit for mod(ADC1+ADC2) trigger value
 
   rx_cntr         = (uint32_t *)(sts + 0);    //через rx_cntr writer0 блок сообщает программе сколько данных он записал в память
-  adc_abs_max     = (uint32_t *)(sts + 4);    //Максимальное начение после сброса, для самокалибровки триггера
+  adc_abs_max     = (uint16_t *)(sts + 4);    //Максимальное значение после сброса, для самокалибровки триггера
+  cur_adc         = (uint16_t *)(sts + 6);    //Значение сейчас
   last_detrigged  = (uint64_t *)(sts + 8);   //Последний раз когда переходили тригер вниз, в семплах
   first_trgged    = (uint64_t *)(sts + 16);   //Когда сработал тригер, в семплах
   limiter         = (uint32_t *)(sts + 24);   //Значение внутреннего ограничителя записи (отадочно-техническое чтобы не перерисал мног раз буфер памяти по кругу)
@@ -128,9 +130,9 @@ int main () {
   *trg_value = trg;
   *rx_addr = size;
 
-  uint32_t adc_abs_max_val, limiter_val;
+  uint32_t limiter_val;
   uint64_t first_trgged_val, last_detrigged_val;
-  uint16_t trigger_activated_val;
+  uint16_t trigger_activated_val, cur_adc_val, adc_abs_max_val;
 
   while(!interrupted) {
 
@@ -147,7 +149,7 @@ int main () {
     *rx_rst &= ~2;
     /* set default sample rate */
     
-    *rx_rate = 3;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
+    *rx_rate = 2;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
 
     signal(SIGINT, signal_handler);
 
@@ -163,11 +165,14 @@ int main () {
 
   
     while(!interrupted) {
+       usleep(10000);
+
       adc_abs_max_val         = *adc_abs_max;
       first_trgged_val        = *first_trgged;
       last_detrigged_val      = *last_detrigged;
       limiter_val             = *limiter;
       trigger_activated_val   = *trigger_activated;
+      cur_adc_val             = *cur_adc;
 
 
       /* read ram writer position */
@@ -179,15 +184,15 @@ int main () {
         printf("TRIGGER set to %d\n", adc_abs_max_val); 
       }
 
-      if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
-            perror( "clock gettime" );
-            return EXIT_FAILURE;
-      }
+      //if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
+      //      perror( "clock gettime" );
+      //      return EXIT_FAILURE;
+      //}
 
-      if (stop.tv_sec - start.tv_sec >= 1 && stop.tv_nsec - start.tv_nsec > 10000) {
+      //if (stop.tv_sec - start.tv_sec >= 0 && stop.tv_nsec - start.tv_nsec > 100000) {
         clrscr();
 
-        printf("%li sec and %li ns\n", stop.tv_sec - start.tv_sec, stop.tv_nsec - start.tv_nsec);
+        //printf("%li sec and %li ns\n", stop.tv_sec - start.tv_sec, stop.tv_nsec - start.tv_nsec);
 
         //SAVE TIME
         if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
@@ -205,6 +210,7 @@ int main () {
 
         printf("pulse_len: %f sec\n", pulse_len);
         printf("MAX ADC value is %i popugais\n", adc_abs_max_val);
+        printf("ADC = %i popugais\n", cur_adc_val);
         printf("Limiter is: %i SMPS\n", limiter_val);
         printf("Trigger activated: %i\n", trigger_activated_val);
 
@@ -218,7 +224,7 @@ int main () {
 
           printf("%i - %lx\n", i, *(uint8_t *)(sts + i));
         }
-      }
+      //}
 
 
 

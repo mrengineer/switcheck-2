@@ -2257,6 +2257,11 @@
             "left": "15",
             "right": "0"
           },
+          "cur_adc": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          },
           "trigger_level": {
             "direction": "I",
             "left": "15",
@@ -3086,10 +3091,10 @@
             "value": "32"
           },
           "IN1_WIDTH": {
-            "value": "32"
+            "value": "16"
           },
           "IN2_WIDTH": {
-            "value": "64"
+            "value": "16"
           },
           "IN3_WIDTH": {
             "value": "64"
@@ -3104,7 +3109,7 @@
             "value": "16"
           },
           "NUM_PORTS": {
-            "value": "2"
+            "value": "3"
           }
         }
       },
@@ -3197,6 +3202,12 @@
         "ports": [
           "ADC_1/adc_csn",
           "adc_csn_o"
+        ]
+      },
+      "ADC_1_cur_adc": {
+        "ports": [
+          "ADC_1/cur_adc",
+          "xlconcat_1/In2"
         ]
       },
       "ADC_1_first_trigged": {

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sat Jan 18 23:10:37 2025" VIVADOVERSION="2023.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Jan 19 00:35:10 2025" VIVADOVERSION="2023.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -261,6 +261,11 @@
         <PORT DIR="I" NAME="aresetn" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="slice_0_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="slice_0" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="15" NAME="cur_adc" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_cur_adc">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconcat_1" PORT="In2"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="63" NAME="first_trigged" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_first_trigged">
@@ -3662,7 +3667,7 @@
         <PARAMETER NAME="IN17_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN18_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN19_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN1_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="IN1_WIDTH" VALUE="16"/>
         <PARAMETER NAME="IN20_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN21_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN22_WIDTH" VALUE="1"/>
@@ -3673,7 +3678,7 @@
         <PARAMETER NAME="IN27_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN28_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN29_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN2_WIDTH" VALUE="64"/>
+        <PARAMETER NAME="IN2_WIDTH" VALUE="16"/>
         <PARAMETER NAME="IN30_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN31_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN32_WIDTH" VALUE="1"/>
@@ -3751,7 +3756,7 @@
         <PARAMETER NAME="IN98_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN99_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN9_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="NUM_PORTS" VALUE="2"/>
+        <PARAMETER NAME="NUM_PORTS" VALUE="3"/>
         <PARAMETER NAME="dout_width" VALUE="64"/>
         <PARAMETER NAME="Component_Name" VALUE="system_xlconcat_0_1"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
@@ -3762,9 +3767,14 @@
             <CONNECTION INSTANCE="writer_0" PORT="sts_data"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="31" NAME="In1" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_max_sum_out">
+        <PORT DIR="I" LEFT="15" NAME="In1" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_max_sum_out">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ADC_1" PORT="max_sum_out"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="15" NAME="In2" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_cur_adc">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ADC_1" PORT="cur_adc"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="63" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_1_dout">
