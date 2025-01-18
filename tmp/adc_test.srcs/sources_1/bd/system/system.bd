@@ -32,7 +32,9 @@
       "axis_red_pitaya_dac_0": "",
       "axis_constant_0": "",
       "xlconstant_0": "",
-      "axis_dwidth_converter_0": ""
+      "axis_dwidth_converter_0": "",
+      "xlconcat_1": "",
+      "xlconcat_2": ""
     },
     "interface_ports": {
       "Vp_Vn": {
@@ -2282,6 +2284,14 @@
             "direction": "O",
             "left": "63",
             "right": "0"
+          },
+          "limiter": {
+            "direction": "O",
+            "left": "31",
+            "right": "0"
+          },
+          "trigger_activated": {
+            "direction": "O"
           }
         }
       },
@@ -2846,7 +2856,13 @@
             "value": "64"
           },
           "IN4_WIDTH": {
-            "value": "64"
+            "value": "32"
+          },
+          "IN5_WIDTH": {
+            "value": "16"
+          },
+          "IN6_WIDTH": {
+            "value": "16"
           },
           "NUM_PORTS": {
             "value": "4"
@@ -3058,6 +3074,72 @@
             "value": "8"
           }
         }
+      },
+      "xlconcat_1": {
+        "vlnv": "xilinx.com:ip:xlconcat:2.1",
+        "ip_revision": "5",
+        "xci_name": "system_xlconcat_0_1",
+        "xci_path": "ip/system_xlconcat_0_1/system_xlconcat_0_1.xci",
+        "inst_hier_path": "xlconcat_1",
+        "parameters": {
+          "IN0_WIDTH": {
+            "value": "32"
+          },
+          "IN1_WIDTH": {
+            "value": "32"
+          },
+          "IN2_WIDTH": {
+            "value": "64"
+          },
+          "IN3_WIDTH": {
+            "value": "64"
+          },
+          "IN4_WIDTH": {
+            "value": "32"
+          },
+          "IN5_WIDTH": {
+            "value": "16"
+          },
+          "IN6_WIDTH": {
+            "value": "16"
+          },
+          "NUM_PORTS": {
+            "value": "2"
+          }
+        }
+      },
+      "xlconcat_2": {
+        "vlnv": "xilinx.com:ip:xlconcat:2.1",
+        "ip_revision": "5",
+        "xci_name": "system_xlconcat_1_0",
+        "xci_path": "ip/system_xlconcat_1_0/system_xlconcat_1_0.xci",
+        "inst_hier_path": "xlconcat_2",
+        "parameters": {
+          "IN0_WIDTH": {
+            "value": "32"
+          },
+          "IN1_WIDTH": {
+            "value": "32"
+          },
+          "IN2_WIDTH": {
+            "value": "64"
+          },
+          "IN3_WIDTH": {
+            "value": "64"
+          },
+          "IN4_WIDTH": {
+            "value": "32"
+          },
+          "IN5_WIDTH": {
+            "value": "16"
+          },
+          "IN6_WIDTH": {
+            "value": "16"
+          },
+          "NUM_PORTS": {
+            "value": "2"
+          }
+        }
       }
     },
     "interface_nets": {
@@ -3120,7 +3202,7 @@
       "ADC_1_first_trigged": {
         "ports": [
           "ADC_1/first_trigged",
-          "xlconcat_0/In0"
+          "xlconcat_0/In2"
         ]
       },
       "ADC_1_last_detrigged": {
@@ -3129,10 +3211,22 @@
           "xlconcat_0/In1"
         ]
       },
+      "ADC_1_limiter": {
+        "ports": [
+          "ADC_1/limiter",
+          "xlconcat_2/In0"
+        ]
+      },
       "ADC_1_max_sum_out": {
         "ports": [
           "ADC_1/max_sum_out",
-          "xlconcat_0/In2"
+          "xlconcat_1/In1"
+        ]
+      },
+      "ADC_1_trigger_activated": {
+        "ports": [
+          "ADC_1/trigger_activated",
+          "xlconcat_2/In1"
         ]
       },
       "adc_clk_n_i_1": {
@@ -3298,10 +3392,28 @@
           "ADC_1/reset_max_sum"
         ]
       },
+      "writer_0_sts_data": {
+        "ports": [
+          "writer_0/sts_data",
+          "xlconcat_1/In0"
+        ]
+      },
       "xlconcat_0_dout": {
         "ports": [
           "xlconcat_0/dout",
           "axi_hub_modified_0/sts_data"
+        ]
+      },
+      "xlconcat_1_dout": {
+        "ports": [
+          "xlconcat_1/dout",
+          "xlconcat_0/In0"
+        ]
+      },
+      "xlconcat_2_dout": {
+        "ports": [
+          "xlconcat_2/dout",
+          "xlconcat_0/In3"
         ]
       },
       "xlconstant_0_dout": {

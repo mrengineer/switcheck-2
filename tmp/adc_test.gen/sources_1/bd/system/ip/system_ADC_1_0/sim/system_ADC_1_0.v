@@ -67,7 +67,9 @@ module system_ADC_1_0 (
   m_axis_tdata,
   max_sum_out,
   last_detrigged,
-  first_trigged
+  first_trigged,
+  limiter,
+  trigger_activated
 );
 
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aclk, ASSOCIATED_BUSIF m_axis, ASSOCIATED_RESET aresetn, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN system_pll_0_0_clk_out1, INSERT_VIP 0" *)
@@ -94,6 +96,8 @@ output wire [63 : 0] m_axis_tdata;
 output wire [15 : 0] max_sum_out;
 output wire [63 : 0] last_detrigged;
 output wire [63 : 0] first_trigged;
+output wire [31 : 0] limiter;
+output wire trigger_activated;
 
   ADC #(
     .ADC_DATA_WIDTH(14)
@@ -110,6 +114,8 @@ output wire [63 : 0] first_trigged;
     .m_axis_tdata(m_axis_tdata),
     .max_sum_out(max_sum_out),
     .last_detrigged(last_detrigged),
-    .first_trigged(first_trigged)
+    .first_trigged(first_trigged),
+    .limiter(limiter),
+    .trigger_activated(trigger_activated)
   );
 endmodule

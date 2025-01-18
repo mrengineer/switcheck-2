@@ -32,13 +32,14 @@ int main () {
   int fd;
 
   //Для работы с памятью
-  int position = 0;
-  int prev_position = 0;
+  uint64_t position = 0;
+  uint64_t prev_position = 0;
   int limit, offset;
 
+  volatile uint16_t *trigger_activated;
   volatile uint32_t *rx_addr, *rx_cntr;
-  volatile int32_t *adc_abs_max;
-  volatile uint64_t *last_detrg, *first_trg;
+  volatile uint32_t *adc_abs_max, *limiter;
+  volatile uint64_t *last_detrigged, *first_trgged;
 
   volatile uint16_t *rx_rate, *trg_value;
   volatile uint8_t *rx_rst;
@@ -107,28 +108,34 @@ int main () {
   */
 
   //+1 означает сдвиг на 8 бит, т.к. указатели 8 бит => 64 bit address shift is 64/8 = 8
-  rx_rst        = (uint8_t *)(cfg + 0);   //[0 bit shifted]   //Набор битов сброса IP блоков ПЛИС 0й - ADC_1, 1й - axis writer, 2 - флаг превышения триггера у ADC_1, 3 - сброс максимума суммы значений по каналам АЦП
-  rx_rate       = (uint16_t *)(cfg + 2);  //[16 bit shift]    //Децимация
-  rx_addr       = (uint32_t *)(cfg + 4);  //32 bit shifted    //Начальный адрес буфера памяти
-  trg_value     = (uint16_t *)(cfg + 8);  //16 bit for mod(ADC1+ADC2) trigger value
+  rx_rst          = (uint8_t *)(cfg + 0);   //[0 bit shifted]   //Набор битов сброса IP блоков ПЛИС 0й - ADC_1, 1й - axis writer, 2 - флаг превышения триггера у ADC_1, 3 - сброс максимума суммы значений по каналам АЦП
+  rx_rate         = (uint16_t *)(cfg + 2);  //[16 bit shift]    //Децимация
+  rx_addr         = (uint32_t *)(cfg + 4);  //32 bit shifted    //Начальный адрес буфера памяти
+  trg_value       = (uint16_t *)(cfg + 8);  //16 bit for mod(ADC1+ADC2) trigger value
 
-  rx_cntr       = (uint32_t *)(sts + 0);    //через rx_cntr writer0 блок сообщает программе сколько данных он записал в память
-  //adc_abs_max   = (int32_t *)(sts + 4);
-  first_trg     = (uint64_t *)(sts + 4);
-  last_detrg    = (uint64_t *)(sts + 8);
+  rx_cntr         = (uint32_t *)(sts + 0);    //через rx_cntr writer0 блок сообщает программе сколько данных он записал в память
+  adc_abs_max     = (uint32_t *)(sts + 4);    //Максимальное начение после сброса, для самокалибровки триггера
+  last_detrigged  = (uint64_t *)(sts + 8);   //Последний раз когда переходили тригер вниз, в семплах
+  first_trgged    = (uint64_t *)(sts + 16);   //Когда сработал тригер, в семплах
+  limiter         = (uint32_t *)(sts + 24);   //Значение внутреннего ограничителя записи (отадочно-техническое чтобы не перерисал мног раз буфер памяти по кругу)
+  trigger_activated = (uint16_t *)(sts + 28); //1 бит состояния переменной в IP
+  
+  
   
 
-  uint16_t trg = 160;
+  uint16_t trg = 7240;
 
   *trg_value = trg;
   *rx_addr = size;
 
+  uint32_t adc_abs_max_val, limiter_val;
+  uint64_t first_trgged_val, last_detrigged_val;
+  uint16_t trigger_activated_val;
 
   while(!interrupted) {
 
     usleep(30000);
-    usleep(30000);
-    
+
 
     //clrscr();
     printf("CLEAN\n");
@@ -140,7 +147,7 @@ int main () {
     *rx_rst &= ~2;
     /* set default sample rate */
     
-    *rx_rate = 1;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
+    *rx_rate = 3;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
 
     signal(SIGINT, signal_handler);
 
@@ -153,58 +160,67 @@ int main () {
 
 
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
-    int32_t cur_adc_abs_max;
-    uint64_t first_trg_val;
-    uint64_t last_detrg_val;
-    
 
-    //cur_adc_abs_max = *adc_abs_max;
-    ///printf("TRIGGER %d\n", cur_adc_abs_max); 
   
     while(!interrupted) {
-
-      //if (cur_adc_abs_max < *adc_abs_max) {
-      //  cur_adc_abs_max = *adc_abs_max;
-      //  printf("TRIGGER set to %d\n", cur_adc_abs_max); 
-      //}
-      if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
-            perror( "clock gettime" );
-            return EXIT_FAILURE;
-      }
-
-      if (stop.tv_sec - start.tv_sec >= 2 && stop.tv_nsec - start.tv_nsec > 10000) {
-        printf("%li sec and %li ns\n\n", stop.tv_sec - start.tv_sec, stop.tv_nsec - start.tv_nsec);
-
-        //SAVE RESET TIME
-        if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
-            perror( "clock gettime" );
-            return EXIT_FAILURE;
-        }
-
-        
-        first_trg_val  = *first_trg;
-        last_detrg_val = *last_detrg;
-        //printf("\033[0;31mTRIGGEREDBY\033[0m first_trg_val %llu  detrg %llu SMP (d=%llu)\n", first_trg_val, last_detrg, last_detrg-first_trg_val);
-
-        //first_trg     = (uint32_t *)(sts + 0);
-        //last_detrg    = (uint64_t *)(sts + 8);
-  
-
-
-        printf("Raw memory dump:\n");
-        for (int i = 0; i < 256/8; i++) {
-          //printf("%i - %lx\n", i, ((uint8_t *)sts)[i]);
-          printf("%i - %lx\n", i, *(uint8_t *)(sts + i));
-        }
-        
-        
-
-      }
+      adc_abs_max_val         = *adc_abs_max;
+      first_trgged_val        = *first_trgged;
+      last_detrigged_val      = *last_detrigged;
+      limiter_val             = *limiter;
+      trigger_activated_val   = *trigger_activated;
 
 
       /* read ram writer position */
       prev_position = position;
       position      = *rx_cntr;
+
+      if (adc_abs_max_val < *adc_abs_max) {
+        adc_abs_max_val = *adc_abs_max;
+        printf("TRIGGER set to %d\n", adc_abs_max_val); 
+      }
+
+      if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
+            perror( "clock gettime" );
+            return EXIT_FAILURE;
+      }
+
+      if (stop.tv_sec - start.tv_sec >= 1 && stop.tv_nsec - start.tv_nsec > 10000) {
+        clrscr();
+
+        printf("%li sec and %li ns\n", stop.tv_sec - start.tv_sec, stop.tv_nsec - start.tv_nsec);
+
+        //SAVE TIME
+        if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
+            perror( "clock gettime" );
+            return EXIT_FAILURE;
+        }
+        
+        first_trgged_val    = *first_trgged;
+        last_detrigged_val  = *last_detrigged;
+        
+        printf("Position %llu\n", position);
+        printf("first_trgged_val %ju (0x%jx)\n", first_trgged_val, first_trgged_val);
+        printf("last_detrigged_val %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val, last_detrigged_val-first_trgged_val);
+        double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000000.0;
+
+        printf("pulse_len: %f sec\n", pulse_len);
+        printf("MAX ADC value is %i popugais\n", adc_abs_max_val);
+        printf("Limiter is: %i SMPS\n", limiter_val);
+        printf("Trigger activated: %i\n", trigger_activated_val);
+
+        printf("Raw memory dump:\n");
+        for (int i = 0; i < 256/8; i++) {
+          if (i == 8) printf("\n");
+
+          if (i == 8+8) printf("\n");
+
+          if (i == 8+8+8) printf("\n");
+
+          printf("%i - %lx\n", i, *(uint8_t *)(sts + i));
+        }
+      }
+
+
 
 /*      if (prev_position != position) {        
 
@@ -267,10 +283,6 @@ int main () {
     
       */
 
-      /* send 4 MB if ready, otherwise sleep */
-      if((limit > 0 && position > limit) || (limit == 0 && position < 32*1024)) {
-        offset  = limit > 0 ? 0 : 4096*1024;
-        limit   = limit > 0 ? 0 : 32*1024;
 
       /*  uint16_t *buffer = (uint16_t *)(ram + offset);
 
@@ -318,9 +330,9 @@ int main () {
 
         break; //exit while to wait new trigger*/
 
-      } else {
-        usleep(500);
-      }
+
+        usleep(300);
+
     } //Окончание цикла ожидания сигнала прерывания по CTRL-D #2
 
     signal(SIGINT, SIG_DFL);

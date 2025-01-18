@@ -52,7 +52,9 @@
         "m_axis_tdata": [ { "direction": "out", "size_left": "63", "size_right": "0" } ],
         "max_sum_out": [ { "direction": "out", "size_left": "15", "size_right": "0" } ],
         "last_detrigged": [ { "direction": "out", "size_left": "63", "size_right": "0" } ],
-        "first_trigged": [ { "direction": "out", "size_left": "63", "size_right": "0" } ]
+        "first_trigged": [ { "direction": "out", "size_left": "63", "size_right": "0" } ],
+        "limiter": [ { "direction": "out", "size_left": "31", "size_right": "0" } ],
+        "trigger_activated": [ { "direction": "out" } ]
       },
       "interfaces": {
         "m_axis": {
