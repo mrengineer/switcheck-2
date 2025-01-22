@@ -40,7 +40,7 @@ int main () {
   volatile uint32_t *rx_addr, *rx_cntr;
   volatile uint16_t *adc_abs_max, *cur_adc;
   volatile uint32_t *limiter;
-  volatile uint64_t *last_detrigged, *first_trgged;
+  volatile uint64_t *last_detrigged, *first_trgged, *samples_count;
 
   volatile uint16_t *rx_rate, *trg_value;
   volatile uint8_t *rx_rst;
@@ -122,17 +122,18 @@ int main () {
   limiter         = (uint32_t *)(sts + 24);   //Значение внутреннего ограничителя записи (отадочно-техническое чтобы не перерисал мног раз буфер памяти по кругу)
   trigger_activated = (uint16_t *)(sts + 28); //1 бит состояния переменной в IP
   triggers_count = (uint16_t *)(sts + 30);
+  samples_count = (uint64_t *)(sts + 32); //Счетчик семплов (всех)
   
   
   
 
-  uint16_t trg = 5240;
+  uint16_t trg = 240;
 
   *trg_value = trg;
   *rx_addr = size;
 
   uint32_t limiter_val;
-  uint64_t first_trgged_val, last_detrigged_val;
+  uint64_t first_trgged_val, last_detrigged_val, samples_count_val;
   uint16_t trigger_activated_val, triggers_count_val, cur_adc_val, adc_abs_max_val;
 
   while(!interrupted) {
@@ -166,7 +167,7 @@ int main () {
 
   
     while(!interrupted) {
-       usleep(100);
+       usleep(1500);
 
       adc_abs_max_val         = *adc_abs_max;
       first_trgged_val        = *first_trgged;
@@ -175,16 +176,14 @@ int main () {
       trigger_activated_val   = *trigger_activated;
       triggers_count_val      = *triggers_count;
       cur_adc_val             = *cur_adc;
+      samples_count_val       = *samples_count;
 
 
       /* read ram writer position */
       prev_position = position;
       position      = *rx_cntr;
 
-      if (adc_abs_max_val < *adc_abs_max) {
-        adc_abs_max_val = *adc_abs_max;
-        printf("TRIGGER set to %d\n", adc_abs_max_val); 
-      }
+      if (adc_abs_max_val < *adc_abs_max) adc_abs_max_val = *adc_abs_max;
 
       //if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
       //      perror( "clock gettime" );
@@ -197,18 +196,18 @@ int main () {
         //printf("%li sec and %li ns\n", stop.tv_sec - start.tv_sec, stop.tv_nsec - start.tv_nsec);
 
         //SAVE TIME
-        if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
-            perror( "clock gettime" );
-            return EXIT_FAILURE;
-        }
+        //if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
+        //    perror( "clock gettime" );
+        //    return EXIT_FAILURE;
+        //}
         
         first_trgged_val    = *first_trgged;
         last_detrigged_val  = *last_detrigged;
         
         printf("Position %llu\n", position);
         printf("Triggers counter: %i\n", triggers_count_val);
-        printf("first_trgged_val %ju (0x%jx)\n", first_trgged_val, first_trgged_val);
-        printf("last_detrigged_val %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val, last_detrigged_val-first_trgged_val);
+        printf("first_trgged_val \t %ju (0x%jx)\n", first_trgged_val, first_trgged_val);        
+        printf("last_detrigged_val \t %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val);
         double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000000.0;
 
         printf("pulse_len: %f sec\n", pulse_len);
@@ -216,15 +215,22 @@ int main () {
         printf("Limiter is: %i SMPS\n", limiter_val);
         printf("Trigger activated: %i\n", trigger_activated_val);
 
+
+        double_t samples_time       = (double_t)(samples_count_val)/125000000.0;        
+        printf("samples_time: \t\t %f sec\n", samples_time);
+        printf("samples_count_val: \t %ju SMPS\n\n", samples_count_val);
+
         printf("Raw memory dump:\n");
-        for (int i = 0; i < 256/8; i++) {
+        for (int i = 0; i < (256+128)/8; i++) {
           if (i == 8) printf("\n");
-
           if (i == 8+8) printf("\n");
-
           if (i == 8+8+8) printf("\n");
+          if (i == 8+8+8+8) printf("\n");
+          if (i == 8+8+8+8+8) printf("\n");
+          if (i == 8+8+8+8+8+8) printf("\n");
+          if (i == 8+8+8+8+8+8+8) printf("\n");
 
-          printf("%i - %lx\n", i, *(uint8_t *)(sts + i));
+          printf("%02x  ", *(uint8_t *)(sts + i));
         }
       //}
 

@@ -80,6 +80,9 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_xlco
 # IP: bd/system/ip/system_xlconcat_1_0/system_xlconcat_1_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_xlconcat_1_0 || ORIG_REF_NAME==system_xlconcat_1_0} -quiet] -quiet
 
+# IP: bd/system/ip/system_const_1_1/system_const_1_1.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_const_1_1 || ORIG_REF_NAME==system_const_1_1} -quiet] -quiet
+
 # XDC: /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_board.xdc
 set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==system_pll_0_0 || ORIG_REF_NAME==system_pll_0_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
 

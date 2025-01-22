@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Sun Jan 19 01:20:29 2025
+//Date        : Wed Jan 22 22:10:29 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=24,numReposBlks=24,numNonXlnxBlks=10,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=4,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
+(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=25,numReposBlks=25,numNonXlnxBlks=10,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=4,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
 module system
    (DDR_addr,
     DDR_ba,
@@ -89,6 +89,7 @@ module system
 
   wire ADC_1_adc_csn;
   wire [15:0]ADC_1_cur_adc;
+  wire [63:0]ADC_1_cur_sample;
   wire [63:0]ADC_1_first_trigged;
   wire [63:0]ADC_1_last_detrigged;
   wire [31:0]ADC_1_limiter;
@@ -189,7 +190,7 @@ module system
   wire [7:0]writer_0_m_axi_WSTRB;
   wire writer_0_m_axi_WVALID;
   wire [15:0]writer_0_sts_data;
-  wire [255:0]xlconcat_0_dout;
+  wire [319:0]xlconcat_0_dout;
   wire [63:0]xlconcat_1_dout;
   wire [63:0]xlconcat_2_dout;
   wire [31:0]xlconstant_0_dout;
@@ -211,6 +212,7 @@ module system
         .adc_dat_b(adc_dat_b_i_1),
         .aresetn(slice_0_dout),
         .cur_adc(ADC_1_cur_adc),
+        .cur_sample(ADC_1_cur_sample),
         .first_trigged(ADC_1_first_trigged),
         .last_detrigged(ADC_1_last_detrigged),
         .limiter(ADC_1_limiter),
@@ -288,6 +290,8 @@ module system
        (.dout(const_0_dout));
   system_const_1_0 const_1
        (.dout(const_1_dout));
+  system_const_1_1 const_2
+       ();
   system_pll_0_0 pll_0
        (.clk_in1_n(adc_clk_n_i_1),
         .clk_in1_p(adc_clk_p_i_1),
@@ -441,6 +445,7 @@ module system
         .In1(ADC_1_last_detrigged),
         .In2(ADC_1_first_trigged),
         .In3(xlconcat_2_dout),
+        .In4(ADC_1_cur_sample),
         .dout(xlconcat_0_dout));
   system_xlconcat_0_1 xlconcat_1
        (.In0({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,writer_0_sts_data}),

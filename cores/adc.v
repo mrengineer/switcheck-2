@@ -14,7 +14,8 @@ module ADC #
   input  wire [15:0] adc_dat_a,
   input  wire [15:0] adc_dat_b,
 
-  output  wire [15:0] cur_adc,
+  output wire [15:0] cur_adc,
+  output wire [63:0] cur_sample, 
 
   // Trigger level setting
   input  wire [15:0] trigger_level,
@@ -36,7 +37,6 @@ module ADC #
   
   output reg [15:0] triggers_count // сколько раз сработал тригер
   
-  
 );
   localparam PADDING_WIDTH = 16 - ADC_DATA_WIDTH;
 
@@ -48,7 +48,7 @@ module ADC #
 
   reg signed [15:0]  max_sum_abs;   // Output for maximum sum value  
   
-  reg [48:0] sample_counter; // 37-битный регистр для подсчета семплов отработает год, 64 бит - 4,6 млн лет. Этого точно хватит. Учитывая размерность шины я могу позволить 47 (71 год)
+  reg [63:0] sample_counter; // 37-битный регистр для подсчета семплов отработает год, 64 бит - 4,6 млн лет. Этого точно хватит. Учитывая размерность шины я могу позволить 47 (71 год)
 
   // Process for capturing, inverting ADC data, and calculating maximum sum
   always @(posedge aclk or negedge aresetn) begin
@@ -101,8 +101,8 @@ module ADC #
         if (sum_abs > trigger_level && !reset_trigger && trigger_activated == 1'b0) begin       // && limiter==1'b0
           //trigged_by_out <= sum_abs;
           
-          if (first_trigged == 0)
-            first_trigged <= sample_counter;
+          //if (first_trigged == 0) //не сбрасывать номер отсчета срабатывания тригера
+          first_trigged <= sample_counter;
             
           trigger_activated <= 1'b1;
           triggers_count <= triggers_count + 1;
@@ -146,6 +146,7 @@ module ADC #
   // Передаем сумму абсолютных значений на выход
   assign m_axis_tdata = {sample_counter, sum_abs};
   assign cur_adc = sum_abs;
+  assign cur_sample = sample_counter;
 
 endmodule
 

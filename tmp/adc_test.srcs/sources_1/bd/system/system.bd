@@ -34,7 +34,8 @@
       "xlconstant_0": "",
       "axis_dwidth_converter_0": "",
       "xlconcat_1": "",
-      "xlconcat_2": ""
+      "xlconcat_2": "",
+      "const_2": ""
     },
     "interface_ports": {
       "Vp_Vn": {
@@ -2262,6 +2263,11 @@
             "left": "15",
             "right": "0"
           },
+          "cur_sample": {
+            "direction": "O",
+            "left": "63",
+            "right": "0"
+          },
           "trigger_level": {
             "direction": "I",
             "left": "15",
@@ -2551,7 +2557,7 @@
             "value": "160"
           },
           "STS_DATA_WIDTH": {
-            "value": "256"
+            "value": "320"
           }
         },
         "reference_info": {
@@ -2835,11 +2841,11 @@
           },
           "sts_data": {
             "direction": "I",
-            "left": "255",
+            "left": "319",
             "right": "0",
             "parameters": {
               "PortWidth": {
-                "value": "256",
+                "value": "320",
                 "value_src": "ip_prop"
               }
             }
@@ -2866,16 +2872,16 @@
             "value": "64"
           },
           "IN4_WIDTH": {
-            "value": "32"
+            "value": "64"
           },
           "IN5_WIDTH": {
-            "value": "16"
+            "value": "192"
           },
           "IN6_WIDTH": {
             "value": "16"
           },
           "NUM_PORTS": {
-            "value": "4"
+            "value": "5"
           }
         }
       },
@@ -3150,6 +3156,21 @@
             "value": "3"
           }
         }
+      },
+      "const_2": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "ip_revision": "8",
+        "xci_name": "system_const_1_1",
+        "xci_path": "ip/system_const_1_1/system_const_1_1.xci",
+        "inst_hier_path": "const_2",
+        "parameters": {
+          "CONST_VAL": {
+            "value": "12302652060646580787"
+          },
+          "CONST_WIDTH": {
+            "value": "64"
+          }
+        }
       }
     },
     "interface_nets": {
@@ -3213,6 +3234,12 @@
         "ports": [
           "ADC_1/cur_adc",
           "xlconcat_1/In2"
+        ]
+      },
+      "ADC_1_cur_sample": {
+        "ports": [
+          "ADC_1/cur_sample",
+          "xlconcat_0/In4"
         ]
       },
       "ADC_1_first_trigged": {

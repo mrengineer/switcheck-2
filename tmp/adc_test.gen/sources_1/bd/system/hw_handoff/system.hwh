@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Jan 19 01:20:30 2025" VIVADOVERSION="2023.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Jan 22 22:10:30 2025" VIVADOVERSION="2023.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -268,6 +268,11 @@
             <CONNECTION INSTANCE="xlconcat_1" PORT="In2"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="O" LEFT="63" NAME="cur_sample" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_cur_sample">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconcat_0" PORT="In4"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" LEFT="63" NAME="first_trigged" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_first_trigged">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconcat_0" PORT="In2"/>
@@ -350,7 +355,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="CFG_DATA_WIDTH" VALUE="160"/>
-        <PARAMETER NAME="STS_DATA_WIDTH" VALUE="256"/>
+        <PARAMETER NAME="STS_DATA_WIDTH" VALUE="320"/>
         <PARAMETER NAME="Component_Name" VALUE="system_axi_hub_modified_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -487,7 +492,7 @@
             <CONNECTION INSTANCE="ps_0" PORT="M_AXI_GP0_WVALID"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="255" NAME="sts_data" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_0_dout">
+        <PORT DIR="I" LEFT="319" NAME="sts_data" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_0_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconcat_0" PORT="dout"/>
           </CONNECTIONS>
@@ -926,6 +931,19 @@
             <CONNECTION INSTANCE="writer_0" PORT="cfg_data"/>
           </CONNECTIONS>
         </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="8" FULLNAME="/const_2" HWVERSION="1.1" INSTANCE="const_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="0xAABBCCDDEE112233"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="64"/>
+        <PARAMETER NAME="Component_Name" VALUE="system_const_1_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" LEFT="63" NAME="dout" RIGHT="0" SIGIS="undef"/>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -3540,7 +3558,7 @@
         <PARAMETER NAME="IN47_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN48_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN49_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN4_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="IN4_WIDTH" VALUE="64"/>
         <PARAMETER NAME="IN50_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN51_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN52_WIDTH" VALUE="1"/>
@@ -3551,7 +3569,7 @@
         <PARAMETER NAME="IN57_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN58_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN59_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="IN5_WIDTH" VALUE="16"/>
+        <PARAMETER NAME="IN5_WIDTH" VALUE="192"/>
         <PARAMETER NAME="IN60_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN61_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN62_WIDTH" VALUE="1"/>
@@ -3596,8 +3614,8 @@
         <PARAMETER NAME="IN98_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN99_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN9_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="NUM_PORTS" VALUE="4"/>
-        <PARAMETER NAME="dout_width" VALUE="256"/>
+        <PARAMETER NAME="NUM_PORTS" VALUE="5"/>
+        <PARAMETER NAME="dout_width" VALUE="320"/>
         <PARAMETER NAME="Component_Name" VALUE="system_xlconcat_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -3622,7 +3640,12 @@
             <CONNECTION INSTANCE="xlconcat_2" PORT="dout"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="255" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_0_dout">
+        <PORT DIR="I" LEFT="63" NAME="In4" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_cur_sample">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ADC_1" PORT="cur_sample"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="319" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_0_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_hub_modified_0" PORT="sts_data"/>
           </CONNECTIONS>
