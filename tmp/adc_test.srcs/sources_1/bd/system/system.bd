@@ -3176,20 +3176,14 @@
     "interface_nets": {
       "ADC_1_m_axis": {
         "interface_ports": [
-          "ADC_1/m_axis",
-          "axis_decimator_0/s_axis"
+          "axis_dwidth_converter_0/S_AXIS",
+          "ADC_1/m_axis"
         ]
       },
       "axis_constant_0_m_axis": {
         "interface_ports": [
           "axis_red_pitaya_dac_0/s_axis",
           "axis_constant_0/m_axis"
-        ]
-      },
-      "axis_decimator_0_m_axis": {
-        "interface_ports": [
-          "axis_decimator_0/m_axis",
-          "axis_dwidth_converter_0/S_AXIS"
         ]
       },
       "axis_dwidth_converter_0_M_AXIS": {

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date             : Wed Jan 22 22:12:31 2025
+| Date             : Fri Jan 24 23:12:11 2025
 | Host             : bigbc running 64-bit Ubuntu 24.04 LTS
 | Command          : report_power -file system_wrapper_power_routed.rpt -pb system_wrapper_power_summary_routed.pb -rpx system_wrapper_power_routed.rpx
 | Design           : system_wrapper
@@ -52,17 +52,17 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.008 |        8 |       --- |             --- |
-| Slice Logic             |     0.002 |     2145 |       --- |             --- |
-|   LUT as Logic          |     0.002 |      614 |     17600 |            3.49 |
-|   Register              |    <0.001 |     1104 |     35200 |            3.14 |
-|   CARRY4                |    <0.001 |       77 |      4400 |            1.75 |
+| Clocks                  |     0.009 |        8 |       --- |             --- |
+| Slice Logic             |     0.002 |     2069 |       --- |             --- |
+|   LUT as Logic          |     0.002 |      605 |     17600 |            3.44 |
+|   Register              |    <0.001 |     1036 |     35200 |            2.94 |
+|   CARRY4                |    <0.001 |       75 |      4400 |            1.70 |
 |   Others                |     0.000 |      193 |       --- |             --- |
 |   LUT as Shift Register |     0.000 |        1 |      6000 |            0.02 |
-| Signals                 |     0.003 |     1717 |       --- |             --- |
-| Block RAM               |     0.002 |        2 |        60 |            3.33 |
+| Signals                 |     0.003 |     1659 |       --- |             --- |
+| Block RAM               |     0.001 |        2 |        60 |            3.33 |
 | PLL                     |     0.105 |        1 |         2 |           50.00 |
-| I/O                     |     0.072 |       49 |       100 |           49.00 |
+| I/O                     |     0.072 |       63 |       100 |           63.00 |
 | PS7                     |     1.277 |        1 |       --- |             --- |
 | Static Power            |     0.123 |          |           |                 |
 | Total                   |     1.592 |          |           |                 |
@@ -152,23 +152,25 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+---------------------------+-----------+
-| Name                      | Power (W) |
-+---------------------------+-----------+
-| system_wrapper            |     1.469 |
-|   system_i                |     1.398 |
-|     ADC_1                 |     0.003 |
-|       inst                |     0.003 |
-|     axi_hub_modified_0    |     0.005 |
-|       inst                |     0.005 |
-|     axis_red_pitaya_dac_0 |     0.002 |
-|       inst                |     0.002 |
-|     pll_0                 |     0.106 |
-|       inst                |     0.106 |
-|     ps_0                  |     1.277 |
-|       inst                |     1.277 |
-|     writer_0              |     0.003 |
-|       inst                |     0.003 |
-+---------------------------+-----------+
++-----------------------------+-----------+
+| Name                        | Power (W) |
++-----------------------------+-----------+
+| system_wrapper              |     1.469 |
+|   system_i                  |     1.398 |
+|     ADC_1                   |     0.003 |
+|       inst                  |     0.003 |
+|     axi_hub_modified_0      |     0.005 |
+|       inst                  |     0.005 |
+|     axis_dwidth_converter_0 |     0.001 |
+|       inst                  |     0.001 |
+|     axis_red_pitaya_dac_0   |     0.002 |
+|       inst                  |     0.002 |
+|     pll_0                   |     0.106 |
+|       inst                  |     0.106 |
+|     ps_0                    |     1.277 |
+|       inst                  |     1.277 |
+|     writer_0                |     0.003 |
+|       inst                  |     0.003 |
++-----------------------------+-----------+
 
 

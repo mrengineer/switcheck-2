@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Wed Jan 22 22:10:29 2025
+//Date        : Fri Jan 24 23:10:22 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -104,9 +104,6 @@ module system
   wire [15:0]adc_dat_b_i_1;
   wire [31:0]axis_constant_0_m_axis_TDATA;
   wire axis_constant_0_m_axis_TVALID;
-  wire [63:0]axis_decimator_0_m_axis_TDATA;
-  wire axis_decimator_0_m_axis_TREADY;
-  wire axis_decimator_0_m_axis_TVALID;
   wire [31:0]axis_dwidth_converter_0_M_AXIS_TDATA;
   wire axis_dwidth_converter_0_M_AXIS_TREADY;
   wire axis_dwidth_converter_0_M_AXIS_TVALID;
@@ -260,20 +257,17 @@ module system
        (.aclk(pll_0_clk_out1),
         .aresetn(slice_0_dout),
         .cfg_data(slice_2_dout),
-        .m_axis_tdata(axis_decimator_0_m_axis_TDATA),
-        .m_axis_tready(axis_decimator_0_m_axis_TREADY),
-        .m_axis_tvalid(axis_decimator_0_m_axis_TVALID),
-        .s_axis_tdata(ADC_1_m_axis_TDATA),
-        .s_axis_tvalid(ADC_1_m_axis_TVALID));
+        .m_axis_tready(1'b1),
+        .s_axis_tdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .s_axis_tvalid(1'b0));
   system_axis_dwidth_converter_0_0 axis_dwidth_converter_0
        (.aclk(pll_0_clk_out1),
         .aresetn(slice_0_dout),
         .m_axis_tdata(axis_dwidth_converter_0_M_AXIS_TDATA),
         .m_axis_tready(axis_dwidth_converter_0_M_AXIS_TREADY),
         .m_axis_tvalid(axis_dwidth_converter_0_M_AXIS_TVALID),
-        .s_axis_tdata(axis_decimator_0_m_axis_TDATA),
-        .s_axis_tready(axis_decimator_0_m_axis_TREADY),
-        .s_axis_tvalid(axis_decimator_0_m_axis_TVALID));
+        .s_axis_tdata(ADC_1_m_axis_TDATA),
+        .s_axis_tvalid(ADC_1_m_axis_TVALID));
   system_axis_red_pitaya_dac_0_0 axis_red_pitaya_dac_0
        (.aclk(pll_0_clk_out1),
         .dac_clk(axis_red_pitaya_dac_0_dac_clk),

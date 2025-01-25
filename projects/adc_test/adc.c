@@ -127,7 +127,7 @@ int main () {
   
   
 
-  uint16_t trg = 240;
+  uint16_t trg = 120;
 
   *trg_value = trg;
   *rx_addr = size;
@@ -204,13 +204,13 @@ int main () {
         first_trgged_val    = *first_trgged;
         last_detrigged_val  = *last_detrigged;
         
-        printf("Position %llu\n", position);
-        printf("Triggers counter: %i\n", triggers_count_val);
+        printf("POS %llu\n", position);
+        printf("TRGS_COUNT %i\n", triggers_count_val);
         printf("first_trgged_val \t %ju (0x%jx)\n", first_trgged_val, first_trgged_val);        
         printf("last_detrigged_val \t %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val);
+        
         double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000000.0;
-
-        printf("pulse_len: %f sec\n", pulse_len);
+        printf("PULSELEN %f\n", pulse_len);
         printf("ADC (MAX/NOW)= %i/%i popugais\n", adc_abs_max_val, cur_adc_val);
         printf("Limiter is: %i SMPS\n", limiter_val);
         printf("Trigger activated: %i\n", trigger_activated_val);
@@ -220,6 +220,7 @@ int main () {
         printf("samples_time: \t\t %f sec\n", samples_time);
         printf("samples_count_val: \t %ju SMPS\n\n", samples_count_val);
 
+        /*
         printf("Raw memory dump:\n");
         for (int i = 0; i < (256+128)/8; i++) {
           if (i == 8) printf("\n");
@@ -232,6 +233,7 @@ int main () {
 
           printf("%02x  ", *(uint8_t *)(sts + i));
         }
+        */
       //}
 
 
@@ -345,7 +347,7 @@ int main () {
         break; //exit while to wait new trigger*/
 
 
-        usleep(300);
+        usleep(1000);
 
     } //Окончание цикла ожидания сигнала прерывания по CTRL-D #2
 
