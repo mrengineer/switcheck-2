@@ -2,6 +2,7 @@
 Based on  Red Pitaya Notes
 http://pavel-demin.github.io/red-pitaya-notes/
 
+SEE https://pavel-demin.github.io/red-pitaya-notes/alpine/
 
 # Autorun
 
