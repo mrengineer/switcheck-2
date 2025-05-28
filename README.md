@@ -11,7 +11,9 @@ SEE https://pavel-demin.github.io/red-pitaya-notes/alpine/
 - запускает start.sh с карты
 
 rw - mmc RW
+
 wo - mmc Readonly
+
 lbu commit -d 0- commit changes to SD
 
 # configure WPA supplicant
