@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Fri Jan 24 23:10:22 2025
+//Date        : Sun Jan 26 21:08:23 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -92,10 +92,10 @@ module system
   wire [63:0]ADC_1_cur_sample;
   wire [63:0]ADC_1_first_trigged;
   wire [63:0]ADC_1_last_detrigged;
-  wire [31:0]ADC_1_limiter;
   wire [63:0]ADC_1_m_axis_TDATA;
   wire ADC_1_m_axis_TVALID;
   wire [15:0]ADC_1_max_sum_out;
+  wire [31:0]ADC_1_samples_sent;
   wire ADC_1_trigger_activated;
   wire [15:0]ADC_1_triggers_count;
   wire adc_clk_n_i_1;
@@ -212,12 +212,12 @@ module system
         .cur_sample(ADC_1_cur_sample),
         .first_trigged(ADC_1_first_trigged),
         .last_detrigged(ADC_1_last_detrigged),
-        .limiter(ADC_1_limiter),
         .m_axis_tdata(ADC_1_m_axis_TDATA),
         .m_axis_tvalid(ADC_1_m_axis_TVALID),
         .max_sum_out(ADC_1_max_sum_out),
         .reset_max_sum(slice_7_dout),
         .reset_trigger(slice_6_dout),
+        .samples_sent(ADC_1_samples_sent),
         .trigger_activated(ADC_1_trigger_activated),
         .trigger_level(slice_4_dout),
         .triggers_count(ADC_1_triggers_count));
@@ -447,7 +447,7 @@ module system
         .In2(ADC_1_cur_adc),
         .dout(xlconcat_1_dout));
   system_xlconcat_1_0 xlconcat_2
-       (.In0(ADC_1_limiter),
+       (.In0(ADC_1_samples_sent),
         .In1({ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated}),
         .In2(ADC_1_triggers_count),
         .dout(xlconcat_2_dout));

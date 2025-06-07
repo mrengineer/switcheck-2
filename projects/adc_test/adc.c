@@ -39,7 +39,7 @@ int main () {
   volatile uint16_t *trigger_activated, *triggers_count;
   volatile uint32_t *rx_addr, *rx_cntr;
   volatile uint16_t *adc_abs_max, *cur_adc;
-  volatile uint32_t *limiter;
+  volatile uint32_t *adc_sent;
   volatile uint64_t *last_detrigged, *first_trgged, *samples_count;
 
   volatile uint16_t *rx_rate, *trg_value;
@@ -117,24 +117,24 @@ int main () {
   rx_cntr         = (uint32_t *)(sts + 0);    //через rx_cntr writer0 блок сообщает программе сколько данных он записал в память
   adc_abs_max     = (uint16_t *)(sts + 4);    //Максимальное значение после сброса, для самокалибровки триггера
   cur_adc         = (uint16_t *)(sts + 6);    //Значение сейчас
-  last_detrigged  = (uint64_t *)(sts + 8);   //Последний раз когда переходили тригер вниз, в семплах
+  last_detrigged  = (uint64_t *)(sts + 8);   //Последний раз caкогда переходили тригер вниз, в семплах
   first_trgged    = (uint64_t *)(sts + 16);   //Когда сработал тригер, в семплах
-  limiter         = (uint32_t *)(sts + 24);   //Значение внутреннего ограничителя записи (отадочно-техническое чтобы не перерисал мног раз буфер памяти по кругу)
+  adc_sent        = (uint32_t *)(sts + 24);   //Число отправленных отсчетов из блока АЦП
   trigger_activated = (uint16_t *)(sts + 28); //1 бит состояния переменной в IP
-  triggers_count = (uint16_t *)(sts + 30);
-  samples_count = (uint64_t *)(sts + 32); //Счетчик семплов (всех)
-  
-  
+  triggers_count  = (uint16_t *)(sts + 30);
+  samples_count   = (uint64_t *)(sts + 32); //Счетчик семплов (всех)
   
 
-  uint16_t trg = 120;
+  uint16_t trg    = 1500;
 
-  *trg_value = trg;
-  *rx_addr = size;
+  *trg_value      = trg;
+  *rx_addr        = size;
 
-  uint32_t limiter_val;
+  uint32_t adc_sent_val;
   uint64_t first_trgged_val, last_detrigged_val, samples_count_val;
   uint16_t trigger_activated_val, triggers_count_val, cur_adc_val, adc_abs_max_val;
+
+  char outbuf[1500];  //Print to
 
   while(!interrupted) {
 
@@ -160,37 +160,35 @@ int main () {
     usleep(100);
     *rx_rst |= 1;  //установка первого бита в 1 (дециматор и другие)
 
-    //limit = 32*1024;
-
-
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
 
-  
-    while(!interrupted) {
-       usleep(1500);
+//    snprintf(outbuf, sizeof(outbuf), "VALUES:\n");
 
+    while(!interrupted) {
       adc_abs_max_val         = *adc_abs_max;
       first_trgged_val        = *first_trgged;
       last_detrigged_val      = *last_detrigged;
-      limiter_val             = *limiter;
+      adc_sent_val            = *adc_sent;
       trigger_activated_val   = *trigger_activated;
       triggers_count_val      = *triggers_count;
       cur_adc_val             = *cur_adc;
       samples_count_val       = *samples_count;
-
-
+      
       /* read ram writer position */
       prev_position = position;
       position      = *rx_cntr;
 
+      
+
       if (adc_abs_max_val < *adc_abs_max) adc_abs_max_val = *adc_abs_max;
 
-      //if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
-      //      perror( "clock gettime" );
-      //      return EXIT_FAILURE;
-      //}
+      
+        //if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
+        //      perror( "clock gettime" );
+        //      return EXIT_FAILURE;
+        //}
 
-      //if (stop.tv_sec - start.tv_sec >= 0 && stop.tv_nsec - start.tv_nsec > 100000) {
+        //if (stop.tv_sec - start.tv_sec >= 0 && stop.tv_nsec - start.tv_nsec > 100000) {
         clrscr();
 
         //printf("%li sec and %li ns\n", stop.tv_sec - start.tv_sec, stop.tv_nsec - start.tv_nsec);
@@ -205,20 +203,21 @@ int main () {
         last_detrigged_val  = *last_detrigged;
         
         printf("POS %llu\n", position);
+        printf("D_POS \033[0;31m%i\033[0m\n", (int)(position - prev_position));
         printf("TRGS_COUNT %i\n", triggers_count_val);
-        printf("first_trgged_val \t %ju (0x%jx)\n", first_trgged_val, first_trgged_val);        
-        printf("last_detrigged_val \t %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val);
+        printf("first_trgged_val %ju (0x%jx)\n", first_trgged_val, first_trgged_val);        
+        printf("last_detrigged_val %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val);
         
         double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000000.0;
-        printf("PULSELEN %f\n", pulse_len);
+        printf("PULSE_LEN %f\n", pulse_len);
         printf("ADC (MAX/NOW)= %i/%i popugais\n", adc_abs_max_val, cur_adc_val);
-        printf("Limiter is: %i SMPS\n", limiter_val);
-        printf("Trigger activated: %i\n", trigger_activated_val);
+        printf("ADC_SENT_VAL %i\n", adc_sent_val);
+        printf("TRG_ACTIVE %i\n", trigger_activated_val);
 
 
         double_t samples_time       = (double_t)(samples_count_val)/125000000.0;        
-        printf("samples_time: \t\t %f sec\n", samples_time);
-        printf("samples_count_val: \t %ju SMPS\n\n", samples_count_val);
+        printf("SMAPLES_TIME %f\n", samples_time);
+        printf("SAMPLES_COUNT %ju\n", samples_count_val);
 
         /*
         printf("Raw memory dump:\n");
@@ -234,14 +233,11 @@ int main () {
           printf("%02x  ", *(uint8_t *)(sts + i));
         }
         */
-      //}
-
-
-
-/*      if (prev_position != position) {        
-
-        //Вычитаем
+      
+      if (prev_position != position) {      
+        // Позиция чтения данных
         uint64_t *buffer = (uint64_t *)(ram + prev_position);
+
         for(uint32_t i = 0; i < (position - prev_position) * 16; i += 1) {
           //printf("D %i %d\n", i, adc);
           uint64_t counter    = buffer[i] >> 16;         // Извлекаем первые 48 бит как счетчик          
@@ -249,9 +245,32 @@ int main () {
           double_t msec       = (double_t)counter/125000.0;
 
           // Печать результатов
-          printf("%i C: %llu (%f ms), ADC Value: %u\n", i, counter, msec, adc_value);
+          //snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "%i C: %llu (%f ms), ADC Value: %u\n", i, counter, msec, adc_value);
+          snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "%.3i: %.11llu\t%u\n", i, counter, adc_value);          
         }
-      }*/
+
+        
+
+      }   //(prev_position != position)
+
+      printf("%s\n", outbuf);
+
+      usleep(200000);
+
+    } //Окончание цикла ожидания сигнала прерывания по CTRL-D #2
+
+    signal(SIGINT, SIG_DFL);
+  } //Окончание цикла ожидания сигнала прерывания по CTRL-D
+
+  /* enter reset mode */
+  *rx_rst &= ~1;
+  usleep(500);
+  *rx_rst &= ~2;
+
+  return EXIT_SUCCESS;
+}
+
+
 
       /*if (prev_position == position && position > 300000-1) {
         if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
@@ -345,19 +364,3 @@ int main () {
        
 
         break; //exit while to wait new trigger*/
-
-
-        usleep(1000);
-
-    } //Окончание цикла ожидания сигнала прерывания по CTRL-D #2
-
-    signal(SIGINT, SIG_DFL);
-  } //Окончание цикла ожидания сигнала прерывания по CTRL-D
-
-  /* enter reset mode */
-  *rx_rst &= ~1;
-  usleep(500);
-  *rx_rst &= ~2;
-
-  return EXIT_SUCCESS;
-}

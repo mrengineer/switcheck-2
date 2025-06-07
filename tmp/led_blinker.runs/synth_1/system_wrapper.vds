@@ -1,0 +1,516 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue May 13 00:32:55 2025
+# Process ID: 10195
+# Current directory: /home/bulkin/red-pitaya-notes/tmp/led_blinker.runs/synth_1
+# Command line: vivado -log system_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_wrapper.tcl
+# Log file: /home/bulkin/red-pitaya-notes/tmp/led_blinker.runs/synth_1/system_wrapper.vds
+# Journal file: /home/bulkin/red-pitaya-notes/tmp/led_blinker.runs/synth_1/vivado.jou
+# Running On: bigbc, OS: Linux, CPU Frequency: 3200.057 MHz, CPU Physical cores: 6, Host memory: 8187 MB
+#-----------------------------------------------------------
+source system_wrapper.tcl -notrace
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1321.184 ; gain = 0.027 ; free physical = 654 ; free virtual = 12732
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/bulkin/red-pitaya-notes/tmp/cores'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/bulkin/Xilinx/Vivado/2023.2/data/ip'.
+Command: synth_design -top system_wrapper -part xc7z010clg400-1 -directive PerformanceOptimized -fsm_extraction one_hot -keep_equivalent_registers -resource_sharing off -no_lc -shreg_min_size 5
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 10522
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2041.141 ; gain = 413.684 ; free physical = 172 ; free virtual = 11808
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'system_wrapper' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/hdl/system_wrapper.v:13]
+INFO: [Synth 8-6157] synthesizing module 'system' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:13]
+INFO: [Synth 8-638] synthesizing module 'system_cntr_0_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_cntr_0_0/synth/system_cntr_0_0.vhd:66]
+	Parameter C_IMPLEMENTATION bound to: 0 - type: integer 
+	Parameter C_VERBOSITY bound to: 0 - type: integer 
+	Parameter C_XDEVICEFAMILY bound to: zynq - type: string 
+	Parameter C_WIDTH bound to: 32 - type: integer 
+	Parameter C_HAS_CE bound to: 0 - type: integer 
+	Parameter C_HAS_SCLR bound to: 0 - type: integer 
+	Parameter C_RESTRICT_COUNT bound to: 0 - type: integer 
+	Parameter C_COUNT_TO bound to: 1 - type: string 
+	Parameter C_COUNT_BY bound to: 1 - type: string 
+	Parameter C_COUNT_MODE bound to: 0 - type: integer 
+	Parameter C_THRESH0_VALUE bound to: 1 - type: string 
+	Parameter C_CE_OVERRIDES_SYNC bound to: 0 - type: integer 
+	Parameter C_HAS_THRESH0 bound to: 0 - type: integer 
+	Parameter C_HAS_LOAD bound to: 0 - type: integer 
+	Parameter C_LOAD_LOW bound to: 0 - type: integer 
+	Parameter C_LATENCY bound to: 1 - type: integer 
+	Parameter C_FB_LATENCY bound to: 0 - type: integer 
+	Parameter C_AINIT_VAL bound to: 0 - type: string 
+	Parameter C_SINIT_VAL bound to: 0 - type: string 
+	Parameter C_SCLR_OVERRIDES_SSET bound to: 1 - type: integer 
+	Parameter C_HAS_SSET bound to: 0 - type: integer 
+	Parameter C_HAS_SINIT bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'c_counter_binary_v12_0_17' declared at '/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ipshared/f6d3/hdl/c_counter_binary_v12_0_vh_rfs.vhd:2133' bound to instance 'U0' of component 'c_counter_binary_v12_0_17' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_cntr_0_0/synth/system_cntr_0_0.vhd:122]
+INFO: [Synth 8-256] done synthesizing module 'system_cntr_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_cntr_0_0/synth/system_cntr_0_0.vhd:66]
+INFO: [Synth 8-6157] synthesizing module 'system_pll_0_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0.v:65]
+INFO: [Synth 8-6157] synthesizing module 'system_pll_0_0_clk_wiz' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_clk_wiz.v:65]
+INFO: [Synth 8-6157] synthesizing module 'IBUFDS' [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:73646]
+INFO: [Synth 8-6155] done synthesizing module 'IBUFDS' (0#1) [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:73646]
+INFO: [Synth 8-6157] synthesizing module 'PLLE2_ADV' [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:111351]
+	Parameter BANDWIDTH bound to: OPTIMIZED - type: string 
+	Parameter CLKFBOUT_MULT bound to: 7 - type: integer 
+	Parameter CLKFBOUT_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKIN1_PERIOD bound to: 8.000000 - type: double 
+	Parameter CLKOUT0_DIVIDE bound to: 7 - type: integer 
+	Parameter CLKOUT0_DUTY_CYCLE bound to: 0.500000 - type: double 
+	Parameter CLKOUT0_PHASE bound to: 0.000000 - type: double 
+	Parameter COMPENSATION bound to: ZHOLD - type: string 
+	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
+	Parameter STARTUP_WAIT bound to: FALSE - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'PLLE2_ADV' (0#1) [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:111351]
+INFO: [Synth 8-6157] synthesizing module 'BUFG' [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1951]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1951]
+INFO: [Synth 8-6155] done synthesizing module 'system_pll_0_0_clk_wiz' (0#1) [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_clk_wiz.v:65]
+INFO: [Synth 8-6155] done synthesizing module 'system_pll_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0.v:65]
+WARNING: [Synth 8-7071] port 'locked' of module 'system_pll_0_0' is unconnected for instance 'pll_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:123]
+WARNING: [Synth 8-7023] instance 'pll_0' of module 'system_pll_0_0' has 4 connections declared, but only 3 given [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:123]
+INFO: [Synth 8-6157] synthesizing module 'system_ps_0_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'processing_system7_v5_5_processing_system7' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:152]
+INFO: [Synth 8-6157] synthesizing module 'BIBUF' [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1598]
+INFO: [Synth 8-6155] done synthesizing module 'BIBUF' (0#1) [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1598]
+INFO: [Synth 8-6157] synthesizing module 'PS7' [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:111859]
+INFO: [Synth 8-6155] done synthesizing module 'PS7' (0#1) [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:111859]
+INFO: [Synth 8-6155] done synthesizing module 'processing_system7_v5_5_processing_system7' (0#1) [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:152]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'M_AXI_GP1_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'S_AXI_GP0_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'S_AXI_GP1_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'S_AXI_HP0_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'S_AXI_HP1_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'S_AXI_HP2_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'S_AXI_HP3_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'DMA0_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'DMA1_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'DMA2_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7071] port 'DMA3_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+WARNING: [Synth 8-7023] instance 'inst' of module 'processing_system7_v5_5_processing_system7' has 685 connections declared, but only 672 given [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:374]
+INFO: [Synth 8-6155] done synthesizing module 'system_ps_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:53]
+WARNING: [Synth 8-7071] port 'GPIO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'GPIO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_SCLK_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_SCLK_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_MOSI_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_MOSI_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_MISO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_MISO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_SS_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_SS1_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_SS2_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'SPI0_SS_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'USB0_PORT_INDCTL' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'USB0_VBUS_PWRSELECT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARVALID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWVALID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_BREADY' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_RREADY' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_WLAST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_WVALID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_WID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARADDR' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWADDR' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_WDATA' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARLEN' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLEN' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_WSTRB' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'FCLK_CLK0' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7071] port 'FCLK_RESET0_N' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+WARNING: [Synth 8-7023] instance 'ps_0' of module 'system_ps_0_0' has 82 connections declared, but only 39 given [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:127]
+INFO: [Synth 8-6157] synthesizing module 'system_slice_0_0' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_slice_0_0/synth/system_slice_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'port_slicer' [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'port_slicer' (0#1) [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'system_slice_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_slice_0_0/synth/system_slice_0_0.v:53]
+INFO: [Synth 8-6155] done synthesizing module 'system' (0#1) [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'system_wrapper' (0#1) [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/hdl/system_wrapper.v:13]
+WARNING: [Synth 8-3848] Net adc_csn_o in module/entity system does not have driver. [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:75]
+WARNING: [Synth 8-3848] Net adc_enc_n_o in module/entity system does not have driver. [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:78]
+WARNING: [Synth 8-3848] Net adc_enc_p_o in module/entity system does not have driver. [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:79]
+WARNING: [Synth 8-3848] Net dac_clk_o in module/entity system does not have driver. [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:80]
+WARNING: [Synth 8-3848] Net dac_dat_o in module/entity system does not have driver. [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:81]
+WARNING: [Synth 8-3848] Net dac_pwm_o in module/entity system does not have driver. [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:82]
+WARNING: [Synth 8-3848] Net dac_rst_o in module/entity system does not have driver. [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:83]
+WARNING: [Synth 8-3848] Net dac_sel_o in module/entity system does not have driver. [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:84]
+WARNING: [Synth 8-3848] Net dac_wrt_o in module/entity system does not have driver. [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/synth/system.v:85]
+WARNING: [Synth 8-7129] Port din[31] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[30] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[29] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[28] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[27] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[25] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[24] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[23] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[22] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[21] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[20] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[19] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[18] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[17] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[16] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[15] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[14] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[13] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[12] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[11] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[10] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[9] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[8] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[7] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[6] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[5] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[4] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[3] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[2] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[1] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port din[0] in module port_slicer is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_COL in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_CRS in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RX_DV in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RX_ER in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RXD[7] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RXD[6] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RXD[5] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RXD[4] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RXD[3] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RXD[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RXD[1] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET0_GMII_RXD[0] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_COL in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_CRS in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RX_DV in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RX_ER in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RXD[7] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RXD[6] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RXD[5] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RXD[4] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RXD[3] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RXD[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RXD[1] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENET1_GMII_RXD[0] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_GP0_ARSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_GP0_AWSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_GP1_ARSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_GP1_AWSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_ACP_ARSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_ACP_AWSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_HP0_ARSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_HP0_AWSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_HP1_ARSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_HP1_AWSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_HP2_ARSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_HP2_AWSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_HP3_ARSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_HP3_AWSIZE[2] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FCLK_CLKTRIG3_N in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FCLK_CLKTRIG2_N in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FCLK_CLKTRIG1_N in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FCLK_CLKTRIG0_N in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[31] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[30] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[29] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[28] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[27] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[26] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[25] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[24] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[23] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[22] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[21] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[20] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[19] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[18] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[17] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[16] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[15] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[14] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[13] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[12] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[11] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[10] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[9] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[8] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[7] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[6] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FTMD_TRACEIN_DATA[5] in module processing_system7_v5_5_processing_system7 is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2141.078 ; gain = 513.621 ; free physical = 164 ; free virtual = 11673
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2149.984 ; gain = 522.527 ; free physical = 164 ; free virtual = 11673
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2149.984 ; gain = 522.527 ; free physical = 164 ; free virtual = 11673
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2152.953 ; gain = 0.000 ; free physical = 164 ; free virtual = 11673
+INFO: [Netlist 29-17] Analyzing 65 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_board.xdc] for cell 'system_i/pll_0/inst'
+Finished Parsing XDC File [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_board.xdc] for cell 'system_i/pll_0/inst'
+Parsing XDC File [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0.xdc] for cell 'system_i/pll_0/inst'
+Finished Parsing XDC File [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0.xdc] for cell 'system_i/pll_0/inst'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/system_wrapper_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/system_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/system_ps_0_0.xdc] for cell 'system_i/ps_0/inst'
+Finished Parsing XDC File [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/system_ps_0_0.xdc] for cell 'system_i/ps_0/inst'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/bulkin/red-pitaya-notes/tmp/led_blinker.gen/sources_1/bd/system/ip/system_ps_0_0/system_ps_0_0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/system_wrapper_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/system_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+INFO: [Timing 38-2] Deriving generated clocks
+Parsing XDC File [/home/bulkin/red-pitaya-notes/cfg/clocks.xdc]
+Finished Parsing XDC File [/home/bulkin/red-pitaya-notes/cfg/clocks.xdc]
+Parsing XDC File [/home/bulkin/red-pitaya-notes/cfg/ports.xdc]
+WARNING: [Vivado 12-584] No ports matched 'Vp_Vn_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:127]
+WARNING: [Vivado 12-584] No ports matched 'Vp_Vn_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:128]
+WARNING: [Vivado 12-584] No ports matched 'Vaux0_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:129]
+WARNING: [Vivado 12-584] No ports matched 'Vaux0_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:130]
+WARNING: [Vivado 12-584] No ports matched 'Vaux1_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:131]
+WARNING: [Vivado 12-584] No ports matched 'Vaux1_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:132]
+WARNING: [Vivado 12-584] No ports matched 'Vaux8_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:133]
+WARNING: [Vivado 12-584] No ports matched 'Vaux8_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:134]
+WARNING: [Vivado 12-584] No ports matched 'Vaux9_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:135]
+WARNING: [Vivado 12-584] No ports matched 'Vaux9_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:136]
+WARNING: [Vivado 12-584] No ports matched 'Vp_Vn_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:138]
+WARNING: [Vivado 12-584] No ports matched 'Vp_Vn_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:139]
+WARNING: [Vivado 12-584] No ports matched 'Vaux0_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:140]
+WARNING: [Vivado 12-584] No ports matched 'Vaux0_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:141]
+WARNING: [Vivado 12-584] No ports matched 'Vaux1_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:142]
+WARNING: [Vivado 12-584] No ports matched 'Vaux1_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:143]
+WARNING: [Vivado 12-584] No ports matched 'Vaux8_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:144]
+WARNING: [Vivado 12-584] No ports matched 'Vaux8_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:145]
+WARNING: [Vivado 12-584] No ports matched 'Vaux9_v_p'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:146]
+WARNING: [Vivado 12-584] No ports matched 'Vaux9_v_n'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:147]
+WARNING: [Vivado 12-584] No ports matched 'daisy_p_o[*]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:177]
+WARNING: [Vivado 12-584] No ports matched 'daisy_n_o[*]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:178]
+WARNING: [Vivado 12-584] No ports matched 'daisy_p_i[*]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:180]
+WARNING: [Vivado 12-584] No ports matched 'daisy_n_i[*]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:181]
+WARNING: [Vivado 12-584] No ports matched 'daisy_p_o[0]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:183]
+WARNING: [Vivado 12-584] No ports matched 'daisy_n_o[0]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:184]
+WARNING: [Vivado 12-584] No ports matched 'daisy_p_o[1]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:186]
+WARNING: [Vivado 12-584] No ports matched 'daisy_n_o[1]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:187]
+WARNING: [Vivado 12-584] No ports matched 'daisy_p_i[0]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:189]
+WARNING: [Vivado 12-584] No ports matched 'daisy_n_i[0]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:190]
+WARNING: [Vivado 12-584] No ports matched 'daisy_p_i[1]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:192]
+WARNING: [Vivado 12-584] No ports matched 'daisy_n_i[1]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:193]
+WARNING: [Vivado 12-584] No ports matched 'led_o[1]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:202]
+WARNING: [Vivado 12-584] No ports matched 'led_o[2]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:203]
+WARNING: [Vivado 12-584] No ports matched 'led_o[3]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:204]
+WARNING: [Vivado 12-584] No ports matched 'led_o[4]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:205]
+WARNING: [Vivado 12-584] No ports matched 'led_o[5]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:206]
+WARNING: [Vivado 12-584] No ports matched 'led_o[6]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:207]
+WARNING: [Vivado 12-584] No ports matched 'led_o[7]'. [/home/bulkin/red-pitaya-notes/cfg/ports.xdc:208]
+Finished Parsing XDC File [/home/bulkin/red-pitaya-notes/cfg/ports.xdc]
+WARNING: [Project 1-498] One or more constraints failed evaluation while reading constraint file [/home/bulkin/red-pitaya-notes/cfg/ports.xdc] and the design contains unresolved black boxes. These constraints will be read post-synthesis (as long as their source constraint file is marked as used_in_implementation) and should be applied correctly then. You should review the constraints listed in the file [.Xil/system_wrapper_propImpl.xdc] and check the run log file to verify that these constraints were correctly applied.
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/bulkin/red-pitaya-notes/cfg/ports.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/system_wrapper_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/system_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [/home/bulkin/red-pitaya-notes/tmp/led_blinker.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/bulkin/red-pitaya-notes/tmp/led_blinker.runs/synth_1/dont_touch.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/bulkin/red-pitaya-notes/tmp/led_blinker.runs/synth_1/dont_touch.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/system_wrapper_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/system_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2206.914 ; gain = 0.000 ; free physical = 144 ; free virtual = 11671
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2206.949 ; gain = 0.000 ; free physical = 144 ; free virtual = 11671
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2206.949 ; gain = 579.492 ; free physical = 633 ; free virtual = 12085
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2206.949 ; gain = 579.492 ; free physical = 633 ; free virtual = 12085
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for system_i/pll_0/inst. (constraint file  /home/bulkin/red-pitaya-notes/tmp/led_blinker.runs/synth_1/dont_touch.xdc, line 24).
+Applied set_property KEEP_HIERARCHY = SOFT for system_i/ps_0/inst. (constraint file  /home/bulkin/red-pitaya-notes/tmp/led_blinker.runs/synth_1/dont_touch.xdc, line 32).
+Applied set_property KEEP_HIERARCHY = SOFT for system_i. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for system_i/pll_0. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for system_i/ps_0. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for system_i/cntr_0. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for system_i/slice_0. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2206.949 ; gain = 579.492 ; free physical = 634 ; free virtual = 12086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 2206.949 ; gain = 579.492 ; free physical = 636 ; free virtual = 12089
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 2206.949 ; gain = 579.492 ; free physical = 633 ; free virtual = 12091
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 2271.906 ; gain = 644.449 ; free physical = 593 ; free virtual = 12046
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 2291.914 ; gain = 664.457 ; free physical = 577 ; free virtual = 12030
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 2293.930 ; gain = 666.473 ; free physical = 573 ; free virtual = 12028
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2308.805 ; gain = 681.348 ; free physical = 580 ; free virtual = 12027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2308.805 ; gain = 681.348 ; free physical = 580 ; free virtual = 12027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2308.805 ; gain = 681.348 ; free physical = 580 ; free virtual = 12027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2308.805 ; gain = 681.348 ; free physical = 580 ; free virtual = 12027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2308.805 ; gain = 681.348 ; free physical = 580 ; free virtual = 12027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2308.805 ; gain = 681.348 ; free physical = 580 ; free virtual = 12027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+----------+------+
+|      |Cell      |Count |
++------+----------+------+
+|1     |BIBUF     |   130|
+|2     |BUFG      |     3|
+|3     |LUT1      |    25|
+|4     |MUXCY     |    26|
+|5     |PLLE2_ADV |     1|
+|6     |PS7       |     1|
+|7     |XORCY     |    27|
+|8     |FDRE      |    27|
+|9     |IBUF      |    16|
+|10    |IBUFDS    |     1|
+|11    |OBUF      |     1|
+|12    |OBUFT     |    25|
++------+----------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2308.805 ; gain = 681.348 ; free physical = 579 ; free virtual = 12027
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 222 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2308.805 ; gain = 624.383 ; free physical = 579 ; free virtual = 12027
+Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2308.812 ; gain = 681.348 ; free physical = 579 ; free virtual = 12027
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2308.812 ; gain = 0.000 ; free physical = 756 ; free virtual = 12203
+INFO: [Netlist 29-17] Analyzing 55 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2330.586 ; gain = 0.000 ; free physical = 839 ; free virtual = 12288
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 7 instances were transformed.
+  (MUXCY,XORCY) => CARRY4: 7 instances
+
+Synth Design complete | Checksum: 50d6d6e1
+INFO: [Common 17-83] Releasing license: Synthesis
+54 Infos, 210 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:34 ; elapsed = 00:00:31 . Memory (MB): peak = 2330.621 ; gain = 1009.438 ; free physical = 839 ; free virtual = 12288
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1835.165; main = 1625.280; forked = 377.809
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3191.844; main = 2330.590; forked = 984.926
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2330.621 ; gain = 0.000 ; free physical = 846 ; free virtual = 12295
+INFO: [Common 17-1381] The checkpoint '/home/bulkin/red-pitaya-notes/tmp/led_blinker.runs/synth_1/system_wrapper.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file system_wrapper_utilization_synth.rpt -pb system_wrapper_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue May 13 00:33:38 2025...

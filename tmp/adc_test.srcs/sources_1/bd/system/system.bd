@@ -2301,6 +2301,11 @@
             "left": "31",
             "right": "0"
           },
+          "samples_sent": {
+            "direction": "O",
+            "left": "31",
+            "right": "0"
+          },
           "trigger_activated": {
             "direction": "O"
           },
@@ -3248,16 +3253,16 @@
           "xlconcat_0/In1"
         ]
       },
-      "ADC_1_limiter": {
-        "ports": [
-          "ADC_1/limiter",
-          "xlconcat_2/In0"
-        ]
-      },
       "ADC_1_max_sum_out": {
         "ports": [
           "ADC_1/max_sum_out",
           "xlconcat_1/In1"
+        ]
+      },
+      "ADC_1_samples_sent": {
+        "ports": [
+          "ADC_1/samples_sent",
+          "xlconcat_2/In0"
         ]
       },
       "ADC_1_trigger_activated": {

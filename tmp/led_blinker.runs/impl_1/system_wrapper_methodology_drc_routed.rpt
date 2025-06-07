@@ -1,0 +1,69 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Tue May 13 00:34:38 2025
+| Host         : bigbc running 64-bit Ubuntu 24.04 LTS
+| Command      : report_methodology -file system_wrapper_methodology_drc_routed.rpt -pb system_wrapper_methodology_drc_routed.pb -rpx system_wrapper_methodology_drc_routed.rpx
+| Design       : system_wrapper
+| Device       : xc7z010clg400-1
+| Speed File   : -1
+| Design State : Fully Routed
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max violations: <unlimited>
+             Violations found: 5
++-----------+----------+-------------------------------------------------+------------+
+| Rule      | Severity | Description                                     | Violations |
++-----------+----------+-------------------------------------------------+------------+
+| TIMING-18 | Warning  | Missing input or output delay                   | 1          |
+| XDCC-5    | Warning  | User Non-Timing constraint/property overwritten | 4          |
++-----------+----------+-------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+TIMING-18#1 Warning
+Missing input or output delay  
+An output delay is missing on led_o[0] relative to the rising and/or falling clock edge(s) of adc_clk_p_i.
+Related violations: <none>
+
+XDCC-5#1 Warning
+User Non-Timing constraint/property overwritten  
+A new XDC property IOSTANDARD on dac_pwm_o[0] overrides a previous user property.
+New Source: /home/bulkin/red-pitaya-notes/cfg/ports.xdc (Line: 115)
+Previous Source: /home/bulkin/red-pitaya-notes/cfg/ports.xdc (Line: 103)
+Related violations: <none>
+
+XDCC-5#2 Warning
+User Non-Timing constraint/property overwritten  
+A new XDC property IOSTANDARD on dac_pwm_o[1] overrides a previous user property.
+New Source: /home/bulkin/red-pitaya-notes/cfg/ports.xdc (Line: 115)
+Previous Source: /home/bulkin/red-pitaya-notes/cfg/ports.xdc (Line: 103)
+Related violations: <none>
+
+XDCC-5#3 Warning
+User Non-Timing constraint/property overwritten  
+A new XDC property IOSTANDARD on dac_pwm_o[2] overrides a previous user property.
+New Source: /home/bulkin/red-pitaya-notes/cfg/ports.xdc (Line: 115)
+Previous Source: /home/bulkin/red-pitaya-notes/cfg/ports.xdc (Line: 103)
+Related violations: <none>
+
+XDCC-5#4 Warning
+User Non-Timing constraint/property overwritten  
+A new XDC property IOSTANDARD on dac_pwm_o[3] overrides a previous user property.
+New Source: /home/bulkin/red-pitaya-notes/cfg/ports.xdc (Line: 115)
+Previous Source: /home/bulkin/red-pitaya-notes/cfg/ports.xdc (Line: 103)
+Related violations: <none>
+
+

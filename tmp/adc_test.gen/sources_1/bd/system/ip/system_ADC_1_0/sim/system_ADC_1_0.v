@@ -71,6 +71,7 @@ module system_ADC_1_0 (
   last_detrigged,
   first_trigged,
   limiter,
+  samples_sent,
   trigger_activated,
   triggers_count
 );
@@ -102,6 +103,7 @@ output wire [15 : 0] max_sum_out;
 output wire [63 : 0] last_detrigged;
 output wire [63 : 0] first_trigged;
 output wire [31 : 0] limiter;
+output wire [31 : 0] samples_sent;
 output wire trigger_activated;
 output wire [15 : 0] triggers_count;
 
@@ -124,6 +126,7 @@ output wire [15 : 0] triggers_count;
     .last_detrigged(last_detrigged),
     .first_trigged(first_trigged),
     .limiter(limiter),
+    .samples_sent(samples_sent),
     .trigger_activated(trigger_activated),
     .triggers_count(triggers_count)
   );
