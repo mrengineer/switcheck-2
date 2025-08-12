@@ -90,16 +90,16 @@ int main () {
   ram = mmap(NULL, 2048*sysconf(_SC_PAGESIZE), PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
 
   /* В ПЛИСе
-  cfg_data 160 bit
-  SLICE0: 0...0 (1 bit) -> ADC_1.areset
-  SLICE1: 1...1 (1 bit) -> writer_0.areset
-  SLICE6: 2...2 (1 bit) -> ADC_1.reset_trigger
-  SLICE7: 3...3 (1 bit) -> ADC_1.reset_max_sum
+  cfg_data 160 bit в axi_hub_modified_0 - передача конфигурационных данных
+  SLICE0: 0...0 (1 bit) -> ADC_1.areset   -   брасывает ADC, axis_dwidth_converter_0, decimator
+  SLICE1: 1...1 (1 bit) -> writer_0.areset  - сбрасывает блок writer_0, который пигшет вшину axi
+  SLICE6: 2...2 (1 bit) -> ADC_1.reset_trigger  - сбрасывает триггер, если он сработал
+  SLICE7: 3...3 (1 bit) -> ADC_1.reset_max_sum  - при подаче 1 на вход сбрасывает максимум, определенны для суммы входов АЦП в ходе работы
   
 
-  SLICE2: 31...16 (16 bit) -> axis_decimator_0.cfg_data  ? Направление битов меняется?
-  SLICE3: 63....32 (32 bit) -> writer_0.min_addr         ? Направление битов меняется?
-  SLICE6: 79...64 (16 bit) -> ADC_1.trigger_level (16 bit)      <------------------ Все правильно Начиная с 64го бита + 16 бит дает 80. Но указывается конец с -1, сечт же с 0го бита. Потому 79
+  SLICE2: 31...16 (16 bit) -> axis_decimator_0.cfg_data  - настройка децимации ? Направление битов меняется?
+  SLICE3: 63....32 (32 bit) -> writer_0.min_addr         - указывает скакого физического адреса начинать писать в память ? Направление битов меняется?
+  SLICE6: 79...64 (16 bit) -> ADC_1.trigger_level (16 bit)      <------------------ Все правильно Начиная с 64го бита + 16 бит дает 80. Но указывается конец с -1, сечет же с 0го бита. Потому 79
   
   sta_data через xlconcat_0
   31:0 <- ADC_1.max_sum_out (16 bit)
@@ -124,6 +124,13 @@ int main () {
   triggers_count  = (uint16_t *)(sts + 30);
   samples_count   = (uint64_t *)(sts + 32); //Счетчик семплов (всех)
   
+
+
+
+
+
+
+
 
   uint16_t trg    = 1500;
 
