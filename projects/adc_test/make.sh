@@ -1,7 +1,9 @@
 #!/bin/bash
-rm ./adc
-arm-linux-gnueabihf-gcc -static -O3 -march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard ./adc.c -D_GNU_SOURCE -lm -lpthread -o adc
-rm ./system_wrapper.bit
+set -e
+rm -f ./adc
+make
+#arm-linux-gnueabihf-gcc -static -O3 -march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard ./adc.c -D_GNU_SOURCE -lm -lpthread -o adc
+rm -f ./system_wrapper.bit
 cp ~/red-pitaya-notes/tmp/adc_test.runs/impl_1/system_wrapper.bit .
 
 #SHH and prepare for write

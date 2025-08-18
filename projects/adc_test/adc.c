@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 199309L
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -11,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <time.h>
+#include "xadc_temp.h"
 
 #define BILLION  1000000000L;
 
@@ -145,6 +147,9 @@ int main () {
 
   char outbuf[4500];  //Print to
 
+  double temp = read_temperature();
+  printf("Температура XADC: %.2f °C\n", temp);
+
   while(!interrupted) {
 
     usleep(30000);
@@ -189,7 +194,8 @@ int main () {
 
       
 
-      if (adc_abs_max_val < *adc_abs_max) adc_abs_max_val = *adc_abs_max;
+        if (adc_abs_max_val < *adc_abs_max) 
+          adc_abs_max_val = *adc_abs_max;
 
       
         //if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
@@ -227,6 +233,14 @@ int main () {
         double_t samples_time       = (double_t)(samples_count_val)/125000000.0;        
         printf("Время с начала измерения SAPLES_TIME %f\n", samples_time);
         printf("Число измерений АЦП (семплов) %ju\n", samples_count_val);
+
+        struct timespec t_start, t_end;
+        clock_gettime(CLOCK_MONOTONIC, &t_start);
+        temp = read_temperature();
+        clock_gettime(CLOCK_MONOTONIC, &t_end);
+        printf("Температура XADC: %.2f °C\n", temp);
+        long elapsed_us = (t_end.tv_sec - t_start.tv_sec) * 1000000L + (t_end.tv_nsec - t_start.tv_nsec) / 1000L;
+        printf("Время выполнения блока (read_temperature): %ld мкс\n", elapsed_us);
 
         /*
         printf("Raw memory dump:\n");
@@ -269,8 +283,8 @@ int main () {
         }
 
         // Вывод 3 записей
-        printf("\n=== First 3 records ===\n");
-        for (i = 0; i < 3; i++) {
+        printf("\n=== First 5 records ===\n");
+        for (i = 0; i < 5; i++) {
             printf("Record %d:\n", i);
             printf("  Counter: %lu\n", (unsigned long)buffer[i].counter);
             printf("  ADC: dec=%u hex=0x%04X\n",
