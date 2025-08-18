@@ -92,7 +92,7 @@ int main () {
   /* В ПЛИСе
   cfg_data 160 bit в axi_hub_modified_0 - передача конфигурационных данных
   SLICE0: 0...0 (1 bit) -> ADC_1.areset   -   брасывает ADC, axis_dwidth_converter_0, decimator
-  SLICE1: 1...1 (1 bit) -> writer_0.areset  - сбрасывает блок writer_0, который пигшет вшину axi
+  SLICE1: 1...1 (1 bit) -> writer_0.areset  - сбрасывает блок writer_0, который пишет в шину axi
   SLICE6: 2...2 (1 bit) -> ADC_1.reset_trigger  - сбрасывает триггер, если он сработал
   SLICE7: 3...3 (1 bit) -> ADC_1.reset_max_sum  - при подаче 1 на вход сбрасывает максимум, определенны для суммы входов АЦП в ходе работы
   
@@ -125,14 +125,16 @@ int main () {
   samples_count   = (uint64_t *)(sts + 32); //Счетчик семплов (всех)
   
 
+  //Запись в память счетчик номера семпла + значение АЦП
+  #pragma pack(push, 1) // выравнивание в 1 байт
+  struct record {
+      uint64_t counter;
+      uint16_t adc_value;
+  };
+  #pragma pack(pop)
 
 
-
-
-
-
-
-  uint16_t trg    = 1500;
+  uint16_t trg    = 256;
 
   *trg_value      = trg;
   *rx_addr        = size;
@@ -141,7 +143,7 @@ int main () {
   uint64_t first_trgged_val, last_detrigged_val, samples_count_val;
   uint16_t trigger_activated_val, triggers_count_val, cur_adc_val, adc_abs_max_val;
 
-  char outbuf[1500];  //Print to
+  char outbuf[4500];  //Print to
 
   while(!interrupted) {
 
@@ -209,22 +211,22 @@ int main () {
         first_trgged_val    = *first_trgged;
         last_detrigged_val  = *last_detrigged;
         
-        printf("POS %llu\n", position);
-        printf("D_POS \033[0;31m%i\033[0m\n", (int)(position - prev_position));
+        printf("Запись в памяти POS %llu\n", position);
+        printf("Сдвиг по записям D_POS \033[0;31m%i\033[0m\n", (unsigned int)(position - prev_position));
         printf("TRGS_COUNT %i\n", triggers_count_val);
         printf("first_trgged_val %ju (0x%jx)\n", first_trgged_val, first_trgged_val);        
         printf("last_detrigged_val %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val);
         
         double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000000.0;
-        printf("PULSE_LEN %f\n", pulse_len);
+        printf("Длительность семплов, PULSE_LEN %f\n", pulse_len);
         printf("ADC (MAX/NOW)= %i/%i popugais\n", adc_abs_max_val, cur_adc_val);
-        printf("ADC_SENT_VAL %i\n", adc_sent_val);
+        printf("Отправлено в память семлов, ADC_SENT_VAL %i\n", adc_sent_val);
         printf("TRG_ACTIVE %i\n", trigger_activated_val);
 
 
         double_t samples_time       = (double_t)(samples_count_val)/125000000.0;        
-        printf("SMAPLES_TIME %f\n", samples_time);
-        printf("SAMPLES_COUNT %ju\n", samples_count_val);
+        printf("Время с начала измерения SAPLES_TIME %f\n", samples_time);
+        printf("Число измерений АЦП (семплов) %ju\n", samples_count_val);
 
         /*
         printf("Raw memory dump:\n");
@@ -241,28 +243,70 @@ int main () {
         }
         */
       
-      if (prev_position != position) {      
+      if (prev_position != position) {
+
+        //snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "START %lu -> %lu\n", prev_position, position);
+        //snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "Position %lu -> %lu\n", prev_position, position);
+
+
+
+
+
+        printf("DUMP + RECORDS:\n");
+
+        uint8_t *base = (uint8_t *)ram + prev_position;
+        struct record *buffer = (struct record *)base;
+        int i;
+
+
+        for (i = 0; i < 3; i++) {
+            int off = i * 10;  // размер одной записи = 10 байт
+            printf("%04X : ", off); // смещение для наглядности
+            for (int j = 0; j < 10; j++) {
+                printf("%02X ", base[off + j]);
+            }
+            printf("\n");
+        }
+
+        // Вывод 3 записей
+        printf("\n=== First 3 records ===\n");
+        for (i = 0; i < 3; i++) {
+            printf("Record %d:\n", i);
+            printf("  Counter: %lu\n", (unsigned long)buffer[i].counter);
+            printf("  ADC: dec=%u hex=0x%04X\n",
+                  buffer[i].adc_value, buffer[i].adc_value);
+        }
+
+        /*
         // Позиция чтения данных
         uint64_t *buffer = (uint64_t *)(ram + prev_position);
 
+
+
         for(uint32_t i = 0; i < (position - prev_position) * 16; i += 1) {
           //printf("D %i %d\n", i, adc);
-          uint64_t counter    = buffer[i] >> 16;         // Извлекаем первые 48 бит как счетчик          
+          uint64_t counter    = buffer[i] >> 16;       // Извлекаем первые 48 бит как счетчик          
           uint16_t adc_value  = buffer[i] & 0xFFFF;    // Извлекаем оставшиеся 16 бит как значение АЦП
           double_t msec       = (double_t)counter/125000.0;
 
           // Печать результатов
           //snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "%i C: %llu (%f ms), ADC Value: %u\n", i, counter, msec, adc_value);
-          snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "%.3i: %.11llu\t%u\n", i, counter, adc_value);          
-        }
+          snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "%.3i: %.12llu\t%u\n", i, counter, adc_value);
+        }*/
 
-        
+        snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "END OF PORTION----\n");    
+
+        printf("%s\n", outbuf);
+        exit (0);
+      
+        usleep(450000);
 
       }   //(prev_position != position)
-
-      printf("%s\n", outbuf);
-
-      usleep(200000);
+      else {
+        printf("%s\n", outbuf);    
+        usleep(150000);
+      }
+      
 
     } //Окончание цикла ожидания сигнала прерывания по CTRL-D #2
 

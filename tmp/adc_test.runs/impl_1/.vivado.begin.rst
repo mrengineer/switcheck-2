@@ -1,120 +1,15 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="964629" HostCore="8" HostMemory="32754700">
+    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="105384" HostCore="6" HostMemory="7994980">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="973937" HostCore="8" HostMemory="32754700">
+    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="107634" HostCore="6" HostMemory="7994980">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="982766" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="994526" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1001064" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1028972" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1035981" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1043615" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1058977" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1073078" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1080117" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1086899" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1097279" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1157044" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1164157" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1227532" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1234311" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1241270" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1250320" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1278084" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1290254" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1411876" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1418810" HostCore="8" HostMemory="32754700">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="1449904" HostCore="8" HostMemory="32754700">
+    <Process Command="vivado" Owner="bulkin" Host="bigbc" Pid="114820" HostCore="6" HostMemory="7994980">
     </Process>
 </ProcessHandle>

@@ -119,7 +119,7 @@ module ADC #
           trigger_activated <= 1'b0;
         end        
         
-        if (reset_trigger) begin      // При выставленном сверху сбросе триггера (но не всего блока) сбрасываем его и связанное с ним
+        if (reset_trigger) begin      // При выставленном сверху сбросе триггера (но не всего блока, а только части) сбрасываем его и связанное с ним
           last_detrigged    <= 0;
           first_trigged     <= 0;
           triggers_count    <= 0;
@@ -128,7 +128,7 @@ module ADC #
         end
         
 
-        if (limiter > 32'd100000)                    // отрубаем
+        if (limiter > 32'd1000)                    // отрубаем
           trigger_activated <= 1'b0;            // отключаем передачу данных
       
         if (trigger_activated == 1'b1) begin            // если запись разрешена, то считаем limiter и число отсчетов, ушедших в шину
@@ -152,7 +152,8 @@ module ADC #
   assign adc_csn = 1'b1;
 
   // Передаем сумму абсолютных значений на выход
-  assign m_axis_tdata = {sample_counter, sum_abs};
+  //assign m_axis_tdata = {sample_counter, sum_abs};
+  assign m_axis_tdata = {sample_counter, 16'hA1B2};
   assign cur_adc = sum_abs;
   assign cur_sample = sample_counter;
 
