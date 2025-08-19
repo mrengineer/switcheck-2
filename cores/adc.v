@@ -78,9 +78,9 @@ module ADC #
       // Увеличиваем счетчик семплов
       sample_counter <= sample_counter + 1;
 
-      // Захватываем данные и обрезаем до нужной ширины
-      int_dat_a_reg <= adc_dat_a[15:PADDING_WIDTH];
-      int_dat_b_reg <= adc_dat_b[15:PADDING_WIDTH];
+      // Захватываем данные, обрезаем до нужной ширины и убираем смещение mid-scale (8192 - ноль ацп)
+      int_dat_a_reg <= adc_dat_a[15:PADDING_WIDTH]  - (1 << (ADC_DATA_WIDTH-1));  // - (1 << (ADC_DATA_WIDTH-1)) смещает на 8192
+      int_dat_b_reg <= adc_dat_b[15:PADDING_WIDTH]  - (1 << (ADC_DATA_WIDTH-1));
 
         // Абсолютное значение каждого канала
       abs_a <= int_dat_a_reg[ADC_DATA_WIDTH-1] ? (~int_dat_a_reg + 1) : int_dat_a_reg;

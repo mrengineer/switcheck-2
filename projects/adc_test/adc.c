@@ -139,7 +139,7 @@ struct record {
 #pragma pack(pop)
 
 
-  uint16_t trg    = 200;
+  uint16_t trg    = 103;
 
   *trg_value      = trg;
   *rx_addr        = size;
@@ -253,7 +253,7 @@ struct record {
             last_temp_time = now_time;
         }
         
-        if (cached_temp > 46.0) {
+        if (cached_temp > 47.0) {
             printf("Температура XADC: \033[0;31m%.2f °C\033[0m\n", cached_temp);
         } else {
             printf("Температура XADC: %.2f °C\n", cached_temp);
