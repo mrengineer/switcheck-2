@@ -8,6 +8,7 @@
 *.bit
 *.xsa
 *.bif
+*.end.rst
 linux*
 initram*
 vivado*
@@ -16,3 +17,5 @@ uImage
 sd_backup*
 
 tmp/adc_test.runs/synth_1/runme.log
+
+.jobs/

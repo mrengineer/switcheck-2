@@ -3,16 +3,16 @@
 # SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
 # IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
 # SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
-# Start of session at: Tue Aug 19 11:20:33 2025
-# Process ID: 211810
+# Start of session at: Wed Aug 20 01:43:57 2025
+# Process ID: 266170
 # Current directory: /home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1
 # Command line: vivado -log system_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_wrapper.tcl
 # Log file: /home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/system_wrapper.vds
 # Journal file: /home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/vivado.jou
-# Running On: bigbc, OS: Linux, CPU Frequency: 3000.034 MHz, CPU Physical cores: 6, Host memory: 8186 MB
+# Running On: bigbc, OS: Linux, CPU Frequency: 3193.595 MHz, CPU Physical cores: 6, Host memory: 8186 MB
 #-----------------------------------------------------------
 source system_wrapper.tcl -notrace
-create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1322.566 ; gain = 0.027 ; free physical = 1050 ; free virtual = 7268
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1333.082 ; gain = 0.027 ; free physical = 219 ; free virtual = 8831
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/bulkin/red-pitaya-notes/tmp/cores'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/bulkin/Xilinx/Vivado/2023.2/data/ip'.
@@ -28,9 +28,9 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 211845
+INFO: [Synth 8-7075] Helper process launched with PID 266204
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2039.555 ; gain = 408.652 ; free physical = 150 ; free virtual = 6343
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2039.133 ; gain = 406.715 ; free physical = 168 ; free virtual = 7891
 ---------------------------------------------------------------------------------
 CRITICAL WARNING: [Synth 8-9873] overwriting previous definition of module 'output_buffer' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/modules/output_buffer.v:48]
 INFO: [Synth 8-9937] previous definition of design element 'output_buffer' is here [/home/bulkin/red-pitaya-notes/modules/output_buffer.v:48]
@@ -149,13 +149,6 @@ INFO: [Synth 8-6157] synthesizing module 'system_const_1_0' [/home/bulkin/red-pi
 INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_8_xlconstant__parameterized0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
 INFO: [Synth 8-6155] done synthesizing module 'xlconstant_v1_1_8_xlconstant__parameterized0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
 INFO: [Synth 8-6155] done synthesizing module 'system_const_1_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_const_1_0/synth/system_const_1_0.v:53]
-WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:287]
-INFO: [Synth 8-6157] synthesizing module 'system_const_1_1' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_const_1_1/synth/system_const_1_1.v:53]
-INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_8_xlconstant__parameterized1' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
-INFO: [Synth 8-6155] done synthesizing module 'xlconstant_v1_1_8_xlconstant__parameterized1' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
-INFO: [Synth 8-6155] done synthesizing module 'system_const_1_1' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_const_1_1/synth/system_const_1_1.v:53]
-WARNING: [Synth 8-7071] port 'dout' of module 'system_const_1_1' is unconnected for instance 'const_2' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:287]
-WARNING: [Synth 8-7023] instance 'const_2' of module 'system_const_1_1' has 1 connections declared, but only 0 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:287]
 INFO: [Synth 8-6157] synthesizing module 'system_pll_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0.v:67]
 INFO: [Synth 8-6157] synthesizing module 'system_pll_0_0_clk_wiz' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_clk_wiz.v:67]
 INFO: [Synth 8-6157] synthesizing module 'IBUFDS' [/home/bulkin/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:73646]
@@ -204,45 +197,45 @@ WARNING: [Synth 8-7071] port 'DMA2_RSTN' of module 'processing_system7_v5_5_proc
 WARNING: [Synth 8-7071] port 'DMA3_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:500]
 WARNING: [Synth 8-7023] instance 'inst' of module 'processing_system7_v5_5_processing_system7' has 685 connections declared, but only 672 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:500]
 INFO: [Synth 8-6155] done synthesizing module 'system_ps_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_ps_0_0/synth/system_ps_0_0.v:53]
-WARNING: [Synth 8-7071] port 'GPIO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'GPIO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_SCLK_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_SCLK_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_MOSI_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_MOSI_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_MISO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_MISO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_SS_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_SS1_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_SS2_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'SPI0_SS_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'USB0_PORT_INDCTL' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'USB0_VBUS_PWRSELECT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_WID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLEN' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_ARREADY' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_RLAST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_RVALID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_BRESP' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_RRESP' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_BID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_RID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'S_AXI_ACP_RDATA' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'FCLK_CLK0' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7071] port 'FCLK_RESET0_N' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
-WARNING: [Synth 8-7023] instance 'ps_0' of module 'system_ps_0_0' has 123 connections declared, but only 85 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:296]
+WARNING: [Synth 8-7071] port 'GPIO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'GPIO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_SCLK_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_SCLK_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_MOSI_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_MOSI_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_MISO_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_MISO_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_SS_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_SS1_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_SS2_O' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'SPI0_SS_T' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'USB0_PORT_INDCTL' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'USB0_VBUS_PWRSELECT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_WID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWBURST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLOCK' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWSIZE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWPROT' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWCACHE' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWLEN' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_AWQOS' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_ARREADY' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_RLAST' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_RVALID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_BRESP' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_RRESP' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_BID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_RID' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_RDATA' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'FCLK_CLK0' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7071] port 'FCLK_RESET0_N' of module 'system_ps_0_0' is unconnected for instance 'ps_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
+WARNING: [Synth 8-7023] instance 'ps_0' of module 'system_ps_0_0' has 123 connections declared, but only 85 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]
 INFO: [Synth 8-638] synthesizing module 'system_rst_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/synth/system_rst_0_0.vhd:74]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_EXT_RST_WIDTH bound to: 4 - type: integer 
@@ -290,11 +283,11 @@ INFO: [Synth 8-256] done synthesizing module 'upcnt_n' (0#1) [/home/bulkin/red-p
 INFO: [Synth 8-256] done synthesizing module 'sequence_psr' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/408c/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:304]
 INFO: [Synth 8-256] done synthesizing module 'proc_sys_reset' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/408c/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1330]
 INFO: [Synth 8-256] done synthesizing module 'system_rst_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/synth/system_rst_0_0.vhd:74]
-WARNING: [Synth 8-7071] port 'mb_reset' of module 'system_rst_0_0' is unconnected for instance 'rst_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:382]
-WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'system_rst_0_0' is unconnected for instance 'rst_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:382]
-WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'system_rst_0_0' is unconnected for instance 'rst_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:382]
-WARNING: [Synth 8-7071] port 'interconnect_aresetn' of module 'system_rst_0_0' is unconnected for instance 'rst_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:382]
-WARNING: [Synth 8-7023] instance 'rst_0' of module 'system_rst_0_0' has 10 connections declared, but only 6 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:382]
+WARNING: [Synth 8-7071] port 'mb_reset' of module 'system_rst_0_0' is unconnected for instance 'rst_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:380]
+WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'system_rst_0_0' is unconnected for instance 'rst_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:380]
+WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'system_rst_0_0' is unconnected for instance 'rst_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:380]
+WARNING: [Synth 8-7071] port 'interconnect_aresetn' of module 'system_rst_0_0' is unconnected for instance 'rst_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:380]
+WARNING: [Synth 8-7023] instance 'rst_0' of module 'system_rst_0_0' has 10 connections declared, but only 6 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:380]
 INFO: [Synth 8-6157] synthesizing module 'system_slice_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_0_0/synth/system_slice_0_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'port_slicer' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'port_slicer' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
@@ -315,13 +308,13 @@ INFO: [Synth 8-6157] synthesizing module 'system_slice_4_0' [/home/bulkin/red-pi
 INFO: [Synth 8-6157] synthesizing module 'port_slicer__parameterized3' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'port_slicer__parameterized3' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'system_slice_4_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_4_0/synth/system_slice_4_0.v:53]
-WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:404]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:402]
 INFO: [Synth 8-6157] synthesizing module 'system_slice_5_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_5_0/synth/system_slice_5_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'port_slicer__parameterized4' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'port_slicer__parameterized4' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'system_slice_5_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_5_0/synth/system_slice_5_0.v:53]
-WARNING: [Synth 8-7071] port 'dout' of module 'system_slice_5_0' is unconnected for instance 'slice_5' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:404]
-WARNING: [Synth 8-7023] instance 'slice_5' of module 'system_slice_5_0' has 2 connections declared, but only 1 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:404]
+WARNING: [Synth 8-7071] port 'dout' of module 'system_slice_5_0' is unconnected for instance 'slice_5' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:402]
+WARNING: [Synth 8-7023] instance 'slice_5' of module 'system_slice_5_0' has 2 connections declared, but only 1 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:402]
 INFO: [Synth 8-6157] synthesizing module 'system_slice_1_1' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_slice_1_1/synth/system_slice_1_1.v:53]
 INFO: [Synth 8-6157] synthesizing module 'port_slicer__parameterized5' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'port_slicer__parameterized5' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/cores/port_slicer.v:4]
@@ -392,8 +385,8 @@ INFO: [Synth 8-6155] done synthesizing module 'system_xlconcat_0_1' (0#1) [/home
 INFO: [Synth 8-6157] synthesizing module 'system_xlconcat_1_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_xlconcat_1_0/synth/system_xlconcat_1_0.v:53]
 INFO: [Synth 8-6155] done synthesizing module 'system_xlconcat_1_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_xlconcat_1_0/synth/system_xlconcat_1_0.v:53]
 INFO: [Synth 8-6157] synthesizing module 'system_xlconstant_0_0' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_xlconstant_0_0/synth/system_xlconstant_0_0.v:53]
-INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_8_xlconstant__parameterized2' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
-INFO: [Synth 8-6155] done synthesizing module 'xlconstant_v1_1_8_xlconstant__parameterized2' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
+INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_8_xlconstant__parameterized1' [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
+INFO: [Synth 8-6155] done synthesizing module 'xlconstant_v1_1_8_xlconstant__parameterized1' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ipshared/d390/hdl/xlconstant_v1_1_vl_rfs.v:68]
 INFO: [Synth 8-6155] done synthesizing module 'system_xlconstant_0_0' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_xlconstant_0_0/synth/system_xlconstant_0_0.v:53]
 INFO: [Synth 8-6155] done synthesizing module 'system' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:13]
 INFO: [Synth 8-6155] done synthesizing module 'system_wrapper' (0#1) [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/hdl/system_wrapper.v:13]
@@ -511,18 +504,18 @@ WARNING: [Synth 8-7129] Port In5[13] in module xlconcat_v2_1_5_xlconcat__paramet
 WARNING: [Synth 8-7129] Port In5[12] in module xlconcat_v2_1_5_xlconcat__parameterized0 is either unconnected or has no load
 INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:14 . Memory (MB): peak = 2143.492 ; gain = 512.590 ; free physical = 309 ; free virtual = 6274
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2151.070 ; gain = 518.652 ; free physical = 171 ; free virtual = 7774
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:14 . Memory (MB): peak = 2161.305 ; gain = 530.402 ; free physical = 310 ; free virtual = 6271
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2165.914 ; gain = 533.496 ; free physical = 171 ; free virtual = 7774
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:14 . Memory (MB): peak = 2161.305 ; gain = 530.402 ; free physical = 310 ; free virtual = 6271
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2165.914 ; gain = 533.496 ; free physical = 171 ; free virtual = 7774
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.08 . Memory (MB): peak = 2167.242 ; gain = 0.000 ; free physical = 311 ; free virtual = 6273
+Netlist sorting complete. Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.07 . Memory (MB): peak = 2171.852 ; gain = 0.000 ; free physical = 165 ; free virtual = 7769
 INFO: [Netlist 29-17] Analyzing 33 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -657,31 +650,31 @@ Resolution: To avoid this warning, move constraints listed in [.Xil/system_wrapp
 INFO: [Project 1-1714] 1 XPM XDC files have been applied to the design.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2269.047 ; gain = 0.000 ; free physical = 271 ; free virtual = 6248
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2263.688 ; gain = 0.000 ; free physical = 142 ; free virtual = 7757
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 13 instances were transformed.
   FDR => FDRE: 12 instances
   SRL16 => SRL16E: 1 instance 
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2269.082 ; gain = 0.000 ; free physical = 271 ; free virtual = 6248
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2263.723 ; gain = 0.000 ; free physical = 142 ; free virtual = 7757
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 2269.082 ; gain = 638.180 ; free physical = 269 ; free virtual = 6248
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 2263.723 ; gain = 631.305 ; free physical = 183 ; free virtual = 7744
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 2269.082 ; gain = 638.180 ; free physical = 269 ; free virtual = 6248
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 2263.723 ; gain = 631.305 ; free physical = 183 ; free virtual = 7744
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property KEEP_HIERARCHY = SOFT for system_i/pll_0/inst. (constraint file  /home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/dont_touch.xdc, line 87).
-Applied set_property KEEP_HIERARCHY = SOFT for system_i/ps_0/inst. (constraint file  /home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/dont_touch.xdc, line 95).
-Applied set_property KEEP_HIERARCHY = SOFT for system_i/rst_0/U0. (constraint file  /home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/dont_touch.xdc, line 98).
+Applied set_property KEEP_HIERARCHY = SOFT for system_i/pll_0/inst. (constraint file  /home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/dont_touch.xdc, line 84).
+Applied set_property KEEP_HIERARCHY = SOFT for system_i/ps_0/inst. (constraint file  /home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/dont_touch.xdc, line 92).
+Applied set_property KEEP_HIERARCHY = SOFT for system_i/rst_0/U0. (constraint file  /home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/dont_touch.xdc, line 95).
 Applied set_property KEEP_HIERARCHY = SOFT for system_i. (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for system_i/pll_0. (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for system_i/ps_0. (constraint file  auto generated constraint).
@@ -707,10 +700,9 @@ Applied set_property KEEP_HIERARCHY = SOFT for system_i/xlconstant_0. (constrain
 Applied set_property KEEP_HIERARCHY = SOFT for system_i/axis_dwidth_converter_0. (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for system_i/xlconcat_1. (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for system_i/xlconcat_2. (constraint file  auto generated constraint).
-Applied set_property KEEP_HIERARCHY = SOFT for system_i/const_2. (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for system_i/writer_0/inst/fifo_0. (constraint file  auto generated constraint).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:23 . Memory (MB): peak = 2269.082 ; gain = 638.180 ; free physical = 275 ; free virtual = 6253
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2263.723 ; gain = 631.305 ; free physical = 211 ; free virtual = 7754
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-4490] FSM extraction disabled for register 'state_reg' through user attribute
 INFO: [Synth 8-802] inferred FSM for state register 'gen_fwft.curr_fwft_state_reg' in module 'xpm_fifo_base'
@@ -725,7 +717,7 @@ INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'gen_fwft.curr_fwft_state_reg' using encoding 'one-hot' in module 'xpm_fifo_base'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:24 . Memory (MB): peak = 2269.082 ; gain = 638.180 ; free physical = 270 ; free virtual = 6251
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2263.723 ; gain = 631.305 ; free physical = 203 ; free virtual = 7747
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -755,7 +747,7 @@ Detailed RTL Component Info :
 	               32 Bit    Registers := 4     
 	               16 Bit    Registers := 8     
 	               15 Bit    Registers := 1     
-	               14 Bit    Registers := 4     
+	               14 Bit    Registers := 6     
 	               12 Bit    Registers := 2     
 	               11 Bit    Registers := 4     
 	               10 Bit    Registers := 1     
@@ -772,7 +764,9 @@ Detailed RTL Component Info :
 	   2 Input   37 Bit        Muxes := 2     
 	   2 Input   32 Bit        Muxes := 3     
 	   3 Input   32 Bit        Muxes := 1     
-	   2 Input   16 Bit        Muxes := 2     
+	   2 Input   16 Bit        Muxes := 1     
+	   2 Input   15 Bit        Muxes := 1     
+	   2 Input   14 Bit        Muxes := 2     
 	   2 Input    6 Bit        Muxes := 1     
 	   4 Input    4 Bit        Muxes := 1     
 	   2 Input    4 Bit        Muxes := 6     
@@ -819,7 +813,7 @@ WARNING: [Synth 8-3332] Sequential element (BSR_OUT_DFF[0].FDRE_BSR) is unused a
 WARNING: [Synth 8-3332] Sequential element (ACTIVE_LOW_BSR_OUT_DFF[0].FDRE_BSR_N) is unused and will be removed from module proc_sys_reset.
 WARNING: [Synth 8-3332] Sequential element (PR_OUT_DFF[0].FDRE_PER) is unused and will be removed from module proc_sys_reset.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:29 . Memory (MB): peak = 2269.082 ; gain = 638.180 ; free physical = 266 ; free virtual = 6256
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2263.723 ; gain = 631.305 ; free physical = 170 ; free virtual = 7720
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
 ---------------------------------------------------------------------------------
@@ -842,14 +836,14 @@ Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-3321] set_false_path : Empty to list for constraint at line 49 of /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/system_rst_0_0.xdc. [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_rst_0_0/system_rst_0_0.xdc:49]
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:28 ; elapsed = 00:00:35 . Memory (MB): peak = 2296.039 ; gain = 665.137 ; free physical = 183 ; free virtual = 6183
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2297.680 ; gain = 665.262 ; free physical = 126 ; free virtual = 7653
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:29 ; elapsed = 00:00:36 . Memory (MB): peak = 2342.078 ; gain = 711.176 ; free physical = 140 ; free virtual = 6142
+Finished Timing Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 2339.711 ; gain = 707.293 ; free physical = 152 ; free virtual = 7624
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -869,7 +863,7 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:30 ; elapsed = 00:00:37 . Memory (MB): peak = 2343.086 ; gain = 712.184 ; free physical = 127 ; free virtual = 6127
+Finished Technology Mapping : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2340.719 ; gain = 708.301 ; free physical = 150 ; free virtual = 7622
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -888,37 +882,37 @@ Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-3295] tying undriven pin inst/fifo_0:sleep to constant 0
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 2343.086 ; gain = 712.184 ; free physical = 161 ; free virtual = 6142
+Finished IO Insertion : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2340.719 ; gain = 708.301 ; free physical = 129 ; free virtual = 7611
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 2343.086 ; gain = 712.184 ; free physical = 161 ; free virtual = 6142
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2340.719 ; gain = 708.301 ; free physical = 129 ; free virtual = 7611
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 2343.086 ; gain = 712.184 ; free physical = 161 ; free virtual = 6140
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2340.719 ; gain = 708.301 ; free physical = 129 ; free virtual = 7611
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 2343.086 ; gain = 712.184 ; free physical = 161 ; free virtual = 6140
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2340.719 ; gain = 708.301 ; free physical = 129 ; free virtual = 7611
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 2343.086 ; gain = 712.184 ; free physical = 160 ; free virtual = 6139
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2340.719 ; gain = 708.301 ; free physical = 129 ; free virtual = 7611
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 2343.086 ; gain = 712.184 ; free physical = 154 ; free virtual = 6134
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2340.719 ; gain = 708.301 ; free physical = 129 ; free virtual = 7611
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -936,19 +930,19 @@ Report Cell Usage:
 +------+----------+------+
 |1     |BIBUF     |   130|
 |2     |BUFG      |     5|
-|3     |CARRY4    |    83|
-|4     |LUT1      |    53|
-|5     |LUT2      |   275|
-|6     |LUT3      |   120|
-|7     |LUT4      |    90|
-|8     |LUT5      |    71|
-|9     |LUT6      |   217|
+|3     |CARRY4    |    91|
+|4     |LUT1      |    64|
+|5     |LUT2      |   280|
+|6     |LUT3      |   143|
+|7     |LUT4      |    94|
+|8     |LUT5      |    73|
+|9     |LUT6      |   216|
 |10    |ODDR      |    18|
 |11    |PLLE2_ADV |     1|
 |12    |PS7       |     1|
 |13    |RAMB36E1  |     2|
 |14    |SRL16     |     1|
-|15    |FDCE      |   349|
+|15    |FDCE      |   375|
 |16    |FDRE      |   750|
 |17    |FDSE      |    15|
 |18    |IBUF      |    44|
@@ -957,31 +951,31 @@ Report Cell Usage:
 |21    |OBUFT     |    14|
 +------+----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 2343.086 ; gain = 712.184 ; free physical = 154 ; free virtual = 6134
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2340.719 ; gain = 708.301 ; free physical = 129 ; free virtual = 7611
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 1399 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:32 ; elapsed = 00:00:39 . Memory (MB): peak = 2343.086 ; gain = 604.406 ; free physical = 154 ; free virtual = 6133
-Synthesis Optimization Complete : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 2343.094 ; gain = 712.184 ; free physical = 154 ; free virtual = 6133
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:30 . Memory (MB): peak = 2340.719 ; gain = 610.492 ; free physical = 128 ; free virtual = 7610
+Synthesis Optimization Complete : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2340.727 ; gain = 708.301 ; free physical = 128 ; free virtual = 7610
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2343.094 ; gain = 0.000 ; free physical = 433 ; free virtual = 6414
-INFO: [Netlist 29-17] Analyzing 106 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.06 . Memory (MB): peak = 2340.727 ; gain = 0.000 ; free physical = 403 ; free virtual = 7906
+INFO: [Netlist 29-17] Analyzing 114 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2357.930 ; gain = 0.000 ; free physical = 448 ; free virtual = 6408
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2356.562 ; gain = 0.000 ; free physical = 347 ; free virtual = 7857
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 1 instances were transformed.
   SRL16 => SRL16E: 1 instance 
 
-Synth Design complete | Checksum: 34f389e5
+Synth Design complete | Checksum: 1b1dba0d
 INFO: [Common 17-83] Releasing license: Synthesis
-253 Infos, 259 Warnings, 33 Critical Warnings and 0 Errors encountered.
+249 Infos, 256 Warnings, 33 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:47 . Memory (MB): peak = 2357.965 ; gain = 1035.398 ; free physical = 433 ; free virtual = 6402
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2120.391; main = 1832.174; forked = 412.674
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3328.004; main = 2357.934; forked = 984.914
+synth_design: Time (s): cpu = 00:00:40 ; elapsed = 00:00:38 . Memory (MB): peak = 2356.598 ; gain = 1023.516 ; free physical = 346 ; free virtual = 7855
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2030.837; main = 1718.728; forked = 392.432
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3325.633; main = 2356.566; forked = 984.910
 INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
-Write ShapeDB Complete: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00 . Memory (MB): peak = 2357.965 ; gain = 0.000 ; free physical = 432 ; free virtual = 6402
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2356.598 ; gain = 0.000 ; free physical = 346 ; free virtual = 7853
 INFO: [Common 17-1381] The checkpoint '/home/bulkin/red-pitaya-notes/tmp/adc_test.runs/synth_1/system_wrapper.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file system_wrapper_utilization_synth.rpt -pb system_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Aug 19 11:21:34 2025...
+INFO: [Common 17-206] Exiting Vivado at Wed Aug 20 01:44:48 2025...

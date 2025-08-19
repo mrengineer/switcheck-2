@@ -25,7 +25,7 @@ module ADC #
   input  wire       reset_max_sum,     // Сброс максимума суммы при 1
 
   // Master side
-  output reg         m_axis_tvalid,
+  output reg          m_axis_tvalid,
   output wire [128:0] m_axis_tdata,
   
   // Output for max_sum_abs
@@ -43,11 +43,12 @@ module ADC #
 
   reg [ADC_DATA_WIDTH-1:0] int_dat_a_reg;           //signed. Поэтому ADC_DATA_WIDTH-1
   reg [ADC_DATA_WIDTH-1:0] int_dat_b_reg; 
-  //reg [ADC_DATA_WIDTH-1:0] abs_a;             // Абсолютное значение int_dat_a_reg
-  //reg [ADC_DATA_WIDTH-1:0] abs_b;             // Абсолютное значение int_dat_b_reg
-  reg signed [ADC_DATA_WIDTH:0]   sum_abs;    // С дополнительным битом для суммы
+  reg [ADC_DATA_WIDTH-1:0] abs_a;             // Абсолютное значение int_dat_a_reg
+  reg [ADC_DATA_WIDTH-1:0] abs_b;             // Абсолютное значение int_dat_b_reg
+  
+  reg [ADC_DATA_WIDTH:0]   sum_abs;    // С дополнительным битом для суммы
 
-  reg signed [15:0]  max_sum_abs;   // Output for maximum sum value  
+  reg [15:0]  max_sum_abs;   // Output for maximum sum value  
   
   reg [63:0] sample_counter; // 37-битный регистр для подсчета семплов отработает год, 64 бит - 4,6 млн лет. Этого точно хватит. Учитывая размерность шины я могу позволить 47 (71 год)
 
@@ -56,8 +57,8 @@ module ADC #
     if (!aresetn) begin
       int_dat_a_reg    <= 0;
       int_dat_b_reg    <= 0;
-      //abs_a            <= 0;
-      //abs_b            <= 0;
+      abs_a            <= 0;
+      abs_b            <= 0;
       sum_abs          <= 0;
       m_axis_tvalid    <= 1'b0;
       trigger_activated <= 1'b0;
@@ -81,13 +82,16 @@ module ADC #
       int_dat_a_reg <= adc_dat_a[15:PADDING_WIDTH];
       int_dat_b_reg <= adc_dat_b[15:PADDING_WIDTH];
 
-      // Вычисляем абсолютные значения
-      //abs_a <= {1'b0, ~int_dat_a_reg[ADC_DATA_WIDTH-2:0]};      
-      //abs_b <= {1'b0, ~int_dat_b_reg[ADC_DATA_WIDTH-2:0]};
+        // Абсолютное значение каждого канала
+      abs_a <= int_dat_a_reg[ADC_DATA_WIDTH-1] ? (~int_dat_a_reg + 1) : int_dat_a_reg;
+      abs_b <= int_dat_b_reg[ADC_DATA_WIDTH-1] ? (~int_dat_b_reg + 1) : int_dat_b_reg;
+
 
       // Суммируем абсолютные значения
-      sum_abs <= {{(PADDING_WIDTH+1){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, ~int_dat_a_reg[ADC_DATA_WIDTH-2:0]} + {{(PADDING_WIDTH+1){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, ~int_dat_b_reg[ADC_DATA_WIDTH-2:0]};
-      
+      //sum_abs <= {
+      //  {(PADDING_WIDTH+1){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, ~int_dat_a_reg[ADC_DATA_WIDTH-2:0]} + {{(PADDING_WIDTH+1){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, ~int_dat_b_reg[ADC_DATA_WIDTH-2:0]};
+      sum_abs <= abs_a + abs_b;
+
 
       if (sample_counter > 2) begin  // Пропустим первые отсчеты после reset, там фигня какая-то сыпется по данным
 
@@ -128,12 +132,11 @@ module ADC #
         end
         
 
-        if (limiter > 32'd2000)                    // отрубаем
+        if (limiter > 32'd3000)                    // отрубаем
           trigger_activated <= 1'b0;            // отключаем передачу данных
       
         if (trigger_activated == 1'b1) begin            // если запись разрешена, то считаем limiter и число отсчетов, ушедших в шину
           limiter          <= limiter + 1;
-          //samples_sent     <= 32'd555555; //samples_sent + 1;
           samples_sent     <= samples_sent + 1;
          end
 
@@ -161,6 +164,16 @@ assign m_axis_tdata = {
     { {(16-(ADC_DATA_WIDTH+1)){1'b0}}, sum_abs },  // расширяем до 16
     16'hA1B2                                       // 16 бит
 };
+
+// Для проверки передачи данных и их разбора
+/*assign m_axis_tdata = {
+    64'hFFFFFFFFFFFFFFFF,
+    16'h8001, // -32767 в 2's complement для 16 бит
+    16'h7FFF, // 32767
+    16'hF1F2,
+    16'hABCD
+};*/
+
 
   assign cur_adc = sum_abs;
   assign cur_sample = sample_counter;

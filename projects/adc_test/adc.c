@@ -132,14 +132,14 @@ int main () {
 struct record {
     uint16_t marker;       // 16 бит (2 байта, например 0xA1B2)
     uint16_t sum_abs;      // 16 бит (2 байта)
-    uint16_t adc_b;        // 16 бит (2 байта)
-    uint16_t adc_a;        // 16 бит (2 байта)
+    int16_t adc_b;        // 16 бит (2 байта, signed)
+    int16_t adc_a;        // 16 бит (2 байта, signed)
     uint64_t counter;      // 64 бита (8 байт)
 };
 #pragma pack(pop)
 
 
-  uint16_t trg    = 220;
+  uint16_t trg    = 200;
 
   *trg_value      = trg;
   *rx_addr        = size;
@@ -150,8 +150,7 @@ struct record {
 
   char outbuf[4500];  //Print to
 
-  double temp = read_temperature();
-  printf("Температура XADC: %.2f °C\n", temp);
+  double temp = 0;
 
   while(!interrupted) {
 
@@ -240,8 +239,10 @@ struct record {
         static struct timespec last_temp_time = {0, 0};
         static double cached_temp = 0.0;
         struct timespec now_time;
+
         clock_gettime(CLOCK_MONOTONIC, &now_time);
         long diff_sec = now_time.tv_sec - last_temp_time.tv_sec;
+        
         if (diff_sec >= 1) {
             struct timespec t_start, t_end;
             clock_gettime(CLOCK_MONOTONIC, &t_start);
@@ -251,27 +252,14 @@ struct record {
             //printf("Время выполнения блока (read_temperature): %ld мкс\n", elapsed_us);
             last_temp_time = now_time;
         }
+        
         if (cached_temp > 46.0) {
             printf("Температура XADC: \033[0;31m%.2f °C\033[0m\n", cached_temp);
         } else {
             printf("Температура XADC: %.2f °C\n", cached_temp);
         }
 
-        /*
-        printf("Raw memory dump:\n");
-        for (int i = 0; i < (256+128)/8; i++) {
-          if (i == 8) printf("\n");
-          if (i == 8+8) printf("\n");
-          if (i == 8+8+8) printf("\n");
-          if (i == 8+8+8+8) printf("\n");
-          if (i == 8+8+8+8+8) printf("\n");
-          if (i == 8+8+8+8+8+8) printf("\n");
-          if (i == 8+8+8+8+8+8+8) printf("\n");
-
-          printf("%02x  ", *(uint8_t *)(sts + i));
-        }
-        */
-      
+        
       if (prev_position != position) {
 
         //snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "START %lu -> %lu\n", prev_position, position);
@@ -287,7 +275,7 @@ struct record {
         struct record *buffer = (struct record *)base;
         int i;
 
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 5; i++) {
             int off = i * sizeof(struct record);
             printf("%04X : ", off);
             for (int j = 0; j < sizeof(struct record); j++) {
@@ -297,14 +285,19 @@ struct record {
         }
 
         // Вывод 3 записей
-        printf("\n=== First 5 records ===\n");
-        for (i = 0; i < 5; i++) {
-            printf("Record %d:\n", i);
-            printf("  Counter: %lu\n", (unsigned long)buffer[i].counter);
-            printf("  ADC_A: dec=%u hex=0x%04X\n", buffer[i].adc_a, buffer[i].adc_a);
-            printf("  ADC_B: dec=%u hex=0x%04X\n", buffer[i].adc_b, buffer[i].adc_b);
-            printf("  SUM_ABS: dec=%u hex=0x%04X\n", buffer[i].sum_abs, buffer[i].sum_abs);
-            printf("  Marker: dec=%u hex=0x%04X\n", buffer[i].marker, buffer[i].marker);
+        printf("Idx  | Counter     | Dcnt    | ADC_A | ADC_B | SUM_ABS |  ABS_A+B | Marker\n");
+        printf("-----+------------+------+-------+-------+--------+---------+--------\n");
+        for (i = 0; i < 10; i++) {
+            unsigned long counter = (unsigned long)buffer[i].counter;
+            unsigned long prev_counter = (i == 0) ? 0 : (unsigned long)buffer[i-1].counter;
+            int dcnt = (i == 0) ? 0 : (int)(counter - prev_counter);
+            int adc_a = buffer[i].adc_a;
+            int adc_b = buffer[i].adc_b;
+            int sum_abs = buffer[i].sum_abs;
+            int abs_sum = abs(adc_a) + abs(adc_b);
+            unsigned int marker = buffer[i].marker;
+            printf("%3d | %11lu | %7d | %5d | %5d | %6d | %7d | 0x%04X\n",
+                i, counter, dcnt, adc_a, adc_b, sum_abs, abs_sum, marker);
         }
 
         /*

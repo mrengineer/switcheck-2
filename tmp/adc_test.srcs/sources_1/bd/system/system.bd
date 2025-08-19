@@ -34,8 +34,7 @@
       "xlconstant_0": "",
       "axis_dwidth_converter_0": "",
       "xlconcat_1": "",
-      "xlconcat_2": "",
-      "const_2": ""
+      "xlconcat_2": ""
     },
     "interface_ports": {
       "Vp_Vn": {
@@ -3159,21 +3158,6 @@
           },
           "NUM_PORTS": {
             "value": "3"
-          }
-        }
-      },
-      "const_2": {
-        "vlnv": "xilinx.com:ip:xlconstant:1.1",
-        "ip_revision": "8",
-        "xci_name": "system_const_1_1",
-        "xci_path": "ip/system_const_1_1/system_const_1_1.xci",
-        "inst_hier_path": "const_2",
-        "parameters": {
-          "CONST_VAL": {
-            "value": "12302652060646580787"
-          },
-          "CONST_WIDTH": {
-            "value": "64"
           }
         }
       }
