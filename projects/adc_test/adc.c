@@ -128,15 +128,18 @@ int main () {
   
 
   //Запись в память счетчик номера семпла + значение АЦП
-  #pragma pack(push, 1) // выравнивание в 1 байт
-  struct record {
-      uint64_t counter;
-      uint16_t adc_value;
-  };
-  #pragma pack(pop)
+#pragma pack(push, 1)   // выравнивание по 1 байту
+struct record {
+    uint16_t marker;       // 16 бит (2 байта, например 0xA1B2)
+    uint16_t sum_abs;      // 16 бит (2 байта)
+    uint16_t adc_b;        // 16 бит (2 байта)
+    uint16_t adc_a;        // 16 бит (2 байта)
+    uint64_t counter;      // 64 бита (8 байт)
+};
+#pragma pack(pop)
 
 
-  uint16_t trg    = 256;
+  uint16_t trg    = 220;
 
   *trg_value      = trg;
   *rx_addr        = size;
@@ -234,13 +237,25 @@ int main () {
         printf("Время с начала измерения SAPLES_TIME %f\n", samples_time);
         printf("Число измерений АЦП (семплов) %ju\n", samples_count_val);
 
-        struct timespec t_start, t_end;
-        clock_gettime(CLOCK_MONOTONIC, &t_start);
-        temp = read_temperature();
-        clock_gettime(CLOCK_MONOTONIC, &t_end);
-        printf("Температура XADC: %.2f °C\n", temp);
-        long elapsed_us = (t_end.tv_sec - t_start.tv_sec) * 1000000L + (t_end.tv_nsec - t_start.tv_nsec) / 1000L;
-        printf("Время выполнения блока (read_temperature): %ld мкс\n", elapsed_us);
+        static struct timespec last_temp_time = {0, 0};
+        static double cached_temp = 0.0;
+        struct timespec now_time;
+        clock_gettime(CLOCK_MONOTONIC, &now_time);
+        long diff_sec = now_time.tv_sec - last_temp_time.tv_sec;
+        if (diff_sec >= 1) {
+            struct timespec t_start, t_end;
+            clock_gettime(CLOCK_MONOTONIC, &t_start);
+            cached_temp = read_temperature();
+            clock_gettime(CLOCK_MONOTONIC, &t_end);
+            long elapsed_us = (t_end.tv_sec - t_start.tv_sec) * 1000000L + (t_end.tv_nsec - t_start.tv_nsec) / 1000L;
+            //printf("Время выполнения блока (read_temperature): %ld мкс\n", elapsed_us);
+            last_temp_time = now_time;
+        }
+        if (cached_temp > 46.0) {
+            printf("Температура XADC: \033[0;31m%.2f °C\033[0m\n", cached_temp);
+        } else {
+            printf("Температура XADC: %.2f °C\n", cached_temp);
+        }
 
         /*
         printf("Raw memory dump:\n");
@@ -272,11 +287,10 @@ int main () {
         struct record *buffer = (struct record *)base;
         int i;
 
-
         for (i = 0; i < 3; i++) {
-            int off = i * 10;  // размер одной записи = 10 байт
-            printf("%04X : ", off); // смещение для наглядности
-            for (int j = 0; j < 10; j++) {
+            int off = i * sizeof(struct record);
+            printf("%04X : ", off);
+            for (int j = 0; j < sizeof(struct record); j++) {
                 printf("%02X ", base[off + j]);
             }
             printf("\n");
@@ -287,8 +301,10 @@ int main () {
         for (i = 0; i < 5; i++) {
             printf("Record %d:\n", i);
             printf("  Counter: %lu\n", (unsigned long)buffer[i].counter);
-            printf("  ADC: dec=%u hex=0x%04X\n",
-                  buffer[i].adc_value, buffer[i].adc_value);
+            printf("  ADC_A: dec=%u hex=0x%04X\n", buffer[i].adc_a, buffer[i].adc_a);
+            printf("  ADC_B: dec=%u hex=0x%04X\n", buffer[i].adc_b, buffer[i].adc_b);
+            printf("  SUM_ABS: dec=%u hex=0x%04X\n", buffer[i].sum_abs, buffer[i].sum_abs);
+            printf("  Marker: dec=%u hex=0x%04X\n", buffer[i].marker, buffer[i].marker);
         }
 
         /*

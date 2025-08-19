@@ -2150,7 +2150,7 @@
             "vlnv": "xilinx.com:interface:axis_rtl:1.0",
             "parameters": {
               "TDATA_NUM_BYTES": {
-                "value": "8",
+                "value": "16",
                 "value_src": "constant"
               },
               "TDEST_WIDTH": {
@@ -2198,7 +2198,7 @@
               "TDATA": {
                 "physical_name": "m_axis_tdata",
                 "direction": "O",
-                "left": "63",
+                "left": "128",
                 "right": "0"
               },
               "TVALID": {
@@ -3092,7 +3092,7 @@
             "value": "4"
           },
           "S_TDATA_NUM_BYTES": {
-            "value": "10"
+            "value": "16"
           }
         }
       },

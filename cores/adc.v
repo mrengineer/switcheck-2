@@ -26,7 +26,7 @@ module ADC #
 
   // Master side
   output reg         m_axis_tvalid,
-  output wire [63:0] m_axis_tdata,
+  output wire [128:0] m_axis_tdata,
   
   // Output for max_sum_abs
   output reg signed [15:0]  max_sum_out,
@@ -41,7 +41,7 @@ module ADC #
 );
   localparam PADDING_WIDTH = 16 - ADC_DATA_WIDTH;
 
-  reg [ADC_DATA_WIDTH-1:0] int_dat_a_reg;
+  reg [ADC_DATA_WIDTH-1:0] int_dat_a_reg;           //signed. Поэтому ADC_DATA_WIDTH-1
   reg [ADC_DATA_WIDTH-1:0] int_dat_b_reg; 
   //reg [ADC_DATA_WIDTH-1:0] abs_a;             // Абсолютное значение int_dat_a_reg
   //reg [ADC_DATA_WIDTH-1:0] abs_b;             // Абсолютное значение int_dat_b_reg
@@ -128,7 +128,7 @@ module ADC #
         end
         
 
-        if (limiter > 32'd1000)                    // отрубаем
+        if (limiter > 32'd2000)                    // отрубаем
           trigger_activated <= 1'b0;            // отключаем передачу данных
       
         if (trigger_activated == 1'b1) begin            // если запись разрешена, то считаем limiter и число отсчетов, ушедших в шину
@@ -152,8 +152,16 @@ module ADC #
   assign adc_csn = 1'b1;
 
   // Передаем сумму абсолютных значений на выход
-  //assign m_axis_tdata = {sample_counter, sum_abs};
-  assign m_axis_tdata = {sample_counter, 16'hA1B2};
+
+//  assign m_axis_tdata = {sample_counter, sum_abs,  16'hA1B2};
+assign m_axis_tdata = {
+    sample_counter,                                // 64 бита
+    { {(16-ADC_DATA_WIDTH){1'b0}}, int_dat_a_reg },// расширяем до 16, знаковое
+    { {(16-ADC_DATA_WIDTH){1'b0}}, int_dat_b_reg },// расширяем до 16
+    { {(16-(ADC_DATA_WIDTH+1)){1'b0}}, sum_abs },  // расширяем до 16
+    16'hA1B2                                       // 16 бит
+};
+
   assign cur_adc = sum_abs;
   assign cur_sample = sample_counter;
 

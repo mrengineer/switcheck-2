@@ -5,10 +5,13 @@ LDFLAGS=-lm -lpthread
 SRC=adc.c xadc_temp.c
 OBJ=$(SRC:.c=.o)
 
-all: adc
+all: adc postbuild
 
 adc: $(SRC)
 	$(CC) $(CFLAGS) $(SRC) $(LDFLAGS) -o adc
+
+postbuild:
+	./make.sh
 
 clean:
 	rm -f adc *.o

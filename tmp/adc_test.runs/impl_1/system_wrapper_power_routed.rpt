@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date             : Mon Aug 18 23:26:36 2025
+| Date             : Tue Aug 19 11:23:00 2025
 | Host             : bigbc running 64-bit Ubuntu 24.04 LTS
 | Command          : report_power -file system_wrapper_power_routed.rpt -pb system_wrapper_power_summary_routed.pb -rpx system_wrapper_power_routed.rpx
 | Design           : system_wrapper
@@ -53,13 +53,13 @@ Table of Contents
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
 | Clocks                  |     0.009 |        8 |       --- |             --- |
-| Slice Logic             |     0.002 |     2360 |       --- |             --- |
-|   LUT as Logic          |     0.002 |      683 |     17600 |            3.88 |
-|   Register              |    <0.001 |     1254 |     35200 |            3.56 |
+| Slice Logic             |     0.002 |     2191 |       --- |             --- |
+|   LUT as Logic          |     0.002 |      658 |     17600 |            3.74 |
+|   Register              |    <0.001 |     1114 |     35200 |            3.16 |
 |   CARRY4                |    <0.001 |       83 |      4400 |            1.89 |
-|   Others                |     0.000 |      193 |       --- |             --- |
+|   Others                |     0.000 |      191 |       --- |             --- |
 |   LUT as Shift Register |     0.000 |        1 |      6000 |            0.02 |
-| Signals                 |     0.004 |     1904 |       --- |             --- |
+| Signals                 |     0.004 |     1744 |       --- |             --- |
 | Block RAM               |     0.002 |        2 |        60 |            3.33 |
 | PLL                     |     0.105 |        1 |         2 |           50.00 |
 | I/O                     |     0.072 |       63 |       100 |           63.00 |
@@ -161,8 +161,8 @@ Table of Contents
 |       inst                  |     0.003 |
 |     axi_hub_modified_0      |     0.005 |
 |       inst                  |     0.005 |
-|     axis_dwidth_converter_0 |     0.002 |
-|       inst                  |     0.002 |
+|     axis_dwidth_converter_0 |     0.001 |
+|       inst                  |     0.001 |
 |     axis_red_pitaya_dac_0   |     0.002 |
 |       inst                  |     0.002 |
 |     pll_0                   |     0.106 |

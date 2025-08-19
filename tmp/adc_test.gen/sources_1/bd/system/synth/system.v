@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Mon Aug 18 23:24:03 2025
+//Date        : Tue Aug 19 11:20:25 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -92,7 +92,7 @@ module system
   wire [63:0]ADC_1_cur_sample;
   wire [63:0]ADC_1_first_trigged;
   wire [63:0]ADC_1_last_detrigged;
-  wire [63:0]ADC_1_m_axis_TDATA;
+  wire [128:0]ADC_1_m_axis_TDATA;
   wire ADC_1_m_axis_TVALID;
   wire [15:0]ADC_1_max_sum_out;
   wire [31:0]ADC_1_samples_sent;
@@ -266,7 +266,7 @@ module system
         .m_axis_tdata(axis_dwidth_converter_0_M_AXIS_TDATA),
         .m_axis_tready(axis_dwidth_converter_0_M_AXIS_TREADY),
         .m_axis_tvalid(axis_dwidth_converter_0_M_AXIS_TVALID),
-        .s_axis_tdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,ADC_1_m_axis_TDATA}),
+        .s_axis_tdata(ADC_1_m_axis_TDATA[127:0]),
         .s_axis_tvalid(ADC_1_m_axis_TVALID));
   system_axis_red_pitaya_dac_0_0 axis_red_pitaya_dac_0
        (.aclk(pll_0_clk_out1),
