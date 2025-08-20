@@ -115,7 +115,10 @@ proc step_failed { step } {
 OPTRACE "impl_1" END { }
 }
 
+set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config -id {HDL-1065} -limit 10000
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 set_msg_config  -id {BD 41-2383}  -string {{CRITICAL WARNING: [BD 41-2383] Width mismatch when connecting input pin '/xlconcat_1/In0'(32) to pin '/writer_0/sts_data'(16) - Only lower order bits will be connected, and other input bits of this pin will be left unconnected.}}  -suppress 
 set_msg_config  -id {BD 41-759}  -string {{CRITICAL WARNING: [BD 41-759] The input pins (listed below) are either not connected or do not have a source port, and they don't have a tie-off specified. These pins are tied-off to all 0's to avoid error in Implementation flow.
 Please check your design and connect them as needed: 
@@ -131,6 +134,8 @@ set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 1
+  set_param checkpoint.writeSynthRtdsInDcp 1
+  set_param synth.incrementalSynthesisCache ./.Xil/Vivado-230003-bigbc/incrSyn
   set_param runs.launchOptions { -jobs 6  }
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7z010clg400-1

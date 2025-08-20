@@ -178,6 +178,22 @@ struct record {
     usleep(100);
     *rx_rst |= 1;  //установка первого бита в 1 (дециматор и другие)
 
+
+usleep(20);
+// Сброс триггера
+*rx_rst |= (1 << 2);  // ADC_1.reset_trigger
+usleep(20);
+*rx_rst &= ~(1 << 2); 
+
+// Поставить минимальный trigger_level
+*trg_value = 1;
+
+// Включаем writer и ADC
+*rx_rst |= 2;  // writer
+usleep(20);
+*rx_rst |= 1;  // ADC
+
+
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
 
 //    snprintf(outbuf, sizeof(outbuf), "VALUES:\n");

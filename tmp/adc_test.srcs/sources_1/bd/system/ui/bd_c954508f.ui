@@ -7,7 +7,7 @@
    "Color Coded_TopLeft":"-164,-180",
    "Default View_Layers":"/pll_0_clk_out1:true|/pll_0_clk_out3:true|/pll_0_clk_out2:true|/rst_0_peripheral_aresetn:true|/axis_red_pitaya_dac_0_dac_clk:true|/axis_red_pitaya_dac_0_dac_rst:true|",
    "Default View_ScaleFactor":"0.854507",
-   "Default View_TopLeft":"-207,254",
+   "Default View_TopLeft":"-207,213",
    "Display-PortTypeClock":"true",
    "Display-PortTypeOthers":"true",
    "Display-PortTypeReset":"true",

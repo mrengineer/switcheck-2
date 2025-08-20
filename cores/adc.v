@@ -40,9 +40,10 @@ module ADC #
   
 );
   localparam PADDING_WIDTH = 16 - ADC_DATA_WIDTH;
+  localparam MID_SCALE = 1 << (ADC_DATA_WIDTH-1); // для 14 бит: 0x2000
 
-  reg [ADC_DATA_WIDTH-1:0] int_dat_a_reg;           //signed. Поэтому ADC_DATA_WIDTH-1
-  reg [ADC_DATA_WIDTH-1:0] int_dat_b_reg; 
+  reg signed [ADC_DATA_WIDTH-1:0] int_dat_a_reg;           //signed. Поэтому ADC_DATA_WIDTH-1
+  reg signed [ADC_DATA_WIDTH-1:0] int_dat_b_reg; 
   reg [ADC_DATA_WIDTH-1:0] abs_a;             // Абсолютное значение int_dat_a_reg
   reg [ADC_DATA_WIDTH-1:0] abs_b;             // Абсолютное значение int_dat_b_reg
   
@@ -88,11 +89,16 @@ module ADC #
       // Увеличиваем счетчик семплов
       sample_counter <= sample_counter + 1;
 
-      // Захватываем данные, обрезаем до нужной ширины и убираем смещение mid-scale (8192 - ноль ацп)
-      int_dat_a_reg <= adc_dat_a[15:PADDING_WIDTH]  - (1 << (ADC_DATA_WIDTH-1));  // - (1 << (ADC_DATA_WIDTH-1)) смещает на 8192
-      int_dat_b_reg <= adc_dat_b[15:PADDING_WIDTH]  - (1 << (ADC_DATA_WIDTH-1));
 
-        // Абсолютное значение каждого канала
+
+      // Захватываем данные, обрезаем до нужной ширины и убираем смещение mid-scale (8192 - ноль ацп)
+      int_dat_a_reg <=  {{(PADDING_WIDTH+1){adc_dat_a[ADC_DATA_WIDTH-1]}}, ~adc_dat_a[ADC_DATA_WIDTH-2:0]} + MID_SCALE;
+      int_dat_b_reg <=  {{(PADDING_WIDTH+1){adc_dat_b[ADC_DATA_WIDTH-1]}}, ~adc_dat_b[ADC_DATA_WIDTH-2:0]} + MID_SCALE;
+        
+        // Берём младшие ADC_DATA_WIDTH бит и смещаем mid-scale к 0
+        //int_dat_a_reg <= -16'd20; //Проверить что идут отрицательные числа
+              
+      // Абсолютное значение каждого канала
       abs_a <= int_dat_a_reg[ADC_DATA_WIDTH-1] ? (~int_dat_a_reg + 1) : int_dat_a_reg;
       abs_b <= int_dat_b_reg[ADC_DATA_WIDTH-1] ? (~int_dat_b_reg + 1) : int_dat_b_reg;
 
@@ -164,8 +170,11 @@ module ADC #
 //  assign m_axis_tdata = {sample_counter, sum_abs,  16'hA1B2};
 assign m_axis_tdata = {
     sample_counter,                                // 64 бита
-    { {(16-ADC_DATA_WIDTH){1'b0}}, int_dat_a_reg },// расширяем до 16, знаковое
-    { {(16-ADC_DATA_WIDTH){1'b0}}, int_dat_b_reg },// расширяем до 16
+    // int_dat_a_reg: sign-extend до 16 бит
+    { {(16-ADC_DATA_WIDTH){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, int_dat_a_reg },
+
+    // int_dat_b_reg: sign-extend до 16 бит
+    { {(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, int_dat_b_reg },
     { {(16-(ADC_DATA_WIDTH+1)){1'b0}}, sum_abs },  // расширяем до 16
     16'hA1B2                                       // 16 бит
 };

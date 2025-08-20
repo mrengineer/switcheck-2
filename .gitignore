@@ -24,7 +24,7 @@
 *.protoinst
 *.rpt
 *.pb
-*.begin.rst
+*.rst
 
 linux*
 initram*
@@ -44,3 +44,13 @@ sd_backup*
 .runs/
 .gen/
 .Xil/
+
+!*.v
+!*.sw
+!*.vh
+!*.xdc
+!*.xci
+!*.bd
+!*.tcl
+!*.xpr
+
