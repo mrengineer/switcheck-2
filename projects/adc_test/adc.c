@@ -23,6 +23,8 @@
 
 int interrupted = 0;
 
+
+
 void signal_handler(int sig) {
   interrupted = 1;
 }
@@ -139,7 +141,7 @@ struct record {
 #pragma pack(pop)
 
 
-  uint16_t trg    = 103;
+  uint16_t trg    = 1;
 
   *trg_value      = trg;
   *rx_addr        = size;
@@ -274,7 +276,10 @@ struct record {
         uint8_t *base = (uint8_t *)ram + prev_position;
         struct record *buffer = (struct record *)base;
         int i;
+        
 
+        // DUMP
+        /*
         for (i = 0; i < 5; i++) {
             int off = i * sizeof(struct record);
             printf("%04X : ", off);
@@ -282,7 +287,7 @@ struct record {
                 printf("%02X ", base[off + j]);
             }
             printf("\n");
-        }
+        } */
 
         // Вывод 3 записей
         printf("Idx  | Counter     | Dcnt    | ADC_A | ADC_B | SUM_ABS |  ABS_A+B | Marker\n");
@@ -322,7 +327,7 @@ struct record {
         printf("%s\n", outbuf);
         exit (0);
       
-        usleep(450000);
+        usleep(350000);
 
       }   //(prev_position != position)
       else {

@@ -75,6 +75,16 @@ module ADC #
     else 
     begin
 
+    if (reset_trigger) begin      // При выставленном сверху сбросе триггера (но не всего блока, а только части) сбрасываем его и связанное с ним
+          last_detrigged    <= 0;
+          first_trigged     <= 0;
+          triggers_count    <= 0;
+          //trigger_activated <= 1'b0;
+          trigger_activated <= 1'b1;
+          limiter           <= 1'b0;
+    end
+
+
       // Увеличиваем счетчик семплов
       sample_counter <= sample_counter + 1;
 
@@ -93,7 +103,7 @@ module ADC #
       sum_abs <= abs_a + abs_b;
 
 
-      if (sample_counter > 2) begin  // Пропустим первые отсчеты после reset, там фигня какая-то сыпется по данным
+      if (sample_counter > 1) begin  // Пропустим первые отсчеты после reset, там фигня какая-то сыпется по данным
 
         // Определяем максимальное значение суммы
         if (sum_abs > max_sum_abs && !reset_max_sum) 
@@ -105,6 +115,8 @@ module ADC #
         // Проверяем условие для срабатывания триггера и сохраняем состояние
         // Актуальное значение выше уровня триггера
         // Мы не в резете триггера, триггер еще не сработал
+        
+/*        
         if (sum_abs > trigger_level && !reset_trigger && trigger_activated == 1'b0) begin       // && limiter==1'b0          
           //trigged_by_out <= sum_abs;
           
@@ -116,23 +128,16 @@ module ADC #
           trigger_activated <= 1'b1;
           triggers_count    <= triggers_count + 1;
         end
-        
+*/        
         
         if (sum_abs < trigger_level && !reset_trigger && trigger_activated == 1'b1) begin
           last_detrigged    <= sample_counter;
           trigger_activated <= 1'b0;
         end        
         
-        if (reset_trigger) begin      // При выставленном сверху сбросе триггера (но не всего блока, а только части) сбрасываем его и связанное с ним
-          last_detrigged    <= 0;
-          first_trigged     <= 0;
-          triggers_count    <= 0;
-          trigger_activated <= 1'b0;
-          limiter           <= 1'b0;
-        end
         
 
-        if (limiter > 32'd3000)                    // отрубаем
+        if (limiter > 32'd40)                    // отрубаем
           trigger_activated <= 1'b0;            // отключаем передачу данных
       
         if (trigger_activated == 1'b1) begin            // если запись разрешена, то считаем limiter и число отсчетов, ушедших в шину

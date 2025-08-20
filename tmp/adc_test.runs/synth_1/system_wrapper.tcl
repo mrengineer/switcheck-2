@@ -72,6 +72,13 @@ proc create_report { reportName command } {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 1
 set_msg_config -id {HDL-1065} -limit 10000
+set_msg_config  -id {BD 41-2383}  -string {{CRITICAL WARNING: [BD 41-2383] Width mismatch when connecting input pin '/xlconcat_1/In0'(32) to pin '/writer_0/sts_data'(16) - Only lower order bits will be connected, and other input bits of this pin will be left unconnected.}}  -suppress 
+set_msg_config  -id {BD 41-759}  -string {{CRITICAL WARNING: [BD 41-759] The input pins (listed below) are either not connected or do not have a source port, and they don't have a tie-off specified. These pins are tied-off to all 0's to avoid error in Implementation flow.
+Please check your design and connect them as needed: 
+/axis_decimator_0/s_axis_tvalid}}  -suppress 
+set_msg_config  -id {BD 41-2384}  -string {{WARNING: [BD 41-2384] Width mismatch when connecting pin: '/axis_dwidth_converter_0/s_axis_tdata'(128) to pin: '/ADC_1/m_axis_tdata'(129) - Only lower order bits will be connected.}}  -suppress 
+set_msg_config  -id {xilinx.com:ip:clk_wiz:6.0-1}  -string {{INFO: [xilinx.com:ip:clk_wiz:6.0-1] /pll_0 clk_wiz propagate}}  -suppress 
+set_msg_config  -id {Synth 8-7023}  -string {{WARNING: [Synth 8-7023] instance 'ps_0' of module 'system_ps_0_0' has 123 connections declared, but only 85 given [/home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/synth/system.v:294]}}  -suppress 
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z010clg400-1
 

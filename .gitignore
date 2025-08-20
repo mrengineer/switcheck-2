@@ -9,6 +9,23 @@
 *.xsa
 *.bif
 *.end.rst
+*.log
+*.wdb
+*.dcp
+*.chk
+*.svf
+*.bit
+*.ltx
+
+*.jou
+*.str
+*.cache
+*.xml
+*.protoinst
+*.rpt
+*.pb
+*.begin.rst
+
 linux*
 initram*
 vivado*
@@ -16,6 +33,14 @@ webtalk*
 uImage
 sd_backup*
 
-tmp/adc_test.runs/synth_1/runme.log
 
-.jobs/
+.cache/
+.hw/
+.ip_user_files/
+.sim/
+.srcs/sources_1/bd/
+.srcs/sources_1/ip/
+.srcs/sources_1/ipshared/
+.runs/
+.gen/
+.Xil/
