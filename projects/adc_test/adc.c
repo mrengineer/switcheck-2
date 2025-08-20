@@ -141,7 +141,7 @@ struct record {
 #pragma pack(pop)
 
 
-  uint16_t trg    = 1;
+  uint16_t trg    = 405;
 
   *trg_value      = trg;
   *rx_addr        = size;
@@ -185,8 +185,6 @@ usleep(20);
 usleep(20);
 *rx_rst &= ~(1 << 2); 
 
-// Поставить минимальный trigger_level
-*trg_value = 1;
 
 // Включаем writer и ADC
 *rx_rst |= 2;  // writer
@@ -243,15 +241,15 @@ usleep(20);
         printf("first_trgged_val %ju (0x%jx)\n", first_trgged_val, first_trgged_val);        
         printf("last_detrigged_val %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val);
         
-        double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000000.0;
-        printf("Длительность семплов, PULSE_LEN %f\n", pulse_len);
-        printf("ADC (MAX/NOW)= %i/%i popugais\n", adc_abs_max_val, cur_adc_val);
+        double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000.0;
+        printf("Длительность импульсв, мс, PULSE_LEN %f\n", pulse_len);
+        printf("ADC (MAX/NOW)= %i/%i ед. АЦП\n", adc_abs_max_val, cur_adc_val);
         printf("Отправлено в память семлов, ADC_SENT_VAL %i\n", adc_sent_val);
         printf("TRG_ACTIVE %i\n", trigger_activated_val);
 
 
         double_t samples_time       = (double_t)(samples_count_val)/125000000.0;        
-        printf("Время с начала измерения SAPLES_TIME %f\n", samples_time);
+        printf("Время с начала измерения, с SAPMLES_TIME %f\n", samples_time);
         printf("Число измерений АЦП (семплов) %ju\n", samples_count_val);
 
         static struct timespec last_temp_time = {0, 0};
@@ -264,6 +262,7 @@ usleep(20);
         if (diff_sec >= 1) {
             struct timespec t_start, t_end;
             clock_gettime(CLOCK_MONOTONIC, &t_start);
+
             cached_temp = read_temperature();
             clock_gettime(CLOCK_MONOTONIC, &t_end);
             long elapsed_us = (t_end.tv_sec - t_start.tv_sec) * 1000000L + (t_end.tv_nsec - t_start.tv_nsec) / 1000L;
@@ -308,7 +307,7 @@ usleep(20);
         // Вывод 3 записей
         printf("Idx  | Counter     | Dcnt    | ADC_A | ADC_B | SUM_ABS |  ABS_A+B | Marker\n");
         printf("-----+------------+------+-------+-------+--------+---------+--------\n");
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < 15; i++) {
             unsigned long counter = (unsigned long)buffer[i].counter;
             unsigned long prev_counter = (i == 0) ? 0 : (unsigned long)buffer[i-1].counter;
             int dcnt = (i == 0) ? 0 : (int)(counter - prev_counter);
