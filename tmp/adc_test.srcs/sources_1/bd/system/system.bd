@@ -1802,6 +1802,9 @@
           "PCW_USE_S_AXI_ACP": {
             "value": "1"
           },
+          "PCW_USE_S_AXI_HP0": {
+            "value": "1"
+          },
           "PCW_WDT_PERIPHERAL_CLKSRC": {
             "value": "CPU_1X"
           },
@@ -1827,6 +1830,11 @@
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
             "mode": "Slave",
             "memory_map_ref": "S_AXI_ACP"
+          },
+          "S_AXI_HP0": {
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
+            "mode": "Slave",
+            "memory_map_ref": "S_AXI_HP0"
           }
         },
         "addressing": {
@@ -3202,7 +3210,7 @@
       "writer_0_m_axi": {
         "interface_ports": [
           "writer_0/m_axi",
-          "ps_0/S_AXI_ACP"
+          "ps_0/S_AXI_HP0"
         ]
       }
     },
@@ -3352,7 +3360,8 @@
           "axis_red_pitaya_dac_0/aclk",
           "axis_constant_0/aclk",
           "axis_dwidth_converter_0/aclk",
-          "ADC_1/aclk"
+          "ADC_1/aclk",
+          "ps_0/S_AXI_HP0_ACLK"
         ]
       },
       "pll_0_clk_out2": {

@@ -83,15 +83,17 @@ int main () {
     return EXIT_FAILURE;
   }
 
-  size = 2048*sysconf(_SC_PAGESIZE);
+  size = 2*2048*sysconf(_SC_PAGESIZE);    //sysconf(_SC_PAGESIZE) на Zynq под Linux обычно = 4096 байт (4 КБ). Т.е. 2x8 МБ памяти
 
-  if(ioctl(fd, CMA_ALLOC, &size) < 0)
-  {
-    perror("ioctl");
+  
+  if (ioctl(fd, CMA_ALLOC, &size) < 0) {    //в size возвращается физ адрес
+    perror("ioctl CMA_ALLOC failed");
     return EXIT_FAILURE;
   }
 
-  ram = mmap(NULL, 2048*sysconf(_SC_PAGESIZE), PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
+  uint32_t physical_address = (uint32_t)size;   // вот он, адрес от драйвера
+
+  ram = mmap(NULL, 2*2048*sysconf(_SC_PAGESIZE), PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
 
   /* В ПЛИСе
   cfg_data 160 bit в axi_hub_modified_0 - передача конфигурационных данных
@@ -144,7 +146,7 @@ struct record {
   uint16_t trg    = 405;
 
   *trg_value      = trg;
-  *rx_addr        = size;
+  *rx_addr        = physical_address;   //начальный адрес записи У CMA GP0 это 0x8000_0000, у HP0 это 0x0000_0000
 
   uint32_t adc_sent_val;
   uint64_t first_trgged_val, last_detrigged_val, samples_count_val;
@@ -234,7 +236,8 @@ usleep(20);
         
         first_trgged_val    = *first_trgged;
         last_detrigged_val  = *last_detrigged;
-        
+
+        printf("CMA buffer physical address: 0x%08X\n", physical_address);
         printf("Запись в памяти POS %llu\n", position);
         printf("Сдвиг по записям D_POS \033[0;31m%i\033[0m\n", (unsigned int)(position - prev_position));
         printf("TRGS_COUNT %i\n", triggers_count_val);
@@ -361,100 +364,6 @@ usleep(20);
   usleep(500);
   *rx_rst &= ~2;
 
+
   return EXIT_SUCCESS;
 }
-
-
-
-      /*if (prev_position == position && position > 300000-1) {
-        if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
-          perror( "clock gettime" );
-          return EXIT_FAILURE;
-        }
-
-        triggered_by_val = *triggered_by;
-        triggered_when_val = *triggered_when;
-        printf("\033[0;31mTRIGGEREDBY\033[0m %d at %u SMP\n", triggered_by_val, triggered_when_val);
-        printf("\033[0;33mCONSOLE\033[0m %i -> %i\n", prev_position, position);
-
-        //Вычитаем
-        uint16_t *buffer = (uint16_t *)(ram + prev_position);
-
-
-        for(uint32_t i = 0; i < (position - prev_position); i += 1) {
-            int16_t adc    = (int16_t)buffer[i];
-            if (i == 0) printf("D %i %d\n", i, adc);
-            if (i == position - prev_position - 1 ) printf("D %i %d\n", i, adc);
-        }
-
-        if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
-            perror( "clock gettime" );
-            return EXIT_FAILURE;
-        }
-
-        printf("SAVE/SEND TIME OF  %i vales is %li sec and %li ns\n\n", N, stop.tv_sec - start.tv_sec, stop.tv_nsec - start.tv_nsec);
-
-      } else {
-
-      }*/
-
-
-      /* 
-        Используем два буфера памяти с переключением между ними. У нас выделено 32*1024 памяти в целом под эти нужды (как до конца не знаю, этим занят специально переписанный драйвер CMA, смотри red pitatya notes https://pavel-demin.github.io/red-pitaya-notes/dma/)
-
-        Как только мы записали больше или равно N значений по срабатыванию тригера
-        2. Готовим указатель на буфер для вычитывания
-        1. Даем ADC_1.reset_trigger
-        2. Сбрасываем writer0
-        
-        3. Устанавливаем новое значение адреса для записи чтобы при срабатывании триггера снова пошла запись уже во второй участок памяти
-        4. Проводим вычитывание и сохранение записи
-    
-      */
-
-
-      /*  uint16_t *buffer = (uint16_t *)(ram + offset);
-
-        triggered_by_val = *triggered_by;
-        triggered_when_val = *triggered_when;
-        printf("\033[0;31mTRIGGEREDBY\033[0m %d at %u SMP\n", triggered_by_val, triggered_when_val);
-
-        //SAVE TO FILE
-        //char filename[40];
-        //struct tm *timenow;
-
-        //time_t now = time(NULL);
-        //timenow = gmtime(&now);
-
-        //strftime(filename, sizeof(filename), "%Y-%m-%d_%H:%M:%S.txt", timenow);
-
-        //FILE *fp = fopen(filename, "w");
-
-
-        if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
-          perror( "clock gettime" );
-          return EXIT_FAILURE;
-        }
-
-          for(uint32_t i = 0; i < N; i += 1) {
-            int16_t adc    = (int16_t)buffer[i];
-						//fprintf(fp, "%i %d\n", i, adc);
-            //printf("D %i %d\n", i, adc);
-          }
-
-				//fclose(fp);
-
-        printf("DRAW\n");
-
-
-        if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
-            perror( "clock gettime" );
-            return EXIT_FAILURE;
-        }
-
-
-        //accum = () + (double)(stop.tv_nsec - start.tv_nsec) / (double)BILLION;
-        printf("%li sec and %li ns\n\n", N, stop.tv_sec - start.tv_sec, stop.tv_nsec - start.tv_nsec);
-       
-
-        break; //exit while to wait new trigger*/
