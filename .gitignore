@@ -24,7 +24,8 @@
 *.protoinst
 *.rpt
 *.pb
-*.rst
+*.xml
+
 
 linux*
 initram*
@@ -45,12 +46,20 @@ sd_backup*
 .gen/
 .Xil/
 
-!*.v
-!*.sw
-!*.vh
-!*.xdc
-!*.xci
-!*.bd
-!*.tcl
-!*.xpr
+#!*.v
+#!*.sw
+#!*.vh
+#!*.xdc
+#!*.xci
+#!*.bd
+#!*.tcl
+#!*.xpr
 
+tmp/adc_test.runs/impl_1/.post_route_phys_opt_design.begin.rst
+tmp/adc_test.runs/impl_1/.vivado.begin.rst
+tmp/adc_test.runs/impl_1/system_wrapper_route_status.pb
+tmp/adc_test.runs/impl_1/system_wrapper_routed.dcp
+tmp/adc_test.runs/impl_1/runme.log
+tmp/adc_test.runs/impl_1/gen_run.xml
+tmp/adc_test.runs/impl_1/.init_design.begin.rst
+tmp/adc_test.runs/impl_1/.opt_design.begin.rst

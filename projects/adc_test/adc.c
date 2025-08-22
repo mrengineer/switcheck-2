@@ -143,7 +143,7 @@ struct record {
 #pragma pack(pop)
 
 
-  uint16_t trg    = 405;
+  uint16_t trg    = 5;
 
   *trg_value      = trg;
   *rx_addr        = physical_address;   //начальный адрес записи У CMA GP0 это 0x8000_0000, у HP0 это 0x0000_0000
