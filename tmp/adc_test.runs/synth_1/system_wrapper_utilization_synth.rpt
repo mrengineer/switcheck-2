@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Fri Aug 22 15:44:26 2025
+| Date         : Sun Aug 24 12:39:55 2025
 | Host         : bigbc running 64-bit Ubuntu 24.04 LTS
 | Command      : report_utilization -file system_wrapper_utilization_synth.rpt -pb system_wrapper_utilization_synth.pb
 | Design       : system_wrapper
@@ -31,13 +31,13 @@ Table of Contents
 +----------------------------+------+-------+------------+-----------+-------+
 |          Site Type         | Used | Fixed | Prohibited | Available | Util% |
 +----------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*                |  887 |     0 |          0 |     17600 |  5.04 |
-|   LUT as Logic             |  886 |     0 |          0 |     17600 |  5.03 |
+| Slice LUTs*                |  851 |     0 |          0 |     17600 |  4.84 |
+|   LUT as Logic             |  850 |     0 |          0 |     17600 |  4.83 |
 |   LUT as Memory            |    1 |     0 |          0 |      6000 |  0.02 |
 |     LUT as Distributed RAM |    0 |     0 |            |           |       |
 |     LUT as Shift Register  |    1 |     0 |            |           |       |
-| Slice Registers            | 1144 |     0 |          0 |     35200 |  3.25 |
-|   Register as Flip Flop    | 1144 |     0 |          0 |     35200 |  3.25 |
+| Slice Registers            | 1030 |     0 |          0 |     35200 |  2.93 |
+|   Register as Flip Flop    | 1030 |     0 |          0 |     35200 |  2.93 |
 |   Register as Latch        |    0 |     0 |          0 |     35200 |  0.00 |
 | F7 Muxes                   |    0 |     0 |          0 |      8800 |  0.00 |
 | F8 Muxes                   |    0 |     0 |          0 |      4400 |  0.00 |
@@ -59,9 +59,9 @@ Warning! LUT value is adjusted to account for LUT combining.
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 0     |          Yes |           - |          Set |
-| 375   |          Yes |           - |        Reset |
-| 15    |          Yes |         Set |            - |
-| 754   |          Yes |       Reset |            - |
+| 412   |          Yes |           - |        Reset |
+| 14    |          Yes |         Set |            - |
+| 604   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -152,21 +152,21 @@ Warning! LUT value is adjusted to account for LUT combining.
 +-----------+------+----------------------+
 |  Ref Name | Used |  Functional Category |
 +-----------+------+----------------------+
-| FDRE      |  754 |         Flop & Latch |
-| FDCE      |  375 |         Flop & Latch |
-| LUT5      |  222 |                  LUT |
-| LUT6      |  218 |                  LUT |
-| LUT3      |  175 |                  LUT |
-| LUT2      |  167 |                  LUT |
+| FDRE      |  604 |         Flop & Latch |
+| FDCE      |  412 |         Flop & Latch |
+| LUT6      |  216 |                  LUT |
+| LUT5      |  191 |                  LUT |
+| LUT3      |  171 |                  LUT |
+| LUT2      |  169 |                  LUT |
 | BIBUF     |  130 |                   IO |
-| LUT1      |   92 |                  LUT |
 | CARRY4    |   91 |           CarryLogic |
-| LUT4      |   86 |                  LUT |
+| LUT1      |   90 |                  LUT |
+| LUT4      |   88 |                  LUT |
 | IBUF      |   44 |                   IO |
 | OBUF      |   19 |                   IO |
 | ODDR      |   18 |                   IO |
-| FDSE      |   15 |         Flop & Latch |
 | OBUFT     |   14 |                   IO |
+| FDSE      |   14 |         Flop & Latch |
 | BUFG      |    5 |                Clock |
 | RAMB36E1  |    2 |         Block Memory |
 | SRL16E    |    1 |   Distributed Memory |

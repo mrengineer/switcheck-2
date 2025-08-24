@@ -32,7 +32,6 @@
       "axis_red_pitaya_dac_0": "",
       "axis_constant_0": "",
       "xlconstant_0": "",
-      "axis_dwidth_converter_0": "",
       "xlconcat_1": "",
       "xlconcat_2": ""
     },
@@ -2157,7 +2156,7 @@
             "vlnv": "xilinx.com:interface:axis_rtl:1.0",
             "parameters": {
               "TDATA_NUM_BYTES": {
-                "value": "16",
+                "value": "4",
                 "value_src": "constant"
               },
               "TDEST_WIDTH": {
@@ -2205,7 +2204,7 @@
               "TDATA": {
                 "physical_name": "m_axis_tdata",
                 "direction": "O",
-                "left": "128",
+                "left": "31",
                 "right": "0"
               },
               "TVALID": {
@@ -3088,21 +3087,6 @@
           }
         }
       },
-      "axis_dwidth_converter_0": {
-        "vlnv": "xilinx.com:ip:axis_dwidth_converter:1.1",
-        "ip_revision": "28",
-        "xci_name": "system_axis_dwidth_converter_0_0",
-        "xci_path": "ip/system_axis_dwidth_converter_0_0/system_axis_dwidth_converter_0_0.xci",
-        "inst_hier_path": "axis_dwidth_converter_0",
-        "parameters": {
-          "M_TDATA_NUM_BYTES": {
-            "value": "4"
-          },
-          "S_TDATA_NUM_BYTES": {
-            "value": "16"
-          }
-        }
-      },
       "xlconcat_1": {
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "5",
@@ -3173,20 +3157,14 @@
     "interface_nets": {
       "ADC_1_m_axis": {
         "interface_ports": [
-          "axis_dwidth_converter_0/S_AXIS",
-          "ADC_1/m_axis"
+          "ADC_1/m_axis",
+          "writer_0/s_axis"
         ]
       },
       "axis_constant_0_m_axis": {
         "interface_ports": [
           "axis_red_pitaya_dac_0/s_axis",
           "axis_constant_0/m_axis"
-        ]
-      },
-      "axis_dwidth_converter_0_M_AXIS": {
-        "interface_ports": [
-          "writer_0/s_axis",
-          "axis_dwidth_converter_0/M_AXIS"
         ]
       },
       "ps_0_DDR": {
@@ -3359,9 +3337,8 @@
           "axi_hub_modified_0/aclk",
           "axis_red_pitaya_dac_0/aclk",
           "axis_constant_0/aclk",
-          "axis_dwidth_converter_0/aclk",
-          "ADC_1/aclk",
-          "ps_0/S_AXI_HP0_ACLK"
+          "ps_0/S_AXI_HP0_ACLK",
+          "ADC_1/aclk"
         ]
       },
       "pll_0_clk_out2": {
@@ -3393,7 +3370,6 @@
         "ports": [
           "slice_0/dout",
           "axis_decimator_0/aresetn",
-          "axis_dwidth_converter_0/aresetn",
           "ADC_1/aresetn"
         ]
       },

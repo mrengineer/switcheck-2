@@ -8,7 +8,7 @@
 					"ports": {
 						"ACLK": { "actual": "aclk"},
 						"ARESETN": { "actual": "aresetn"},
-						"TDATA": { "actual": "m_axis_tdata[128:0]"},
+						"TDATA": { "actual": "m_axis_tdata[31:0]"},
 						"TVALID": { "actual": "m_axis_tvalid"}
 					}
 				},
@@ -47,26 +47,6 @@
 						"ACLK": { "actual": "aclk"},
 						"TDATA": { "actual": "m_axis_tdata[31:0]"},
 						"TVALID": { "actual": "m_axis_tvalid"}
-					}
-				},
-				"/axis_dwidth_converter_0/M_AXIS": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "aclk"},
-						"ARESETN": { "actual": "aresetn"},
-						"TDATA": { "actual": "m_axis_tdata[31:0]"},
-						"TREADY": { "actual": "m_axis_tready"},
-						"TVALID": { "actual": "m_axis_tvalid"}
-					}
-				},
-				"/axis_dwidth_converter_0/S_AXIS": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "aclk"},
-						"ARESETN": { "actual": "aresetn"},
-						"TDATA": { "actual": "s_axis_tdata[127:0]"},
-						"TREADY": { "actual": "s_axis_tready"},
-						"TVALID": { "actual": "s_axis_tvalid"}
 					}
 				},
 				"/axis_red_pitaya_dac_0/s_axis": {

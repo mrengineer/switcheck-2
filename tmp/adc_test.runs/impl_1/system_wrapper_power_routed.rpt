@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date             : Fri Aug 22 15:46:00 2025
+| Date             : Sun Aug 24 12:41:23 2025
 | Host             : bigbc running 64-bit Ubuntu 24.04 LTS
 | Command          : report_power -file system_wrapper_power_routed.rpt -pb system_wrapper_power_summary_routed.pb -rpx system_wrapper_power_routed.rpx
 | Design           : system_wrapper
@@ -52,14 +52,14 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.010 |        8 |       --- |             --- |
-| Slice Logic             |     0.003 |     2335 |       --- |             --- |
-|   LUT as Logic          |     0.002 |      810 |     17600 |            4.60 |
-|   Register              |    <0.001 |     1144 |     35200 |            3.25 |
+| Clocks                  |     0.009 |        8 |       --- |             --- |
+| Slice Logic             |     0.003 |     2182 |       --- |             --- |
+|   LUT as Logic          |     0.002 |      773 |     17600 |            4.39 |
 |   CARRY4                |    <0.001 |       91 |      4400 |            2.07 |
-|   Others                |     0.000 |      193 |       --- |             --- |
+|   Register              |    <0.001 |     1030 |     35200 |            2.93 |
+|   Others                |     0.000 |      189 |       --- |             --- |
 |   LUT as Shift Register |     0.000 |        1 |      6000 |            0.02 |
-| Signals                 |     0.004 |     1745 |       --- |             --- |
+| Signals                 |     0.004 |     1597 |       --- |             --- |
 | Block RAM               |    <0.001 |        2 |        60 |            3.33 |
 | PLL                     |     0.105 |        1 |         2 |           50.00 |
 | I/O                     |     0.072 |       63 |       100 |           63.00 |
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.034 |       0.027 |      0.007 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.033 |       0.026 |      0.007 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.063 |       0.055 |      0.008 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.022 |       0.021 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -152,25 +152,23 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+-----------------------------+-----------+
-| Name                        | Power (W) |
-+-----------------------------+-----------+
-| system_wrapper              |     1.476 |
-|   system_i                  |     1.405 |
-|     ADC_1                   |     0.004 |
-|       inst                  |     0.004 |
-|     axi_hub_modified_0      |     0.005 |
-|       inst                  |     0.005 |
-|     axis_dwidth_converter_0 |     0.001 |
-|       inst                  |     0.001 |
-|     axis_red_pitaya_dac_0   |     0.002 |
-|       inst                  |     0.002 |
-|     pll_0                   |     0.106 |
-|       inst                  |     0.106 |
-|     ps_0                    |     1.283 |
-|       inst                  |     1.283 |
-|     writer_0                |     0.003 |
-|       inst                  |     0.003 |
-+-----------------------------+-----------+
++---------------------------+-----------+
+| Name                      | Power (W) |
++---------------------------+-----------+
+| system_wrapper            |     1.476 |
+|   system_i                |     1.405 |
+|     ADC_1                 |     0.005 |
+|       inst                |     0.005 |
+|     axi_hub_modified_0    |     0.005 |
+|       inst                |     0.005 |
+|     axis_red_pitaya_dac_0 |     0.002 |
+|       inst                |     0.002 |
+|     pll_0                 |     0.106 |
+|       inst                |     0.106 |
+|     ps_0                  |     1.283 |
+|       inst                |     1.283 |
+|     writer_0              |     0.003 |
+|       inst                |     0.003 |
++---------------------------+-----------+
 
 
