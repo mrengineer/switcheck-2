@@ -234,7 +234,7 @@ module ADC #
         cur_limiter           <= cur_limiter + 1;
         samples_sent          <= samples_sent + 1;
                   
-        axis_data_reg  <= {2'b10, 15'd123, 15'd555};
+        axis_data_reg  <= {2'b10, a_u15, b_u15};
         m_axis_tvalid  <= 1'b1;
         
         if (samples_sent > 32'd32) begin 
