@@ -1489,9 +1489,6 @@
           "PCW_SPI_PERIPHERAL_VALID": {
             "value": "1"
           },
-          "PCW_S_AXI_HP0_DATA_WIDTH": {
-            "value": "64"
-          },
           "PCW_S_AXI_HP1_DATA_WIDTH": {
             "value": "64"
           },
@@ -1802,7 +1799,7 @@
             "value": "1"
           },
           "PCW_USE_S_AXI_HP0": {
-            "value": "1"
+            "value": "0"
           },
           "PCW_WDT_PERIPHERAL_CLKSRC": {
             "value": "CPU_1X"
@@ -1829,11 +1826,6 @@
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
             "mode": "Slave",
             "memory_map_ref": "S_AXI_ACP"
-          },
-          "S_AXI_HP0": {
-            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-            "mode": "Slave",
-            "memory_map_ref": "S_AXI_HP0"
           }
         },
         "addressing": {
@@ -2123,10 +2115,10 @@
         "inst_hier_path": "slice_5",
         "parameters": {
           "DIN_FROM": {
-            "value": "127"
+            "value": "87"
           },
           "DIN_TO": {
-            "value": "96"
+            "value": "80"
           },
           "DIN_WIDTH": {
             "value": "160"
@@ -2274,6 +2266,11 @@
             "left": "63",
             "right": "0"
           },
+          "limiter": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
           "trigger_level": {
             "direction": "I",
             "left": "15",
@@ -2302,9 +2299,9 @@
             "left": "63",
             "right": "0"
           },
-          "limiter": {
+          "cur_limiter": {
             "direction": "O",
-            "left": "31",
+            "left": "63",
             "right": "0"
           },
           "samples_sent": {
@@ -3188,7 +3185,7 @@
       "writer_0_m_axi": {
         "interface_ports": [
           "writer_0/m_axi",
-          "ps_0/S_AXI_HP0"
+          "ps_0/S_AXI_ACP"
         ]
       }
     },
@@ -3337,7 +3334,6 @@
           "axi_hub_modified_0/aclk",
           "axis_red_pitaya_dac_0/aclk",
           "axis_constant_0/aclk",
-          "ps_0/S_AXI_HP0_ACLK",
           "ADC_1/aclk"
         ]
       },
@@ -3395,6 +3391,12 @@
         "ports": [
           "slice_4/dout",
           "ADC_1/trigger_level"
+        ]
+      },
+      "slice_5_dout": {
+        "ports": [
+          "slice_5/dout",
+          "ADC_1/limiter"
         ]
       },
       "slice_6_dout": {

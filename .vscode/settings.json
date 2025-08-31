@@ -3,6 +3,7 @@
         "main.h": "c",
         "types.h": "c",
         "signal.h": "c",
-        "cstdint": "c"
+        "cstdint": "c",
+        "sched.h": "c"
     }
 }

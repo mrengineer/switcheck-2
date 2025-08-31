@@ -1,30 +1,34 @@
-*.apk
-*.bin
-*.dtb
-*.img
-*.tar.gz
-*.zip
-*.elf
-*.bit
-*.xsa
-*.bif
-*.end.rst
+# Vivado build artifacts
+.tmp/
+tmp/
+
+# Vivado output folders
+adc_test.runs/
+adc_test.gen/
+adc_test.cache/
+adc_test.srcs/
+
+# Vivado files
+*.jou
 *.log
-*.wdb
+*.pb
 *.dcp
-*.chk
+*.rpt
+*.xml
+*.wdb
 *.svf
 *.bit
 *.ltx
-
-*.jou
 *.str
 *.cache
-*.xml
+*.chk
+*.bif
+*.end.rst
 *.protoinst
 *.rpt
 *.pb
 *.xml
+scripts/*.zip
 
 
 linux*
@@ -35,31 +39,25 @@ uImage
 sd_backup*
 
 
-.cache/
-.hw/
-.ip_user_files/
-.sim/
-.srcs/sources_1/bd/
-.srcs/sources_1/ip/
-.srcs/sources_1/ipshared/
-.runs/
-.gen/
-.Xil/
 
-#!*.v
-#!*.sw
-#!*.vh
-#!*.xdc
-#!*.xci
-#!*.bd
-#!*.tcl
-#!*.xpr
 
-tmp/adc_test.runs/impl_1/.post_route_phys_opt_design.begin.rst
-tmp/adc_test.runs/impl_1/.vivado.begin.rst
-tmp/adc_test.runs/impl_1/system_wrapper_route_status.pb
-tmp/adc_test.runs/impl_1/system_wrapper_routed.dcp
-tmp/adc_test.runs/impl_1/runme.log
-tmp/adc_test.runs/impl_1/gen_run.xml
-tmp/adc_test.runs/impl_1/.init_design.begin.rst
-tmp/adc_test.runs/impl_1/.opt_design.begin.rst
+# Remove individual file rules for impl_1, synth_1, etc. (covered by folders above)
+# Remove duplicate rules
+
+# Scripts, sd_backup, led_blinker, etc. (keep only if needed)
+sd_backup/
+scripts/*.apk
+tmp/led_blinker.*
+synth_1/
+tmp/adc_test.runs/impl_1/
+
+# Uncomment if you want to keep source files:
+!*.v
+!*.sw
+!*.vh
+!*.xdc
+!*.xci
+!*.bd
+!*.tcl
+!*.xpr
+

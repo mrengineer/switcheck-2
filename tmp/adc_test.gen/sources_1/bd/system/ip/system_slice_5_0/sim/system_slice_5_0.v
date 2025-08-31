@@ -60,12 +60,12 @@ module system_slice_5_0 (
 );
 
 input wire [159 : 0] din;
-output wire [31 : 0] dout;
+output wire [7 : 0] dout;
 
   port_slicer #(
     .DIN_WIDTH(160),
-    .DIN_FROM(127),
-    .DIN_TO(96)
+    .DIN_FROM(87),
+    .DIN_TO(80)
   ) inst (
     .din(din),
     .dout(dout)

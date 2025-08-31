@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Sun Aug 24 12:38:50 2025
+//Date        : Mon Sep  1 00:03:45 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -165,6 +165,7 @@ module system
   wire [15:0]slice_2_dout;
   wire [31:0]slice_3_dout;
   wire [15:0]slice_4_dout;
+  wire [7:0]slice_5_dout;
   wire [0:0]slice_6_dout;
   wire [0:0]slice_7_dout;
   wire [31:0]writer_0_m_axi_AWADDR;
@@ -209,6 +210,7 @@ module system
         .cur_sample(ADC_1_cur_sample),
         .first_trigged(ADC_1_first_trigged),
         .last_detrigged(ADC_1_last_detrigged),
+        .limiter(slice_5_dout),
         .m_axis_tdata(ADC_1_m_axis_TDATA),
         .m_axis_tvalid(ADC_1_m_axis_TVALID),
         .max_sum_out(ADC_1_max_sum_out),
@@ -344,57 +346,27 @@ module system
         .S_AXI_ACP_ARSIZE({1'b0,1'b1,1'b1}),
         .S_AXI_ACP_ARUSER({1'b0,1'b0,1'b0,1'b0,1'b0}),
         .S_AXI_ACP_ARVALID(1'b0),
-        .S_AXI_ACP_AWADDR({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_ACP_AWBURST({1'b0,1'b1}),
-        .S_AXI_ACP_AWCACHE({1'b0,1'b0,1'b1,1'b1}),
-        .S_AXI_ACP_AWID({1'b0,1'b0,1'b0}),
-        .S_AXI_ACP_AWLEN({1'b0,1'b0,1'b0,1'b0}),
+        .S_AXI_ACP_AWADDR(writer_0_m_axi_AWADDR),
+        .S_AXI_ACP_AWBURST(writer_0_m_axi_AWBURST),
+        .S_AXI_ACP_AWCACHE(writer_0_m_axi_AWCACHE),
+        .S_AXI_ACP_AWID(writer_0_m_axi_AWID),
+        .S_AXI_ACP_AWLEN(writer_0_m_axi_AWLEN),
         .S_AXI_ACP_AWLOCK({1'b0,1'b0}),
         .S_AXI_ACP_AWPROT({1'b0,1'b0,1'b0}),
         .S_AXI_ACP_AWQOS({1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_ACP_AWSIZE({1'b0,1'b1,1'b1}),
+        .S_AXI_ACP_AWREADY(writer_0_m_axi_AWREADY),
+        .S_AXI_ACP_AWSIZE(writer_0_m_axi_AWSIZE),
         .S_AXI_ACP_AWUSER({1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_ACP_AWVALID(1'b0),
-        .S_AXI_ACP_BREADY(1'b0),
+        .S_AXI_ACP_AWVALID(writer_0_m_axi_AWVALID),
+        .S_AXI_ACP_BREADY(writer_0_m_axi_BREADY),
+        .S_AXI_ACP_BVALID(writer_0_m_axi_BVALID),
         .S_AXI_ACP_RREADY(1'b0),
-        .S_AXI_ACP_WDATA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_ACP_WID({1'b0,1'b0,1'b0}),
-        .S_AXI_ACP_WLAST(1'b0),
-        .S_AXI_ACP_WSTRB({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
-        .S_AXI_ACP_WVALID(1'b0),
-        .S_AXI_HP0_ACLK(pll_0_clk_out1),
-        .S_AXI_HP0_ARADDR({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_HP0_ARBURST({1'b0,1'b1}),
-        .S_AXI_HP0_ARCACHE({1'b0,1'b0,1'b1,1'b1}),
-        .S_AXI_HP0_ARID({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_HP0_ARLEN({1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_HP0_ARLOCK({1'b0,1'b0}),
-        .S_AXI_HP0_ARPROT({1'b0,1'b0,1'b0}),
-        .S_AXI_HP0_ARQOS({1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_HP0_ARSIZE({1'b0,1'b1,1'b1}),
-        .S_AXI_HP0_ARVALID(1'b0),
-        .S_AXI_HP0_AWADDR(writer_0_m_axi_AWADDR),
-        .S_AXI_HP0_AWBURST(writer_0_m_axi_AWBURST),
-        .S_AXI_HP0_AWCACHE(writer_0_m_axi_AWCACHE),
-        .S_AXI_HP0_AWID({1'b0,1'b0,1'b0,writer_0_m_axi_AWID}),
-        .S_AXI_HP0_AWLEN(writer_0_m_axi_AWLEN),
-        .S_AXI_HP0_AWLOCK({1'b0,1'b0}),
-        .S_AXI_HP0_AWPROT({1'b0,1'b0,1'b0}),
-        .S_AXI_HP0_AWQOS({1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_HP0_AWREADY(writer_0_m_axi_AWREADY),
-        .S_AXI_HP0_AWSIZE(writer_0_m_axi_AWSIZE),
-        .S_AXI_HP0_AWVALID(writer_0_m_axi_AWVALID),
-        .S_AXI_HP0_BREADY(writer_0_m_axi_BREADY),
-        .S_AXI_HP0_BVALID(writer_0_m_axi_BVALID),
-        .S_AXI_HP0_RDISSUECAP1_EN(1'b0),
-        .S_AXI_HP0_RREADY(1'b0),
-        .S_AXI_HP0_WDATA(writer_0_m_axi_WDATA),
-        .S_AXI_HP0_WID({1'b0,1'b0,1'b0,writer_0_m_axi_WID}),
-        .S_AXI_HP0_WLAST(writer_0_m_axi_WLAST),
-        .S_AXI_HP0_WREADY(writer_0_m_axi_WREADY),
-        .S_AXI_HP0_WRISSUECAP1_EN(1'b0),
-        .S_AXI_HP0_WSTRB(writer_0_m_axi_WSTRB),
-        .S_AXI_HP0_WVALID(writer_0_m_axi_WVALID),
+        .S_AXI_ACP_WDATA(writer_0_m_axi_WDATA),
+        .S_AXI_ACP_WID(writer_0_m_axi_WID),
+        .S_AXI_ACP_WLAST(writer_0_m_axi_WLAST),
+        .S_AXI_ACP_WREADY(writer_0_m_axi_WREADY),
+        .S_AXI_ACP_WSTRB(writer_0_m_axi_WSTRB),
+        .S_AXI_ACP_WVALID(writer_0_m_axi_WVALID),
         .USB0_VBUS_PWRFAULT(1'b0));
   system_rst_0_0 rst_0
        (.aux_reset_in(1'b1),
@@ -419,7 +391,8 @@ module system
        (.din(hub_0_cfg_data),
         .dout(slice_4_dout));
   system_slice_5_0 slice_5
-       (.din(hub_0_cfg_data));
+       (.din(hub_0_cfg_data),
+        .dout(slice_5_dout));
   system_slice_1_1 slice_6
        (.din(hub_0_cfg_data),
         .dout(slice_6_dout));
