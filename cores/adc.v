@@ -67,8 +67,7 @@ module ADC #
   reg [31:0] axis_data_reg;   // Регистр данных на выход
   assign m_axis_tdata = axis_data_reg;
 
-  // Флаги событий для посылки служебных пакетов
-  reg prev_trigger_activated;
+  // Флаги событий для посылки служебных пакетов  
   reg need_send_cnt_low;
   reg need_send_cnt_high;
   reg need_send_end;
@@ -107,7 +106,6 @@ module ADC #
       axis_data_reg         <= 32'd0;
 
       trigger_activated     <= 1'b0;
-      prev_trigger_activated<= 1'b0;
       triggers_count        <= 0;
       max_sum_abs           <= 0;
       sample_counter        <= 64'd0;
@@ -166,38 +164,6 @@ module ADC #
         else if (reset_max_sum)
           max_sum_abs <= 0;
 
-        // -------------------------
-        // Логика триггера
-        // -------------------------
-        // Включение
-        /*if (sum_abs > trigger_level && !reset_trigger && trigger_activated == 1'b0) begin
-          cur_limiter           <= 0;
-          first_trigged         <= sample_counter;
-          trigger_activated     <= 1'b1;
-          triggers_count        <= triggers_count + 1;
-
-          // При фронте триггера нужно отправить счётчик (2 слова)
-          need_send_cnt_low     <= 1'b1;
-          need_send_cnt_high    <= 1'b1;
-        end*/
-
-        // Выключение (по уровню)
-        /*
-        if (sum_abs < trigger_level && !reset_trigger && trigger_activated == 1'b1) begin
-          last_detrigged        <= sample_counter;
-          trigger_activated     <= 1'b0;
-          need_send_end         <= 1'b1;   // по спаду - отправить окончание
-        end
-        */
-
-
-
-        // Ограничение длины серии
-        //if (cur_limiter > limiter*10 && trigger_activated == 1'b1) begin
-        /*if (cur_limiter >= limiter_val && trigger_activated == 1'b1) begin
-          trigger_activated     <= 1'b0;   // отрубить
-          need_send_end         <= 1'b1;   // и отправить окончание
-        end*/
 
 
         // Вывод статистики
@@ -210,50 +176,23 @@ module ADC #
       // -------------------------
       m_axis_tvalid <= 1'b0; // по умолчанию
 
-
-
-      //if (sample_counter < 64'd150) begin   // Временно
-
-      // Фронт/спад триггера детектируем
-      prev_trigger_activated <= trigger_activated;
-
-      // 1) Если нужно отправить счетчик (после фронта)
-      /*if (need_send_cnt_low) begin
-        axis_data_reg     <= {2'b00, sample_counter[29:0]};
-        m_axis_tvalid     <= 1'b1;
-        need_send_cnt_low <= 1'b0;
-      end else if (need_send_cnt_high) begin
-        axis_data_reg      <= {2'b01, sample_counter[59:30]};
-        m_axis_tvalid      <= 1'b1;
-        need_send_cnt_high <= 1'b0;
-
-      // 2) Пока активен триггер - шлём данные АЦП
-      end else */
       
       if (trigger_activated) begin       
         cur_limiter           <= cur_limiter + 1;
         samples_sent          <= samples_sent + 1;
+
+        if (samples_sent == 32'd32) begin 
+            trigger_activated  <= 1'b0;
+            axis_data_reg  <= {2'b11, a_u15, b_u15};
+        end else begin
+            axis_data_reg  <= {2'b10, a_u15, b_u15};
+        end
                   
-        axis_data_reg  <= {2'b10, a_u15, b_u15};
+        
         m_axis_tvalid  <= 1'b1;
         
-        if (samples_sent > 32'd32) begin 
-            trigger_activated  <= 1'b0;
-        end               
+               
       end
-
-      /*
-      // 3) Если нужно отправить окончание
-      end else if (need_send_end) begin
-        axis_data_reg  <= {2'b11, 30'd0};
-        m_axis_tvalid  <= 1'b1;
-        need_send_end  <= 1'b0;
-      end
-      */
-      
-      
-      //end
-      
     end
   end
 

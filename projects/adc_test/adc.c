@@ -154,7 +154,7 @@ int main () {
   uint16_t trg    = 2;
 
   *trg_value      = trg;
-  *limiter        = 2;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
+  *limiter        = 5;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
   *rx_addr        = physical_address;   //начальный адрес записи У CMA GP0 это 0x8000_0000, у HP0 это 0x0000_0000
 
   uint32_t adc_sent_val;
@@ -191,9 +191,10 @@ int main () {
 
     
     // Сброс триггера
-    *rx_rst |= (1 << 2);  // ADC_1.reset_trigger Ставит бит в 1
+        
+    *rx_rst &= ~(1 << 2);   // сбрасывает бит в 0 
     usleep(120);
-    *rx_rst &= ~(1 << 2);   // сбрасывает бит в 0
+    *rx_rst |= (1 << 2);  // ADC_1.reset_trigger Ставит бит в 1
 
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
 
@@ -265,29 +266,15 @@ int main () {
           printf("Температура XADC: \033[0;31m%.2f °C\033[0m\n", cached_temp);
       } else {
           printf("Температура XADC: %.2f °C\n", cached_temp);
-      }
+      }    
 
-        
-//      if (prev_position != position) {
-        uint8_t *base = (uint8_t *)ram + prev_position;
-        size_t bytes = (size_t)(position - prev_position);
 
-        //if (bytes < 4) {
-        //    printf("Мало данных (%zu байт), ждем еще.\n", bytes);            
-        //} else {
+          uint32_t *buf32 = (uint32_t *)ram;
 
-          //Данные приходят: 00 (счетчик сэмплов) - начало передачи, первая часть счетчика
-          //                 01 - вторая часть счетчика
-          //                 10 - АЦП 1 + АЦП 2 (должны пролезать все семплы на 125 МГЦ)
-          //                 0
-
-          size_t nwords = bytes / 4; // количество 32-битных слов
-          uint32_t *buf32 = (uint32_t *)base;
-          // ВРЕМЕННО: вывод первых 32 слов буфера, разбивка на поля
           printf("Raw buffer (first 32 words, parsed):\n");
           printf("Idx | Type |   A (signed)   |   B (signed)\n");
           printf("----+------+---------------+---------------\n");
-          for (int i = 0; i < 16; ++i) {
+          for (int i = 0; i < 37; ++i) {
               uint32_t word = buf32[i];
               uint8_t type = (word >> 30) & 0x3;
               int16_t a = (int16_t)((word >> 15) & 0x7FFF); // 15 бит
@@ -302,116 +289,6 @@ int main () {
           close(fd); // закрытие дескриптора CMA
           exit(0);
 
-          // структура события (динамически выделяем по числу слов, будет достаточно)
-          typedef struct {
-              uint64_t counter;
-              uint16_t adc_a;   // 15-bit packed -> store in 16
-              uint16_t adc_b;   // 15-bit packed -> store in 16
-              uint8_t  end_flag;
-          } event_t;
-
-          event_t *events = (event_t *)calloc(nwords, sizeof(event_t));
-          if (!events) {
-
-
-              perror("calloc events");
-              exit(1);
-          }
-          size_t ev_count = 0;
-
-          // временные переменные для сборки счётчика
-          uint32_t counter_low = 0;
-          uint32_t counter_high = 0;
-          int have_counter_low = 0;
-          int have_counter_high = 0;
-          uint64_t current_counter = 0;
-
-          for (size_t i = 0; i < nwords; ++i) {
-              uint32_t word = buf32[i];
-              uint8_t type = (word >> 30) & 0x3;
-              uint32_t payload = word & 0x3FFFFFFF; // 30 бит полезной нагрузки
-
-              switch (type) {
-                  case 0x0: // 00 - младшие 30 бит счетчика
-                      counter_low = payload & 0x3FFFFFFF;
-                      have_counter_low = 1;
-                      if (have_counter_high) {
-                          current_counter = ((uint64_t)counter_high << 30) | (uint64_t)counter_low;
-                      } else {
-                          current_counter = (uint64_t)counter_low;
-                      }
-                      break;
-                  case 0x1: // 01 - старшие 30 бит счетчика
-                      counter_high = payload & 0x3FFFFFFF;
-                      have_counter_high = 1;
-                      if (have_counter_low) {
-                          current_counter = ((uint64_t)counter_high << 30) | (uint64_t)counter_low;
-                      } else {
-                          current_counter = ((uint64_t)counter_high << 30);
-                      }
-                      break;
-                  case 0x2: { // 10 - данные АЦП (a_u15 (15b) | b_u15 (15b))
-                      uint16_t a_u15 = (uint16_t)((payload >> 15) & 0x7FFF);
-                      uint16_t b_u15 = (uint16_t)(payload & 0x7FFF);
-                      // запишем событие (используем текущий собранный counter)
-                      if (ev_count < nwords) {
-                          events[ev_count].counter = current_counter;
-                          events[ev_count].adc_a = a_u15;
-                          events[ev_count].adc_b = b_u15;
-                          events[ev_count].end_flag = 0;
-                          ev_count++;
-                      }
-                      break;
-                  }
-                  case 0x3: // 11 - окончание серии
-                      if (ev_count < nwords) {
-                          events[ev_count].counter = current_counter;
-                          events[ev_count].adc_a = 0;
-                          events[ev_count].adc_b = 0;
-                          events[ev_count].end_flag = 1;
-                          ev_count++;
-                      }
-                      // при окончании можно очистить текущий counter или оставить, в зависимости от логики
-                      break;
-                  default:
-                      break;
-              }
-          }
-
-          // Печать таблицы (как раньше — первые 15 событий)
-          printf("Idx  | Counter            | Dcnt    | ADC_A  | ADC_B  | End\n");
-          printf("-----+--------------------+---------+--------+--------+----\n");
-          for (size_t i = 0; i < ev_count && i < 25; ++i) {
-              uint64_t counter = events[i].counter;
-              uint64_t prev_counter = (i == 0) ? 0 : events[i-1].counter;
-              long dcnt = (i == 0) ? 0 : (long)(counter - prev_counter);
-              int adc_a = (int)events[i].adc_a;
-              int adc_b = (int)events[i].adc_b;
-              int endf = events[i].end_flag;
-              printf("%3zu | %18llu | %7ld | %6d | %6d |  %d\n",
-                  i, (unsigned long long)counter, dcnt, adc_a, adc_b, endf);
-          }
-
-          // Дополнительно вывести общее число разобранных событий
-          printf("\nTotal events parsed from block: %zu (words=%zu bytes=%zu)\n", ev_count, nwords, bytes);
-
-          // Очистка
-          free(events);
-
-          //snprintf(outbuf+strlen(outbuf), sizeof(outbuf)-strlen(outbuf), "END OF PORTION----\n");    
-
-          printf("%s\n", outbuf);
-          exit (0);
-        
-          //usleep(350000);
-
-        //}
-
-//      }   //(prev_position != position)
-//      else {
-//        printf("%s\n", outbuf);    
-//        usleep(150000);
-//      }
       
 
     } //Окончание цикла ожидания сигнала прерывания по CTRL-D #2
