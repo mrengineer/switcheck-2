@@ -209,13 +209,14 @@ int main () {
     usleep(10);
 
     
-    // Сброс триггера
+    // Сброс триггера (сбрасывается лог 1!)
     
     //*rx_rst &= ~(1 << 2);   // сбрасывает бит в 0 
-    CLEAR_BIT(*rx_rst, 2);
-
+    
+    SET_BIT(*rx_rst, 2);            //лог 1
     usleep(20);
-    SET_BIT(*rx_rst, 2);
+    CLEAR_BIT(*rx_rst, 2);
+    
     //*rx_rst |= (1 << 2);  // ADC_1.reset_trigger Ставит бит в 1
 
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
