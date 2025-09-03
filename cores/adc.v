@@ -38,7 +38,7 @@ module ADC #
   output reg  [63:0]        first_trigged,      // первый раз сработал триггер
   output reg  [63:0]        cur_limiter,        // Ограничивает запись числом записей на одну серию
   output reg  [31:0]        samples_sent,       // Число отсчётов, сохранённых в шину
-  output reg                trigger_activated,  // Флаг активации триггера
+  output reg  [0:0]         trigger_activated,  // Флаг активации триггера  
   output reg  [15:0]        triggers_count      // сколько раз сработал триггер
 );
 
@@ -89,6 +89,8 @@ module ADC #
   // Берём 15 младших бит, со знаком
   wire [14:0] a_u15 = a_ext[14:0];
   wire [14:0] b_u15 = b_ext[14:0];
+  
+  wire triggered [0:0];
 
 
   // =========================
@@ -134,12 +136,12 @@ module ADC #
         need_send_cnt_low     <= 1'b0;
         need_send_cnt_high    <= 1'b0;
         
-        
+        samples_sent          <= 0;             //временно
         sample_counter <= 64'd0;                //временно!
       end
 
 
-      last_detrigged <= limiter;
+      last_detrigged <= limiter_val;
 
       // -------------------------
       // Счётчик семплов
@@ -174,10 +176,10 @@ module ADC #
       // Очерёдность: cnt_low -> cnt_high -> data(если активен) -> end
       // За такт уходит максимум 1 слово.
       // -------------------------
-      m_axis_tvalid <= 1'b0; // по умолчанию
+      m_axis_tvalid <= 1'b0; // по умолчаниюm_axis_tvalid
 
       
-      if (trigger_activated) begin       
+      if (trigger_activated == 1'b1) begin       
         cur_limiter           <= cur_limiter + 1;
         samples_sent          <= samples_sent + 1;
 
@@ -189,10 +191,10 @@ module ADC #
         end
                   
         
-        m_axis_tvalid  <= 1'b1;
-        
-               
+        m_axis_tvalid  <= 1'b1;                       
       end
+      
+      
     end
   end
 

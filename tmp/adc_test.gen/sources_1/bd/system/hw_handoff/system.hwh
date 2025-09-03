@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Sep  3 00:19:08 2025" VIVADOVERSION="2023.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Sep  3 09:25:53 2025" VIVADOVERSION="2023.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -319,7 +319,7 @@
             <CONNECTION INSTANCE="xlconcat_2" PORT="In0"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="trigger_activated" SIGIS="undef" SIGNAME="ADC_1_trigger_activated">
+        <PORT DIR="O" LEFT="0" NAME="trigger_activated" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_trigger_activated">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconcat_2" PORT="In1"/>
           </CONNECTIONS>

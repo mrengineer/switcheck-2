@@ -2310,7 +2310,9 @@
             "right": "0"
           },
           "trigger_activated": {
-            "direction": "O"
+            "direction": "O",
+            "left": "0",
+            "right": "0"
           },
           "triggers_count": {
             "direction": "O",

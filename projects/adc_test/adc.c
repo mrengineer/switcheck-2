@@ -14,7 +14,20 @@
 #include <time.h>
 #include "xadc_temp.h"
 
-#define BILLION  1000000000L;
+// Установить бит n
+#define SET_BIT(var, n)    ((var) |=  (1U << (n)))
+
+// Сбросить бит n
+#define CLEAR_BIT(var, n)  ((var) &= ~(1U << (n)))
+
+// Инвертировать бит n
+#define TOGGLE_BIT(var, n) ((var) ^=  (1U << (n)))
+
+// Проверить бит n (вернёт 0 или 1)
+#define CHECK_BIT(var, n)  (((var) >> (n)) & 1U)
+
+
+
 
 #define clrscr() printf("\e[1;1H\e[2J")
 
@@ -141,7 +154,7 @@ int main () {
   rx_cntr         = (uint32_t *)(sts + 0);    //через rx_cntr writer0 блок сообщает программе сколько данных он записал в память
   adc_abs_max     = (uint16_t *)(sts + 4);    //Максимальное значение после сброса, для самокалибровки триггера
   cur_adc         = (uint16_t *)(sts + 6);    //Значение сейчас
-  last_detrigged  = (uint64_t *)(sts + 8);   //Последний раз caкогда переходили триггер вниз, в семплах
+  last_detrigged  = (uint64_t *)(sts + 8);   //Последний раз когда переходили триггер вниз, в семплах
   first_trgged    = (uint64_t *)(sts + 16);   //Когда сработал триггер, в семплах
   adc_sent        = (uint32_t *)(sts + 24);   //Число отправленных отсчетов из блока АЦП
   trigger_activated = (uint16_t *)(sts + 28); //1 бит состояния переменной в IP
@@ -153,9 +166,7 @@ int main () {
 
   uint16_t trg    = 2;
 
-  *trg_value      = trg;
-  *limiter        = 5;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
-  *rx_addr        = physical_address;   //начальный адрес записи У CMA GP0 это 0x8000_0000, у HP0 это 0x0000_0000
+
 
   uint32_t adc_sent_val;
   uint64_t first_trgged_val, last_detrigged_val, samples_count_val;
@@ -167,15 +178,19 @@ int main () {
 
 
 
-    //clrscr();
-    printf("CLEAN\n");
+    clrscr();
+    
 
-    printf("RESET\n"); 
-    
-    *rx_rst &= ~1;    //сброс первого бита в 0 (сборс ацп)
-    *rx_rst &= ~2;    //сброс axi writer (1й  бит)
-    /* set default sample rate */
-    
+
+    //*rx_rst &= ~1;    
+    CLEAR_BIT(*rx_rst, 0); //сброс первого бита в 0 (сборс ацп)
+    //*rx_rst &= ~2;    
+    CLEAR_BIT(*rx_rst, 1); //сброс axi writer (1й  бит)
+
+
+    *trg_value      = trg;
+    *limiter        = 5;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
+    *rx_addr        = physical_address;   //начальный адрес записи У CMA GP0 это 0x8000_0000, у HP0 это 0x0000_0000    
 
     *rx_rate = 1;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
 
@@ -184,17 +199,24 @@ int main () {
     signal(SIGINT, signal_handler);
 
     /* enter normal operating mode */
-    *rx_rst |= 2; //установка второго бита в 1 (axis writer)
-    usleep(100);    
-    *rx_rst |= 1;  //установка первого бита в 1 (дециматор и другие)
-    usleep(100);
+
+    SET_BIT(*rx_rst, 0); //сброс первого бита в 0 (сборс ацп)
+    SET_BIT(*rx_rst, 1); //сброс axi writer (1й  бит)
+
+    //*rx_rst |= 2; //установка второго бита в 1 (axis writer)
+    
+    //*rx_rst |= 1;  //установка первого бита в 1 (дециматор и другие)
+    usleep(10);
 
     
     // Сброс триггера
-        
-    *rx_rst &= ~(1 << 2);   // сбрасывает бит в 0 
-    usleep(120);
-    *rx_rst |= (1 << 2);  // ADC_1.reset_trigger Ставит бит в 1
+    
+    //*rx_rst &= ~(1 << 2);   // сбрасывает бит в 0 
+    CLEAR_BIT(*rx_rst, 2);
+
+    usleep(20);
+    SET_BIT(*rx_rst, 2);
+    //*rx_rst |= (1 << 2);  // ADC_1.reset_trigger Ставит бит в 1
 
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
 

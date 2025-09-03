@@ -6,8 +6,8 @@
    "Color Coded_ScaleFactor":"0.529094",
    "Color Coded_TopLeft":"-164,-180",
    "Default View_Layers":"/pll_0_clk_out1:true|/pll_0_clk_out3:true|/pll_0_clk_out2:true|/rst_0_peripheral_aresetn:true|/axis_red_pitaya_dac_0_dac_clk:true|/axis_red_pitaya_dac_0_dac_rst:true|",
-   "Default View_ScaleFactor":"1.70903",
-   "Default View_TopLeft":"226,362",
+   "Default View_ScaleFactor":"1.05203",
+   "Default View_TopLeft":"-455,240",
    "Display-PortTypeClock":"true",
    "Display-PortTypeOthers":"true",
    "Display-PortTypeReset":"true",
@@ -230,9 +230,9 @@ preplace inst ps_0 -pg 1 -lvl 7 -x 2310 -y 370 -defaultsOSRD
 preplace inst const_0 -pg 1 -lvl 6 -x 1910 -y 80 -defaultsOSRD
 preplace inst rst_0 -pg 1 -lvl 7 -x 2310 -y 100 -defaultsOSRD
 preplace inst slice_0 -pg 1 -lvl 1 -x 160 -y 400 -defaultsOSRD
-preplace inst slice_1 -pg 1 -lvl 4 -x 1350 -y 930 -defaultsOSRD
+preplace inst slice_1 -pg 1 -lvl 4 -x 1350 -y 580 -defaultsOSRD
 preplace inst slice_2 -pg 1 -lvl 1 -x 160 -y 900 -defaultsOSRD
-preplace inst slice_3 -pg 1 -lvl 4 -x 1350 -y 630 -defaultsOSRD
+preplace inst slice_3 -pg 1 -lvl 4 -x 1350 -y 680 -defaultsOSRD
 preplace inst const_1 -pg 1 -lvl 5 -x 1610 -y 710 -defaultsOSRD
 preplace inst writer_0 -pg 1 -lvl 6 -x 1910 -y 610 -defaultsOSRD
 preplace inst slice_4 -pg 1 -lvl 1 -x 160 -y 600 -defaultsOSRD
@@ -248,10 +248,10 @@ preplace inst axis_constant_0 -pg 1 -lvl 7 -x 2310 -y 790 -defaultsOSRD
 preplace inst xlconstant_0 -pg 1 -lvl 6 -x 1910 -y 800 -defaultsOSRD
 preplace inst xlconcat_1 -pg 1 -lvl 3 -x 1070 -y 170 -defaultsOSRD -resize 175 98
 preplace inst xlconcat_2 -pg 1 -lvl 3 -x 1070 -y 600 -defaultsOSRD -resize 191 98
-preplace netloc ADC_1_adc_csn 1 2 7 NJ 430 NJ 430 NJ 430 1700 500 2060J 520 NJ 520 2880J
+preplace netloc ADC_1_adc_csn 1 2 7 NJ 430 NJ 430 NJ 430 1690 500 2060J 520 NJ 520 2880J
 preplace netloc ADC_1_cur_adc 1 2 1 710 180n
 preplace netloc ADC_1_cur_sample 1 2 2 740 300 NJ
-preplace netloc ADC_1_first_trigged 1 2 2 750J 290 1210
+preplace netloc ADC_1_first_trigged 1 2 2 750J 290 1220
 preplace netloc ADC_1_last_detrigged 1 2 2 730 240 NJ
 preplace netloc ADC_1_max_sum_out 1 2 1 720J 170n
 preplace netloc ADC_1_samples_sent 1 2 1 750 570n
@@ -267,27 +267,27 @@ preplace netloc axis_red_pitaya_dac_0_dac_rst 1 8 1 2870J 190n
 preplace netloc axis_red_pitaya_dac_0_dac_sel 1 8 1 NJ 220
 preplace netloc axis_red_pitaya_dac_0_dac_wrt 1 8 1 2870J 240n
 preplace netloc const_0_dout 1 6 1 NJ 80
-preplace netloc const_1_dout 1 5 1 1690 650n
-preplace netloc hub_0_cfg_data 1 0 9 50 340 N 340 NJ 340 1190 510 NJ 510 N 510 2050J 530 NJ 530 2870
-preplace netloc pll_0_clk_out1 1 1 7 330 670 N 670 1240 570 N 570 1760 710 2100 200 2570
-preplace netloc pll_0_clk_out2 1 1 7 270J 90 NJ 90 NJ 90 NJ 90 1720 210 NJ 210 2540
-preplace netloc pll_0_clk_out3 1 1 7 350J 250 NJ 250 1220J 370 1460J 380 1780 490 2120J 500 2520
-preplace netloc pll_0_locked 1 1 7 NJ 260 NJ 260 1200J 360 NJ 360 N 360 2090 240 2500J
+preplace netloc const_1_dout 1 5 1 1700 650n
+preplace netloc hub_0_cfg_data 1 0 9 50 340 N 340 NJ 340 1200 510 NJ 510 N 510 2050J 530 NJ 530 2870
+preplace netloc pll_0_clk_out1 1 1 7 330 770 N 770 N 770 N 770 1780 710 2100 200 2570
+preplace netloc pll_0_clk_out2 1 1 7 270J 90 NJ 90 NJ 90 NJ 90 1710 210 NJ 210 2540
+preplace netloc pll_0_clk_out3 1 1 7 350J 250 NJ 250 1230J 370 1460J 380 1710 490 2120J 500 2520
+preplace netloc pll_0_locked 1 1 7 NJ 260 NJ 260 1210J 360 NJ 360 N 360 2090 240 2500J
 preplace netloc rst_0_peripheral_aresetn 1 7 1 2510 140n
 preplace netloc slice_0_dout 1 1 1 300 400n
-preplace netloc slice_1_dout 1 4 2 1470J 620 1780
+preplace netloc slice_1_dout 1 4 2 NJ 580 1690
 preplace netloc slice_2_dout 1 1 1 N 900
-preplace netloc slice_3_dout 1 4 2 NJ 630 N
+preplace netloc slice_3_dout 1 4 2 1470J 650 1690
 preplace netloc slice_4_dout 1 1 1 320J 540n
 preplace netloc slice_5_dout 1 1 1 310 500n
 preplace netloc slice_6_dout 1 1 1 340J 560n
 preplace netloc slice_7_dout 1 1 1 350J 580n
-preplace netloc writer_0_sts_data 1 2 5 950 100 N 100 N 100 1710 220 2040
+preplace netloc writer_0_sts_data 1 2 5 950 100 N 100 N 100 1690 220 2040
 preplace netloc xlconcat_0_dout 1 4 4 1470 370 N 370 2070 510 2550
-preplace netloc xlconcat_1_dout 1 3 1 1200 170n
-preplace netloc xlconcat_2_dout 1 3 1 1230 280n
+preplace netloc xlconcat_1_dout 1 3 1 1220 170n
+preplace netloc xlconcat_2_dout 1 3 1 1240 280n
 preplace netloc xlconstant_0_dout 1 6 1 NJ 800
-preplace netloc ADC_1_m_axis 1 2 4 NJ 410 NJ 410 NJ 410 1770
+preplace netloc ADC_1_m_axis 1 2 4 NJ 410 NJ 410 NJ 410 1700
 preplace netloc axis_constant_0_m_axis 1 7 1 2530 180n
 preplace netloc ps_0_DDR 1 7 2 NJ 320 2870J
 preplace netloc ps_0_FIXED_IO 1 7 2 NJ 340 NJ
