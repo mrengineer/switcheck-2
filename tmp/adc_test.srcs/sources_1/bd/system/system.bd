@@ -2306,7 +2306,7 @@
           },
           "samples_sent": {
             "direction": "O",
-            "left": "31",
+            "left": "63",
             "right": "0"
           },
           "trigger_activated": {

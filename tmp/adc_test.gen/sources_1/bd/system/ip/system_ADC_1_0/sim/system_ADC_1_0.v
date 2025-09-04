@@ -105,7 +105,7 @@ output wire [15 : 0] max_sum_out;
 output wire [63 : 0] last_detrigged;
 output wire [63 : 0] first_trigged;
 output wire [63 : 0] cur_limiter;
-output wire [31 : 0] samples_sent;
+output wire [63 : 0] samples_sent;
 output wire [0 : 0] trigger_activated;
 output wire [15 : 0] triggers_count;
 

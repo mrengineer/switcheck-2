@@ -37,7 +37,7 @@ module ADC #
         output reg  [63:0]        last_detrigged,     // последний раз пересекли триггер вниз
         output reg  [63:0]        first_trigged,      // первый раз сработал триггер
         output reg  [63:0]        cur_limiter,        // Ограничивает запись числом записей на одну серию
-        output reg  [31:0]        samples_sent,       // Число отсчётов, сохранённых в шину
+        output reg  [63:0]        samples_sent,       // Число отсчётов, сохранённых в шину
         output reg  [0:0]         trigger_activated,  // Флаг активации триггера  
         output reg  [15:0]        triggers_count      // сколько раз сработал триггер
     );
@@ -130,9 +130,6 @@ always @(posedge aclk or negedge aresetn) begin
             triggers_count        <= 0;
             trigger_activated     <= 1'b1;      //  временно 1!
             cur_limiter           <= 0;
-            // need_send_end         <= 1'b0;
-            // need_send_cnt_low     <= 1'b0;
-            // need_send_cnt_high    <= 1'b0;
             
             samples_sent          <= 0;             //временно
             sample_counter <= 64'd0;                //временно!  AfoninAS: если убирается из сброса, то из else тоже нужно убрать, переместив за блок
@@ -157,7 +154,7 @@ always @(posedge aclk or negedge aresetn) begin
                 cur_limiter           <= cur_limiter + 1;
                 samples_sent          <= samples_sent + 1;
 
-                if (samples_sent == 32'd31) begin // AfoninAS: так как m_axis_tvalid опускается с задержкой на так по trigger_activated, счетчик д.б. на 1 меньше
+                if (samples_sent == limiter_val-1) begin // AfoninAS: так как m_axis_tvalid опускается с задержкой на так по trigger_activated, счетчик д.б. на 1 меньше
                     trigger_activated  <= 1'b0;
                     axis_data_reg  <= {2'b11, a_u15, b_u15}; //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов
                 end else begin

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Sep  3 22:04:32 2025" VIVADOVERSION="2023.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Sep  4 08:59:53 2025" VIVADOVERSION="2023.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -314,7 +314,7 @@
             <CONNECTION INSTANCE="slice_6" PORT="dout"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="31" NAME="samples_sent" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_samples_sent">
+        <PORT DIR="O" LEFT="63" NAME="samples_sent" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_samples_sent">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconcat_2" PORT="In0"/>
           </CONNECTIONS>
