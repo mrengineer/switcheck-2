@@ -2176,7 +2176,7 @@
                 "value_src": "constant"
               },
               "HAS_TLAST": {
-                "value": "0",
+                "value": "1",
                 "value_src": "constant"
               },
               "FREQ_HZ": {
@@ -2198,6 +2198,10 @@
                 "direction": "O",
                 "left": "31",
                 "right": "0"
+              },
+              "TLAST": {
+                "physical_name": "m_axis_tlast",
+                "direction": "O"
               },
               "TVALID": {
                 "physical_name": "m_axis_tvalid",

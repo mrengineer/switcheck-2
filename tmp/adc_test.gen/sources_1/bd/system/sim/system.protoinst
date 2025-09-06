@@ -9,6 +9,7 @@
 						"ACLK": { "actual": "aclk"},
 						"ARESETN": { "actual": "aresetn"},
 						"TDATA": { "actual": "m_axis_tdata[31:0]"},
+						"TLAST": { "actual": "m_axis_tlast"},
 						"TVALID": { "actual": "m_axis_tvalid"}
 					}
 				},

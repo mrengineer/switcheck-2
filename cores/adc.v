@@ -30,6 +30,7 @@ module ADC #
 
         // AXI-Stream master (32-bit words)
         output reg         m_axis_tvalid,
+        output reg m_axis_tlast,   // AXI-Stream tlast
         output wire [31:0] m_axis_tdata,
         
         // Output for max_sum_abs
@@ -136,7 +137,7 @@ always @(posedge aclk or negedge aresetn) begin
         end
         else // AfoninAS: размещаем в else все, что сбрасывается по reset_trigger
         begin 
-            last_detrigged <= limiter_val;
+            //last_detrigged <= limiter_val;
 
             // -------------------------
             // Счётчик семплов
@@ -157,14 +158,17 @@ always @(posedge aclk or negedge aresetn) begin
                 if (samples_sent == limiter_val-1) begin // AfoninAS: так как m_axis_tvalid опускается с задержкой на так по trigger_activated, счетчик д.б. на 1 меньше
                     trigger_activated  <= 1'b0;
                     axis_data_reg  <= {2'b11, a_u15, b_u15}; //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов
+                    m_axis_tlast       <= 1'b1;   // конец пакета, завершить burst в writer даже если не кратно 32
                 end else begin
                     axis_data_reg  <= {2'b10, a_u15, b_u15}; //  AfoninAS: слова с 0го по 31е
+                    m_axis_tlast       <= 1'b0;
                 end
 
                 m_axis_tvalid <= 1'b1; // AfoninAS: при активном триггере поднимаем tvalid, задержка на такт относительно trigger_activated
             end
             else
                 m_axis_tvalid <= 1'b0; // AfoninAS: при неактивном триггере опускаем tvalid, задержка на такт относительно trigger_activated
+                m_axis_tlast       <= 1'b0;
         end
 
 

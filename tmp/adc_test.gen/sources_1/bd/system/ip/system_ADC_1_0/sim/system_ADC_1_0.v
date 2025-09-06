@@ -67,6 +67,7 @@ module system_ADC_1_0 (
   reset_trigger,
   reset_max_sum,
   m_axis_tvalid,
+  m_axis_tlast,
   m_axis_tdata,
   max_sum_out,
   last_detrigged,
@@ -98,7 +99,9 @@ input wire reset_trigger;
 input wire reset_max_sum;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 m_axis TVALID" *)
 output wire m_axis_tvalid;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME m_axis, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 0, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 125000000, PHASE 0.0, CLK_DOMAIN system_pll_0_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 m_axis TLAST" *)
+output wire m_axis_tlast;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME m_axis, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 0, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 125000000, PHASE 0.0, CLK_DOMAIN system_pll_0_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 m_axis TDATA" *)
 output wire [31 : 0] m_axis_tdata;
 output wire [15 : 0] max_sum_out;
@@ -124,6 +127,7 @@ output wire [15 : 0] triggers_count;
     .reset_trigger(reset_trigger),
     .reset_max_sum(reset_max_sum),
     .m_axis_tvalid(m_axis_tvalid),
+    .m_axis_tlast(m_axis_tlast),
     .m_axis_tdata(m_axis_tdata),
     .max_sum_out(max_sum_out),
     .last_detrigged(last_detrigged),
