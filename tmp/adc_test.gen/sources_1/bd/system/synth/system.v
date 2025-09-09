@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Thu Sep  4 23:22:10 2025
+//Date        : Tue Sep  9 09:32:03 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=23,numReposBlks=23,numNonXlnxBlks=10,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=4,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
+(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=23,numReposBlks=23,numNonXlnxBlks=9,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=5,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
 module system
    (DDR_addr,
     DDR_ba,
@@ -93,6 +93,7 @@ module system
   wire [63:0]ADC_1_first_trigged;
   wire [63:0]ADC_1_last_detrigged;
   wire [31:0]ADC_1_m_axis_TDATA;
+  wire ADC_1_m_axis_TLAST;
   wire ADC_1_m_axis_TVALID;
   wire [15:0]ADC_1_max_sum_out;
   wire [63:0]ADC_1_samples_sent;
@@ -159,6 +160,23 @@ module system
   wire ps_0_M_AXI_GP0_WREADY;
   wire [3:0]ps_0_M_AXI_GP0_WSTRB;
   wire ps_0_M_AXI_GP0_WVALID;
+  wire [31:0]ram_writer_0_m_axi_AWADDR;
+  wire [1:0]ram_writer_0_m_axi_AWBURST;
+  wire [3:0]ram_writer_0_m_axi_AWCACHE;
+  wire [2:0]ram_writer_0_m_axi_AWID;
+  wire [3:0]ram_writer_0_m_axi_AWLEN;
+  wire ram_writer_0_m_axi_AWREADY;
+  wire [2:0]ram_writer_0_m_axi_AWSIZE;
+  wire ram_writer_0_m_axi_AWVALID;
+  wire ram_writer_0_m_axi_BREADY;
+  wire ram_writer_0_m_axi_BVALID;
+  wire [63:0]ram_writer_0_m_axi_WDATA;
+  wire [2:0]ram_writer_0_m_axi_WID;
+  wire ram_writer_0_m_axi_WLAST;
+  wire ram_writer_0_m_axi_WREADY;
+  wire [7:0]ram_writer_0_m_axi_WSTRB;
+  wire ram_writer_0_m_axi_WVALID;
+  wire [15:0]ram_writer_0_sts_data;
   wire [0:0]rst_0_peripheral_aresetn;
   wire [0:0]slice_0_dout;
   wire [0:0]slice_1_dout;
@@ -168,23 +186,6 @@ module system
   wire [7:0]slice_5_dout;
   wire [0:0]slice_6_dout;
   wire [0:0]slice_7_dout;
-  wire [31:0]writer_0_m_axi_AWADDR;
-  wire [1:0]writer_0_m_axi_AWBURST;
-  wire [3:0]writer_0_m_axi_AWCACHE;
-  wire [2:0]writer_0_m_axi_AWID;
-  wire [3:0]writer_0_m_axi_AWLEN;
-  wire writer_0_m_axi_AWREADY;
-  wire [2:0]writer_0_m_axi_AWSIZE;
-  wire writer_0_m_axi_AWVALID;
-  wire writer_0_m_axi_BREADY;
-  wire writer_0_m_axi_BVALID;
-  wire [63:0]writer_0_m_axi_WDATA;
-  wire [2:0]writer_0_m_axi_WID;
-  wire writer_0_m_axi_WLAST;
-  wire writer_0_m_axi_WREADY;
-  wire [7:0]writer_0_m_axi_WSTRB;
-  wire writer_0_m_axi_WVALID;
-  wire [15:0]writer_0_sts_data;
   wire [319:0]xlconcat_0_dout;
   wire [63:0]xlconcat_1_dout;
   wire [63:0]xlconcat_2_dout;
@@ -212,6 +213,7 @@ module system
         .last_detrigged(ADC_1_last_detrigged),
         .limiter(slice_5_dout),
         .m_axis_tdata(ADC_1_m_axis_TDATA),
+        .m_axis_tlast(ADC_1_m_axis_TLAST),
         .m_axis_tvalid(ADC_1_m_axis_TVALID),
         .max_sum_out(ADC_1_max_sum_out),
         .reset_max_sum(slice_7_dout),
@@ -346,28 +348,53 @@ module system
         .S_AXI_ACP_ARSIZE({1'b0,1'b1,1'b1}),
         .S_AXI_ACP_ARUSER({1'b0,1'b0,1'b0,1'b0,1'b0}),
         .S_AXI_ACP_ARVALID(1'b0),
-        .S_AXI_ACP_AWADDR(writer_0_m_axi_AWADDR),
-        .S_AXI_ACP_AWBURST(writer_0_m_axi_AWBURST),
-        .S_AXI_ACP_AWCACHE(writer_0_m_axi_AWCACHE),
-        .S_AXI_ACP_AWID(writer_0_m_axi_AWID),
-        .S_AXI_ACP_AWLEN(writer_0_m_axi_AWLEN),
+        .S_AXI_ACP_AWADDR(ram_writer_0_m_axi_AWADDR),
+        .S_AXI_ACP_AWBURST(ram_writer_0_m_axi_AWBURST),
+        .S_AXI_ACP_AWCACHE(ram_writer_0_m_axi_AWCACHE),
+        .S_AXI_ACP_AWID(ram_writer_0_m_axi_AWID),
+        .S_AXI_ACP_AWLEN(ram_writer_0_m_axi_AWLEN),
         .S_AXI_ACP_AWLOCK({1'b0,1'b0}),
         .S_AXI_ACP_AWPROT({1'b0,1'b0,1'b0}),
         .S_AXI_ACP_AWQOS({1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_ACP_AWREADY(writer_0_m_axi_AWREADY),
-        .S_AXI_ACP_AWSIZE(writer_0_m_axi_AWSIZE),
+        .S_AXI_ACP_AWREADY(ram_writer_0_m_axi_AWREADY),
+        .S_AXI_ACP_AWSIZE(ram_writer_0_m_axi_AWSIZE),
         .S_AXI_ACP_AWUSER({1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .S_AXI_ACP_AWVALID(writer_0_m_axi_AWVALID),
-        .S_AXI_ACP_BREADY(writer_0_m_axi_BREADY),
-        .S_AXI_ACP_BVALID(writer_0_m_axi_BVALID),
+        .S_AXI_ACP_AWVALID(ram_writer_0_m_axi_AWVALID),
+        .S_AXI_ACP_BREADY(ram_writer_0_m_axi_BREADY),
+        .S_AXI_ACP_BVALID(ram_writer_0_m_axi_BVALID),
         .S_AXI_ACP_RREADY(1'b0),
-        .S_AXI_ACP_WDATA(writer_0_m_axi_WDATA),
-        .S_AXI_ACP_WID(writer_0_m_axi_WID),
-        .S_AXI_ACP_WLAST(writer_0_m_axi_WLAST),
-        .S_AXI_ACP_WREADY(writer_0_m_axi_WREADY),
-        .S_AXI_ACP_WSTRB(writer_0_m_axi_WSTRB),
-        .S_AXI_ACP_WVALID(writer_0_m_axi_WVALID),
+        .S_AXI_ACP_WDATA(ram_writer_0_m_axi_WDATA),
+        .S_AXI_ACP_WID(ram_writer_0_m_axi_WID),
+        .S_AXI_ACP_WLAST(ram_writer_0_m_axi_WLAST),
+        .S_AXI_ACP_WREADY(ram_writer_0_m_axi_WREADY),
+        .S_AXI_ACP_WSTRB(ram_writer_0_m_axi_WSTRB),
+        .S_AXI_ACP_WVALID(ram_writer_0_m_axi_WVALID),
         .USB0_VBUS_PWRFAULT(1'b0));
+  system_ram_writer_0_0 ram_writer_0
+       (.aclk(pll_0_clk_out1),
+        .aresetn(slice_1_dout),
+        .cfg_data(const_1_dout),
+        .m_axi_awaddr(ram_writer_0_m_axi_AWADDR),
+        .m_axi_awburst(ram_writer_0_m_axi_AWBURST),
+        .m_axi_awcache(ram_writer_0_m_axi_AWCACHE),
+        .m_axi_awid(ram_writer_0_m_axi_AWID),
+        .m_axi_awlen(ram_writer_0_m_axi_AWLEN),
+        .m_axi_awready(ram_writer_0_m_axi_AWREADY),
+        .m_axi_awsize(ram_writer_0_m_axi_AWSIZE),
+        .m_axi_awvalid(ram_writer_0_m_axi_AWVALID),
+        .m_axi_bready(ram_writer_0_m_axi_BREADY),
+        .m_axi_bvalid(ram_writer_0_m_axi_BVALID),
+        .m_axi_wdata(ram_writer_0_m_axi_WDATA),
+        .m_axi_wid(ram_writer_0_m_axi_WID),
+        .m_axi_wlast(ram_writer_0_m_axi_WLAST),
+        .m_axi_wready(ram_writer_0_m_axi_WREADY),
+        .m_axi_wstrb(ram_writer_0_m_axi_WSTRB),
+        .m_axi_wvalid(ram_writer_0_m_axi_WVALID),
+        .min_addr(slice_3_dout),
+        .s_axis_tdata(ADC_1_m_axis_TDATA),
+        .s_axis_tlast(ADC_1_m_axis_TLAST),
+        .s_axis_tvalid(ADC_1_m_axis_TVALID),
+        .sts_data(ram_writer_0_sts_data));
   system_rst_0_0 rst_0
        (.aux_reset_in(1'b1),
         .dcm_locked(pll_0_locked),
@@ -399,30 +426,6 @@ module system
   system_slice_6_0 slice_7
        (.din(hub_0_cfg_data),
         .dout(slice_7_dout));
-  system_writer_0_0 writer_0
-       (.aclk(pll_0_clk_out1),
-        .aresetn(slice_1_dout),
-        .cfg_data(const_1_dout),
-        .m_axi_awaddr(writer_0_m_axi_AWADDR),
-        .m_axi_awburst(writer_0_m_axi_AWBURST),
-        .m_axi_awcache(writer_0_m_axi_AWCACHE),
-        .m_axi_awid(writer_0_m_axi_AWID),
-        .m_axi_awlen(writer_0_m_axi_AWLEN),
-        .m_axi_awready(writer_0_m_axi_AWREADY),
-        .m_axi_awsize(writer_0_m_axi_AWSIZE),
-        .m_axi_awvalid(writer_0_m_axi_AWVALID),
-        .m_axi_bready(writer_0_m_axi_BREADY),
-        .m_axi_bvalid(writer_0_m_axi_BVALID),
-        .m_axi_wdata(writer_0_m_axi_WDATA),
-        .m_axi_wid(writer_0_m_axi_WID),
-        .m_axi_wlast(writer_0_m_axi_WLAST),
-        .m_axi_wready(writer_0_m_axi_WREADY),
-        .m_axi_wstrb(writer_0_m_axi_WSTRB),
-        .m_axi_wvalid(writer_0_m_axi_WVALID),
-        .min_addr(slice_3_dout),
-        .s_axis_tdata(ADC_1_m_axis_TDATA),
-        .s_axis_tvalid(ADC_1_m_axis_TVALID),
-        .sts_data(writer_0_sts_data));
   system_xlconcat_0_0 xlconcat_0
        (.In0(xlconcat_1_dout),
         .In1(ADC_1_last_detrigged),
@@ -431,7 +434,7 @@ module system
         .In4(ADC_1_cur_sample),
         .dout(xlconcat_0_dout));
   system_xlconcat_0_1 xlconcat_1
-       (.In0({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,writer_0_sts_data}),
+       (.In0({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,ram_writer_0_sts_data}),
         .In1(ADC_1_max_sum_out),
         .In2(ADC_1_cur_adc),
         .dout(xlconcat_1_dout));

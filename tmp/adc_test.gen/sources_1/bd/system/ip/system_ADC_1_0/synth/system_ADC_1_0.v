@@ -52,7 +52,7 @@
 
 (* X_CORE_INFO = "ADC,Vivado 2023.2" *)
 (* CHECK_LICENSE_TYPE = "system_ADC_1_0,ADC,{}" *)
-(* CORE_GENERATION_INFO = "system_ADC_1_0,ADC,{x_ipProduct=Vivado 2023.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=ADC,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,ADC_DATA_WIDTH=14}" *)
+(* CORE_GENERATION_INFO = "system_ADC_1_0,ADC,{x_ipProduct=Vivado 2023.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=ADC,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=VERILOG,ADC_DATA_WIDTH=14}" *)
 (* IP_DEFINITION_SOURCE = "module_ref" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module system_ADC_1_0 (

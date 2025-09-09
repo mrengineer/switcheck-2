@@ -35,9 +35,6 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_slic
 # IP: bd/system/ip/system_const_1_0/system_const_1_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_const_1_0 || ORIG_REF_NAME==system_const_1_0} -quiet] -quiet
 
-# IP: bd/system/ip/system_writer_0_0/system_writer_0_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_writer_0_0 || ORIG_REF_NAME==system_writer_0_0} -quiet] -quiet
-
 # IP: bd/system/ip/system_slice_4_0/system_slice_4_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_slice_4_0 || ORIG_REF_NAME==system_slice_4_0} -quiet] -quiet
 
@@ -76,6 +73,9 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_xlco
 
 # IP: bd/system/ip/system_xlconcat_1_0/system_xlconcat_1_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_xlconcat_1_0 || ORIG_REF_NAME==system_xlconcat_1_0} -quiet] -quiet
+
+# IP: bd/system/ip/system_ram_writer_0_0/system_ram_writer_0_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==system_ram_writer_0_0 || ORIG_REF_NAME==system_ram_writer_0_0} -quiet] -quiet
 
 # XDC: /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/ip/system_pll_0_0/system_pll_0_0_board.xdc
 set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==system_pll_0_0 || ORIG_REF_NAME==system_pll_0_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
