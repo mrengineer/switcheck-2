@@ -149,7 +149,7 @@
 						"WVALID": { "actual": "S_AXI_ACP_WVALID"}
 					}
 				},
-				"/writer_0/m_axi": {
+				"/ram_writer_0/m_axi": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},
@@ -172,12 +172,13 @@
 						"WVALID": { "actual": "m_axi_wvalid"}
 					}
 				},
-				"/writer_0/s_axis": {
+				"/ram_writer_0/s_axis": {
 					"interface": "xilinx.com:interface:axis:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},
 						"ARESETN": { "actual": "aresetn"},
 						"TDATA": { "actual": "s_axis_tdata[31:0]"},
+						"TLAST": { "actual": "s_axis_tlast"},
 						"TREADY": { "actual": "s_axis_tready"},
 						"TVALID": { "actual": "s_axis_tvalid"}
 					}

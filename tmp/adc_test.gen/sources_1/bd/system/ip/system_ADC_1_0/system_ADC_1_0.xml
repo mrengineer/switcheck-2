@@ -350,7 +350,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f51db3f3</spirit:value>
+            <spirit:value>9:0e365b53</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -362,7 +362,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:55c54d06</spirit:value>
+            <spirit:value>9:8fe2bc7a</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -373,7 +373,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:55c54d06</spirit:value>
+            <spirit:value>9:8fe2bc7a</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -389,11 +389,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Tue Sep 09 06:10:42 UTC 2025</spirit:value>
+            <spirit:value>Wed Sep 10 20:47:34 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f51db3f3</spirit:value>
+            <spirit:value>9:0e365b53</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -409,11 +409,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Tue Sep 09 06:10:42 UTC 2025</spirit:value>
+            <spirit:value>Wed Sep 10 20:47:34 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:55c54d06</spirit:value>
+            <spirit:value>9:8fe2bc7a</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -718,10 +718,6 @@
         <spirit:name>trigger_activated</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
-          <spirit:vector>
-            <spirit:left spirit:format="long">0</spirit:left>
-            <spirit:right spirit:format="long">0</spirit:right>
-          </spirit:vector>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
               <spirit:typeName>reg</spirit:typeName>

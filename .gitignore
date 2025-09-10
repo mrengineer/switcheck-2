@@ -1,6 +1,7 @@
 # Vivado build artifacts
 .tmp/
 tmp/
+.Xil/
 
 # Vivado output folders
 adc_test.runs/
@@ -59,4 +60,5 @@ tmp/led_blinker.*
 !*.xpr
 
 
-tmp/adc_test.runs/synth_1/gen_run.xml
+tmp/adc_test.runs/synth_1/*
+tmp/adc_test.runs/synth_1/runme.log

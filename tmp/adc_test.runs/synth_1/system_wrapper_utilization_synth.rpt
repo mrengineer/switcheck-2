@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Tue Sep  9 09:33:01 2025
+| Date         : Wed Sep 10 23:48:50 2025
 | Host         : bigbc running 64-bit Ubuntu 24.04 LTS
 | Command      : report_utilization -file system_wrapper_utilization_synth.rpt -pb system_wrapper_utilization_synth.pb
 | Design       : system_wrapper
@@ -31,15 +31,15 @@ Table of Contents
 +----------------------------+------+-------+------------+-----------+-------+
 |          Site Type         | Used | Fixed | Prohibited | Available | Util% |
 +----------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*                |  833 |     0 |          0 |     17600 |  4.73 |
-|   LUT as Logic             |  832 |     0 |          0 |     17600 |  4.73 |
+| Slice LUTs*                |  890 |     0 |          0 |     17600 |  5.06 |
+|   LUT as Logic             |  889 |     0 |          0 |     17600 |  5.05 |
 |   LUT as Memory            |    1 |     0 |          0 |      6000 |  0.02 |
 |     LUT as Distributed RAM |    0 |     0 |            |           |       |
 |     LUT as Shift Register  |    1 |     0 |            |           |       |
-| Slice Registers            |  891 |     0 |          0 |     35200 |  2.53 |
-|   Register as Flip Flop    |  891 |     0 |          0 |     35200 |  2.53 |
+| Slice Registers            | 1067 |     0 |          0 |     35200 |  3.03 |
+|   Register as Flip Flop    | 1067 |     0 |          0 |     35200 |  3.03 |
 |   Register as Latch        |    0 |     0 |          0 |     35200 |  0.00 |
-| F7 Muxes                   |   32 |     0 |          0 |      8800 |  0.36 |
+| F7 Muxes                   |    0 |     0 |          0 |      8800 |  0.00 |
 | F8 Muxes                   |    0 |     0 |          0 |      4400 |  0.00 |
 +----------------------------+------+-------+------------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
@@ -59,7 +59,7 @@ Warning! LUT value is adjusted to account for LUT combining.
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 0     |          Yes |           - |          Set |
-| 263   |          Yes |           - |        Reset |
+| 439   |          Yes |           - |        Reset |
 | 18    |          Yes |         Set |            - |
 | 610   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
@@ -153,17 +153,16 @@ Warning! LUT value is adjusted to account for LUT combining.
 |  Ref Name | Used |  Functional Category |
 +-----------+------+----------------------+
 | FDRE      |  610 |         Flop & Latch |
-| LUT6      |  265 |                  LUT |
-| FDCE      |  263 |         Flop & Latch |
-| LUT2      |  254 |                  LUT |
+| FDCE      |  439 |         Flop & Latch |
+| LUT6      |  330 |                  LUT |
+| LUT2      |  203 |                  LUT |
+| LUT3      |  187 |                  LUT |
 | BIBUF     |  130 |                   IO |
-| LUT3      |  122 |                  LUT |
-| CARRY4    |   97 |           CarryLogic |
-| LUT1      |   89 |                  LUT |
-| LUT4      |   85 |                  LUT |
-| LUT5      |   44 |                  LUT |
+| CARRY4    |  111 |           CarryLogic |
+| LUT1      |   91 |                  LUT |
+| LUT4      |   68 |                  LUT |
+| LUT5      |   45 |                  LUT |
 | IBUF      |   44 |                   IO |
-| MUXF7     |   32 |                MuxFx |
 | OBUF      |   19 |                   IO |
 | ODDR      |   18 |                   IO |
 | FDSE      |   18 |         Flop & Latch |

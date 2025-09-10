@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_adc_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_adc" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="584.426 ns"></ZoomEndTime>
+      <Cursor1Time time="346.405 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="136"></NameColumnWidth>
+      <ValueColumnWidth column_width="141"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="22" />
+   <wvobject type="logic" fp_name="/tb_adc/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_adc/rstn">
+      <obj_property name="ElementShortName">rstn</obj_property>
+      <obj_property name="ObjectShortName">rstn</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/adc_dat_a">
+      <obj_property name="ElementShortName">adc_dat_a[15:0]</obj_property>
+      <obj_property name="ObjectShortName">adc_dat_a[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/adc_dat_b">
+      <obj_property name="ElementShortName">adc_dat_b[15:0]</obj_property>
+      <obj_property name="ObjectShortName">adc_dat_b[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/limiter">
+      <obj_property name="ElementShortName">limiter[7:0]</obj_property>
+      <obj_property name="ObjectShortName">limiter[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/trigger_level">
+      <obj_property name="ElementShortName">trigger_level[15:0]</obj_property>
+      <obj_property name="ObjectShortName">trigger_level[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_adc/reset_trigger">
+      <obj_property name="ElementShortName">reset_trigger</obj_property>
+      <obj_property name="ObjectShortName">reset_trigger</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_adc/reset_max_sum">
+      <obj_property name="ElementShortName">reset_max_sum</obj_property>
+      <obj_property name="ObjectShortName">reset_max_sum</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group67">
+      <obj_property name="label">Secondary</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/tb_adc/adc_csn">
+         <obj_property name="ElementShortName">adc_csn</obj_property>
+         <obj_property name="ObjectShortName">adc_csn</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/cur_adc">
+      <obj_property name="ElementShortName">cur_adc[15:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_adc[15:0]</obj_property>
+      <obj_property name="CustomSignalColor">#008080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/cur_sample">
+      <obj_property name="ElementShortName">cur_sample[63:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_sample[63:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_adc/m_axis_tvalid">
+      <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_adc/m_axis_tlast">
+      <obj_property name="ElementShortName">m_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/m_axis_tdata">
+      <obj_property name="ElementShortName">m_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/max_sum_out">
+      <obj_property name="ElementShortName">max_sum_out[15:0]</obj_property>
+      <obj_property name="ObjectShortName">max_sum_out[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/last_detrigged">
+      <obj_property name="ElementShortName">last_detrigged[63:0]</obj_property>
+      <obj_property name="ObjectShortName">last_detrigged[63:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/first_trigged">
+      <obj_property name="ElementShortName">first_trigged[63:0]</obj_property>
+      <obj_property name="ObjectShortName">first_trigged[63:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/cur_limiter">
+      <obj_property name="ElementShortName">cur_limiter[63:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_limiter[63:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/samples_sent">
+      <obj_property name="ElementShortName">samples_sent[63:0]</obj_property>
+      <obj_property name="ObjectShortName">samples_sent[63:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FAAFBE</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_adc/trigger_activated">
+      <obj_property name="ElementShortName">trigger_activated</obj_property>
+      <obj_property name="ObjectShortName">trigger_activated</obj_property>
+      <obj_property name="CustomSignalColor">#FFD700</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/triggers_count">
+      <obj_property name="ElementShortName">triggers_count[15:0]</obj_property>
+      <obj_property name="ObjectShortName">triggers_count[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_adc/ADC_DATA_WIDTH">
+      <obj_property name="ElementShortName">ADC_DATA_WIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ADC_DATA_WIDTH[31:0]</obj_property>
+   </wvobject>
+</wave_config>

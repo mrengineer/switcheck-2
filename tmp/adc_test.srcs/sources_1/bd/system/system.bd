@@ -2273,9 +2273,7 @@
             "right": "0"
           },
           "trigger_activated": {
-            "direction": "O",
-            "left": "0",
-            "right": "0"
+            "direction": "O"
           },
           "triggers_count": {
             "direction": "O",
@@ -3656,8 +3654,8 @@
           "axi_hub_modified_0/aclk",
           "axis_red_pitaya_dac_0/aclk",
           "axis_constant_0/aclk",
-          "ADC_1/aclk",
-          "ram_writer_0/aclk"
+          "ram_writer_0/aclk",
+          "ADC_1/aclk"
         ]
       },
       "pll_0_clk_out2": {
