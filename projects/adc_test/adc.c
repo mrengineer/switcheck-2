@@ -164,7 +164,7 @@ int main () {
 
 
 
-  uint16_t trg    = 2;
+  uint16_t trg    = 400;
 
 
 
@@ -182,14 +182,12 @@ int main () {
     
 
 
-    //*rx_rst &= ~1;    
     CLEAR_BIT(*rx_rst, 0); //сброс первого бита в 0 (сборс ацп)
-    //*rx_rst &= ~2;    
     CLEAR_BIT(*rx_rst, 1); //сброс axi writer (1й  бит)
 
 
     *trg_value      = trg;
-    *limiter        = 6;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
+    *limiter        = 5;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
     *rx_addr        = physical_address;   //начальный адрес записи У CMA GP0 это 0x8000_0000, у HP0 это 0x0000_0000    
 
     *rx_rate = 1;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
@@ -209,21 +207,16 @@ int main () {
     usleep(10);
 
     
-    // Сброс триггера (сбрасывается лог 1!)
-    
-    //*rx_rst &= ~(1 << 2);   // сбрасывает бит в 0 
-    
+    // Сброс триггера (сбрасывается лог 1!) 
     CLEAR_BIT(*rx_rst, 2);            //лог 0 ()
     usleep(20);
     SET_BIT(*rx_rst, 2);
     
-    //*rx_rst |= (1 << 2);  // ADC_1.reset_trigger Ставит бит в 1
-
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
 
 //    snprintf(outbuf, sizeof(outbuf), "VALUES:\n");
 
-    usleep(350000);
+    usleep(300000);
 
     while(!interrupted) {
       adc_abs_max_val         = *adc_abs_max;
@@ -292,12 +285,14 @@ int main () {
       }    
 
 
+      if (prev_position != position) {
+
           uint32_t *buf32 = (uint32_t *)ram;
 
           printf("Raw buffer (first 32 words, parsed):\n");
           printf("Idx | Type |   A (signed)   |   B (signed)\n");
           printf("----+------+---------------+---------------\n");
-          for (int i = 0; i < 66; ++i) {
+          for (int i = 0; i < 86; ++i) {
               uint32_t word = buf32[i];
               uint8_t type = (word >> 30) & 0x3;
               int16_t a = (int16_t)((word >> 15) & 0x7FFF); // 15 бит
@@ -311,6 +306,9 @@ int main () {
           
           close(fd); // закрытие дескриптора CMA
           exit(0);
+        } else {
+            usleep(800);
+        }
 
       
 
