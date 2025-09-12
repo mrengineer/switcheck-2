@@ -161,7 +161,7 @@ always @(posedge aclk or negedge aresetn) begin
             sum_abs <= abs_a + abs_b;
 
 
-            trigger_now = ((trigger_level < sum_abs) || trigger_activated);  // сделано чтобы избежать блокирующего присвоения и иметь значение прямо на этом такте
+            trigger_now = ((trigger_level <= sum_abs) || trigger_activated);  // сделано чтобы избежать блокирующего присвоения и иметь значение прямо на этом такте
 
             // Срабатывание тригера
             if (trigger_now && !trigger_activated) begin
@@ -178,8 +178,8 @@ always @(posedge aclk or negedge aresetn) begin
 
             if (trigger_now == 1'b1) begin
                               
-
-                if (cur_limiter == limiter_val-1) begin            // AfoninAS: так как m_axis_tvalid опускается с задержкой на так по trigger_activated, счетчик д.б. на 1 меньше
+                // Отключение посылки данных если достигнуто максимальное число отсчетов на серию или или сумма значений менее тригера
+                if ((cur_limiter == limiter_val-1) || (sum_abs <= trigger_level)) begin            // AfoninAS: так как m_axis_tvalid опускается с задержкой на так по trigger_activated, счетчик д.б. на 1 меньше
                     trigger_activated       <= 0;
                     axis_data_reg           <= {2'b11, a_u15, b_u15};        //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов
                     samples_sent            <= samples_sent + 1;
