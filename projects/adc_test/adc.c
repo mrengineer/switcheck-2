@@ -164,7 +164,7 @@ int main () {
 
 
 
-  uint16_t trg    = 400;
+  uint16_t trg    = 1450;
 
 
 
@@ -201,9 +201,6 @@ int main () {
     SET_BIT(*rx_rst, 0); //сброс первого бита в 0 (сборс ацп)
     SET_BIT(*rx_rst, 1); //сброс axi writer (1й  бит)
 
-    //*rx_rst |= 2; //установка второго бита в 1 (axis writer)
-    
-    //*rx_rst |= 1;  //установка первого бита в 1 (дециматор и другие)
     usleep(10);
 
     
@@ -216,7 +213,7 @@ int main () {
 
 //    snprintf(outbuf, sizeof(outbuf), "VALUES:\n");
 
-    usleep(300000);
+    usleep(30000);
 
     while(!interrupted) {
       adc_abs_max_val         = *adc_abs_max;
@@ -229,7 +226,7 @@ int main () {
       samples_count_val       = *samples_count;
       
       /* read ram writer position */
-      prev_position = position;
+      prev_position = position;         //В словах (32 бита)
       position      = *rx_cntr;
 
       if (adc_abs_max_val < *adc_abs_max) 
@@ -289,9 +286,8 @@ int main () {
 
           uint32_t *buf32 = (uint32_t *)ram;
 
-          printf("Raw buffer (first 32 words, parsed):\n");
-          printf("Idx | Type |   A (signed)   |   B (signed)\n");
-          printf("----+------+---------------+---------------\n");
+          
+          printf("Ix | Type |   A (signed)  |   B (signed)\n");
           for (int i = 0; i < 86; ++i) {
               uint32_t word = buf32[i];
               uint8_t type = (word >> 30) & 0x3;
@@ -304,10 +300,10 @@ int main () {
           }
 
           
-          close(fd); // закрытие дескриптора CMA
-          exit(0);
+        //close(fd); // закрытие дескриптора CMA
+          //#exit(0);
         } else {
-            usleep(800);
+            usleep(500); 
         }
 
       
