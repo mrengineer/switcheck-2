@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../adc_test.gen/sources_1/bd/system/ipshared/c2c6" --include "../../../../adc_test.gen/sources_1/bd/system/ipshared/ec67/hdl" --include "../../../../adc_test.gen/sources_1/bd/system/ipshared/6b2b/hdl" --include "/home/bulkin/Xilinx/Vivado/2023.2/data/xilinx_vip/include" \
+"../../../../../cores/adc.v" \
+"../../../../adc_test.srcs/sim_1/new/adc_tlast_test.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
