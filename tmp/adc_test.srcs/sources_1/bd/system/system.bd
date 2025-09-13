@@ -2234,6 +2234,9 @@
             "direction": "O",
             "left": "15",
             "right": "0"
+          },
+          "dbg_send_first_trigged_high": {
+            "direction": "O"
           }
         }
       },

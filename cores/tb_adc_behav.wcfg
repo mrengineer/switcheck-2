@@ -12,17 +12,18 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="231.985 ns"></ZoomEndTime>
-      <Cursor1Time time="1,563.331 ns"></Cursor1Time>
+      <ZoomEndTime time="1,940.376 ns"></ZoomEndTime>
+      <Cursor1Time time="5,513.745 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="133"></NameColumnWidth>
-      <ValueColumnWidth column_width="238"></ValueColumnWidth>
+      <NameColumnWidth column_width="182"></NameColumnWidth>
+      <ValueColumnWidth column_width="298"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="14" />
+   <WVObjectSize size="15" />
    <wvobject type="array" fp_name="/tb_adc/limiter">
       <obj_property name="ElementShortName">limiter[7:0]</obj_property>
       <obj_property name="ObjectShortName">limiter[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/tb_adc/reset_trigger">
       <obj_property name="ElementShortName">reset_trigger</obj_property>
@@ -74,6 +75,10 @@
          <obj_property name="ElementShortName">rstn</obj_property>
          <obj_property name="ObjectShortName">rstn</obj_property>
       </wvobject>
+      <wvobject type="array" fp_name="/tb_adc/ADC_DATA_WIDTH">
+         <obj_property name="ElementShortName">ADC_DATA_WIDTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ADC_DATA_WIDTH[31:0]</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject type="array" fp_name="/tb_adc/cur_sample">
       <obj_property name="ElementShortName">cur_sample[63:0]</obj_property>
@@ -103,7 +108,9 @@
    <wvobject type="array" fp_name="/tb_adc/first_trigged">
       <obj_property name="ElementShortName">first_trigged[63:0]</obj_property>
       <obj_property name="ObjectShortName">first_trigged[63:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FFFFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/tb_adc/cur_limiter">
       <obj_property name="ElementShortName">cur_limiter[63:0]</obj_property>
@@ -128,8 +135,16 @@
       <obj_property name="ObjectShortName">triggers_count[15:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_adc/ADC_DATA_WIDTH">
-      <obj_property name="ElementShortName">ADC_DATA_WIDTH[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ADC_DATA_WIDTH[31:0]</obj_property>
+   <wvobject type="array" fp_name="/tb_adc/m_axis_tdata">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">m_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata[31:0]</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="label">m_axis_tdata[29:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_adc/dbg_send_first_trigged_high">
+      <obj_property name="ElementShortName">dbg_send_first_trigged_high</obj_property>
+      <obj_property name="ObjectShortName">dbg_send_first_trigged_high</obj_property>
    </wvobject>
 </wave_config>

@@ -17,6 +17,8 @@ module ADC #
         output wire [15:0] cur_adc,
         output wire [63:0] cur_sample,
         
+        
+        
         input wire  [ 7:0] limiter,           // Сколько писать отсчетов в серии максимум (число 2^limiter) 
         
 
@@ -40,7 +42,11 @@ module ADC #
         output reg  [63:0]        cur_limiter,        // Ограничивает запись числом записей на одну серию
         output reg  [63:0]        samples_sent,       // Число отсчётов, сохранённых в шину
         output reg                trigger_activated,  // Флаг активации триггера  
-        output reg  [15:0]        triggers_count      // сколько раз сработал триггер
+        output reg  [15:0]        triggers_count,      // сколько раз сработал триггер
+        
+        
+        output wire dbg_send_first_trigged_high
+            
     );
 
 // =========================
@@ -90,7 +96,21 @@ wire signed [15:0] b_ext = {{(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]
 wire [14:0] a_u15 = a_ext[14:0];
 wire [14:0] b_u15 = b_ext[14:0];
 
-reg trigger_now;   // временный флаг
+reg trigger_now;   // флаг чтобы понимать сейчас идет серия или нет
+
+
+// Дробим переменную со счетчиком времени начала импульса чтобы отправить его в конце посылки c даннными
+// При этом берем 30 + 30 бит. Это хранит до 1170 лет при 125 МГц
+// Две 30-битные части
+wire [29:0] first_trigged_low;
+wire [29:0] first_trigged_high;
+
+reg send_first_trigged_high; //Флаг для отправки второй части счетчика в конце серии
+assign dbg_send_first_trigged_high = send_first_trigged_high; 
+
+// Разбиваем основной счётчик на части
+assign first_trigged_low  = first_trigged[29:0];
+assign first_trigged_high = first_trigged[59:30];
 
 
 // =========================
@@ -117,10 +137,7 @@ always @(posedge aclk or negedge aresetn) begin
         last_detrigged        <= 0;
         first_trigged         <= 0;
         cur_limiter           <= 0;
-
-        // need_send_cnt_low     <= 1'b0;
-        // need_send_cnt_high    <= 1'b0;
-        // need_send_end         <= 1'b0;
+        send_first_trigged_high <=0;
 
     end else begin
 
@@ -133,6 +150,7 @@ always @(posedge aclk or negedge aresetn) begin
             triggers_count        <= 0;
             
             trigger_activated     <= 0;
+            send_first_trigged_high <=0;
             cur_limiter           <= 0;
             
             trigger_now             <= 1'b0;
@@ -180,17 +198,27 @@ always @(posedge aclk or negedge aresetn) begin
                               
                 // Отключение посылки данных если достигнуто максимальное число отсчетов на серию или или сумма значений менее тригера
                 if ((cur_limiter == limiter_val-1) || (sum_abs <= trigger_level)) begin            // AfoninAS: так как m_axis_tvalid опускается с задержкой на так по trigger_activated, счетчик д.б. на 1 меньше
-                    trigger_activated       <= 0;
-                    axis_data_reg           <= {2'b11, a_u15, b_u15};        //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов
-                    samples_sent            <= samples_sent + 1;
-                    cur_limiter             <= 0;                    
-                    m_axis_tlast            <= 1'b1;                     // конец пакета, завершить burst в writer даже если не кратно 32
-                    last_detrigged          <= sample_counter;
+                    if (!send_first_trigged_high) begin 
+                        
+                        axis_data_reg           <= {2'b01, first_trigged_low};        //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов
+//                        samples_sent            <= samples_sent + 1;
+//                        cur_limiter             <= 0;
+//                        m_axis_tlast            <= 1'b0;                        // конец пакета, завершить burst в writer даже если не кратно 32
+                        last_detrigged          <= sample_counter;
+                        send_first_trigged_high <= 1;
+                    end else begin
+                        axis_data_reg           <= {2'b10, first_trigged_high};        //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов                    
+                        trigger_activated       <= 0;                        
+                        send_first_trigged_high <= 0;
+                        cur_limiter             <= 0;
+                        m_axis_tlast            <= 1'b0;                        // конец пакета, завершить burst в writer даже если не кратно 32                                                
+                    end
                 end else begin
-                    axis_data_reg           <= {2'b10, a_u15, b_u15};        //  AfoninAS: слова с 0го по 31е
+                    axis_data_reg           <= {2'b11, a_u15, b_u15};        //  AfoninAS: слова с 0го по 31е
                     samples_sent            <= samples_sent + 1;
                     cur_limiter             <= cur_limiter + 1;
                     m_axis_tlast            <= 1'b0;
+                    send_first_trigged_high <= 0;
 
                 end
 
