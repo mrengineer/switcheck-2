@@ -300,8 +300,8 @@ int main () {
           }
 
           
-        //close(fd); // закрытие дескриптора CMA
-          //#exit(0);
+            close(fd); // закрытие дескриптора CMA
+            exit(0);
         } else {
             usleep(500); 
         }
