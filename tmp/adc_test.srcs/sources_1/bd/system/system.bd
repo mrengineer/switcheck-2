@@ -7,8 +7,7 @@
       "name": "system",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "None",
-      "tool_version": "2023.2",
-      "validated": "true"
+      "tool_version": "2023.2"
     },
     "design_tree": {
       "pll_0": "",
@@ -262,30 +261,10 @@
         "right": "0"
       },
       "dac_clk_o": {
-        "direction": "O",
-        "parameters": {
-          "CLK_DOMAIN": {
-            "value": "system_axis_red_pitaya_dac_0_0_dac_clk",
-            "value_src": "default_prop"
-          },
-          "FREQ_HZ": {
-            "value": "100000000",
-            "value_src": "default_prop"
-          },
-          "PHASE": {
-            "value": "0.0",
-            "value_src": "default_prop"
-          }
-        }
+        "direction": "O"
       },
       "dac_rst_o": {
-        "direction": "O",
-        "parameters": {
-          "POLARITY": {
-            "value": "ACTIVE_LOW",
-            "value_src": "default_prop"
-          }
-        }
+        "direction": "O"
       },
       "dac_sel_o": {
         "direction": "O"
@@ -370,6 +349,12 @@
           "PCW_ACT_APU_PERIPHERAL_FREQMHZ": {
             "value": "666.666687"
           },
+          "PCW_ACT_CAN0_PERIPHERAL_FREQMHZ": {
+            "value": "23.8095"
+          },
+          "PCW_ACT_CAN1_PERIPHERAL_FREQMHZ": {
+            "value": "23.8095"
+          },
           "PCW_ACT_CAN_PERIPHERAL_FREQMHZ": {
             "value": "10.000000"
           },
@@ -393,6 +378,9 @@
           },
           "PCW_ACT_FPGA3_PERIPHERAL_FREQMHZ": {
             "value": "10.000000"
+          },
+          "PCW_ACT_I2C_PERIPHERAL_FREQMHZ": {
+            "value": "50"
           },
           "PCW_ACT_PCAP_PERIPHERAL_FREQMHZ": {
             "value": "200.000000"
@@ -499,8 +487,23 @@
           "PCW_DDR_PERIPHERAL_CLKSRC": {
             "value": "DDR PLL"
           },
+          "PCW_DDR_RAM_BASEADDR": {
+            "value": "0x00100000"
+          },
           "PCW_DDR_RAM_HIGHADDR": {
             "value": "0x1FFFFFFF"
+          },
+          "PCW_DM_WIDTH": {
+            "value": "4"
+          },
+          "PCW_DQS_WIDTH": {
+            "value": "4"
+          },
+          "PCW_DQ_WIDTH": {
+            "value": "32"
+          },
+          "PCW_ENET0_BASEADDR": {
+            "value": "0xE000B000"
           },
           "PCW_ENET0_ENET0_IO": {
             "value": "MIO 16 .. 27"
@@ -510,6 +513,9 @@
           },
           "PCW_ENET0_GRP_MDIO_IO": {
             "value": "MIO 52 .. 53"
+          },
+          "PCW_ENET0_HIGHADDR": {
+            "value": "0xE000BFFF"
           },
           "PCW_ENET0_PERIPHERAL_CLKSRC": {
             "value": "IO PLL"
@@ -557,6 +563,18 @@
             "value": "0"
           },
           "PCW_EN_CLK3_PORT": {
+            "value": "0"
+          },
+          "PCW_EN_CLKTRIG0_PORT": {
+            "value": "0"
+          },
+          "PCW_EN_CLKTRIG1_PORT": {
+            "value": "0"
+          },
+          "PCW_EN_CLKTRIG2_PORT": {
+            "value": "0"
+          },
+          "PCW_EN_CLKTRIG3_PORT": {
             "value": "0"
           },
           "PCW_EN_DDR": {
@@ -661,7 +679,25 @@
           "PCW_EN_PJTAG": {
             "value": "0"
           },
+          "PCW_EN_PTP_ENET0": {
+            "value": "0"
+          },
+          "PCW_EN_PTP_ENET1": {
+            "value": "0"
+          },
           "PCW_EN_QSPI": {
+            "value": "0"
+          },
+          "PCW_EN_RST0_PORT": {
+            "value": "1"
+          },
+          "PCW_EN_RST1_PORT": {
+            "value": "0"
+          },
+          "PCW_EN_RST2_PORT": {
+            "value": "0"
+          },
+          "PCW_EN_RST3_PORT": {
             "value": "0"
           },
           "PCW_EN_SDIO0": {
@@ -733,6 +769,27 @@
           "PCW_FPGA_FCLK0_ENABLE": {
             "value": "1"
           },
+          "PCW_GP0_EN_MODIFIABLE_TXN": {
+            "value": "1"
+          },
+          "PCW_GP0_NUM_READ_THREADS": {
+            "value": "4"
+          },
+          "PCW_GP0_NUM_WRITE_THREADS": {
+            "value": "4"
+          },
+          "PCW_GP1_EN_MODIFIABLE_TXN": {
+            "value": "1"
+          },
+          "PCW_GP1_NUM_READ_THREADS": {
+            "value": "4"
+          },
+          "PCW_GP1_NUM_WRITE_THREADS": {
+            "value": "4"
+          },
+          "PCW_GPIO_BASEADDR": {
+            "value": "0xE000A000"
+          },
           "PCW_GPIO_EMIO_GPIO_ENABLE": {
             "value": "1"
           },
@@ -741,6 +798,9 @@
           },
           "PCW_GPIO_EMIO_GPIO_WIDTH": {
             "value": "64"
+          },
+          "PCW_GPIO_HIGHADDR": {
+            "value": "0xE000AFFF"
           },
           "PCW_GPIO_MIO_GPIO_ENABLE": {
             "value": "1"
@@ -751,8 +811,14 @@
           "PCW_GPIO_PERIPHERAL_ENABLE": {
             "value": "1"
           },
+          "PCW_I2C0_BASEADDR": {
+            "value": "0xE0004000"
+          },
           "PCW_I2C0_GRP_INT_ENABLE": {
             "value": "0"
+          },
+          "PCW_I2C0_HIGHADDR": {
+            "value": "0xE0004FFF"
           },
           "PCW_I2C0_I2C0_IO": {
             "value": "MIO 50 .. 51"
@@ -781,8 +847,8 @@
           "PCW_IMPORT_BOARD_PRESET": {
             "value": "cfg/red_pitaya.xml"
           },
-          "PCW_IRQ_F2P_MODE": {
-            "value": "DIRECT"
+          "PCW_INCLUDE_ACP_TRANS_CHECK": {
+            "value": "0"
           },
           "PCW_MIO_0_IOTYPE": {
             "value": "LVCMOS 3.3V"
@@ -1249,6 +1315,9 @@
           "PCW_MIO_9_SLEW": {
             "value": "slow"
           },
+          "PCW_MIO_PRIMITIVE": {
+            "value": "54"
+          },
           "PCW_MIO_TREE_PERIPHERALS": {
             "value": [
               "GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#UART 1#UART 1#SPI 1#SPI 1#SPI 1#SPI 1#UART 0#UART 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#USB 0#USB 0#USB 0#USB",
@@ -1257,6 +1326,18 @@
           },
           "PCW_MIO_TREE_SIGNALS": {
             "value": "gpio[0]#gpio[1]#gpio[2]#gpio[3]#gpio[4]#gpio[5]#gpio[6]#gpio[7]#tx#rx#mosi#miso#sclk#ss[0]#rx#tx#tx_clk#txd[0]#txd[1]#txd[2]#txd[3]#tx_ctl#rx_clk#rxd[0]#rxd[1]#rxd[2]#rxd[3]#rx_ctl#data[4]#dir#stp#nxt#data[0]#data[1]#data[2]#data[3]#clk#data[5]#data[6]#data[7]#clk#cmd#data[0]#data[1]#data[2]#data[3]#cd#wp#reset#gpio[49]#scl#sda#mdc#mdio"
+          },
+          "PCW_M_AXI_GP0_ENABLE_STATIC_REMAP": {
+            "value": "0"
+          },
+          "PCW_M_AXI_GP0_ID_WIDTH": {
+            "value": "12"
+          },
+          "PCW_M_AXI_GP0_SUPPORT_NARROW_BURST": {
+            "value": "0"
+          },
+          "PCW_M_AXI_GP0_THREAD_ID_WIDTH": {
+            "value": "12"
           },
           "PCW_NAND_CYCLES_T_AR": {
             "value": "1"
@@ -1396,11 +1477,17 @@
           "PCW_PACKAGE_DDR_DQS_TO_CLK_DELAY_3": {
             "value": "-0.017"
           },
+          "PCW_PACKAGE_NAME": {
+            "value": "clg400"
+          },
           "PCW_PCAP_PERIPHERAL_CLKSRC": {
             "value": "IO PLL"
           },
           "PCW_PCAP_PERIPHERAL_FREQMHZ": {
             "value": "200"
+          },
+          "PCW_PERIPHERAL_BOARD_PRESET": {
+            "value": "None"
           },
           "PCW_PJTAG_PERIPHERAL_ENABLE": {
             "value": "0"
@@ -1413,6 +1500,9 @@
           },
           "PCW_PRESET_BANK1_VOLTAGE": {
             "value": "LVCMOS 2.5V"
+          },
+          "PCW_PS7_SI_REV": {
+            "value": "PRODUCTION"
           },
           "PCW_QSPI_INTERNAL_HIGHADDRESS": {
             "value": "0xFCFFFFFF"
@@ -1447,6 +1537,12 @@
           "PCW_SD1_PERIPHERAL_ENABLE": {
             "value": "0"
           },
+          "PCW_SDIO0_BASEADDR": {
+            "value": "0xE0100000"
+          },
+          "PCW_SDIO0_HIGHADDR": {
+            "value": "0xE0100FFF"
+          },
           "PCW_SDIO_PERIPHERAL_CLKSRC": {
             "value": "IO PLL"
           },
@@ -1456,11 +1552,38 @@
           "PCW_SDIO_PERIPHERAL_VALID": {
             "value": "1"
           },
+          "PCW_SMC_CYCLE_T0": {
+            "value": "NA"
+          },
+          "PCW_SMC_CYCLE_T1": {
+            "value": "NA"
+          },
+          "PCW_SMC_CYCLE_T2": {
+            "value": "NA"
+          },
+          "PCW_SMC_CYCLE_T3": {
+            "value": "NA"
+          },
+          "PCW_SMC_CYCLE_T4": {
+            "value": "NA"
+          },
+          "PCW_SMC_CYCLE_T5": {
+            "value": "NA"
+          },
+          "PCW_SMC_CYCLE_T6": {
+            "value": "NA"
+          },
           "PCW_SMC_PERIPHERAL_CLKSRC": {
             "value": "IO PLL"
           },
           "PCW_SMC_PERIPHERAL_VALID": {
             "value": "0"
+          },
+          "PCW_SPI0_BASEADDR": {
+            "value": "0xE0006000"
+          },
+          "PCW_SPI0_HIGHADDR": {
+            "value": "0xE0006FFF"
           },
           "PCW_SPI0_PERIPHERAL_ENABLE": {
             "value": "1"
@@ -1468,11 +1591,17 @@
           "PCW_SPI0_SPI0_IO": {
             "value": "EMIO"
           },
+          "PCW_SPI1_BASEADDR": {
+            "value": "0xE0007000"
+          },
           "PCW_SPI1_GRP_SS1_ENABLE": {
             "value": "0"
           },
           "PCW_SPI1_GRP_SS2_ENABLE": {
             "value": "0"
+          },
+          "PCW_SPI1_HIGHADDR": {
+            "value": "0xE0007FFF"
           },
           "PCW_SPI1_PERIPHERAL_ENABLE": {
             "value": "1"
@@ -1489,14 +1618,14 @@
           "PCW_SPI_PERIPHERAL_VALID": {
             "value": "1"
           },
-          "PCW_S_AXI_HP1_DATA_WIDTH": {
-            "value": "64"
+          "PCW_S_AXI_ACP_ARUSER_VAL": {
+            "value": "31"
           },
-          "PCW_S_AXI_HP2_DATA_WIDTH": {
-            "value": "64"
+          "PCW_S_AXI_ACP_AWUSER_VAL": {
+            "value": "31"
           },
-          "PCW_S_AXI_HP3_DATA_WIDTH": {
-            "value": "64"
+          "PCW_S_AXI_ACP_ID_WIDTH": {
+            "value": "3"
           },
           "PCW_TPIU_PERIPHERAL_CLKSRC": {
             "value": "External"
@@ -1549,11 +1678,17 @@
           "PCW_TTC1_PERIPHERAL_ENABLE": {
             "value": "0"
           },
+          "PCW_UART0_BASEADDR": {
+            "value": "0xE0000000"
+          },
           "PCW_UART0_BAUD_RATE": {
             "value": "115200"
           },
           "PCW_UART0_GRP_FULL_ENABLE": {
             "value": "0"
+          },
+          "PCW_UART0_HIGHADDR": {
+            "value": "0xE0000FFF"
           },
           "PCW_UART0_PERIPHERAL_ENABLE": {
             "value": "1"
@@ -1561,11 +1696,17 @@
           "PCW_UART0_UART0_IO": {
             "value": "MIO 14 .. 15"
           },
+          "PCW_UART1_BASEADDR": {
+            "value": "0xE0001000"
+          },
           "PCW_UART1_BAUD_RATE": {
             "value": "115200"
           },
           "PCW_UART1_GRP_FULL_ENABLE": {
             "value": "0"
+          },
+          "PCW_UART1_HIGHADDR": {
+            "value": "0xE0001FFF"
           },
           "PCW_UART1_PERIPHERAL_ENABLE": {
             "value": "1"
@@ -1762,6 +1903,15 @@
           "PCW_UIPARAM_DDR_USE_INTERNAL_VREF": {
             "value": "0"
           },
+          "PCW_UIPARAM_GENERATE_SUMMARY": {
+            "value": "NA"
+          },
+          "PCW_USB0_BASEADDR": {
+            "value": "0xE0102000"
+          },
+          "PCW_USB0_HIGHADDR": {
+            "value": "0xE0102fff"
+          },
           "PCW_USB0_PERIPHERAL_ENABLE": {
             "value": "1"
           },
@@ -1786,20 +1936,89 @@
           "PCW_USB_RESET_SELECT": {
             "value": "Share reset pin"
           },
+          "PCW_USE_AXI_FABRIC_IDLE": {
+            "value": "0"
+          },
           "PCW_USE_AXI_NONSECURE": {
+            "value": "0"
+          },
+          "PCW_USE_CORESIGHT": {
             "value": "0"
           },
           "PCW_USE_CROSS_TRIGGER": {
             "value": "0"
           },
+          "PCW_USE_CR_FABRIC": {
+            "value": "1"
+          },
+          "PCW_USE_DDR_BYPASS": {
+            "value": "0"
+          },
+          "PCW_USE_DEBUG": {
+            "value": "0"
+          },
           "PCW_USE_DEFAULT_ACP_USER_VAL": {
             "value": "1"
+          },
+          "PCW_USE_DMA0": {
+            "value": "0"
+          },
+          "PCW_USE_DMA1": {
+            "value": "0"
+          },
+          "PCW_USE_DMA2": {
+            "value": "0"
+          },
+          "PCW_USE_DMA3": {
+            "value": "0"
+          },
+          "PCW_USE_EXPANDED_IOP": {
+            "value": "0"
+          },
+          "PCW_USE_FABRIC_INTERRUPT": {
+            "value": "0"
+          },
+          "PCW_USE_HIGH_OCM": {
+            "value": "0"
+          },
+          "PCW_USE_M_AXI_GP0": {
+            "value": "1"
+          },
+          "PCW_USE_M_AXI_GP1": {
+            "value": "0"
+          },
+          "PCW_USE_PROC_EVENT_BUS": {
+            "value": "0"
+          },
+          "PCW_USE_PS_SLCR_REGISTERS": {
+            "value": "0"
           },
           "PCW_USE_S_AXI_ACP": {
             "value": "1"
           },
+          "PCW_USE_S_AXI_GP0": {
+            "value": "0"
+          },
+          "PCW_USE_S_AXI_GP1": {
+            "value": "0"
+          },
           "PCW_USE_S_AXI_HP0": {
             "value": "0"
+          },
+          "PCW_USE_S_AXI_HP1": {
+            "value": "0"
+          },
+          "PCW_USE_S_AXI_HP2": {
+            "value": "0"
+          },
+          "PCW_USE_S_AXI_HP3": {
+            "value": "0"
+          },
+          "PCW_USE_TRACE": {
+            "value": "0"
+          },
+          "PCW_VALUE_SILVERSION": {
+            "value": "3"
           },
           "PCW_WDT_PERIPHERAL_CLKSRC": {
             "value": "CPU_1X"
@@ -1809,6 +2028,9 @@
           },
           "PCW_WDT_PERIPHERAL_ENABLE": {
             "value": "0"
+          },
+          "preset": {
+            "value": "None"
           }
         },
         "interface_ports": {
@@ -3178,18 +3400,6 @@
               "HAS_TLAST": {
                 "value": "1",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "125000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "system_pll_0_0_clk_out1",
-                "value_src": "default_prop"
               }
             },
             "port_maps": {
@@ -3225,10 +3435,6 @@
               "PROTOCOL": {
                 "value": "AXI3",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "125000000",
-                "value_src": "ip_prop"
               },
               "ID_WIDTH": {
                 "value": "3",
@@ -3313,14 +3519,6 @@
               "MAX_BURST_LENGTH": {
                 "value": "16",
                 "value_src": "auto"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "system_pll_0_0_clk_out1",
-                "value_src": "default_prop"
               }
             },
             "address_space_ref": "m_axi",
@@ -3427,18 +3625,6 @@
               "ASSOCIATED_RESET": {
                 "value": "aresetn",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "125000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "system_pll_0_0_clk_out1",
-                "value_src": "default_prop"
               }
             }
           },
@@ -3660,8 +3846,8 @@
           "axi_hub_modified_0/aclk",
           "axis_red_pitaya_dac_0/aclk",
           "axis_constant_0/aclk",
-          "ram_writer_0/aclk",
-          "ADC_1/aclk"
+          "ADC_1/aclk",
+          "ram_writer_0/aclk"
         ]
       },
       "pll_0_clk_out2": {
