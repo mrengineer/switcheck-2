@@ -9,19 +9,32 @@
 ./tmp/adc_test.runs/
 ./tmp/adc_test.cache/
 ./tmp/adc_test.gen/
+./tmp/adc_test.sim/sim_1/
+
+sd_backup/
+tmp/adc_test.runs/
+tmp/adc_test.cache/
+tmp/adc_test.gen/
+tmp/adc_test.sim/sim_1/
+
 
 /sd_backup/
 /tmp/adc_test.runs/
 /tmp/adc_test.cache/
 /tmp/adc_test.gen/
+/tmp/adc_test.sim/sim_1
+
 
 *.xml
 *.rst
 *.bat
+*.wdb
 *.js
 *.log
 *.pb
 *.rpt
+*.rtti
+..sdb/adc_test.sim/sim_1/
 *.rpx
 *.jou
 *.ini
@@ -55,4 +68,4 @@
 !*.tcl
 !*.xpr
 
-
+notebooks/
