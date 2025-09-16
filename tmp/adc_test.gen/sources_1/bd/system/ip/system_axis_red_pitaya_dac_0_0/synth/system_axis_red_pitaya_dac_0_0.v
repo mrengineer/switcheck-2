@@ -52,7 +52,7 @@
 
 (* X_CORE_INFO = "axis_red_pitaya_dac,Vivado 2023.2" *)
 (* CHECK_LICENSE_TYPE = "system_axis_red_pitaya_dac_0_0,axis_red_pitaya_dac,{}" *)
-(* CORE_GENERATION_INFO = "system_axis_red_pitaya_dac_0_0,axis_red_pitaya_dac,{x_ipProduct=Vivado 2023.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=axis_red_pitaya_dac,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,DAC_DATA_WIDTH=14,AXIS_TDATA_WIDTH=32}" *)
+(* CORE_GENERATION_INFO = "system_axis_red_pitaya_dac_0_0,axis_red_pitaya_dac,{x_ipProduct=Vivado 2023.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=axis_red_pitaya_dac,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=VERILOG,DAC_DATA_WIDTH=14,AXIS_TDATA_WIDTH=32}" *)
 (* IP_DEFINITION_SOURCE = "module_ref" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module system_axis_red_pitaya_dac_0_0 (

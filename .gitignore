@@ -1,71 +1,59 @@
-*.zip
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.rar
-*.apk
+# ======================
+# Vivado / Xilinx
+# ======================
+# Временные каталоги Vivado
+*.Xil/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+*.str/
+*.cache/
 
-./sd_backup/
-./tmp/adc_test.runs/
-./tmp/adc_test.cache/
-./tmp/adc_test.gen/
-./tmp/adc_test.sim/sim_1/
-
-sd_backup/
-tmp/adc_test.runs/
+tmp/adc_test.sim/sim_1/behav/xsim/xsim.dir/tb_adc_behav/xsim.xdbg
 tmp/adc_test.cache/
-tmp/adc_test.gen/
-tmp/adc_test.sim/sim_1/
 
-
-/sd_backup/
-/tmp/adc_test.runs/
-/tmp/adc_test.cache/
-/tmp/adc_test.gen/
-/tmp/adc_test.sim/sim_1
-
-
-*.xml
-*.rst
-*.bat
-*.wdb
-*.js
-*.log
-*.pb
-*.rpt
-*.rtti
-..sdb/adc_test.sim/sim_1/
-*.rpx
+# Логи и временные файлы
 *.jou
-*.ini
-*.sdb
-*.mem
-*.sd_backup
+*.log
+*.wdb
+*.dcp
+
+# ======================
+# C / C++
+# ======================
+# Объектные файлы (можно собрать заново)
 *.o
-*.txt
+*.obj
+
+# Временные библиотеки
+*.a
+*.so
+*.dll
+*.dylib
+*.lib
+
+# ======================
+# CMake / Make
+build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+Makefile.in
+*.cmake
 
 
-!*adc*
-!*.bit
+# Misc
+*.swp
+*.swo
+*~
 
 
-
-
-# Uncomment if you want to keep source files:
-!*.c
-!*.h
-
-!.gitignore
+# Linux
+*.apk
+sd_backup/
+scripts/*.zip
 
 !*.v
-!*.sw
-!*.sv
-!*.vh
-!*.vh
-!*.xdc
-!*.xci
-!*.bd
-!*.tcl
-!*.xpr
 
-notebooks/

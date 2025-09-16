@@ -52,7 +52,7 @@
 
 (* X_CORE_INFO = "axis_decimator,Vivado 2023.2" *)
 (* CHECK_LICENSE_TYPE = "system_axis_decimator_0_0,axis_decimator,{}" *)
-(* CORE_GENERATION_INFO = "system_axis_decimator_0_0,axis_decimator,{x_ipProduct=Vivado 2023.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=axis_decimator,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,AXIS_TDATA_WIDTH=64,CNTR_WIDTH=16}" *)
+(* CORE_GENERATION_INFO = "system_axis_decimator_0_0,axis_decimator,{x_ipProduct=Vivado 2023.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=axis_decimator,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=VERILOG,AXIS_TDATA_WIDTH=64,CNTR_WIDTH=16}" *)
 (* IP_DEFINITION_SOURCE = "module_ref" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module system_axis_decimator_0_0 (

@@ -52,7 +52,7 @@
 
 (* X_CORE_INFO = "axi_hub_modified,Vivado 2023.2" *)
 (* CHECK_LICENSE_TYPE = "system_axi_hub_modified_0_0,axi_hub_modified,{}" *)
-(* CORE_GENERATION_INFO = "system_axi_hub_modified_0_0,axi_hub_modified,{x_ipProduct=Vivado 2023.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=axi_hub_modified,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,CFG_DATA_WIDTH=160,STS_DATA_WIDTH=320}" *)
+(* CORE_GENERATION_INFO = "system_axi_hub_modified_0_0,axi_hub_modified,{x_ipProduct=Vivado 2023.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=axi_hub_modified,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=VERILOG,CFG_DATA_WIDTH=160,STS_DATA_WIDTH=320}" *)
 (* IP_DEFINITION_SOURCE = "module_ref" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module system_axi_hub_modified_0_0 (

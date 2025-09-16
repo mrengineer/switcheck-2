@@ -70,14 +70,8 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param project.hsv.suppressChildGraphs 0
-set_param chipscope.maxJobs 1
-set_param checkpoint.writeSynthRtdsInDcp 1
-set_param synth.incrementalSynthesisCache ./.Xil/Vivado-360561-bigbc/incrSyn
-set_msg_config -id {Common 17-41} -limit 10000000
+set_param chipscope.maxJobs 2
 set_msg_config -id {HDL-1065} -limit 10000
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 set_msg_config  -id {BD 41-2383}  -string {{CRITICAL WARNING: [BD 41-2383] Width mismatch when connecting input pin '/xlconcat_1/In0'(32) to pin '/writer_0/sts_data'(16) - Only lower order bits will be connected, and other input bits of this pin will be left unconnected.}}  -suppress 
 set_msg_config  -id {BD 41-759}  -string {{CRITICAL WARNING: [BD 41-759] The input pins (listed below) are either not connected or do not have a source port, and they don't have a tie-off specified. These pins are tied-off to all 0's to avoid error in Implementation flow.
 Please check your design and connect them as needed: 
@@ -112,7 +106,7 @@ read_verilog -library xil_defaultlib {
   /home/bulkin/red-pitaya-notes/modules/output_buffer.v
   /home/bulkin/red-pitaya-notes/cores/axi_hub_modified.v
   /home/bulkin/red-pitaya-notes/cores/axis_red_pitaya_dac.v
-  /home/bulkin/red-pitaya-notes/tmp/adc_test.srcs/sources_1/new/ram_writer.v
+  /home/bulkin/red-pitaya-notes/cores/ram_writer.v
   /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/hdl/system_wrapper.v
 }
 add_files /home/bulkin/red-pitaya-notes/tmp/adc_test.srcs/sources_1/bd/system/system.bd

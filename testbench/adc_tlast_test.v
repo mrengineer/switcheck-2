@@ -32,7 +32,6 @@ module tb_adc();
     wire [63:0] samples_sent;
     wire trigger_activated;
     wire [15:0] triggers_count;
-    wire dbg_send_first_trigged_high;
 
     // DUT
     ADC #(
@@ -55,7 +54,7 @@ module tb_adc();
         .reset_max_sum(reset_max_sum),
 
         .m_axis_tvalid(m_axis_tvalid),
-        .m_axis_tlast(m_axis_tlast),
+        //.m_axis_tlast(m_axis_tlast),
         .m_axis_tdata(m_axis_tdata),
 
         .max_sum_out(max_sum_out),
@@ -64,9 +63,7 @@ module tb_adc();
         .cur_limiter(cur_limiter),
         .samples_sent(samples_sent),
         .trigger_activated(trigger_activated),
-        .triggers_count(triggers_count), 
-        .dbg_send_first_trigged_high(dbg_send_first_trigged_high),
-        .dbg_trigger_now(dbg_trigger_now)
+        .triggers_count(triggers_count)
     );
 
     // Тактовый генератор
