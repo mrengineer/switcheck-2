@@ -13,4 +13,4 @@ pkill tcpserver     #kill http server
 #./websocketd --port=80 --staticdir=. ./adc
 ./adc
 
-dd if=/dev/mem bs=1 count=128 skip=$((0x1C500000)) 2>/dev/null | xxd
+#dd if=/dev/mem bs=1 count=128 skip=$((0x1C500000)) 2>/dev/null | xxd

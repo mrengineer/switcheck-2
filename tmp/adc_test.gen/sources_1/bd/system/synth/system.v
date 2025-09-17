@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Tue Sep 16 22:45:55 2025
+//Date        : Wed Sep 17 21:36:26 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -93,10 +93,11 @@ module system
   wire [63:0]ADC_1_first_trigged;
   wire [63:0]ADC_1_last_detrigged;
   wire [31:0]ADC_1_m_axis_TDATA;
+  wire ADC_1_m_axis_TLAST;
   wire ADC_1_m_axis_TVALID;
   wire [15:0]ADC_1_max_sum_out;
   wire [31:0]ADC_1_samples_sent;
-  wire [0:0]ADC_1_trigger_activated;
+  wire ADC_1_trigger_activated;
   wire [15:0]ADC_1_triggers_count;
   wire adc_clk_n_i_1;
   wire adc_clk_p_i_1;
@@ -212,6 +213,7 @@ module system
         .last_detrigged(ADC_1_last_detrigged),
         .limiter(slice_5_dout),
         .m_axis_tdata(ADC_1_m_axis_TDATA),
+        .m_axis_tlast(ADC_1_m_axis_TLAST),
         .m_axis_tvalid(ADC_1_m_axis_TVALID),
         .max_sum_out(ADC_1_max_sum_out),
         .reset_max_sum(slice_7_dout),
@@ -390,7 +392,7 @@ module system
         .m_axi_wvalid(ram_writer_0_m_axi_WVALID),
         .min_addr(slice_3_dout),
         .s_axis_tdata(ADC_1_m_axis_TDATA),
-        .s_axis_tlast(1'b0),
+        .s_axis_tlast(ADC_1_m_axis_TLAST),
         .s_axis_tvalid(ADC_1_m_axis_TVALID),
         .sts_data(ram_writer_0_sts_data));
   system_rst_0_0 rst_0
@@ -438,7 +440,7 @@ module system
         .dout(xlconcat_1_dout));
   system_xlconcat_1_0 xlconcat_2
        (.In0(ADC_1_samples_sent),
-        .In1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,ADC_1_trigger_activated}),
+        .In1({ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated}),
         .In2(ADC_1_triggers_count),
         .dout(xlconcat_2_dout));
   system_xlconstant_0_0 xlconstant_0

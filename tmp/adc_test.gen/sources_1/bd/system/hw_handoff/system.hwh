@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Sep 16 22:45:56 2025" VIVADOVERSION="2023.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Sep 17 21:36:27 2025" VIVADOVERSION="2023.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -294,6 +294,11 @@
             <CONNECTION INSTANCE="ram_writer_0" PORT="s_axis_tdata"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="O" NAME="m_axis_tlast" SIGIS="undef" SIGNAME="ADC_1_m_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ram_writer_0" PORT="s_axis_tlast"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" NAME="m_axis_tvalid" SIGIS="undef" SIGNAME="ADC_1_m_axis_tvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ram_writer_0" PORT="s_axis_tvalid"/>
@@ -319,7 +324,7 @@
             <CONNECTION INSTANCE="xlconcat_2" PORT="In0"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="0" NAME="trigger_activated" RIGHT="0" SIGIS="undef" SIGNAME="ADC_1_trigger_activated">
+        <PORT DIR="O" NAME="trigger_activated" SIGIS="undef" SIGNAME="ADC_1_trigger_activated">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconcat_2" PORT="In1"/>
           </CONNECTIONS>
@@ -340,7 +345,7 @@
           <PARAMETER NAME="CLK_DOMAIN" VALUE="system_pll_0_0_clk_out1"/>
           <PARAMETER NAME="FREQ_HZ" VALUE="125000000"/>
           <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
-          <PARAMETER NAME="HAS_TLAST" VALUE="0"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
           <PARAMETER NAME="HAS_TREADY" VALUE="0"/>
           <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
           <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
@@ -352,6 +357,7 @@
           <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
           <PORTMAPS>
             <PORTMAP LOGICAL="TDATA" PHYSICAL="m_axis_tdata"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="m_axis_tlast"/>
             <PORTMAP LOGICAL="TVALID" PHYSICAL="m_axis_tvalid"/>
           </PORTMAPS>
         </BUSINTERFACE>
@@ -3021,6 +3027,11 @@
             <CONNECTION INSTANCE="ADC_1" PORT="m_axis_tdata"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="s_axis_tlast" SIGIS="undef" SIGNAME="ADC_1_m_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ADC_1" PORT="m_axis_tlast"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="ADC_1_m_axis_tvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ADC_1" PORT="m_axis_tvalid"/>
@@ -3049,6 +3060,7 @@
           <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
           <PORTMAPS>
             <PORTMAP LOGICAL="TDATA" PHYSICAL="s_axis_tdata"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="s_axis_tlast"/>
             <PORTMAP LOGICAL="TVALID" PHYSICAL="s_axis_tvalid"/>
           </PORTMAPS>
         </BUSINTERFACE>

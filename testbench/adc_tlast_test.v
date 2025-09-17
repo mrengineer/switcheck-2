@@ -29,7 +29,7 @@ module tb_adc();
     wire [63:0] last_detrigged;
     wire [63:0] first_trigged;
     wire [63:0] cur_limiter;
-    wire [63:0] samples_sent;
+    wire [31:0] samples_sent;
     wire trigger_activated;
     wire [15:0] triggers_count;
 
@@ -54,7 +54,7 @@ module tb_adc();
         .reset_max_sum(reset_max_sum),
 
         .m_axis_tvalid(m_axis_tvalid),
-        //.m_axis_tlast(m_axis_tlast),
+        .m_axis_tlast(m_axis_tlast),
         .m_axis_tdata(m_axis_tdata),
 
         .max_sum_out(max_sum_out),
@@ -76,7 +76,7 @@ module tb_adc();
     initial begin
         // init
         rstn            = 0;
-        limiter         = 8'd5;           // = 2^2 = 4 отсчета 5->32
+        limiter         = 8'd8;           // = 2^2 = 4 отсчета 5->32
         adc_dat_a       = 16'd10;
         adc_dat_b       = 16'd2;
         trigger_level   = 16'd20;

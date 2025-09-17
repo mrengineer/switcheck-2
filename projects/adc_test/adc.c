@@ -32,7 +32,6 @@
 #define clrscr() printf("\e[1;1H\e[2J")
 
 #define CMA_ALLOC _IOWR('Z', 0, uint32_t)
-#define N 30000 //900000 //N 4194304
 
 int interrupted = 0;
 
@@ -164,7 +163,7 @@ int main () {
 
 
 
-  uint16_t trg    = 1450;
+  uint16_t trg    = 1250;
 
 
 
@@ -187,7 +186,7 @@ int main () {
 
 
     *trg_value      = trg;
-    *limiter        = 5;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
+    *limiter        = 11;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
     *rx_addr        = physical_address;   //начальный адрес записи У CMA GP0 это 0x8000_0000, у HP0 это 0x0000_0000    
 
     *rx_rate = 1;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
@@ -283,12 +282,13 @@ int main () {
 
 
       if (prev_position != position) {
+            usleep(10000);
 
           uint32_t *buf32 = (uint32_t *)ram;
 
           
           printf("Ix | Type |   A (signed)  |   B (signed)\n");
-          for (int i = 0; i < 86; ++i) {
+          for (int i = 0; i < 2050; ++i) {
               uint32_t word = buf32[i];
               uint8_t type = (word >> 30) & 0x3;
               int16_t a = (int16_t)((word >> 15) & 0x7FFF); // 15 бит
@@ -300,8 +300,8 @@ int main () {
           }
 
           
-        //close(fd); // закрытие дескриптора CMA
-          //#exit(0);
+          close(fd); // закрытие дескриптора CMA
+          exit(0);
         } else {
             usleep(500); 
         }

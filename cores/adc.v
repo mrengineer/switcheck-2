@@ -30,6 +30,7 @@ module ADC #
 
         // AXI-Stream master (32-bit words)
         output reg         m_axis_tvalid,
+        output reg         m_axis_tlast,        // AXI-Stream tlast        
         output wire [31:0] m_axis_tdata,
         
         // Output for max_sum_abs
@@ -38,7 +39,7 @@ module ADC #
         output reg  [63:0]        first_trigged,      // первый раз сработал триггер
         output reg  [63:0]        cur_limiter,        // Ограничивает запись числом записей на одну серию
         output reg  [31:0]        samples_sent,       // Число отсчётов, сохранённых в шину
-        output reg  [0:0]         trigger_activated,  // Флаг активации триггера  
+        output reg                trigger_activated,  // Флаг активации триггера  
         output reg  [15:0]        triggers_count      // сколько раз сработал триггер
     );
 
@@ -89,7 +90,7 @@ wire signed [15:0] b_ext = {{(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]
 wire [14:0] a_u15 = a_ext[14:0];
 wire [14:0] b_u15 = b_ext[14:0];
 
-
+reg trigger_now;   // временный флаг
 
 // =========================
 // Основной процесс
@@ -105,7 +106,8 @@ always @(posedge aclk or negedge aresetn) begin
         m_axis_tvalid         <= 1'b0;
         axis_data_reg         <= 32'd0;
 
-        trigger_activated     <= 1'b0;
+        trigger_activated     <= 0;
+        trigger_now           <= 1'b0;
         triggers_count        <= 0;
         max_sum_abs           <= 0;
         sample_counter        <= 64'd0;
@@ -128,61 +130,90 @@ always @(posedge aclk or negedge aresetn) begin
             last_detrigged        <= 0;
             first_trigged         <= 0;
             triggers_count        <= 0;
-            trigger_activated     <= 1'b1;      //  временно 1!
-            cur_limiter           <= 0;
-            // need_send_end         <= 1'b0;
-            // need_send_cnt_low     <= 1'b0;
-            // need_send_cnt_high    <= 1'b0;
             
-            samples_sent          <= 0;             //временно
-            sample_counter <= 64'd0;                //временно!  AfoninAS: если убирается из сброса, то из else тоже нужно убрать, переместив за блок
+            trigger_activated     <= 0;
+            cur_limiter           <= 0;
+            
+            trigger_now             <= 1'b0;
         end
         else // AfoninAS: размещаем в else все, что сбрасывается по reset_trigger
         begin 
-            last_detrigged <= limiter_val;
+        
+            //last_detrigged <= limiter_val;
 
             // -------------------------
             // Счётчик семплов
             // -------------------------
             sample_counter <= sample_counter + 1;
 
+
             // -------------------------
+            // Захват и нормализация ADC
+            // (адаптировано из исходника)
+            // -------------------------
+            int_dat_a_reg <= {{(PADDING_WIDTH+1){adc_dat_a[ADC_DATA_WIDTH-1]}}, ~adc_dat_a[ADC_DATA_WIDTH-2:0]} + MID_SCALE;
+            int_dat_b_reg <= {{(PADDING_WIDTH+1){adc_dat_b[ADC_DATA_WIDTH-1]}}, ~adc_dat_b[ADC_DATA_WIDTH-2:0]} + MID_SCALE;
+    
+            abs_a <= int_dat_a_reg[ADC_DATA_WIDTH-1] ? (~int_dat_a_reg + 1) : int_dat_a_reg;
+            abs_b <= int_dat_b_reg[ADC_DATA_WIDTH-1] ? (~int_dat_b_reg + 1) : int_dat_b_reg;
+    
+            sum_abs <= abs_a + abs_b;
+
+
+            trigger_now = ((trigger_level <= sum_abs) || trigger_activated);  // сделано чтобы избежать блокирующего присвоения и иметь значение прямо на этом такте
+
+            // Срабатывание тригера
+            if (trigger_now && !trigger_activated) begin
+                trigger_activated <= 1;  // Запомним на следующий такт
+                triggers_count  <= triggers_count+1;
+                first_trigged   <= sample_counter;
+            end
+
+
             // Формирование AXI-Stream
-            // Очерёдность: cnt_low -> cnt_high -> data(если активен) -> end
             // За такт уходит максимум 1 слово.
             // -------------------------
             // m_axis_tvalid <= 1'b0; // по умолчаниюm_axis_tvalid - AfoninAS: так писать неправильно, нужно под else убрать
+            // || ()
 
-            if (trigger_activated == 1'b1) begin
-                cur_limiter           <= cur_limiter + 1;
-                samples_sent          <= samples_sent + 1;
-
-                if (samples_sent == 32'd31) begin // AfoninAS: так как m_axis_tvalid опускается с задержкой на так по trigger_activated, счетчик д.б. на 1 меньше
-                    trigger_activated  <= 1'b0;
-                    axis_data_reg  <= {2'b11, a_u15, b_u15}; //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов
+            if (trigger_now == 1'b1) begin
+            
+                if (sum_abs <= trigger_level) begin
+                    last_detrigged          <= sample_counter;
+                end
+                              
+                // Отключение посылки данных если достигнуто максимальное число отсчетов на серию или или сумма значений менее тригера
+                if ((cur_limiter == limiter_val-1) ) begin            // AfoninAS: так как m_axis_tvalid опускается с задержкой на так по trigger_activated, счетчик д.б. на 1 меньше
+                    trigger_activated       <= 0;
+                    axis_data_reg           <= {2'b11, a_u15, b_u15};        //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов
+                    samples_sent            <= samples_sent + 1;
+                    cur_limiter             <= 0;                    
+                    m_axis_tlast            <= 1'b1;                     // конец пакета, завершить burst в writer даже если не кратно 32
                 end else begin
-                    axis_data_reg  <= {2'b10, a_u15, b_u15}; //  AfoninAS: слова с 0го по 31е
+                    if (sum_abs <= trigger_level) begin
+                        axis_data_reg           <= {2'b10, a_u15, b_u15};
+                        samples_sent            <= samples_sent + 1;
+                        cur_limiter             <= cur_limiter + 1;
+                        m_axis_tlast            <= 1'b0;
+                    end else begin
+                        axis_data_reg           <= {2'b00, a_u15, b_u15};
+                        samples_sent            <= samples_sent + 1;
+                        cur_limiter             <= cur_limiter + 1;
+                        m_axis_tlast            <= 1'b0;                    
+                    end
+                    
                 end
 
                 m_axis_tvalid <= 1'b1; // AfoninAS: при активном триггере поднимаем tvalid, задержка на такт относительно trigger_activated
-            end
-            else
+            end else begin
                 m_axis_tvalid <= 1'b0; // AfoninAS: при неактивном триггере опускаем tvalid, задержка на такт относительно trigger_activated
+                m_axis_tlast  <= 1'b0;
+            end
         end
 
 
          
-        // -------------------------
-        // Захват и нормализация ADC
-        // (адаптировано из исходника)
-        // -------------------------
-        int_dat_a_reg <= {{(PADDING_WIDTH+1){adc_dat_a[ADC_DATA_WIDTH-1]}}, ~adc_dat_a[ADC_DATA_WIDTH-2:0]} + MID_SCALE;
-        int_dat_b_reg <= {{(PADDING_WIDTH+1){adc_dat_b[ADC_DATA_WIDTH-1]}}, ~adc_dat_b[ADC_DATA_WIDTH-2:0]} + MID_SCALE;
 
-        abs_a <= int_dat_a_reg[ADC_DATA_WIDTH-1] ? (~int_dat_a_reg + 1) : int_dat_a_reg;
-        abs_b <= int_dat_b_reg[ADC_DATA_WIDTH-1] ? (~int_dat_b_reg + 1) : int_dat_b_reg;
-
-        sum_abs <= abs_a + abs_b;
 
         // Трекинг максимума
         if (reset_max_sum) // AfoninAS: приоритет сброса выше, чем обновления суммы, переставляем местами и убираем лишнее условие в else

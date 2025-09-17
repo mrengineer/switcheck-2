@@ -10,6 +10,10 @@
 *.sim/
 *.str/
 *.cache/
+tmp/**/behav/
+tmp/**/sim_1/
+tmp/**/synth_1/
+
 
 tmp/adc_test.sim/sim_1/behav/xsim/xsim.dir/tb_adc_behav/xsim.xdbg
 tmp/adc_test.cache/
