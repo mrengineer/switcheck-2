@@ -164,7 +164,7 @@ int main () {
 
 
 
-  uint16_t trg    = 650;
+  uint16_t trg    = 1450;
 
 
 
@@ -245,7 +245,7 @@ int main () {
       printf("last_detrigged_val %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val);
       
       double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000.0;
-      printf("Длительность импульса, мс, PULSE_LEN %f\n", pulse_len);
+      printf("Длительность импульсв, мс, PULSE_LEN %f\n", pulse_len);
       printf("ADC (MAX/NOW)= %i/%i ед. АЦП\n", adc_abs_max_val, cur_adc_val);
       printf("Отправлено в память семлов, ADC_SENT_VAL %i\n", adc_sent_val);
       printf("TRG_ACTIVE %i\n", trigger_activated_val);
@@ -300,8 +300,8 @@ int main () {
           }
 
           
-            close(fd); // закрытие дескриптора CMA
-            exit(0);
+        //close(fd); // закрытие дескриптора CMA
+          //#exit(0);
         } else {
             usleep(500); 
         }
@@ -321,5 +321,4 @@ int main () {
 
   return EXIT_SUCCESS;
 }
-
 
