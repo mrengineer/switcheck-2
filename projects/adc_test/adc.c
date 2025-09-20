@@ -163,7 +163,7 @@ int main () {
 
 
 
-  uint16_t trg    = 1250;
+  uint16_t trg    = 2100;   //Уровень срабатывания триггера (для АЦП 12 бит, максимум 4095)
 
 
 
@@ -186,7 +186,7 @@ int main () {
 
 
     *trg_value      = trg;
-    *limiter        = 11;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
+    *limiter        = 16;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
     *rx_addr        = physical_address;   //начальный адрес записи У CMA GP0 это 0x8000_0000, у HP0 это 0x0000_0000    
 
     *rx_rate = 1;    //Дециматор. Ранее стояло 29  ЕСЛИ СТОИТ 4, то будет передаваться каждый 5й отсчет, 9 -> каждый 10й, 1-каждй 2й
@@ -212,7 +212,7 @@ int main () {
 
 //    snprintf(outbuf, sizeof(outbuf), "VALUES:\n");
 
-    usleep(30000);
+    usleep(60000);
 
     while(!interrupted) {
       adc_abs_max_val         = *adc_abs_max;
@@ -282,13 +282,30 @@ int main () {
 
 
       if (prev_position != position) {
-            usleep(10000);
+          usleep(10000);
 
           uint32_t *buf32 = (uint32_t *)ram;
 
           
+          // формируем имя файла по текущему времени
+          time_t now = time(NULL);
+          struct tm *t = localtime(&now);
+          char filename[128];
+          strftime(filename, sizeof(filename), "/tmp/%Y-%m-%d_%H_%M_%S.csv", t);
+
+          FILE *csv = fopen(filename, "w");
+          if (!csv) {
+              perror("fopen");
+              close(fd);
+              exit(1);
+          }
+
+          // заголовок в csv
+          fprintf(csv, "Ix|Type|A|B\n");
+
+          
           printf("Ix | Type |   A (signed)  |   B (signed)\n");
-          for (int i = 0; i < 2050; ++i) {
+          for (int i = 0; i < 65536+4; ++i) {
               uint32_t word = buf32[i];
               uint8_t type = (word >> 30) & 0x3;
               int16_t a = (int16_t)((word >> 15) & 0x7FFF); // 15 бит
@@ -297,9 +314,11 @@ int main () {
               if (a & 0x4000) a |= 0x8000; // sign extend
               if (b & 0x4000) b |= 0x8000; // sign extend
               printf("%2d |  %2u  | %13d | %13d\n", i, type, a, b);
+              
+              fprintf(csv, "%2d|%2u|%d|%d\n", i, type, a, b);
           }
 
-          
+          fclose(csv);
           close(fd); // закрытие дескриптора CMA
           exit(0);
         } else {

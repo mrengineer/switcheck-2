@@ -12,7 +12,7 @@ print("Args:", len(sys.argv))
 if (len(sys.argv) == 2):
     filenames = [sys.argv[1]]
 else:
-    filenames = glob.glob('./*.csv')
+    filenames = glob.glob('./**/*.csv',  recursive=True)
     
 plt.rcParams["figure.figsize"] = (30,15)
 
@@ -26,30 +26,20 @@ for filename in filenames:
     
     data = pd.read_csv(
         filename,
-        sep=";", 
-        nrows=100,
-        usecols=["Ix", "Type", "B (signed)"]
+        sep="|",         
+        usecols=["Type", "A", "B"]
     )
 
-
-    '''
-    #Для улучшения производительности суммируем I и Q каналов а не магнитуды
-    data['II'] = ((data['i0']**2 + data['q0']**2))**0.5 + ((data['i1']**2 + data['q1']**2))**0.5
-
-    data['i0'] = None
-
-
-            data['trigger'][i] = None
-    
-    '''
+    # переставляем порядок колонок → сначала B, потом A
+    data = data[["B", "A", "Type"]]
 
     # Create a line plot
     plot = data.plot(kind='line', title=filename)
-    #plot.set_ylim(-40,230)
-    plot.set_xlim(0, 100)
+    plot.set_ylim(-1500,1500)
+    plot.set_xlim(0, len(data) - 1)
     
     out_file = filename.replace(".csv", ".png")
-    plt.savefig(out_file, dpi=100)
+    plt.savefig(out_file, dpi=200)
     #plt.show(block=False)
 #plt.show()
 print(filenames)
