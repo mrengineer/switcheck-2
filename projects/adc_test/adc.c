@@ -313,10 +313,12 @@ int main () {
               // Преобразование 15-битного знакового числа
               if (a & 0x4000) a |= 0x8000; // sign extend
               if (b & 0x4000) b |= 0x8000; // sign extend
-              printf("%2d |  %2u  | %13d | %13d\n", i, type, a, b);
+              //printf("%2d |  %2u  | %13d | %13d\n", i, type, a, b);
               
               fprintf(csv, "%2d|%2u|%d|%d\n", i, type, a, b);
           }
+
+          printf("DONE\n");
 
           fclose(csv);
           close(fd); // закрытие дескриптора CMA

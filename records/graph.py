@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys, getopt
@@ -5,144 +6,119 @@ import numpy as np
 from math import sqrt
 import glob
 
+# попытка импортировать scipy.find_peaks
+try:
+    from scipy.signal import find_peaks
+    HAVE_SCIPY = True
+except Exception:
+    HAVE_SCIPY = False
 
-def my_alg(v, m):
-    res = 0
+def find_peaks_simple(x, distance=50, threshold=0):
+    """
+    Простой детектор пиков:
+    - x: 1D numpy array или list
+    - distance: минимальное расстояние между пиками (в сэмплах)
+    - threshold: минимальная высота пика
+    Возвращает numpy array индексов пиков.
+    """
+    x = np.asarray(x)
+    N = len(x)
+    peaks = []
+    last_peak = -distance
+    i = 1
+    while i < N - 1:
+        # локальный максимум
+        if x[i] > x[i - 1] and x[i] >= x[i + 1] and x[i] > threshold and (i - last_peak) >= distance:
+            # refine: найти настоящий максимум в небольшом окне вокруг i
+            left = max(0, i - 2)
+            right = min(N, i + 3)
+            local_max = i
+            for j in range(left, right):
+                if x[j] > x[local_max]:
+                    local_max = j
+            if (local_max - last_peak) >= distance:
+                peaks.append(local_max)
+                last_peak = local_max
+                i = local_max + 1
+                continue
+        i += 1
+    return np.array(peaks, dtype=int)
 
-    my_alg.v_prev.append(v)
-    my_alg.v_prev.pop(0)
+# --- основной код ---
+start = 0
+end = 0
 
-    my_alg.m_prev.append(m)
-    my_alg.m_prev.pop(0)
+print("Args:", len(sys.argv), sys.argv)
 
-    cnt         = len(my_alg.v_prev)
-        
-    left        = cnt//2
-
-    c_left      = 0
-    c_right     = 0
-
-    #stage 1 Is it bigger than treshold?
-    if (my_alg.v_prev[left] > v_tres and my_alg.m_prev[left] > m_tres):
-        #print("MIDDLE", my_alg.prev[left], ",")
-
-        #stage 2 Is it rise + fall
-        for i in range (1, left+1):
-            c_left  +=  my_alg.v_prev[i] - my_alg.v_prev[i-1]
-
-        for i in range (left+1, cnt):
-            c_right +=  my_alg.v_prev[i] - my_alg.v_prev[i-1]
-
-        if (c_left > 0 and c_right < 0):
-            res = 150
-
-    return res
-
-
-print("Args:", len(sys.argv))
-
-if (len(sys.argv) == 2):
+if (len(sys.argv) >= 2):
     filenames = [sys.argv[1]]
 else:
-    filenames = glob.glob('./*.txt')
-    
-plt.rcParams["figure.figsize"] = (30,15)
+    filenames = glob.glob('./**/*.csv',  recursive=True)
 
-i = 0
-f = 0
+if (len(sys.argv) >= 3):    
+    start = int(sys.argv[2])
+if (len(sys.argv) >= 4):    
+    end = int(sys.argv[3])
+
+plt.rcParams["figure.figsize"] = (45,15)
+
+min_distance = 1     # под сигнал
+rolling_window = 20  # запасной вариант
+
 for filename in filenames:
     print("plot", filename)
-    f = f + 1
+    data = pd.read_csv(
+        filename,
+        sep="|",         
+        usecols=["Type", "A", "B"]
+    )
 
+    data = data[["B", "A", "Type"]]
 
-    
-    data = pd.read_csv(filename, header=None, sep=' ', skiprows=0, nrows=100, names=['adc'], usecols=[1])
+    bias = 150
+    data["A"] = -1 * (data["A"] - bias)
+    data["B"] = data["B"] - bias
+    data["Type"] = data["Type"] * 100 - 500
 
-    '''
-    #Для улучшения производительности суммируем I и Q каналов а не магнитуды
-    data['II'] = ((data['i0']**2 + data['q0']**2))**0.5 + ((data['i1']**2 + data['q1']**2))**0.5
+    # сумма модулей
+    data["abs_sum"] = data["A"].abs() + data["B"].abs()
 
-    data['i0'] = None
-    data['i1'] = None
-    data['q0'] = None
-    data['q1'] = None
+    # порог по умолчанию (можно подбирать)
+    threshold = np.mean(data["abs_sum"]) + 0.03 * np.std(data["abs_sum"])
 
-    data['ewm'] = (data['II']).ewm(span=2, adjust=False).mean()
+    # поиск пиков: сначала scipy (если есть), иначе простой fallback
+    #if HAVE_SCIPY:
+        #peaks, props = find_peaks(data["abs_sum"].values, distance=min_distance, height=threshold)
+    #else:
+    peaks = find_peaks_simple(data["abs_sum"].values, distance=min_distance, threshold=threshold)
 
-    data['ewm_hard'] = (data['ewm']).ewm(span=7, adjust=False).mean()  #Важно! Сглаживание уже сглаженных данных!
-    data['dewm_hard'] = (data['ewm_hard']).diff().ewm(span=4, adjust=False).mean()
+    # строим огибающую: интерполяция по пикам
+    if len(peaks) >= 2:
+        envelope = np.interp(np.arange(len(data)), peaks, data["abs_sum"].values[peaks])
+    else:
+        # мало пиков — fallback: скользящий максимум (не по пикам, но стабильно)
+        envelope = data["abs_sum"].rolling(window=rolling_window, center=True, min_periods=1).max().values
 
-    trishold = data['ewm_hard'][0:580].max()*1.3
-    
-    d_trishold_max = data['dewm_hard'][0:580].max()*1.3
-    d_trishold_min = data['dewm_hard'][0:580].min()*1.3
+    data["envelope"] = envelope
+    data["envelope"] =  data["envelope"] + 10  # небольшой запас сверху
 
-    data['trishold'] = trishold
-    data['d_trishold_max'] = d_trishold_max
-    data['d_trishold_min'] = d_trishold_min
-    data['trigger']     = None
-    data['trigger1']    = None
-    data['trigger2']    = None
+    #Немного улучшим вывод
 
-    i = 0
-    cnt = 0 
+    data["A"] = 0.2 * data["A"]
+    data["B"] = 0.2 * data["B"]
 
+    # рисуем
+    fig, ax = plt.subplots(figsize=(45,15))
+    data[["B","A","Type","abs_sum"]].plot(ax=ax)
+    ax.plot(data["envelope"].values, linewidth=2)  # огибающая поверх
+    ax.set_title(filename)
+    ax.set_ylim(-2500, 7500)
 
-    data['adaptive_trishold'] = data['ewm_hard'].ewm(span=400, adjust=False).mean()
+    local_end = end if end != 0 else len(data) - 1
+    ax.set_xlim(start, local_end)
 
-    for i in range(1, data['dewm_hard'].count()):
-        
-        if (data['ewm_hard'][i] > trishold):
-            data['trigger'][i]   = -20
-            data['trigger'][i-1] = -20
-            data['trigger'][i+1] = None
+    out_file = os.path.splitext(filename)[0] + ".png"
+    plt.savefig(out_file, dpi=200)
+    plt.close(fig)
 
-            if (data['ewm_hard'][i] > data['adaptive_trishold'][i]):
-                data['trigger1'][i]     = -40
-                data['trigger1'][i-1]   = -40
-                data['trigger1'][i+1]   = None
-
-                if (data['dewm_hard'][i-1] >= 0 and data['dewm_hard'][i] <= 0):
-                    data['trigger2'][i]     = 60
-                    data['trigger2'][i-1]   = -60
-                    data['trigger2'][i+1]   = None
-                    cnt = cnt + 1
-                else:
-                    data['trigger2'][i] = None
-            else:
-                data['trigger1'][i] = None
-        else:
-            data['trigger'][i] = None
-    
-
-    
-
-        #На пике может быть зазубринка с одной из его сторон. Это может быть или шум или от смыкание второго контакта
-        #Будем считать, что воторой пик - это результат смыкания второго контакта, если он образован фронтом минимум 2 точек, идущих наверх
-
-    print ("\n----------------------------------------------\n")
-    print ("max d=", data['dewm_hard'].max())
-    print ("min d=", data['dewm_hard'].min())
-
-    data['0'] = 0
-    #data['m'] = None
-    data['ema'] = None
-    data['ewm'] = None
-    data['II'] = None
-
-    print("\ntrishold", trishold)
-    print("d_trishold_max=", d_trishold_max)
-    print("d_trishold_min=", d_trishold_min)
-    print("\nFOUND", cnt)
-    '''
-
-    # Create a line plot
-    plot = data.plot(kind='line', title=filename)
-    #plot.set_ylim(-40,230)
-    plot.set_xlim(0, 100)
-    
-    out_file = filename.replace(".txt", ".png")
-    plt.savefig(out_file, dpi=100)
-    #plt.show(block=False)
-#plt.show()
 print(filenames)
