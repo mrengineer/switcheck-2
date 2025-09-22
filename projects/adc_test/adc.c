@@ -57,6 +57,8 @@ int main () {
   volatile uint64_t *last_detrigged, *first_trgged, *samples_count;
 
   volatile uint16_t *rx_rate, *trg_value;
+  volatile int16_t *bias_ch_A, *bias_ch_B;
+
   volatile uint8_t *limiter;
   volatile uint8_t *rx_rst;
   volatile void *cfg, *sts, *ram;
@@ -145,10 +147,17 @@ int main () {
 
   //+1 означает сдвиг на 8 бит, т.к. указатели 8 бит => 64 bit address shift is 64/8 = 8
   rx_rst          = (uint8_t *)(cfg + 0);   //[0 bit shifted]   //Набор битов сброса IP блоков ПЛИС 0й - ADC_1, 1й - axis writer, 2 - флаг превышения триггера у ADC_1, 3 - сброс максимума суммы значений по каналам АЦП
-  rx_rate         = (uint16_t *)(cfg + 2);  //[16 bit shift]    //Децимация
+  rx_rate         = (int16_t *)(cfg + 2);   //[16 bit shift]    //Децимация
   rx_addr         = (uint32_t *)(cfg + 4);  //32 bit shifted    //Начальный адрес буфера памяти
   trg_value       = (uint16_t *)(cfg + 8);  //16 bit for mod(ADC1+ADC2) trigger value
-  limiter         = (uint8_t *)(cfg + 10); //максимальное число семплов на серию (ограничение. степень 2)
+  limiter         = (uint8_t *)(cfg + 10);  //максимальное число семплов на серию (ограничение. степень 2)
+
+  bias_ch_A       = (int16_t *)(cfg + 12); //16 bit for bias_ch_A
+  bias_ch_B       = (int16_t *)(cfg + 14); //16 bit
+
+  // 160 бит = 20 байт
+
+
 
   rx_cntr         = (uint32_t *)(sts + 0);    //через rx_cntr writer0 блок сообщает программе сколько данных он записал в память
   adc_abs_max     = (uint16_t *)(sts + 4);    //Максимальное значение после сброса, для самокалибровки триггера

@@ -25,7 +25,7 @@ module ADC #
         input  wire [15:0] trigger_level,
 
         // Reset control signals
-        input  wire        reset_trigger,     // Сброс триггера при 1 извне
+        input  wire        nreset_trigger,     // Сброс триггера при 1 извне
         input  wire        reset_max_sum,     // Сброс максимума суммы при 1
 
         // AXI-Stream master (32-bit words)
@@ -117,16 +117,13 @@ always @(posedge aclk or negedge aresetn) begin
         first_trigged         <= 0;
         cur_limiter           <= 0;
 
-        // need_send_cnt_low     <= 1'b0;
-        // need_send_cnt_high    <= 1'b0;
-        // need_send_end         <= 1'b0;
 
     end else begin
 
         // -------------------------
         // Сброс части триггера
         // -------------------------
-        if (!reset_trigger) begin
+        if (!nreset_trigger) begin
             last_detrigged        <= 0;
             first_trigged         <= 0;
             triggers_count        <= 0;

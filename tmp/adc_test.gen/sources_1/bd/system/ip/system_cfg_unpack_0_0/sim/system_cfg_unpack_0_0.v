@@ -47,20 +47,68 @@
 // DO NOT MODIFY THIS FILE.
 
 
-#ifndef _xlconstant_v1_1_8_H_
-#define _xlconstant_v1_1_8_H_
+// IP VLNV: xilinx.com:module_ref:cfg_unpack:1.0
+// IP Revision: 1
 
-#include "systemc.h"
-template<int CONST_WIDTH,long int CONST_VAL>
-SC_MODULE(xlconstant_v1_1_8) {
-  public:
-  sc_out< sc_bv<CONST_WIDTH> > dout;
-  void init() {
-    dout.write(CONST_VAL);
-  }
-  SC_CTOR(xlconstant_v1_1_8) {
-    SC_METHOD(init);
-  }
-};
+`timescale 1ns/1ps
 
-#endif
+(* IP_DEFINITION_SOURCE = "module_ref" *)
+(* DowngradeIPIdentifiedWarnings = "yes" *)
+module system_cfg_unpack_0_0 (
+  cfg_data,
+  rx_rst,
+  rst_adc_n,
+  rst_axis_writer_n,
+  rst_trg,
+  rx_rate,
+  rx_addr,
+  trg_value,
+  limiter,
+  bias_ch_A,
+  bias_ch_B
+);
+
+input wire [159 : 0] cfg_data;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME rx_rst, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 rx_rst RST" *)
+input wire [7 : 0] rx_rst;
+output wire rst_adc_n;
+output wire rst_axis_writer_n;
+output wire rst_trg;
+output wire [15 : 0] rx_rate;
+output wire [31 : 0] rx_addr;
+output wire [15 : 0] trg_value;
+output wire [7 : 0] limiter;
+output wire [15 : 0] bias_ch_A;
+output wire [15 : 0] bias_ch_B;
+
+  cfg_unpack #(
+    .CFG_DATA_WIDTH(160),
+    .RX_RST_LSB(0),
+    .RX_RST_WIDTH(8),
+    .RX_RATE_LSB(16),
+    .RX_RATE_WIDTH(16),
+    .RX_ADDR_LSB(32),
+    .RX_ADDR_WIDTH(32),
+    .TRG_VALUE_LSB(64),
+    .TRG_VALUE_WIDTH(16),
+    .LIMITER_LSB(80),
+    .LIMITER_WIDTH(8),
+    .BIAS_A_LSB(96),
+    .BIAS_A_WIDTH(16),
+    .BIAS_B_LSB(112),
+    .BIAS_B_WIDTH(16)
+  ) inst (
+    .cfg_data(cfg_data),
+    .rx_rst(rx_rst),
+    .rst_adc_n(rst_adc_n),
+    .rst_axis_writer_n(rst_axis_writer_n),
+    .rst_trg(rst_trg),
+    .rx_rate(rx_rate),
+    .rx_addr(rx_addr),
+    .trg_value(trg_value),
+    .limiter(limiter),
+    .bias_ch_A(bias_ch_A),
+    .bias_ch_B(bias_ch_B)
+  );
+endmodule

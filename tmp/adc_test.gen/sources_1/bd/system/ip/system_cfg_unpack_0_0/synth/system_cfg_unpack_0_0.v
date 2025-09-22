@@ -47,22 +47,69 @@
 // DO NOT MODIFY THIS FILE.
 
 
-// IP VLNV: xilinx.com:ip:xlconstant:1.1
-// IP Revision: 8
+// IP VLNV: xilinx.com:module_ref:cfg_unpack:1.0
+// IP Revision: 1
 
-`timescale 1ns/1ps
-
+(* X_CORE_INFO = "cfg_unpack,Vivado 2023.2" *)
+(* CHECK_LICENSE_TYPE = "system_cfg_unpack_0_0,cfg_unpack,{}" *)
+(* CORE_GENERATION_INFO = "system_cfg_unpack_0_0,cfg_unpack,{x_ipProduct=Vivado 2023.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=cfg_unpack,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=VERILOG,CFG_DATA_WIDTH=160,RX_RST_LSB=0,RX_RST_WIDTH=8,RX_RATE_LSB=16,RX_RATE_WIDTH=16,RX_ADDR_LSB=32,RX_ADDR_WIDTH=32,TRG_VALUE_LSB=64,TRG_VALUE_WIDTH=16,LIMITER_LSB=80,LIMITER_WIDTH=8,BIAS_A_LSB=96,BIAS_A_WIDTH=16,BIAS_B_LSB=112,BIAS_B_WIDTH=16}" *)
+(* IP_DEFINITION_SOURCE = "module_ref" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
-module system_xlconstant_0_0 (
-  dout
+module system_cfg_unpack_0_0 (
+  cfg_data,
+  rx_rst,
+  rst_adc_n,
+  rst_axis_writer_n,
+  rst_trg,
+  rx_rate,
+  rx_addr,
+  trg_value,
+  limiter,
+  bias_ch_A,
+  bias_ch_B
 );
 
-output wire [31 : 0] dout;
+input wire [159 : 0] cfg_data;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME rx_rst, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 rx_rst RST" *)
+input wire [7 : 0] rx_rst;
+output wire rst_adc_n;
+output wire rst_axis_writer_n;
+output wire rst_trg;
+output wire [15 : 0] rx_rate;
+output wire [31 : 0] rx_addr;
+output wire [15 : 0] trg_value;
+output wire [7 : 0] limiter;
+output wire [15 : 0] bias_ch_A;
+output wire [15 : 0] bias_ch_B;
 
-  xlconstant_v1_1_8_xlconstant #(
-    .CONST_WIDTH(32),
-    .CONST_VAL(32'H00002328)
+  cfg_unpack #(
+    .CFG_DATA_WIDTH(160),
+    .RX_RST_LSB(0),
+    .RX_RST_WIDTH(8),
+    .RX_RATE_LSB(16),
+    .RX_RATE_WIDTH(16),
+    .RX_ADDR_LSB(32),
+    .RX_ADDR_WIDTH(32),
+    .TRG_VALUE_LSB(64),
+    .TRG_VALUE_WIDTH(16),
+    .LIMITER_LSB(80),
+    .LIMITER_WIDTH(8),
+    .BIAS_A_LSB(96),
+    .BIAS_A_WIDTH(16),
+    .BIAS_B_LSB(112),
+    .BIAS_B_WIDTH(16)
   ) inst (
-    .dout(dout)
+    .cfg_data(cfg_data),
+    .rx_rst(rx_rst),
+    .rst_adc_n(rst_adc_n),
+    .rst_axis_writer_n(rst_axis_writer_n),
+    .rst_trg(rst_trg),
+    .rx_rate(rx_rate),
+    .rx_addr(rx_addr),
+    .trg_value(trg_value),
+    .limiter(limiter),
+    .bias_ch_A(bias_ch_A),
+    .bias_ch_B(bias_ch_B)
   );
 endmodule

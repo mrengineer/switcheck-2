@@ -64,7 +64,7 @@ module system_ADC_1_0 (
   cur_sample,
   limiter,
   trigger_level,
-  reset_trigger,
+  nreset_trigger,
   reset_max_sum,
   m_axis_tvalid,
   m_axis_tlast,
@@ -91,9 +91,7 @@ output wire [15 : 0] cur_adc;
 output wire [63 : 0] cur_sample;
 input wire [7 : 0] limiter;
 input wire [15 : 0] trigger_level;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_trigger, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_trigger RST" *)
-input wire reset_trigger;
+input wire nreset_trigger;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_max_sum, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_max_sum RST" *)
 input wire reset_max_sum;
@@ -124,7 +122,7 @@ output wire [15 : 0] triggers_count;
     .cur_sample(cur_sample),
     .limiter(limiter),
     .trigger_level(trigger_level),
-    .reset_trigger(reset_trigger),
+    .nreset_trigger(nreset_trigger),
     .reset_max_sum(reset_max_sum),
     .m_axis_tvalid(m_axis_tvalid),
     .m_axis_tlast(m_axis_tlast),

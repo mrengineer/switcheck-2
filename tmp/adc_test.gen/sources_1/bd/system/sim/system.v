@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Wed Sep 17 21:36:27 2025
+//Date        : Mon Sep 22 23:35:29 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=23,numReposBlks=23,numNonXlnxBlks=9,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=5,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
+(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=21,numReposBlks=21,numNonXlnxBlks=8,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=5,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
 module system
    (DDR_addr,
     DDR_ba,
@@ -103,19 +103,10 @@ module system
   wire adc_clk_p_i_1;
   wire [15:0]adc_dat_a_i_1;
   wire [15:0]adc_dat_b_i_1;
-  wire [31:0]axis_constant_0_m_axis_TDATA;
-  wire axis_constant_0_m_axis_TVALID;
-  wire axis_red_pitaya_dac_0_dac_clk;
-  wire [13:0]axis_red_pitaya_dac_0_dac_dat;
-  wire axis_red_pitaya_dac_0_dac_rst;
-  wire axis_red_pitaya_dac_0_dac_sel;
-  wire axis_red_pitaya_dac_0_dac_wrt;
   wire [0:0]const_0_dout;
   wire [15:0]const_1_dout;
   wire [159:0]hub_0_cfg_data;
   wire pll_0_clk_out1;
-  wire pll_0_clk_out2;
-  wire pll_0_clk_out3;
   wire pll_0_locked;
   wire [14:0]ps_0_DDR_ADDR;
   wire [2:0]ps_0_DDR_BA;
@@ -189,18 +180,12 @@ module system
   wire [319:0]xlconcat_0_dout;
   wire [63:0]xlconcat_1_dout;
   wire [63:0]xlconcat_2_dout;
-  wire [31:0]xlconstant_0_dout;
 
   assign adc_clk_n_i_1 = adc_clk_n_i;
   assign adc_clk_p_i_1 = adc_clk_p_i;
   assign adc_csn_o = ADC_1_adc_csn;
   assign adc_dat_a_i_1 = adc_dat_a_i[15:0];
   assign adc_dat_b_i_1 = adc_dat_b_i[15:0];
-  assign dac_clk_o = axis_red_pitaya_dac_0_dac_clk;
-  assign dac_dat_o[13:0] = axis_red_pitaya_dac_0_dac_dat;
-  assign dac_rst_o = axis_red_pitaya_dac_0_dac_rst;
-  assign dac_sel_o = axis_red_pitaya_dac_0_dac_sel;
-  assign dac_wrt_o = axis_red_pitaya_dac_0_dac_wrt;
   system_ADC_1_0 ADC_1
        (.aclk(pll_0_clk_out1),
         .adc_csn(ADC_1_adc_csn),
@@ -216,8 +201,8 @@ module system
         .m_axis_tlast(ADC_1_m_axis_TLAST),
         .m_axis_tvalid(ADC_1_m_axis_TVALID),
         .max_sum_out(ADC_1_max_sum_out),
+        .nreset_trigger(slice_6_dout),
         .reset_max_sum(slice_7_dout),
-        .reset_trigger(slice_6_dout),
         .samples_sent(ADC_1_samples_sent),
         .trigger_activated(ADC_1_trigger_activated),
         .trigger_level(slice_4_dout),
@@ -249,11 +234,6 @@ module system
         .s_axi_wstrb(ps_0_M_AXI_GP0_WSTRB),
         .s_axi_wvalid(ps_0_M_AXI_GP0_WVALID),
         .sts_data(xlconcat_0_dout));
-  system_axis_constant_0_0 axis_constant_0
-       (.aclk(pll_0_clk_out1),
-        .cfg_data(xlconstant_0_dout),
-        .m_axis_tdata(axis_constant_0_m_axis_TDATA),
-        .m_axis_tvalid(axis_constant_0_m_axis_TVALID));
   system_axis_decimator_0_0 axis_decimator_0
        (.aclk(pll_0_clk_out1),
         .aresetn(slice_0_dout),
@@ -261,18 +241,9 @@ module system
         .m_axis_tready(1'b1),
         .s_axis_tdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .s_axis_tvalid(1'b0));
-  system_axis_red_pitaya_dac_0_0 axis_red_pitaya_dac_0
-       (.aclk(pll_0_clk_out1),
-        .dac_clk(axis_red_pitaya_dac_0_dac_clk),
-        .dac_dat(axis_red_pitaya_dac_0_dac_dat),
-        .dac_rst(axis_red_pitaya_dac_0_dac_rst),
-        .dac_sel(axis_red_pitaya_dac_0_dac_sel),
-        .dac_wrt(axis_red_pitaya_dac_0_dac_wrt),
-        .ddr_clk(pll_0_clk_out2),
-        .locked(pll_0_locked),
-        .s_axis_tdata(axis_constant_0_m_axis_TDATA),
-        .s_axis_tvalid(axis_constant_0_m_axis_TVALID),
-        .wrt_clk(pll_0_clk_out3));
+  system_cfg_unpack_0_0 cfg_unpack_0
+       (.cfg_data(hub_0_cfg_data),
+        .rx_rst({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}));
   system_const_0_0 const_0
        (.dout(const_0_dout));
   system_const_1_0 const_1
@@ -281,8 +252,6 @@ module system
        (.clk_in1_n(adc_clk_n_i_1),
         .clk_in1_p(adc_clk_p_i_1),
         .clk_out1(pll_0_clk_out1),
-        .clk_out2(pll_0_clk_out2),
-        .clk_out3(pll_0_clk_out3),
         .locked(pll_0_locked));
   system_ps_0_0 ps_0
        (.DDR_Addr(DDR_addr[14:0]),
@@ -443,6 +412,4 @@ module system
         .In1({ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated}),
         .In2(ADC_1_triggers_count),
         .dout(xlconcat_2_dout));
-  system_xlconstant_0_0 xlconstant_0
-       (.dout(xlconstant_0_dout));
 endmodule

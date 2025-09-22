@@ -42,23 +42,6 @@
 						"WVALID": { "actual": "s_axi_wvalid"}
 					}
 				},
-				"/axis_constant_0/m_axis": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "aclk"},
-						"TDATA": { "actual": "m_axis_tdata[31:0]"},
-						"TVALID": { "actual": "m_axis_tvalid"}
-					}
-				},
-				"/axis_red_pitaya_dac_0/s_axis": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "aclk"},
-						"TDATA": { "actual": "s_axis_tdata[31:0]"},
-						"TREADY": { "actual": "s_axis_tready"},
-						"TVALID": { "actual": "s_axis_tvalid"}
-					}
-				},
 				"/ps_0/M_AXI_GP0": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {

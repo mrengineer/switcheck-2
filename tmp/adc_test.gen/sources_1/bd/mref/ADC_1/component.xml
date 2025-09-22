@@ -76,22 +76,6 @@
       </spirit:portMaps>
     </spirit:busInterface>
     <spirit:busInterface>
-      <spirit:name>reset_trigger</spirit:name>
-      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset" spirit:version="1.0"/>
-      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset_rtl" spirit:version="1.0"/>
-      <spirit:slave/>
-      <spirit:portMaps>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>RST</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>reset_trigger</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-      </spirit:portMaps>
-    </spirit:busInterface>
-    <spirit:busInterface>
       <spirit:name>aclk</spirit:name>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock" spirit:version="1.0"/>
       <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock_rtl" spirit:version="1.0"/>
@@ -129,7 +113,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>dc486cdb</spirit:value>
+            <spirit:value>4582017e</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -142,7 +126,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>dc486cdb</spirit:value>
+            <spirit:value>4582017e</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -298,7 +282,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>reset_trigger</spirit:name>
+        <spirit:name>nreset_trigger</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:wireTypeDefs>
@@ -535,7 +519,7 @@
         <xilinx:designToolContext>IPI</xilinx:designToolContext>
       </xilinx:designToolContexts>
       <xilinx:coreRevision>1</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2025-09-17T18:36:14Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2025-09-22T20:24:23Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2023.2</xilinx:xilinxVersion>

@@ -224,42 +224,6 @@
       </spirit:parameters>
     </spirit:busInterface>
     <spirit:busInterface>
-      <spirit:name>reset_trigger</spirit:name>
-      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset" spirit:version="1.0"/>
-      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset_rtl" spirit:version="1.0"/>
-      <spirit:slave/>
-      <spirit:portMaps>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>RST</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>reset_trigger</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-      </spirit:portMaps>
-      <spirit:parameters>
-        <spirit:parameter>
-          <spirit:name>POLARITY</spirit:name>
-          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.RESET_TRIGGER.POLARITY">ACTIVE_LOW</spirit:value>
-          <spirit:vendorExtensions>
-            <xilinx:parameterInfo>
-              <xilinx:parameterUsage>none</xilinx:parameterUsage>
-            </xilinx:parameterInfo>
-          </spirit:vendorExtensions>
-        </spirit:parameter>
-        <spirit:parameter>
-          <spirit:name>INSERT_VIP</spirit:name>
-          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.RESET_TRIGGER.INSERT_VIP">0</spirit:value>
-          <spirit:vendorExtensions>
-            <xilinx:parameterInfo>
-              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
-            </xilinx:parameterInfo>
-          </spirit:vendorExtensions>
-        </spirit:parameter>
-      </spirit:parameters>
-    </spirit:busInterface>
-    <spirit:busInterface>
       <spirit:name>aclk</spirit:name>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock" spirit:version="1.0"/>
       <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock_rtl" spirit:version="1.0"/>
@@ -350,7 +314,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:034982a2</spirit:value>
+            <spirit:value>9:b1a4d7ed</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -362,7 +326,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:611700fb</spirit:value>
+            <spirit:value>9:cf6c533f</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -373,7 +337,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:611700fb</spirit:value>
+            <spirit:value>9:cf6c533f</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -389,11 +353,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Wed Sep 17 18:36:27 UTC 2025</spirit:value>
+            <spirit:value>Mon Sep 22 20:29:57 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:034982a2</spirit:value>
+            <spirit:value>9:b1a4d7ed</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -409,11 +373,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Wed Sep 17 18:36:27 UTC 2025</spirit:value>
+            <spirit:value>Mon Sep 22 20:29:57 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:611700fb</spirit:value>
+            <spirit:value>9:cf6c533f</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -561,7 +525,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>reset_trigger</spirit:name>
+        <spirit:name>nreset_trigger</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:wireTypeDefs>
@@ -817,7 +781,6 @@
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.M_AXIS.TID_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd_and_user"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.M_AXIS.TUSER_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd_and_user"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.RESET_MAX_SUM.POLARITY" xilinx:valuePermission="bd_and_user"/>
-        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.RESET_TRIGGER.POLARITY" xilinx:valuePermission="bd_and_user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.ADC_DATA_WIDTH" xilinx:valueSource="user"/>
       </xilinx:configElementInfos>
     </xilinx:coreExtensions>
