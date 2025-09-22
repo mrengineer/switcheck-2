@@ -100,7 +100,6 @@ OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
   /home/bulkin/red-pitaya-notes/cores/adc.v
-  /home/bulkin/red-pitaya-notes/cores/axis_decimator.v
   /home/bulkin/red-pitaya-notes/modules/inout_buffer.v
   /home/bulkin/red-pitaya-notes/modules/input_buffer.v
   /home/bulkin/red-pitaya-notes/modules/output_buffer.v

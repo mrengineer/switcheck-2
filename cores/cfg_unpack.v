@@ -10,13 +10,12 @@ module cfg_unpack #(
 ) (
   input  wire [CFG_DATA_WIDTH-1:0] cfg_data,
 
-  // оригинальные выходы
-  wire [RX_RST_WIDTH-1:0]   rx_rst,       // uint8
-
+  
   // отдельные битовые выходы (по запросу)
-  output wire                      rst_adc_n,         // rx_rst[0]
-  output wire                      rst_axis_writer_n, // rx_rst[1]
-  output wire                      rst_trg,         // rx_rst[2]
+  output wire                      nreset_adc,         // rx_rst[0]
+  output wire                      nreset_axis_writer, // rx_rst[1]
+  output wire                      nreset_trg,         // rx_rst[2]
+  output wire                      nreset_max_sum,         // rx_rst[3]
 
   output wire signed [RX_RATE_WIDTH-1:0] rx_rate,
   output wire [RX_ADDR_WIDTH-1:0]  rx_addr,
@@ -25,7 +24,9 @@ module cfg_unpack #(
   output wire signed [BIAS_A_WIDTH-1:0] bias_ch_A,
   output wire signed [BIAS_B_WIDTH-1:0] bias_ch_B
 );
-
+ 
+ wire [RX_RST_WIDTH-1:0]   rx_rst;
+ 
   // проверки границ (как было)
   initial begin
     if (RX_RST_LSB + RX_RST_WIDTH   > CFG_DATA_WIDTH)  $error("RX_RST out of range");
@@ -47,9 +48,10 @@ module cfg_unpack #(
   assign bias_ch_B = cfg_data[ BIAS_B_LSB + BIAS_B_WIDTH - 1 : BIAS_B_LSB ];
 
   // побитовые выходы (0 - LSB)
-  assign rst_adc_n         = rx_rst[0]; // 0 бит - сброс ADC_1
-  assign rst_axis_writer_n = rx_rst[1]; // 1 бит - axis_writer
-  assign rst_trg         = rx_rst[2]; // 2 бит - сброс триггера
+  assign nreset_adc         = rx_rst[0]; // 0 бит - сброс ADC_1
+  assign nreset_axis_writer = rx_rst[1]; // 1 бит - axis_writer
+  assign nreset_trg         = rx_rst[2]; // 2 бит - сброс триггера
+  assign nreset_max_sum     = rx_rst[3]; // 3 бит - сброс максимума суммы модулей каналов АЦП
 
   // при желании можно добавить инверсию (active-low) здесь, например:
   // assign rst_adc = ~rx_rst[0]; // если в логике нужно active-low

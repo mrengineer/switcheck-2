@@ -69,30 +69,16 @@
     "boundary": {
       "ports": {
         "cfg_data": [ { "direction": "in", "size_left": "159", "size_right": "0" } ],
-        "rx_rst": [ { "direction": "in", "size_left": "7", "size_right": "0" } ],
-        "rst_adc_n": [ { "direction": "out" } ],
-        "rst_axis_writer_n": [ { "direction": "out" } ],
-        "rst_trg": [ { "direction": "out" } ],
+        "nreset_adc": [ { "direction": "out" } ],
+        "nreset_axis_writer": [ { "direction": "out" } ],
+        "nreset_trg": [ { "direction": "out" } ],
+        "nreset_max_sum": [ { "direction": "out" } ],
         "rx_rate": [ { "direction": "out", "size_left": "15", "size_right": "0" } ],
         "rx_addr": [ { "direction": "out", "size_left": "31", "size_right": "0" } ],
         "trg_value": [ { "direction": "out", "size_left": "15", "size_right": "0" } ],
         "limiter": [ { "direction": "out", "size_left": "7", "size_right": "0" } ],
         "bias_ch_A": [ { "direction": "out", "size_left": "15", "size_right": "0" } ],
         "bias_ch_B": [ { "direction": "out", "size_left": "15", "size_right": "0" } ]
-      },
-      "interfaces": {
-        "rx_rst": {
-          "vlnv": "xilinx.com:signal:reset:1.0",
-          "abstraction_type": "xilinx.com:signal:reset_rtl:1.0",
-          "mode": "slave",
-          "parameters": {
-            "POLARITY": [ { "value": "ACTIVE_LOW", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ]
-          },
-          "port_maps": {
-            "RST": [ { "physical_name": "rx_rst" } ]
-          }
-        }
       }
     }
   }

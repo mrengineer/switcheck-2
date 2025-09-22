@@ -111,7 +111,7 @@ int main () {
   SLICE0: 0...0 (1 bit) -> ADC_1.areset   -   брасывает ADC, axis_dwidth_converter_0, decimator
   SLICE1: 1...1 (1 bit) -> writer_0.areset  - сбрасывает блок writer_0, который пишет в шину axi
   SLICE6: 2...2 (1 bit) -> ADC_1.reset_trigger  - сбрасывает триггер, если он сработал
-  SLICE7: 3...3 (1 bit) -> ADC_1.reset_max_sum  - при подаче 1 на вход сбрасывает максимум, определенны для суммы входов АЦП в ходе работы
+  SLICE7: 3...3 (1 bit) -> ADC_1.reset_max_sum  - при подаче 0 на вход сбрасывает максимум, определенны для суммы входов АЦП в ходе работы
   
 
   SLICE2: 31...16 (16 bit) -> axis_decimator_0.cfg_data  - настройка децимации ? Направление битов меняется?
@@ -146,7 +146,11 @@ int main () {
   */
 
   //+1 означает сдвиг на 8 бит, т.к. указатели 8 бит => 64 bit address shift is 64/8 = 8
-  rx_rst          = (uint8_t *)(cfg + 0);   //[0 bit shifted]   //Набор битов сброса IP блоков ПЛИС 0й - ADC_1, 1й - axis writer, 2 - флаг превышения триггера у ADC_1, 3 - сброс максимума суммы значений по каналам АЦП
+  rx_rst          = (uint8_t *)(cfg + 0);   //[0 bit shifted]   Набор битов сброса IP блоков 
+                                                  // 0й - ПЛИС 0й - ADC_1, сброс нулем
+                                                  // 1й - axis writer,  сброс нулем
+                                                  // 2й - флаг превышения триггера у ADC_1,  сброс нулем
+                                                  // 3й - сброс максимума суммы значений по каналам АЦП,  сброс нулем
   rx_rate         = (int16_t *)(cfg + 2);   //[16 bit shift]    //Децимация
   rx_addr         = (uint32_t *)(cfg + 4);  //32 bit shifted    //Начальный адрес буфера памяти
   trg_value       = (uint16_t *)(cfg + 8);  //16 bit for mod(ADC1+ADC2) trigger value
@@ -170,11 +174,7 @@ int main () {
   samples_count   = (uint64_t *)(sts + 32); //Счетчик семплов (всех)
   
 
-
-
-  uint16_t trg    = 2100;   //Уровень срабатывания триггера (для АЦП 12 бит, максимум 4095)
-
-
+  uint16_t trg    = 2000;   //Уровень срабатывания триггера (для АЦП 12 бит, максимум 4095)
 
   uint32_t adc_sent_val;
   uint64_t first_trgged_val, last_detrigged_val, samples_count_val;
@@ -184,15 +184,14 @@ int main () {
 
   double temp = 0;
 
-
-
     clrscr();
     
-
 
     CLEAR_BIT(*rx_rst, 0); //сброс первого бита в 0 (сборс ацп)
     CLEAR_BIT(*rx_rst, 1); //сброс axi writer (1й  бит)
 
+    *bias_ch_A = -10;
+    *bias_ch_B = +1000;
 
     *trg_value      = trg;
     *limiter        = 16;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
@@ -206,17 +205,19 @@ int main () {
 
     /* enter normal operating mode */
 
-    SET_BIT(*rx_rst, 0); //сброс первого бита в 0 (сборс ацп)
-    SET_BIT(*rx_rst, 1); //сброс axi writer (1й  бит)
+    SET_BIT(*rx_rst, 0); //установка 1 первого бита (отмена сборса ацп)
+    SET_BIT(*rx_rst, 1); //отмена сброса axi writer (1й  бит)
+
+    SET_BIT(*rx_rst, 3); //отмена сброса max_sum
 
     usleep(10);
 
     
-    // Сброс триггера (сбрасывается лог 1!) 
-    CLEAR_BIT(*rx_rst, 2);            //лог 0 ()
+    // Сброс триггера (сбрасывается лог 0!) 
+    CLEAR_BIT(*rx_rst, 2);            //сброс
     usleep(20);
-    SET_BIT(*rx_rst, 2);
-    
+    SET_BIT(*rx_rst, 2);            //отмена сброса
+      
     printf("CONSOLE WAIT TRIGGER > %u...\n", trg);
 
 //    snprintf(outbuf, sizeof(outbuf), "VALUES:\n");

@@ -57,10 +57,10 @@
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module system_cfg_unpack_0_0 (
   cfg_data,
-  rx_rst,
-  rst_adc_n,
-  rst_axis_writer_n,
-  rst_trg,
+  nreset_adc,
+  nreset_axis_writer,
+  nreset_trg,
+  nreset_max_sum,
   rx_rate,
   rx_addr,
   trg_value,
@@ -70,12 +70,10 @@ module system_cfg_unpack_0_0 (
 );
 
 input wire [159 : 0] cfg_data;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME rx_rst, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 rx_rst RST" *)
-input wire [7 : 0] rx_rst;
-output wire rst_adc_n;
-output wire rst_axis_writer_n;
-output wire rst_trg;
+output wire nreset_adc;
+output wire nreset_axis_writer;
+output wire nreset_trg;
+output wire nreset_max_sum;
 output wire [15 : 0] rx_rate;
 output wire [31 : 0] rx_addr;
 output wire [15 : 0] trg_value;
@@ -101,10 +99,10 @@ output wire [15 : 0] bias_ch_B;
     .BIAS_B_WIDTH(16)
   ) inst (
     .cfg_data(cfg_data),
-    .rx_rst(rx_rst),
-    .rst_adc_n(rst_adc_n),
-    .rst_axis_writer_n(rst_axis_writer_n),
-    .rst_trg(rst_trg),
+    .nreset_adc(nreset_adc),
+    .nreset_axis_writer(nreset_axis_writer),
+    .nreset_trg(nreset_trg),
+    .nreset_max_sum(nreset_max_sum),
     .rx_rate(rx_rate),
     .rx_addr(rx_addr),
     .trg_value(trg_value),

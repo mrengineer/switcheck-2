@@ -5,14 +5,17 @@ module ADC #
       parameter integer ADC_DATA_WIDTH = 14
     )
     (
-        // System signals
+        // System signals 
         input  wire        aclk,
         input  wire        aresetn,      // Active-low reset
 
         // ADC signals
         output wire        adc_csn,
-        input  wire [15:0] adc_dat_a,
-        input  wire [15:0] adc_dat_b,
+        input  wire signed [15:0] adc_dat_a,
+        input  wire signed [15:0] adc_dat_b,
+        
+        input wire [15:0] bias_a,
+        input wire [15:0] bias_b,
 
         output wire [15:0] cur_adc,
         output wire [63:0] cur_sample,
@@ -25,8 +28,8 @@ module ADC #
         input  wire [15:0] trigger_level,
 
         // Reset control signals
-        input  wire        nreset_trigger,     // Сброс триггера при 1 извне
-        input  wire        reset_max_sum,     // Сброс максимума суммы при 1
+        input  wire        nreset_trigger,     // Сброс триггера при 0 извне
+        input  wire        nreset_max_sum,     // Сброс максимума суммы при 0
 
         // AXI-Stream master (32-bit words)
         output reg         m_axis_tvalid,
@@ -83,8 +86,8 @@ assign limiter_val = (limiter > 8'd63) ? 64'hFFFF_FFFF_FFFF_FFFF : (64'd1 << lim
 // Сместим signed к unsigned и ограничим в 0..32767 (15 бит).
 // Для корректности на любой ADC_DATA_WIDTH<=15.
 
-wire signed [15:0] a_ext = {{(16-ADC_DATA_WIDTH){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, int_dat_a_reg};
-wire signed [15:0] b_ext = {{(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, int_dat_b_reg};
+wire signed [15:0] a_ext = {{(16-ADC_DATA_WIDTH){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, int_dat_a_reg} + bias_a;
+wire signed [15:0] b_ext = {{(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, int_dat_b_reg} + bias_b;
 
 // Берём 15 младших бит, со знаком
 wire [14:0] a_u15 = a_ext[14:0];
@@ -131,16 +134,13 @@ always @(posedge aclk or negedge aresetn) begin
             trigger_activated     <= 0;
             cur_limiter           <= 0;
             
-            trigger_now             <= 1'b0;
+            trigger_now           <= 1'b0;
         end
         else // AfoninAS: размещаем в else все, что сбрасывается по reset_trigger
         begin 
         
-            //last_detrigged <= limiter_val;
 
-            // -------------------------
             // Счётчик семплов
-            // -------------------------
             sample_counter <= sample_counter + 1;
 
 
@@ -168,24 +168,21 @@ always @(posedge aclk or negedge aresetn) begin
 
 
             // Формирование AXI-Stream
-            // За такт уходит максимум 1 слово.
-            // -------------------------
             // m_axis_tvalid <= 1'b0; // по умолчаниюm_axis_tvalid - AfoninAS: так писать неправильно, нужно под else убрать
-            // || ()
 
             if (trigger_now == 1'b1) begin
             
                 if (sum_abs <= trigger_level) begin
-                    last_detrigged          <= sample_counter;
+                    last_detrigged              <= sample_counter;
                 end
                               
                 // Отключение посылки данных если достигнуто максимальное число отсчетов на серию или или сумма значений менее тригера
                 if ((cur_limiter == limiter_val-1) ) begin            // AfoninAS: так как m_axis_tvalid опускается с задержкой на так по trigger_activated, счетчик д.б. на 1 меньше
-                    trigger_activated       <= 0;
-                    axis_data_reg           <= {2'b11, a_u15, b_u15};        //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов
-                    samples_sent            <= samples_sent + 1;
-                    cur_limiter             <= 0;                    
-                    m_axis_tlast            <= 1'b1;                     // конец пакета, завершить burst в writer даже если не кратно 32
+                    trigger_activated           <= 0;
+                    axis_data_reg               <= {2'b11, a_u15, b_u15};        //  AfoninAS: помечаем последнее (32е) слово в пачке из 32 слов
+                    samples_sent                <= samples_sent + 1;
+                    cur_limiter                 <= 0;                    
+                    m_axis_tlast                <= 1'b1;                     // конец пакета, завершить burst в writer даже если не кратно 32
                 end else begin
                     if (sum_abs <= trigger_level) begin
                         axis_data_reg           <= {2'b10, a_u15, b_u15};
@@ -208,12 +205,10 @@ always @(posedge aclk or negedge aresetn) begin
             end
         end
 
-
-         
-
+        
 
         // Трекинг максимума
-        if (reset_max_sum) // AfoninAS: приоритет сброса выше, чем обновления суммы, переставляем местами и убираем лишнее условие в else
+        if (!nreset_max_sum) // AfoninAS: приоритет сброса выше, чем обновления суммы, переставляем местами и убираем лишнее условие в else
             max_sum_abs <= 0;
         else if (sum_abs > max_sum_abs)
             max_sum_abs <= sum_abs;

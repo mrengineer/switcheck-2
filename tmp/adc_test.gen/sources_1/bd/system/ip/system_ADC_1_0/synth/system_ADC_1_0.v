@@ -61,12 +61,14 @@ module system_ADC_1_0 (
   adc_csn,
   adc_dat_a,
   adc_dat_b,
+  bias_a,
+  bias_b,
   cur_adc,
   cur_sample,
   limiter,
   trigger_level,
   nreset_trigger,
-  reset_max_sum,
+  nreset_max_sum,
   m_axis_tvalid,
   m_axis_tlast,
   m_axis_tdata,
@@ -88,14 +90,14 @@ input wire aresetn;
 output wire adc_csn;
 input wire [15 : 0] adc_dat_a;
 input wire [15 : 0] adc_dat_b;
+input wire [15 : 0] bias_a;
+input wire [15 : 0] bias_b;
 output wire [15 : 0] cur_adc;
 output wire [63 : 0] cur_sample;
 input wire [7 : 0] limiter;
 input wire [15 : 0] trigger_level;
 input wire nreset_trigger;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_max_sum, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_max_sum RST" *)
-input wire reset_max_sum;
+input wire nreset_max_sum;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 m_axis TVALID" *)
 output wire m_axis_tvalid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 m_axis TLAST" *)
@@ -119,12 +121,14 @@ output wire [15 : 0] triggers_count;
     .adc_csn(adc_csn),
     .adc_dat_a(adc_dat_a),
     .adc_dat_b(adc_dat_b),
+    .bias_a(bias_a),
+    .bias_b(bias_b),
     .cur_adc(cur_adc),
     .cur_sample(cur_sample),
     .limiter(limiter),
     .trigger_level(trigger_level),
     .nreset_trigger(nreset_trigger),
-    .reset_max_sum(reset_max_sum),
+    .nreset_max_sum(nreset_max_sum),
     .m_axis_tvalid(m_axis_tvalid),
     .m_axis_tlast(m_axis_tlast),
     .m_axis_tdata(m_axis_tdata),

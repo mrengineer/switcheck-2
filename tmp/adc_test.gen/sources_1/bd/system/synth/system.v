@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Mon Sep 22 23:35:29 2025
+//Date        : Tue Sep 23 00:43:03 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=21,numReposBlks=21,numNonXlnxBlks=8,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=5,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
+(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=12,numReposBlks=12,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=4,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
 module system
    (DDR_addr,
     DDR_ba,
@@ -103,6 +103,15 @@ module system
   wire adc_clk_p_i_1;
   wire [15:0]adc_dat_a_i_1;
   wire [15:0]adc_dat_b_i_1;
+  wire [15:0]cfg_unpack_0_bias_ch_A;
+  wire [15:0]cfg_unpack_0_bias_ch_B;
+  wire [7:0]cfg_unpack_0_limiter;
+  wire cfg_unpack_0_nreset_max_sum;
+  wire cfg_unpack_0_rst_adc_n;
+  wire cfg_unpack_0_rst_axis_writer_n;
+  wire cfg_unpack_0_rst_trg;
+  wire [31:0]cfg_unpack_0_rx_addr;
+  wire [15:0]cfg_unpack_0_trg_value;
   wire [0:0]const_0_dout;
   wire [15:0]const_1_dout;
   wire [159:0]hub_0_cfg_data;
@@ -169,14 +178,6 @@ module system
   wire ram_writer_0_m_axi_WVALID;
   wire [15:0]ram_writer_0_sts_data;
   wire [0:0]rst_0_peripheral_aresetn;
-  wire [0:0]slice_0_dout;
-  wire [0:0]slice_1_dout;
-  wire [15:0]slice_2_dout;
-  wire [31:0]slice_3_dout;
-  wire [15:0]slice_4_dout;
-  wire [7:0]slice_5_dout;
-  wire [0:0]slice_6_dout;
-  wire [0:0]slice_7_dout;
   wire [319:0]xlconcat_0_dout;
   wire [63:0]xlconcat_1_dout;
   wire [63:0]xlconcat_2_dout;
@@ -191,21 +192,23 @@ module system
         .adc_csn(ADC_1_adc_csn),
         .adc_dat_a(adc_dat_a_i_1),
         .adc_dat_b(adc_dat_b_i_1),
-        .aresetn(slice_0_dout),
+        .aresetn(cfg_unpack_0_rst_adc_n),
+        .bias_a(cfg_unpack_0_bias_ch_A),
+        .bias_b(cfg_unpack_0_bias_ch_B),
         .cur_adc(ADC_1_cur_adc),
         .cur_sample(ADC_1_cur_sample),
         .first_trigged(ADC_1_first_trigged),
         .last_detrigged(ADC_1_last_detrigged),
-        .limiter(slice_5_dout),
+        .limiter(cfg_unpack_0_limiter),
         .m_axis_tdata(ADC_1_m_axis_TDATA),
         .m_axis_tlast(ADC_1_m_axis_TLAST),
         .m_axis_tvalid(ADC_1_m_axis_TVALID),
         .max_sum_out(ADC_1_max_sum_out),
-        .nreset_trigger(slice_6_dout),
-        .reset_max_sum(slice_7_dout),
+        .nreset_max_sum(cfg_unpack_0_nreset_max_sum),
+        .nreset_trigger(cfg_unpack_0_rst_trg),
         .samples_sent(ADC_1_samples_sent),
         .trigger_activated(ADC_1_trigger_activated),
-        .trigger_level(slice_4_dout),
+        .trigger_level(cfg_unpack_0_trg_value),
         .triggers_count(ADC_1_triggers_count));
   system_axi_hub_modified_0_0 axi_hub_modified_0
        (.aclk(pll_0_clk_out1),
@@ -234,16 +237,17 @@ module system
         .s_axi_wstrb(ps_0_M_AXI_GP0_WSTRB),
         .s_axi_wvalid(ps_0_M_AXI_GP0_WVALID),
         .sts_data(xlconcat_0_dout));
-  system_axis_decimator_0_0 axis_decimator_0
-       (.aclk(pll_0_clk_out1),
-        .aresetn(slice_0_dout),
-        .cfg_data(slice_2_dout),
-        .m_axis_tready(1'b1),
-        .s_axis_tdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .s_axis_tvalid(1'b0));
   system_cfg_unpack_0_0 cfg_unpack_0
-       (.cfg_data(hub_0_cfg_data),
-        .rx_rst({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}));
+       (.bias_ch_A(cfg_unpack_0_bias_ch_A),
+        .bias_ch_B(cfg_unpack_0_bias_ch_B),
+        .cfg_data(hub_0_cfg_data),
+        .limiter(cfg_unpack_0_limiter),
+        .nreset_adc(cfg_unpack_0_rst_adc_n),
+        .nreset_axis_writer(cfg_unpack_0_rst_axis_writer_n),
+        .nreset_max_sum(cfg_unpack_0_nreset_max_sum),
+        .nreset_trg(cfg_unpack_0_rst_trg),
+        .rx_addr(cfg_unpack_0_rx_addr),
+        .trg_value(cfg_unpack_0_trg_value));
   system_const_0_0 const_0
        (.dout(const_0_dout));
   system_const_1_0 const_1
@@ -341,7 +345,7 @@ module system
         .USB0_VBUS_PWRFAULT(1'b0));
   system_ram_writer_0_0 ram_writer_0
        (.aclk(pll_0_clk_out1),
-        .aresetn(slice_1_dout),
+        .aresetn(cfg_unpack_0_rst_axis_writer_n),
         .cfg_data(const_1_dout),
         .m_axi_awaddr(ram_writer_0_m_axi_AWADDR),
         .m_axi_awburst(ram_writer_0_m_axi_AWBURST),
@@ -359,7 +363,7 @@ module system
         .m_axi_wready(ram_writer_0_m_axi_WREADY),
         .m_axi_wstrb(ram_writer_0_m_axi_WSTRB),
         .m_axi_wvalid(ram_writer_0_m_axi_WVALID),
-        .min_addr(slice_3_dout),
+        .min_addr(cfg_unpack_0_rx_addr),
         .s_axis_tdata(ADC_1_m_axis_TDATA),
         .s_axis_tlast(ADC_1_m_axis_TLAST),
         .s_axis_tvalid(ADC_1_m_axis_TVALID),
@@ -371,30 +375,6 @@ module system
         .mb_debug_sys_rst(1'b0),
         .peripheral_aresetn(rst_0_peripheral_aresetn),
         .slowest_sync_clk(pll_0_clk_out1));
-  system_slice_0_0 slice_0
-       (.din(hub_0_cfg_data),
-        .dout(slice_0_dout));
-  system_slice_1_0 slice_1
-       (.din(hub_0_cfg_data),
-        .dout(slice_1_dout));
-  system_slice_2_0 slice_2
-       (.din(hub_0_cfg_data),
-        .dout(slice_2_dout));
-  system_slice_3_0 slice_3
-       (.din(hub_0_cfg_data),
-        .dout(slice_3_dout));
-  system_slice_4_0 slice_4
-       (.din(hub_0_cfg_data),
-        .dout(slice_4_dout));
-  system_slice_5_0 slice_5
-       (.din(hub_0_cfg_data),
-        .dout(slice_5_dout));
-  system_slice_1_1 slice_6
-       (.din(hub_0_cfg_data),
-        .dout(slice_6_dout));
-  system_slice_6_0 slice_7
-       (.din(hub_0_cfg_data),
-        .dout(slice_7_dout));
   system_xlconcat_0_0 xlconcat_0
        (.In0(xlconcat_1_dout),
         .In1(ADC_1_last_detrigged),
