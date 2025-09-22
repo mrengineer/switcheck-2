@@ -14,7 +14,6 @@ tmp/**/behav/
 tmp/**/sim_1/
 tmp/**/synth_1/
 
-
 tmp/adc_test.sim/sim_1/behav/xsim/xsim.dir/tb_adc_behav/xsim.xdbg
 tmp/adc_test.cache/
 
@@ -34,24 +33,14 @@ tmp/adc_test.cache/
 # Временные библиотеки
 *.a
 *.so
-*.dll
 *.dylib
 *.lib
 
-# ======================
-# CMake / Make
-build/
-cmake-build-*/
-CMakeCache.txt
-CMakeFiles/
-Makefile.in
-*.cmake
 
 
 # Misc
 *.swp
 *.swo
-*~
 
 
 # Linux
@@ -59,5 +48,8 @@ Makefile.in
 sd_backup/
 scripts/*.zip
 
-!*.v
 
+!/records/*
+!*.v
+!*.png
+!*.csv

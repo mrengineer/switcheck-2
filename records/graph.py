@@ -112,7 +112,7 @@ for filename in filenames:
     data[["B","A","Type","abs_sum"]].plot(ax=ax)
     ax.plot(data["envelope"].values, linewidth=2)  # огибающая поверх
     ax.set_title(filename)
-    ax.set_ylim(-2500, 7500)
+    ax.set_ylim(-2200, 7600)
 
     local_end = end if end != 0 else len(data) - 1
     ax.set_xlim(start, local_end)
