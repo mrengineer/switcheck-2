@@ -13,6 +13,11 @@ module ADC #
         output wire        adc_csn,
         input  wire signed [15:0] adc_dat_a,
         input  wire signed [15:0] adc_dat_b,
+
+        output wire signed [15:0] cur_adc_a,
+        output wire signed [15:0] cur_adc_b,
+
+
         
         input wire [15:0] bias_a,
         input wire [15:0] bias_b,
@@ -22,7 +27,6 @@ module ADC #
         
         input wire  [ 7:0] limiter,           // Сколько писать отсчетов в серии максимум (число 2^limiter) 
         
-
 
         // Trigger level setting
         input  wire [15:0] trigger_level,
@@ -229,5 +233,6 @@ end
 assign adc_csn     = 1'b1;
 assign cur_adc     = sum_abs;
 assign cur_sample  = sample_counter;
-
+assign cur_adc_a   = a_ext;
+assign cur_adc_b   = b_ext;
 endmodule

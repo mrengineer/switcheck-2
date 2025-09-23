@@ -18,11 +18,9 @@
       "const_1": "",
       "ADC_1": "",
       "axi_hub_modified_0": "",
-      "xlconcat_0": "",
-      "xlconcat_1": "",
-      "xlconcat_2": "",
       "ram_writer_0": "",
-      "cfg_unpack_0": ""
+      "cfg_unpack_0": "",
+      "sts_pack_0": ""
     },
     "interface_ports": {
       "Vp_Vn": {
@@ -2343,6 +2341,16 @@
             "left": "15",
             "right": "0"
           },
+          "cur_adc_a": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          },
+          "cur_adc_b": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          },
           "bias_a": {
             "direction": "I",
             "left": "15",
@@ -2425,7 +2433,7 @@
             "value": "160"
           },
           "STS_DATA_WIDTH": {
-            "value": "320"
+            "value": "640"
           }
         },
         "reference_info": {
@@ -2709,7 +2717,7 @@
           },
           "sts_data": {
             "direction": "I",
-            "left": "319",
+            "left": "639",
             "right": "0",
             "parameters": {
               "PortWidth": {
@@ -2717,105 +2725,6 @@
                 "value_src": "ip_prop"
               }
             }
-          }
-        }
-      },
-      "xlconcat_0": {
-        "vlnv": "xilinx.com:ip:xlconcat:2.1",
-        "ip_revision": "5",
-        "xci_name": "system_xlconcat_0_0",
-        "xci_path": "ip/system_xlconcat_0_0_1/system_xlconcat_0_0.xci",
-        "inst_hier_path": "xlconcat_0",
-        "parameters": {
-          "IN0_WIDTH": {
-            "value": "64"
-          },
-          "IN1_WIDTH": {
-            "value": "64"
-          },
-          "IN2_WIDTH": {
-            "value": "64"
-          },
-          "IN3_WIDTH": {
-            "value": "64"
-          },
-          "IN4_WIDTH": {
-            "value": "64"
-          },
-          "IN5_WIDTH": {
-            "value": "192"
-          },
-          "IN6_WIDTH": {
-            "value": "16"
-          },
-          "NUM_PORTS": {
-            "value": "5"
-          }
-        }
-      },
-      "xlconcat_1": {
-        "vlnv": "xilinx.com:ip:xlconcat:2.1",
-        "ip_revision": "5",
-        "xci_name": "system_xlconcat_0_1",
-        "xci_path": "ip/system_xlconcat_0_1/system_xlconcat_0_1.xci",
-        "inst_hier_path": "xlconcat_1",
-        "parameters": {
-          "IN0_WIDTH": {
-            "value": "32"
-          },
-          "IN1_WIDTH": {
-            "value": "16"
-          },
-          "IN2_WIDTH": {
-            "value": "16"
-          },
-          "IN3_WIDTH": {
-            "value": "64"
-          },
-          "IN4_WIDTH": {
-            "value": "32"
-          },
-          "IN5_WIDTH": {
-            "value": "16"
-          },
-          "IN6_WIDTH": {
-            "value": "16"
-          },
-          "NUM_PORTS": {
-            "value": "3"
-          }
-        }
-      },
-      "xlconcat_2": {
-        "vlnv": "xilinx.com:ip:xlconcat:2.1",
-        "ip_revision": "5",
-        "xci_name": "system_xlconcat_1_0",
-        "xci_path": "ip/system_xlconcat_1_0/system_xlconcat_1_0.xci",
-        "inst_hier_path": "xlconcat_2",
-        "parameters": {
-          "IN0_WIDTH": {
-            "value": "32"
-          },
-          "IN1_WIDTH": {
-            "value": "16"
-          },
-          "IN2_WIDTH": {
-            "value": "16"
-          },
-          "IN3_WIDTH": {
-            "value": "64"
-          },
-          "IN4_WIDTH": {
-            "value": "32"
-          },
-          "IN5_WIDTH": {
-            "value": "16"
-          },
-          "IN6_WIDTH": {
-            "value": "16"
-          },
-          "NUM_PORTS": {
-            "value": "3"
           }
         }
       },
@@ -3237,6 +3146,91 @@
             "right": "0"
           }
         }
+      },
+      "sts_pack_0": {
+        "vlnv": "xilinx.com:module_ref:sts_pack:1.0",
+        "ip_revision": "1",
+        "xci_name": "system_sts_pack_0_0",
+        "xci_path": "ip/system_sts_pack_0_0/system_sts_pack_0_0.xci",
+        "inst_hier_path": "sts_pack_0",
+        "parameters": {
+          "TOTAL_WIDTH": {
+            "value": "640"
+          }
+        },
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "sts_pack",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "rx_cntr": {
+            "direction": "I",
+            "left": "31",
+            "right": "0"
+          },
+          "adc_abs_max": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "cur_adc": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "last_detrigged": {
+            "direction": "I",
+            "left": "63",
+            "right": "0"
+          },
+          "first_trgged": {
+            "direction": "I",
+            "left": "63",
+            "right": "0"
+          },
+          "adc_sent": {
+            "direction": "I",
+            "left": "31",
+            "right": "0"
+          },
+          "trigger_activated": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "triggers_count": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "samples_count": {
+            "direction": "I",
+            "left": "63",
+            "right": "0"
+          },
+          "cur_adc_a": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "cur_adc_b": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "sts_bus": {
+            "direction": "O",
+            "left": "639",
+            "right": "0",
+            "parameters": {
+              "PortWidth": {
+                "value": "320",
+                "value_src": "ip_prop"
+              }
+            }
+          }
+        }
       }
     },
     "interface_nets": {
@@ -3281,49 +3275,61 @@
       "ADC_1_cur_adc": {
         "ports": [
           "ADC_1/cur_adc",
-          "xlconcat_1/In2"
+          "sts_pack_0/cur_adc"
+        ]
+      },
+      "ADC_1_cur_adc_a": {
+        "ports": [
+          "ADC_1/cur_adc_a",
+          "sts_pack_0/cur_adc_a"
+        ]
+      },
+      "ADC_1_cur_adc_b": {
+        "ports": [
+          "ADC_1/cur_adc_b",
+          "sts_pack_0/cur_adc_b"
         ]
       },
       "ADC_1_cur_sample": {
         "ports": [
           "ADC_1/cur_sample",
-          "xlconcat_0/In4"
+          "sts_pack_0/samples_count"
         ]
       },
       "ADC_1_first_trigged": {
         "ports": [
           "ADC_1/first_trigged",
-          "xlconcat_0/In2"
+          "sts_pack_0/first_trgged"
         ]
       },
       "ADC_1_last_detrigged": {
         "ports": [
           "ADC_1/last_detrigged",
-          "xlconcat_0/In1"
+          "sts_pack_0/last_detrigged"
         ]
       },
       "ADC_1_max_sum_out": {
         "ports": [
           "ADC_1/max_sum_out",
-          "xlconcat_1/In1"
+          "sts_pack_0/adc_abs_max"
         ]
       },
       "ADC_1_samples_sent": {
         "ports": [
           "ADC_1/samples_sent",
-          "xlconcat_2/In0"
+          "sts_pack_0/adc_sent"
         ]
       },
       "ADC_1_trigger_activated": {
         "ports": [
           "ADC_1/trigger_activated",
-          "xlconcat_2/In1"
+          "sts_pack_0/trigger_activated"
         ]
       },
       "ADC_1_triggers_count": {
         "ports": [
           "ADC_1/triggers_count",
-          "xlconcat_2/In2"
+          "sts_pack_0/triggers_count"
         ]
       },
       "adc_clk_n_i_1": {
@@ -3442,7 +3448,7 @@
       "ram_writer_0_sts_data": {
         "ports": [
           "ram_writer_0/sts_data",
-          "xlconcat_1/In0"
+          "sts_pack_0/rx_cntr"
         ]
       },
       "rst_0_peripheral_aresetn": {
@@ -3451,22 +3457,10 @@
           "axi_hub_modified_0/aresetn"
         ]
       },
-      "xlconcat_0_dout": {
+      "sts_pack_0_sts_bus": {
         "ports": [
-          "xlconcat_0/dout",
+          "sts_pack_0/sts_bus",
           "axi_hub_modified_0/sts_data"
-        ]
-      },
-      "xlconcat_1_dout": {
-        "ports": [
-          "xlconcat_1/dout",
-          "xlconcat_0/In0"
-        ]
-      },
-      "xlconcat_2_dout": {
-        "ports": [
-          "xlconcat_2/dout",
-          "xlconcat_0/In3"
         ]
       }
     }

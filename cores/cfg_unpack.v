@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module cfg_unpack #(
   parameter integer CFG_DATA_WIDTH = 160,
   parameter integer RX_RST_LSB     = 0,    parameter integer RX_RST_WIDTH     = 8,

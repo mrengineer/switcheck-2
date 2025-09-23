@@ -2,7 +2,7 @@
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-//Date        : Tue Sep 23 00:43:03 2025
+//Date        : Wed Sep 24 00:38:12 2025
 //Host        : bigbc running 64-bit Ubuntu 24.04 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=12,numReposBlks=12,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=4,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
+(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=10,numReposBlks=10,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=5,numPkgbdBlks=0,bdsource=USER,synth_mode=None}" *) (* HW_HANDOFF = "system.hwdef" *) 
 module system
    (DDR_addr,
     DDR_ba,
@@ -89,6 +89,8 @@ module system
 
   wire ADC_1_adc_csn;
   wire [15:0]ADC_1_cur_adc;
+  wire [15:0]ADC_1_cur_adc_a;
+  wire [15:0]ADC_1_cur_adc_b;
   wire [63:0]ADC_1_cur_sample;
   wire [63:0]ADC_1_first_trigged;
   wire [63:0]ADC_1_last_detrigged;
@@ -178,9 +180,7 @@ module system
   wire ram_writer_0_m_axi_WVALID;
   wire [15:0]ram_writer_0_sts_data;
   wire [0:0]rst_0_peripheral_aresetn;
-  wire [319:0]xlconcat_0_dout;
-  wire [63:0]xlconcat_1_dout;
-  wire [63:0]xlconcat_2_dout;
+  wire [639:0]sts_pack_0_sts_bus;
 
   assign adc_clk_n_i_1 = adc_clk_n_i;
   assign adc_clk_p_i_1 = adc_clk_p_i;
@@ -196,6 +196,8 @@ module system
         .bias_a(cfg_unpack_0_bias_ch_A),
         .bias_b(cfg_unpack_0_bias_ch_B),
         .cur_adc(ADC_1_cur_adc),
+        .cur_adc_a(ADC_1_cur_adc_a),
+        .cur_adc_b(ADC_1_cur_adc_b),
         .cur_sample(ADC_1_cur_sample),
         .first_trigged(ADC_1_first_trigged),
         .last_detrigged(ADC_1_last_detrigged),
@@ -236,7 +238,7 @@ module system
         .s_axi_wready(ps_0_M_AXI_GP0_WREADY),
         .s_axi_wstrb(ps_0_M_AXI_GP0_WSTRB),
         .s_axi_wvalid(ps_0_M_AXI_GP0_WVALID),
-        .sts_data(xlconcat_0_dout));
+        .sts_data(sts_pack_0_sts_bus));
   system_cfg_unpack_0_0 cfg_unpack_0
        (.bias_ch_A(cfg_unpack_0_bias_ch_A),
         .bias_ch_B(cfg_unpack_0_bias_ch_B),
@@ -375,21 +377,17 @@ module system
         .mb_debug_sys_rst(1'b0),
         .peripheral_aresetn(rst_0_peripheral_aresetn),
         .slowest_sync_clk(pll_0_clk_out1));
-  system_xlconcat_0_0 xlconcat_0
-       (.In0(xlconcat_1_dout),
-        .In1(ADC_1_last_detrigged),
-        .In2(ADC_1_first_trigged),
-        .In3(xlconcat_2_dout),
-        .In4(ADC_1_cur_sample),
-        .dout(xlconcat_0_dout));
-  system_xlconcat_0_1 xlconcat_1
-       (.In0({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,ram_writer_0_sts_data}),
-        .In1(ADC_1_max_sum_out),
-        .In2(ADC_1_cur_adc),
-        .dout(xlconcat_1_dout));
-  system_xlconcat_1_0 xlconcat_2
-       (.In0(ADC_1_samples_sent),
-        .In1({ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated}),
-        .In2(ADC_1_triggers_count),
-        .dout(xlconcat_2_dout));
+  system_sts_pack_0_0 sts_pack_0
+       (.adc_abs_max(ADC_1_max_sum_out),
+        .adc_sent(ADC_1_samples_sent),
+        .cur_adc(ADC_1_cur_adc),
+        .cur_adc_a(ADC_1_cur_adc_a),
+        .cur_adc_b(ADC_1_cur_adc_b),
+        .first_trgged(ADC_1_first_trigged),
+        .last_detrigged(ADC_1_last_detrigged),
+        .rx_cntr({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,ram_writer_0_sts_data}),
+        .samples_count(ADC_1_cur_sample),
+        .sts_bus(sts_pack_0_sts_bus),
+        .trigger_activated({ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated,ADC_1_trigger_activated}),
+        .triggers_count(ADC_1_triggers_count));
 endmodule

@@ -61,6 +61,8 @@ module system_ADC_1_0 (
   adc_csn,
   adc_dat_a,
   adc_dat_b,
+  cur_adc_a,
+  cur_adc_b,
   bias_a,
   bias_b,
   cur_adc,
@@ -90,6 +92,8 @@ input wire aresetn;
 output wire adc_csn;
 input wire [15 : 0] adc_dat_a;
 input wire [15 : 0] adc_dat_b;
+output wire [15 : 0] cur_adc_a;
+output wire [15 : 0] cur_adc_b;
 input wire [15 : 0] bias_a;
 input wire [15 : 0] bias_b;
 output wire [15 : 0] cur_adc;
@@ -121,6 +125,8 @@ output wire [15 : 0] triggers_count;
     .adc_csn(adc_csn),
     .adc_dat_a(adc_dat_a),
     .adc_dat_b(adc_dat_b),
+    .cur_adc_a(cur_adc_a),
+    .cur_adc_b(cur_adc_b),
     .bias_a(bias_a),
     .bias_b(bias_b),
     .cur_adc(cur_adc),

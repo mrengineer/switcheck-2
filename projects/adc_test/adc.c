@@ -50,10 +50,9 @@ int main () {
   uint64_t prev_position = 0;
   int limit, offset;
 
-  volatile uint16_t *trigger_activated, *triggers_count;
+  
   volatile uint32_t *rx_addr, *rx_cntr;
   volatile uint16_t *adc_abs_max, *cur_adc;
-  volatile uint32_t *adc_sent;
   volatile uint64_t *last_detrigged, *first_trgged, *samples_count;
 
   volatile uint16_t *rx_rate, *trg_value;
@@ -108,21 +107,6 @@ int main () {
 
   /* В ПЛИСе
   cfg_data 160 bit в axi_hub_modified_0 - передача конфигурационных данных
-  SLICE0: 0...0 (1 bit) -> ADC_1.areset   -   брасывает ADC, axis_dwidth_converter_0, decimator
-  SLICE1: 1...1 (1 bit) -> writer_0.areset  - сбрасывает блок writer_0, который пишет в шину axi
-  SLICE6: 2...2 (1 bit) -> ADC_1.reset_trigger  - сбрасывает триггер, если он сработал
-  SLICE7: 3...3 (1 bit) -> ADC_1.reset_max_sum  - при подаче 0 на вход сбрасывает максимум, определенны для суммы входов АЦП в ходе работы
-  
-
-  SLICE2: 31...16 (16 bit) -> axis_decimator_0.cfg_data  - настройка децимации ? Направление битов меняется?
-  SLICE3: 63....32 (32 bit) -> writer_0.min_addr         - указывает скакого физического адреса начинать писать в память ? Направление битов меняется?
-  SLICE6: 79...64 (16 bit) -> ADC_1.trigger_level (16 bit)      <------------------ Все правильно Начиная с 64го бита + 16 бит дает 80. Но указывается конец с -1, сечет же с 0го бита. Потому 79
-  
-  sta_data через xlconcat_0
-  31:0 <- ADC_1.max_sum_out (16 bit)
-  31:0 <- ADC_1.triggered_by_out (16 bit)
-  31:0 <- ADC_1.triggered_when (32 bit)
-  31:0 <- writer_0.sts_data (16 bit)
 
 
   бит номерация (MSB слева)       байт (cfg+N)      назначение
@@ -135,7 +119,7 @@ int main () {
 [119:112]  cfg[14]   резерв / будущее
 [111:104]  cfg[13]   резерв / будущее
 [103:96 ]  cfg[12]   резерв / будущее
-[95 :88 ]  cfg[11]   резерв / будущее
+[95 :88 ]  cfg[11]   резерв / будущееbase
 [87 :80 ]  cfg[10]   limiter (8 бит → limiter[7:0])
 [79 :64 ]  cfg[8..9] trigger_level (16 бит → trg_value[15:0])
 [63 :32 ]  cfg[4..7] rx_addr (32 бит → начальный адрес буфера)
@@ -168,11 +152,31 @@ int main () {
   cur_adc         = (uint16_t *)(sts + 6);    //Значение сейчас
   last_detrigged  = (uint64_t *)(sts + 8);   //Последний раз когда переходили триггер вниз, в семплах
   first_trgged    = (uint64_t *)(sts + 16);   //Когда сработал триггер, в семплах
-  adc_sent        = (uint32_t *)(sts + 24);   //Число отправленных отсчетов из блока АЦП
-  trigger_activated = (uint16_t *)(sts + 28); //1 бит состояния переменной в IP
-  triggers_count  = (uint16_t *)(sts + 30);
+
+
   samples_count   = (uint64_t *)(sts + 32); //Счетчик семплов (всех)
   
+
+  // строгое соответствие выравниванию в железе
+  #pragma pack(push, 1)
+  typedef struct {
+      uint32_t rx_cntr;            // 0x00
+      uint16_t adc_abs_max;        // 0x04
+      uint16_t cur_adc;            // 0x06
+      uint64_t last_detrigged;     // 0x08
+      uint64_t first_trgged;       // 0x10
+      uint32_t adc_sent;           // 0x18
+      uint16_t trigger_activated;  // 0x1C
+      uint16_t triggers_count;     // число срабатываний триггера
+      uint64_t samples_count;      // число семплов всего
+
+      int16_t cur_adc_a;
+      int16_t cur_adc_b;
+  } sts_pack_t;
+  #pragma pack(pop)
+
+
+  volatile sts_pack_t *ssts = (volatile sts_pack_t *)sts;
 
   uint16_t trg    = 2000;   //Уровень срабатывания триггера (для АЦП 12 бит, максимум 4095)
 
@@ -190,8 +194,8 @@ int main () {
     CLEAR_BIT(*rx_rst, 0); //сброс первого бита в 0 (сборс ацп)
     CLEAR_BIT(*rx_rst, 1); //сброс axi writer (1й  бит)
 
-    *bias_ch_A = -10;
-    *bias_ch_B = +1000;
+    *bias_ch_A = -140;
+    *bias_ch_B = -105;
 
     *trg_value      = trg;
     *limiter        = 16;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
@@ -228,9 +232,6 @@ int main () {
       adc_abs_max_val         = *adc_abs_max;
       first_trgged_val        = *first_trgged;
       last_detrigged_val      = *last_detrigged;
-      adc_sent_val            = *adc_sent;
-      trigger_activated_val   = *trigger_activated;
-      triggers_count_val      = *triggers_count;
       cur_adc_val             = *cur_adc;
       samples_count_val       = *samples_count;
       
@@ -247,21 +248,23 @@ int main () {
       last_detrigged_val  = *last_detrigged;
 
       printf("CMA buffer physical address: 0x%08X\n", physical_address);
-      printf("Запись в памяти POS %llu\n", position);
+      printf("Запись в памяти POS %llu / %llu\n", position, ssts->rx_cntr);
       printf("Сдвиг по записям D_POS \033[0;31m%i\033[0m\n", (unsigned int)(position - prev_position));
-      printf("TRGS_COUNT %i\n", triggers_count_val);
+      printf("TRGS_COUNT %i / %i\n", triggers_count_val, ssts->triggers_count);
       printf("first_trgged_val %ju (0x%jx)\n", first_trgged_val, first_trgged_val);        
       printf("last_detrigged_val %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val);
       
       double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000.0;
       printf("Длительность импульсв, мс, PULSE_LEN %f\n", pulse_len);
-      printf("ADC (MAX/NOW)= %i/%i ед. АЦП\n", adc_abs_max_val, cur_adc_val);
-      printf("Отправлено в память семлов, ADC_SENT_VAL %i\n", adc_sent_val);
-      printf("TRG_ACTIVE %i\n", trigger_activated_val);
+      printf("ADC (MAX/NOW)= %i (%i)/%i ед. АЦП\n", adc_abs_max_val, cur_adc_val, ssts->adc_abs_max);
+      printf("ADC A %i\n", ssts->cur_adc_a);
+      printf("ADC B %i\n", ssts->cur_adc_b);
+      printf("Отправлено в память семлов, ADC_SENT_VAL %i\n", ssts->adc_sent);
+      printf("TRG_ACTIVE %i\n", ssts->trigger_activated);
 
-      double_t samples_time       = (double_t)(samples_count_val)/125000000.0;        
+      double_t samples_time       = (double_t)(samples_count_val)/125000000.0;
       printf("Время с начала измерения, с SAPMLES_TIME %f\n", samples_time);
-      printf("Число измерений АЦП (семплов) %ju\n", samples_count_val);
+      printf("Число измерений АЦП (семплов) %ju\n", ssts->samples_count);
 
       static struct timespec last_temp_time = {0, 0};
       static double cached_temp = 0.0;
@@ -336,7 +339,6 @@ int main () {
         } else {
             usleep(500); 
         }
-
       
 
     } //Окончание цикла ожидания сигнала прерывания по CTRL-D #2

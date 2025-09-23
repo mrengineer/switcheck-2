@@ -106,6 +106,7 @@ read_verilog -library xil_defaultlib {
   /home/bulkin/red-pitaya-notes/cores/axi_hub_modified.v
   /home/bulkin/red-pitaya-notes/cores/ram_writer.v
   /home/bulkin/red-pitaya-notes/cores/cfg_unpack.v
+  /home/bulkin/red-pitaya-notes/cores/sts_pack.v
   /home/bulkin/red-pitaya-notes/tmp/adc_test.gen/sources_1/bd/system/hdl/system_wrapper.v
 }
 add_files /home/bulkin/red-pitaya-notes/tmp/adc_test.srcs/sources_1/bd/system/system.bd
