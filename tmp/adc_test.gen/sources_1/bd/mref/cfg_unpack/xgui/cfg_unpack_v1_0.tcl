@@ -3,6 +3,14 @@ proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "Component_Name"
   #Adding Page
   set Page_0 [ipgui::add_page $IPINST -name "Page 0"]
+  ipgui::add_param $IPINST -name "ADC_MULT_AFTER_A_LSB" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "ADC_MULT_AFTER_A_WIDTH" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "ADC_MULT_AFTER_B_LSB" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "ADC_MULT_AFTER_B_WIDTH" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "ADC_MULT_BEFORE_A_LSB" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "ADC_MULT_BEFORE_A_WIDTH" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "ADC_MULT_BEFORE_B_LSB" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "ADC_MULT_BEFORE_B_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "BIAS_A_LSB" -parent ${Page_0}
   ipgui::add_param $IPINST -name "BIAS_A_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "BIAS_B_LSB" -parent ${Page_0}
@@ -20,6 +28,78 @@ proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "TRG_VALUE_WIDTH" -parent ${Page_0}
 
 
+}
+
+proc update_PARAM_VALUE.ADC_MULT_AFTER_A_LSB { PARAM_VALUE.ADC_MULT_AFTER_A_LSB } {
+	# Procedure called to update ADC_MULT_AFTER_A_LSB when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.ADC_MULT_AFTER_A_LSB { PARAM_VALUE.ADC_MULT_AFTER_A_LSB } {
+	# Procedure called to validate ADC_MULT_AFTER_A_LSB
+	return true
+}
+
+proc update_PARAM_VALUE.ADC_MULT_AFTER_A_WIDTH { PARAM_VALUE.ADC_MULT_AFTER_A_WIDTH } {
+	# Procedure called to update ADC_MULT_AFTER_A_WIDTH when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.ADC_MULT_AFTER_A_WIDTH { PARAM_VALUE.ADC_MULT_AFTER_A_WIDTH } {
+	# Procedure called to validate ADC_MULT_AFTER_A_WIDTH
+	return true
+}
+
+proc update_PARAM_VALUE.ADC_MULT_AFTER_B_LSB { PARAM_VALUE.ADC_MULT_AFTER_B_LSB } {
+	# Procedure called to update ADC_MULT_AFTER_B_LSB when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.ADC_MULT_AFTER_B_LSB { PARAM_VALUE.ADC_MULT_AFTER_B_LSB } {
+	# Procedure called to validate ADC_MULT_AFTER_B_LSB
+	return true
+}
+
+proc update_PARAM_VALUE.ADC_MULT_AFTER_B_WIDTH { PARAM_VALUE.ADC_MULT_AFTER_B_WIDTH } {
+	# Procedure called to update ADC_MULT_AFTER_B_WIDTH when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.ADC_MULT_AFTER_B_WIDTH { PARAM_VALUE.ADC_MULT_AFTER_B_WIDTH } {
+	# Procedure called to validate ADC_MULT_AFTER_B_WIDTH
+	return true
+}
+
+proc update_PARAM_VALUE.ADC_MULT_BEFORE_A_LSB { PARAM_VALUE.ADC_MULT_BEFORE_A_LSB } {
+	# Procedure called to update ADC_MULT_BEFORE_A_LSB when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.ADC_MULT_BEFORE_A_LSB { PARAM_VALUE.ADC_MULT_BEFORE_A_LSB } {
+	# Procedure called to validate ADC_MULT_BEFORE_A_LSB
+	return true
+}
+
+proc update_PARAM_VALUE.ADC_MULT_BEFORE_A_WIDTH { PARAM_VALUE.ADC_MULT_BEFORE_A_WIDTH } {
+	# Procedure called to update ADC_MULT_BEFORE_A_WIDTH when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.ADC_MULT_BEFORE_A_WIDTH { PARAM_VALUE.ADC_MULT_BEFORE_A_WIDTH } {
+	# Procedure called to validate ADC_MULT_BEFORE_A_WIDTH
+	return true
+}
+
+proc update_PARAM_VALUE.ADC_MULT_BEFORE_B_LSB { PARAM_VALUE.ADC_MULT_BEFORE_B_LSB } {
+	# Procedure called to update ADC_MULT_BEFORE_B_LSB when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.ADC_MULT_BEFORE_B_LSB { PARAM_VALUE.ADC_MULT_BEFORE_B_LSB } {
+	# Procedure called to validate ADC_MULT_BEFORE_B_LSB
+	return true
+}
+
+proc update_PARAM_VALUE.ADC_MULT_BEFORE_B_WIDTH { PARAM_VALUE.ADC_MULT_BEFORE_B_WIDTH } {
+	# Procedure called to update ADC_MULT_BEFORE_B_WIDTH when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.ADC_MULT_BEFORE_B_WIDTH { PARAM_VALUE.ADC_MULT_BEFORE_B_WIDTH } {
+	# Procedure called to validate ADC_MULT_BEFORE_B_WIDTH
+	return true
 }
 
 proc update_PARAM_VALUE.BIAS_A_LSB { PARAM_VALUE.BIAS_A_LSB } {
@@ -231,5 +311,45 @@ proc update_MODELPARAM_VALUE.BIAS_B_LSB { MODELPARAM_VALUE.BIAS_B_LSB PARAM_VALU
 proc update_MODELPARAM_VALUE.BIAS_B_WIDTH { MODELPARAM_VALUE.BIAS_B_WIDTH PARAM_VALUE.BIAS_B_WIDTH } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
 	set_property value [get_property value ${PARAM_VALUE.BIAS_B_WIDTH}] ${MODELPARAM_VALUE.BIAS_B_WIDTH}
+}
+
+proc update_MODELPARAM_VALUE.ADC_MULT_BEFORE_A_LSB { MODELPARAM_VALUE.ADC_MULT_BEFORE_A_LSB PARAM_VALUE.ADC_MULT_BEFORE_A_LSB } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.ADC_MULT_BEFORE_A_LSB}] ${MODELPARAM_VALUE.ADC_MULT_BEFORE_A_LSB}
+}
+
+proc update_MODELPARAM_VALUE.ADC_MULT_BEFORE_A_WIDTH { MODELPARAM_VALUE.ADC_MULT_BEFORE_A_WIDTH PARAM_VALUE.ADC_MULT_BEFORE_A_WIDTH } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.ADC_MULT_BEFORE_A_WIDTH}] ${MODELPARAM_VALUE.ADC_MULT_BEFORE_A_WIDTH}
+}
+
+proc update_MODELPARAM_VALUE.ADC_MULT_BEFORE_B_LSB { MODELPARAM_VALUE.ADC_MULT_BEFORE_B_LSB PARAM_VALUE.ADC_MULT_BEFORE_B_LSB } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.ADC_MULT_BEFORE_B_LSB}] ${MODELPARAM_VALUE.ADC_MULT_BEFORE_B_LSB}
+}
+
+proc update_MODELPARAM_VALUE.ADC_MULT_BEFORE_B_WIDTH { MODELPARAM_VALUE.ADC_MULT_BEFORE_B_WIDTH PARAM_VALUE.ADC_MULT_BEFORE_B_WIDTH } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.ADC_MULT_BEFORE_B_WIDTH}] ${MODELPARAM_VALUE.ADC_MULT_BEFORE_B_WIDTH}
+}
+
+proc update_MODELPARAM_VALUE.ADC_MULT_AFTER_A_LSB { MODELPARAM_VALUE.ADC_MULT_AFTER_A_LSB PARAM_VALUE.ADC_MULT_AFTER_A_LSB } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.ADC_MULT_AFTER_A_LSB}] ${MODELPARAM_VALUE.ADC_MULT_AFTER_A_LSB}
+}
+
+proc update_MODELPARAM_VALUE.ADC_MULT_AFTER_A_WIDTH { MODELPARAM_VALUE.ADC_MULT_AFTER_A_WIDTH PARAM_VALUE.ADC_MULT_AFTER_A_WIDTH } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.ADC_MULT_AFTER_A_WIDTH}] ${MODELPARAM_VALUE.ADC_MULT_AFTER_A_WIDTH}
+}
+
+proc update_MODELPARAM_VALUE.ADC_MULT_AFTER_B_LSB { MODELPARAM_VALUE.ADC_MULT_AFTER_B_LSB PARAM_VALUE.ADC_MULT_AFTER_B_LSB } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.ADC_MULT_AFTER_B_LSB}] ${MODELPARAM_VALUE.ADC_MULT_AFTER_B_LSB}
+}
+
+proc update_MODELPARAM_VALUE.ADC_MULT_AFTER_B_WIDTH { MODELPARAM_VALUE.ADC_MULT_AFTER_B_WIDTH PARAM_VALUE.ADC_MULT_AFTER_B_WIDTH } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.ADC_MULT_AFTER_B_WIDTH}] ${MODELPARAM_VALUE.ADC_MULT_AFTER_B_WIDTH}
 }
 

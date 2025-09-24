@@ -57,6 +57,7 @@ int main () {
 
   volatile uint16_t *rx_rate, *trg_value;
   volatile int16_t *bias_ch_A, *bias_ch_B;
+  volatile int8_t *adc_mult_before_bias_a, *adc_mult_before_bias_b, *adc_mult_after_bias_a, *adc_mult_after_bias_b;  // [8 bit]  // Множители каналов до bias и после
 
   volatile uint8_t *limiter;
   volatile uint8_t *rx_rst;
@@ -143,6 +144,12 @@ int main () {
   bias_ch_A       = (int16_t *)(cfg + 12); //16 bit for bias_ch_A
   bias_ch_B       = (int16_t *)(cfg + 14); //16 bit
 
+
+  adc_mult_before_bias_a = (int8_t *)(cfg + 16);  // [8 bit]  // Множитель канала A до вычитания bias
+  adc_mult_before_bias_b = (int8_t *)(cfg + 17);  // [8 bit]  // Множитель канала B до вычитания bias
+  adc_mult_after_bias_a  = (int8_t *)(cfg + 18);  // [8 bit]  // Множитель канала A после вычитания bias
+  adc_mult_after_bias_b  = (int8_t *)(cfg + 19);  // [8 bit]  // Множитель канала B после вычитания bias
+
   // 160 бит = 20 байт
 
 
@@ -197,6 +204,11 @@ int main () {
     *bias_ch_A = -140;
     *bias_ch_B = -105;
 
+    *adc_mult_before_bias_a = 1;
+    *adc_mult_before_bias_b = 1;
+    *adc_mult_after_bias_a = 1;
+    *adc_mult_after_bias_b = 1;
+
     *trg_value      = trg;
     *limiter        = 16;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8
     *rx_addr        = physical_address;   //начальный адрес записи У CMA GP0 это 0x8000_0000, у HP0 это 0x0000_0000    
@@ -250,19 +262,19 @@ int main () {
       printf("CMA buffer physical address: 0x%08X\n", physical_address);
       printf("Запись в памяти POS %llu / %llu\n", position, ssts->rx_cntr);
       printf("Сдвиг по записям D_POS \033[0;31m%i\033[0m\n", (unsigned int)(position - prev_position));
-      printf("TRGS_COUNT %i / %i\n", triggers_count_val, ssts->triggers_count);
-      printf("first_trgged_val %ju (0x%jx)\n", first_trgged_val, first_trgged_val);        
-      printf("last_detrigged_val %ju (0x%jx)\n", last_detrigged_val, last_detrigged_val);
+      printf("TRGS_COUNT %i\n", ssts->triggers_count);
+      printf("first_trgged_val %ju\n", ssts->first_trgged);
+      printf("last_detrigged_val %ju\n", ssts->last_detrigged);
       
       double_t pulse_len       = (double_t)(last_detrigged_val-first_trgged_val)/125000.0;
       printf("Длительность импульсв, мс, PULSE_LEN %f\n", pulse_len);
-      printf("ADC (MAX/NOW)= %i (%i)/%i ед. АЦП\n", adc_abs_max_val, cur_adc_val, ssts->adc_abs_max);
+      printf("ADC |A| + |B| (MAX/NOW)= %i /%i ед. АЦП\n", ssts->adc_abs_max, ssts->cur_adc);
       printf("ADC A %i\n", ssts->cur_adc_a);
       printf("ADC B %i\n", ssts->cur_adc_b);
       printf("Отправлено в память семлов, ADC_SENT_VAL %i\n", ssts->adc_sent);
       printf("TRG_ACTIVE %i\n", ssts->trigger_activated);
 
-      double_t samples_time       = (double_t)(samples_count_val)/125000000.0;
+      double_t samples_time       = (double_t)(ssts->samples_count)/125000000.0;
       printf("Время с начала измерения, с SAPMLES_TIME %f\n", samples_time);
       printf("Число измерений АЦП (семплов) %ju\n", ssts->samples_count);
 

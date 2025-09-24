@@ -20,17 +20,18 @@ module sts_pack #(
     parameter integer WIDTH_ADC_CH         = 16   // длина слова с текущим значением канала АЦП
 )(
     // === входы ===
-    input  wire [WIDTH_RX_CNTR-1:0]        rx_cntr,           // [0]   writer0 сколько данных записано в память
+    input  wire [WIDTH_RX_CNTR-1:0]        rx_cntr,           // [0]   writer0 сколько данных записано в память    
+    input  wire [WIDTH_ADC_CH-1:0]         cur_adc_a,         // [9]   канал АЦП А
+    input  wire [WIDTH_ADC_CH-1:0]         cur_adc_b,         // [10]   канал АЦП А    
+    input  wire [WIDTH_CUR_ADC-1:0]        cur_adc,           // [2]   текущее значение суммы модуля каналов A и B    
+    input  wire [WIDTH_SAMPLES_COUNT-1:0]  samples_count,     // [8]   общий счетчик семплов с момента reset    
     input  wire [WIDTH_ADC_ABS_MAX-1:0]    adc_abs_max,       // [1]   максимальное значение суммы модулей каналов A и B
-    input  wire [WIDTH_CUR_ADC-1:0]        cur_adc,           // [2]   текущее значение суммы модуля каналов A и B
     input  wire [WIDTH_LAST_DETRIGGED-1:0] last_detrigged,    // [3]   время последнего спада триггера (в семплах)
     input  wire [WIDTH_FIRST_TRGGED-1:0]   first_trgged,      // [4]   время первого срабатывания триггера (в семплах)
     input  wire [WIDTH_ADC_SENT-1:0]       adc_sent,          // [5]   количество отправленных в шину отсчетов АЦП
     input  wire [WIDTH_TRIG_ACT-1:0]       trigger_activated, // [6]   состояние триггера (флаг)
     input  wire [WIDTH_TRIG_COUNT-1:0]     triggers_count,    // [7]   количество сработок триггера
-    input  wire [WIDTH_SAMPLES_COUNT-1:0]  samples_count,     // [8]   общий счетчик семплов с момента reset
-    input  wire [WIDTH_ADC_CH-1:0]         cur_adc_a,         // [9]   канал АЦП А
-    input  wire [WIDTH_ADC_CH-1:0]         cur_adc_b,         // [10]   канал АЦП А
+
 
     // === выход ===
     output wire [TOTAL_WIDTH-1:0]          sts_bus            // упакованный статусный вектор

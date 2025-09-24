@@ -57,30 +57,30 @@
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module system_sts_pack_0_0 (
   rx_cntr,
-  adc_abs_max,
+  cur_adc_a,
+  cur_adc_b,
   cur_adc,
+  samples_count,
+  adc_abs_max,
   last_detrigged,
   first_trgged,
   adc_sent,
   trigger_activated,
   triggers_count,
-  samples_count,
-  cur_adc_a,
-  cur_adc_b,
   sts_bus
 );
 
 input wire [31 : 0] rx_cntr;
-input wire [15 : 0] adc_abs_max;
+input wire [15 : 0] cur_adc_a;
+input wire [15 : 0] cur_adc_b;
 input wire [15 : 0] cur_adc;
+input wire [63 : 0] samples_count;
+input wire [15 : 0] adc_abs_max;
 input wire [63 : 0] last_detrigged;
 input wire [63 : 0] first_trgged;
 input wire [31 : 0] adc_sent;
 input wire [15 : 0] trigger_activated;
 input wire [15 : 0] triggers_count;
-input wire [63 : 0] samples_count;
-input wire [15 : 0] cur_adc_a;
-input wire [15 : 0] cur_adc_b;
 output wire [639 : 0] sts_bus;
 
   sts_pack #(
@@ -97,16 +97,16 @@ output wire [639 : 0] sts_bus;
     .WIDTH_ADC_CH(16)
   ) inst (
     .rx_cntr(rx_cntr),
-    .adc_abs_max(adc_abs_max),
+    .cur_adc_a(cur_adc_a),
+    .cur_adc_b(cur_adc_b),
     .cur_adc(cur_adc),
+    .samples_count(samples_count),
+    .adc_abs_max(adc_abs_max),
     .last_detrigged(last_detrigged),
     .first_trgged(first_trgged),
     .adc_sent(adc_sent),
     .trigger_activated(trigger_activated),
     .triggers_count(triggers_count),
-    .samples_count(samples_count),
-    .cur_adc_a(cur_adc_a),
-    .cur_adc_b(cur_adc_b),
     .sts_bus(sts_bus)
   );
 endmodule

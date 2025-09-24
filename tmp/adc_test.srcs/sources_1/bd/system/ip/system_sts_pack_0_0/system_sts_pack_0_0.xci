@@ -61,16 +61,16 @@
     "boundary": {
       "ports": {
         "rx_cntr": [ { "direction": "in", "size_left": "31", "size_right": "0" } ],
-        "adc_abs_max": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],
+        "cur_adc_a": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],
+        "cur_adc_b": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],
         "cur_adc": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],
+        "samples_count": [ { "direction": "in", "size_left": "63", "size_right": "0" } ],
+        "adc_abs_max": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],
         "last_detrigged": [ { "direction": "in", "size_left": "63", "size_right": "0" } ],
         "first_trgged": [ { "direction": "in", "size_left": "63", "size_right": "0" } ],
         "adc_sent": [ { "direction": "in", "size_left": "31", "size_right": "0" } ],
         "trigger_activated": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],
         "triggers_count": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],
-        "samples_count": [ { "direction": "in", "size_left": "63", "size_right": "0" } ],
-        "cur_adc_a": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],
-        "cur_adc_b": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],
         "sts_bus": [ { "direction": "out", "size_left": "639", "size_right": "0" } ]
       }
     }

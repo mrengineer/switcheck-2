@@ -34,6 +34,13 @@ module ADC #
         // Reset control signals
         input  wire        nreset_trigger,     // Сброс триггера при 0 извне
         input  wire        nreset_max_sum,     // Сброс максимума суммы при 0
+        
+        
+          // новые выходы множителей ADC
+          input wire signed [7:0] adc_mult_before_bias_a, // умножение значения АЦП канал А до вычитания bias
+          input wire signed [7:0] adc_mult_before_bias_b, // умножение значения АЦП канал Б до вычитания bias
+          input wire signed [7:0]  adc_mult_after_bias_a,  // умножение значения АЦП канал А после вычитания bias
+          input wire signed [7:0]  adc_mult_after_bias_b,   // умножение значения АЦП канал Б после вычитания bias
 
         // AXI-Stream master (32-bit words)
         output reg         m_axis_tvalid,
@@ -43,8 +50,7 @@ module ADC #
         // Output for max_sum_abs
         output reg  signed [15:0] max_sum_out,
         output reg  [63:0]        last_detrigged,     // последний раз пересекли триггер вниз
-        output reg  [63:0]        first_trigged,      // первый раз сработал триггер
-        output reg  [63:0]        cur_limiter,        // Ограничивает запись числом записей на одну серию
+        output reg  [63:0]        first_trigged,      // первый раз сработал триггер        
         output reg  [31:0]        samples_sent,       // Число отсчётов, сохранённых в шину
         output reg                trigger_activated,  // Флаг активации триггера  
         output reg  [15:0]        triggers_count      // сколько раз сработал триггер
@@ -66,6 +72,7 @@ reg         [ADC_DATA_WIDTH-1:0] abs_b;
 reg         [ADC_DATA_WIDTH:0]   sum_abs;       // +1 бит на сумму
 reg         [15:0]               max_sum_abs;
 
+reg  [63:0] cur_limiter;        // Ограничивает запись числом записей на одну серию
 reg  [63:0] sample_counter;
 
 // =========================
@@ -90,8 +97,8 @@ assign limiter_val = (limiter > 8'd63) ? 64'hFFFF_FFFF_FFFF_FFFF : (64'd1 << lim
 // Сместим signed к unsigned и ограничим в 0..32767 (15 бит).
 // Для корректности на любой ADC_DATA_WIDTH<=15.
 
-wire signed [15:0] a_ext = {{(16-ADC_DATA_WIDTH){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, int_dat_a_reg} + bias_a;
-wire signed [15:0] b_ext = {{(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, int_dat_b_reg} + bias_b;
+wire signed [15:0] a_ext = ((({{(16-ADC_DATA_WIDTH){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, int_dat_a_reg}) * adc_mult_before_bias_a) + bias_a) * adc_mult_after_bias_a;
+wire signed [15:0] b_ext = ((({{(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, int_dat_b_reg}) * adc_mult_before_bias_b) + bias_b) * adc_mult_after_bias_b;
 
 // Берём 15 младших бит, со знаком
 wire [14:0] a_u15 = a_ext[14:0];
