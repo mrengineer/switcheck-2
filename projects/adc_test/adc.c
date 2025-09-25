@@ -201,13 +201,16 @@ int main () {
     CLEAR_BIT(*rx_rst, 0); //сброс первого бита в 0 (сборс ацп)
     CLEAR_BIT(*rx_rst, 1); //сброс axi writer (1й  бит)
 
-    *bias_ch_A = -140;
-    *bias_ch_B = -105;
 
-    *adc_mult_before_bias_a = 1;
-    *adc_mult_before_bias_b = 1;
-    *adc_mult_after_bias_a = 1;
-    *adc_mult_after_bias_b = 1;
+    //RESULT = (ADC_CH * adc_mult_before_bias_a + bias_ch_A) * adc_mult_after_bias
+
+    *bias_ch_A = 140; //-140;
+    *bias_ch_B = 1; //-105;
+
+    *adc_mult_before_bias_a = -1;
+    *adc_mult_before_bias_b = 10;
+    *adc_mult_after_bias_a = 100;
+    *adc_mult_after_bias_b = -1;
 
     *trg_value      = trg;
     *limiter        = 16;   //максимальное число семплов на серию (ограничение. степень 2) 2^1 = 2 2^2 = 4 2^3 = 8

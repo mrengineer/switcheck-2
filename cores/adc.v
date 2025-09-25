@@ -19,8 +19,8 @@ module ADC #
 
 
         
-        input wire [15:0] bias_a,
-        input wire [15:0] bias_b,
+        input wire signed [15:0] bias_a,
+        input wire signed [15:0] bias_b,
 
         output wire [15:0] cur_adc,
         output wire [63:0] cur_sample,
@@ -36,11 +36,11 @@ module ADC #
         input  wire        nreset_max_sum,     // Сброс максимума суммы при 0
         
         
-          // новые выходы множителей ADC
-          input wire signed [7:0] adc_mult_before_bias_a, // умножение значения АЦП канал А до вычитания bias
-          input wire signed [7:0] adc_mult_before_bias_b, // умножение значения АЦП канал Б до вычитания bias
-          input wire signed [7:0]  adc_mult_after_bias_a,  // умножение значения АЦП канал А после вычитания bias
-          input wire signed [7:0]  adc_mult_after_bias_b,   // умножение значения АЦП канал Б после вычитания bias
+        // новые выходы множителей ADC
+        input wire signed [7:0] adc_mult_before_bias_a, // умножение значения АЦП канал А до вычитания bias
+        input wire signed [7:0] adc_mult_before_bias_b, // умножение значения АЦП канал Б до вычитания bias
+        input wire signed [7:0]  adc_mult_after_bias_a,  // умножение значения АЦП канал А после вычитания bias
+        input wire signed [7:0]  adc_mult_after_bias_b,   // умножение значения АЦП канал Б после вычитания bias
 
         // AXI-Stream master (32-bit words)
         output reg         m_axis_tvalid,
@@ -97,10 +97,32 @@ assign limiter_val = (limiter > 8'd63) ? 64'hFFFF_FFFF_FFFF_FFFF : (64'd1 << lim
 // Сместим signed к unsigned и ограничим в 0..32767 (15 бит).
 // Для корректности на любой ADC_DATA_WIDTH<=15.
 
-wire signed [15:0] a_ext = ((({{(16-ADC_DATA_WIDTH){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, int_dat_a_reg}) * adc_mult_before_bias_a) + bias_a) * adc_mult_after_bias_a;
-wire signed [15:0] b_ext = ((({{(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, int_dat_b_reg}) * adc_mult_before_bias_b) + bias_b) * adc_mult_after_bias_b;
+//wire signed [15:0] a_ext = ((({{(16-ADC_DATA_WIDTH){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, int_dat_a_reg}) * adc_mult_before_bias_a) + bias_a) * adc_mult_after_bias_a;
+//wire signed [15:0] b_ext = ((({{(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, int_dat_b_reg}) * adc_mult_before_bias_b) + bias_b) * adc_mult_after_bias_b;
 
-// Берём 15 младших бит, со знаком
+// 1. Расширяем АЦП до 16 бит (чтобы знак сохранялся)
+wire signed [15:0] adc_a_ext = {{(16-ADC_DATA_WIDTH){int_dat_a_reg[ADC_DATA_WIDTH-1]}}, int_dat_a_reg};
+wire signed [15:0] adc_b_ext = {{(16-ADC_DATA_WIDTH){int_dat_b_reg[ADC_DATA_WIDTH-1]}}, int_dat_b_reg};
+
+// 2. Умножаем до bias (результат шире: 16 + 8 = 24 бита)
+wire signed [23:0] mult_before_a = adc_a_ext * adc_mult_before_bias_a;
+wire signed [23:0] mult_before_b = adc_b_ext * adc_mult_before_bias_b;
+
+// 3. Прибавляем bias (bias 16 бит, расширяем до 24 перед сложением)
+wire signed [23:0] bias_corr_a = mult_before_a + {{8{bias_a[15]}}, bias_a};
+wire signed [23:0] bias_corr_b = mult_before_b + {{8{bias_b[15]}}, bias_b};
+
+// 4. Умножаем после bias (24 + 8 = 32 бита)
+wire signed [31:0] mult_after_a = bias_corr_a * adc_mult_after_bias_a;
+wire signed [31:0] mult_after_b = bias_corr_b * adc_mult_after_bias_b;
+
+// 5. Окончательный результат (выбираем нужные 16 бит со знаком)
+// Берем старший знак и 15 следующих бит. СИльно умножать нельзя
+wire signed [15:0] a_ext = mult_after_a[15:0];
+wire signed [15:0] b_ext = mult_after_b[15:0];
+
+
+// Берём 15 младших бит
 wire [14:0] a_u15 = a_ext[14:0];
 wire [14:0] b_u15 = b_ext[14:0];
 
